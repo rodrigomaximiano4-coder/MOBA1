@@ -550,6 +550,40 @@ function makeUUID(){try{return crypto.randomUUID()}catch(_){return 'mr-'+Date.no
 function freshSave(){return {uuid:makeUUID(),name:'',nickname:'',country:'',email:'',profileCompleted:false,profileSavedAt:0,accountMode:'guest',accountLinked:false,accountEmail:'',accountProvider:'guest',privacyConsentAt:0,signupRewardClaimed:false,welcomeBonusGranted:0,premiumOwned:false,premiumBonusClaimed:false,ownedProducts:[],purchaseHistory:[],lastForcedAdAt:0,forcedAdsShown:0,gems:0,starsTotal:0,xp:0,bestScore:0,bestDistance:0,bestStars:0,bestTime:0,journey2Unlocked:false,journey2Completed:false,j1Checkpoint:0,j2Checkpoint:0,realmRewardClaims:[],endlessBestDistance:0,upgrades:{shield:0,magnet:0,xp:0},inventory:['outfit_varek_original'],consumables:{shield:0,magnetMinutes:0,canteen:0},equipped:{cap:null,trail:null,outfit:'outfit_varek_original',boots:null,backpack:null},runs:[],settings:{autoRealm:true,sound:true,shadows:true,flipHero:false,haptics:true,musicVolume:.70,sfxVolume:.85,ambientVolume:.65}}}
 function loadSave(){let s=freshSave();try{const stored=localStorage.getItem(SAVE_KEY)||localStorage.getItem(LEGACY_SAVE_KEY);const raw=JSON.parse(stored||'null');if(raw){s={...s,...raw,upgrades:{...s.upgrades,...(raw.upgrades||{})},consumables:{...s.consumables,...(raw.consumables||{})},equipped:{...s.equipped,...(raw.equipped||{})},settings:{...s.settings,...(raw.settings||{})},inventory:Array.isArray(raw.inventory)?raw.inventory:[],runs:Array.isArray(raw.runs)?raw.runs:[]}}}catch(e){}return s}
 let SAVE=loadSave();
+
+// MOBILE37 • RESET SEGURO DE PROGRESSO PARA TESTE.
+// ?resetProgress=1 zera campanha/ranking/moedas de jogo, mas preserva identidade,
+// configurações e compras permanentes. O parâmetro é removido logo após executar,
+// evitando novo reset ao atualizar a página.
+const RESET_PROGRESS_ONCE=new URLSearchParams(location.search).get('resetProgress')==='1';
+if(RESET_PROGRESS_ONCE){
+ const previous=SAVE||freshSave(),clean=freshSave();
+ clean.uuid=previous.uuid||clean.uuid;
+ clean.name=previous.name||'';
+ clean.nickname=previous.nickname||'';
+ clean.country=previous.country||'';
+ clean.email=previous.email||'';
+ clean.profileCompleted=previous.profileCompleted===true;
+ clean.profileSavedAt=Number(previous.profileSavedAt||0);
+ clean.accountMode=previous.accountMode||'guest';
+ clean.accountLinked=previous.accountLinked===true;
+ clean.accountEmail=previous.accountEmail||'';
+ clean.accountProvider=previous.accountProvider||'guest';
+ clean.privacyConsentAt=Number(previous.privacyConsentAt||0);
+ clean.premiumOwned=previous.premiumOwned===true;
+ clean.premiumBonusClaimed=previous.premiumBonusClaimed===true;
+ clean.ownedProducts=Array.isArray(previous.ownedProducts)?[...previous.ownedProducts]:[];
+ clean.purchaseHistory=Array.isArray(previous.purchaseHistory)?[...previous.purchaseHistory]:[];
+ clean.inventory=Array.isArray(previous.inventory)?[...previous.inventory]:['outfit_varek_original'];
+ clean.equipped={...clean.equipped,...(previous.equipped||{})};
+ clean.settings={...clean.settings,...(previous.settings||{})};
+ SAVE=clean;
+ try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}
+ try{
+   const u=new URL(location.href);u.searchParams.delete('resetProgress');
+   history.replaceState(null,'',u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash)
+ }catch(e){}
+}
 const migrateOutfitId=id=>LEGACY_OUTFIT_MAP[id]||id;
 SAVE.ownedProducts=Array.isArray(SAVE.ownedProducts)?Array.from(new Set(SAVE.ownedProducts.map(id=>id==='max_healms_darik_adventurer'?'max_healms_varek_adventurer':id==='max_healms_darik_voren'?'max_healms_varek_voren':id))):[];
 const ownedPaidOutfits=new Set(Object.entries(OUTFIT_PRODUCT_TO_ID).filter(([sku])=>SAVE.ownedProducts.includes(sku)).map(([,id])=>id));
