@@ -76,7 +76,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 
 .topRight{display:none!important}
 
-/* ===== MAX HEALMS MOBILE31 • MOBILE CLEAN + DESCIDA DO RIO ===== */
+/* ===== MAX HEALMS MOBILE32 • MOBILE CLEAN + DESCIDA DO RIO ===== */
 #mobileMore{display:none}.mobileMorePanel{display:contents}
 @media(max-width:740px){
   #app{background-size:auto 100%!important;background-position:50% 46%!important;background-repeat:no-repeat!important;background-color:#07110d!important}
@@ -249,7 +249,7 @@ let forcedAdRunning=false,forcedAdTimer=null,forcedAdResolve=null;const FORCED_A
 const MOBILE_RUNNER=(matchMedia('(pointer:coarse)').matches||innerWidth<=740);
 const DEVICE_MEMORY=navigator.deviceMemory||4,HARDWARE_THREADS=navigator.hardwareConcurrency||4;
 const LOW_END_MOBILE=MOBILE_RUNNER&&(DEVICE_MEMORY<=3||HARDWARE_THREADS<=4);
-const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.68:.78,MOBILE_PIXEL_RATIO_MIN=LOW_END_MOBILE?.56:.62;
+const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.72:.84,MOBILE_PIXEL_RATIO_MIN=LOW_END_MOBILE?.62:.70;
 const TARGET_PIXEL_RATIO=MOBILE_RUNNER?MOBILE_PIXEL_RATIO_MAX:1.4;
 let mobilePixelRatioCurrent=TARGET_PIXEL_RATIO,mobilePerfLowSamples=0,mobilePerfHighSamples=0,mobilePerfLastAdjust=0;
 const RUN_SPEED_BASE=MOBILE_RUNNER?24.2:20.2;
@@ -270,7 +270,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE31 • MOBILE FIRST + DESCIDA DO RIO
+// MAX HEALMS MOBILE32 • MOBILE FIRST + DESCIDA DO RIO
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -291,7 +291,7 @@ function setForestUnderpassVisual(active){
  const cfg=REALMS[realmIndex];
  if(active){
    if(app){app.style.backgroundImage='none';app.style.backgroundColor='#0b100d'}
-   if(scene){scene.background=new THREE.Color(0x0b100d);if(scene.fog){scene.fog.color.set(0x101710);scene.fog.near=8;scene.fog.far=44}}
+   if(scene){scene.background=new THREE.Color(0x0b100d);if(scene.fog){scene.fog.color.set(0x101710);scene.fog.near=12;scene.fog.far=56}}
    if(sceneryGroup)sceneryGroup.visible=false;if(decorGroup)decorGroup.visible=false;
  }else{
    if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;
@@ -357,7 +357,7 @@ function updateKharvorBridge(dt,progress){
  const sequenceRealm=isKharvor||isForest||isVhalor;
  if(!sequenceRealm){if(Math.abs(kharvorLayerY)>.01||forestUnderpassActive||vhalorFloodVisualActive)resetKharvorBridge();return}
  const total=realmTargetDistance(),riseStart=Math.max(700,total-500),lowerY=isForest?FOREST_LOWER_Y:KHARVOR_LOWER_Y;
- const holeFx=kharvorBreakFx; // MOBILE31: scripted collapse stays invisible until the instant of the fall.
+ const holeFx=kharvorBreakFx; // MOBILE32: scripted collapse stays invisible until the instant of the fall.
  if(isBridgeDropTransitionZone(progress)&&!bridgeDropSafetyCleared){bridgeDropSafetyCleared=true;clearBridgeDropApproach();spawnTimer=Math.max(spawnTimer,1.35)}
  if(holeFx)holeFx.visible=false;
  // Vhalor: queda aos 500 m e a parte inferior vira uma travessia fechada e inundada de canoa.
@@ -376,7 +376,7 @@ function updateKharvorBridge(dt,progress){
  if(!active)return;
  let desired=0;
  if(progress>=500&&progress<riseStart)desired=lowerY;
- else if(progress>=riseStart){const q=Math.max(0,Math.min(1,(progress-riseStart)/500));desired=lowerY*(1-q)}
+ else if(progress>=riseStart){const climbSpan=Math.max(1,(total-35)-riseStart),q=Math.max(0,Math.min(1,(progress-riseStart)/climbSpan));desired=lowerY*(1-q)}
  if(progress>=500&&kharvorFallStage<1){
    if(holeFx)holeFx.visible=false;
    kharvorFallStage=1;kharvorFallImpact=1;openingCameraShake=Math.max(openingCameraShake,1.15);haptic([30,26,88,20,118]);
@@ -387,10 +387,11 @@ function updateKharvorBridge(dt,progress){
  const fallFast=(kharvorFallStage===1&&progress<585),rate=fallFast?22.0:2.9;
  kharvorLayerY+=(desired-kharvorLayerY)*Math.min(1,dt*rate);
  if(roadGroup)roadGroup.position.y=kharvorLayerY;if(itemGroup)itemGroup.position.y=kharvorLayerY;if(shelter3D)shelter3D.position.y=kharvorLayerY;
- const under=progress>515&&progress<total-70;if(under&&holeFx)holeFx.visible=false;
+ const under=progress>515&&progress<total-35;if(under&&holeFx)holeFx.visible=false;
  for(const g of kharvorUpperBridgeGroups){g.visible=isKharvor&&under;g.position.y=-kharvorLayerY+.42}
  for(const g of forestClosedBridgeGroups){g.visible=isForest&&under;g.position.y=-kharvorLayerY-.35}
  if(isForest)setForestUnderpassVisual(under);
+ if(isKharvor){if(sceneryGroup)sceneryGroup.visible=!under;if(decorGroup)decorGroup.visible=!under&&!tobogganActive}
  kharvorFallImpact=Math.max(0,kharvorFallImpact-dt*1.20);
  if(progress>=total-35&&kharvorFallStage<3){
    kharvorFallStage=3;kharvorLayerY=0;if(roadGroup)roadGroup.position.y=0;if(itemGroup)itemGroup.position.y=0;if(shelter3D)shelter3D.position.y=0;
@@ -953,7 +954,7 @@ function playVarekFootstep(){
  src.buffer=buf;const speedRatio=Math.max(0,Math.min(1,(speed-RUN_SPEED_BASE)/Math.max(.001,RUN_SPEED_MAX-RUN_SPEED_BASE)));
  src.playbackRate.value=.96+speedRatio*.13+(Math.random()-.5)*.035;g.gain.value=.105+(footstepIndex%2?-.008:.006);src.connect(g);g.connect(sfxMaster);src.start();
 }
-function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE31: sem passos contínuos durante a corrida
+function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE32: sem passos contínuos durante a corrida
 function resetFootsteps(){footstepTimer=0}
 
 function getNoiseBuffer(){
@@ -1480,10 +1481,10 @@ function buildRoad(){
  const railStoneMat=makeStoneMaterial(roundedColor(cfg.edge,.04));
  const railCapMat=makeStoneMaterial(roundedColor(cfg.road[0],.06));
  const railWoodMat=new THREE.MeshStandardMaterial({color:0x7b6752,roughness:.9,metalness:.03});
- const khUnderMat=new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.78});
+ const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
- const frRoofMat=new THREE.MeshStandardMaterial({color:0x302b23,roughness:1}),frWallMat=new THREE.MeshStandardMaterial({color:0x40382b,roughness:1}),frRootMat=new THREE.MeshStandardMaterial({color:0x5a4934,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x314b2d,transparent:true,opacity:.85});
- // MOBILE31 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
+ const frRoofMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x302b23}):new THREE.MeshStandardMaterial({color:0x302b23,roughness:1}),frWallMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x40382b}):new THREE.MeshStandardMaterial({color:0x40382b,roughness:1}),frRootMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x5a4934}):new THREE.MeshStandardMaterial({color:0x5a4934,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x314b2d,transparent:true,opacity:.78});
+ // MOBILE32 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
  const sigStone=new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
  const sigDark=new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
  const sigWood=new THREE.MeshStandardMaterial({color:0x4c3828,roughness:1});
@@ -1563,7 +1564,7 @@ function buildRoad(){
        for(const x of [-2.25,2.25]){const light=new THREE.Mesh(new THREE.BoxGeometry(.10,.02,2.00),new THREE.MeshBasicMaterial({color:0xf6e6b3,transparent:true,opacity:.46})); light.position.set(x,.03,(rz-1.5)*2.62); seg.add(light)}
      }
    }
-   // MOBILE31 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
+   // MOBILE32 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
    if(s%3===0){
      const signature=new THREE.Group();signature.name='MR_PONTE_ASSINATURA_'+cfg.id;
      if(cfg.id==='vruins'){
@@ -1605,18 +1606,24 @@ function buildRoad(){
    }
    if(cfg.id==='vruins'){
      const upper=new THREE.Group();upper.name='KHARVOR_PONTE_ORIGINAL_ACIMA';upper.visible=false;
-     const deck=new THREE.Mesh(khDeckGeo,khUnderMat);deck.position.y=0;deck.receiveShadow=shadowsOn;upper.add(deck);
-     for(const zOff of [-3.3,0,3.3]){const beam=new THREE.Mesh(khBeamGeo,khBeamMat);beam.position.set(0,-.28,zOff);upper.add(beam)}
-     if(s%2===0)for(const x of [-4.05,4.05]){const post=new THREE.Mesh(khPostGeo,khBeamMat);post.position.set(x,-2.45,0);upper.add(post)}
-     for(let mi=0;mi<2;mi++){const moss=new THREE.Mesh(khMossGeo,khMossMat);moss.position.set(mi?2.3:-2.5,-.47,mi?2.5:-2.1);moss.rotation.y=mi?.18:-.22;upper.add(moss)}
+     const deck=new THREE.Mesh(khDeckGeo,khUnderMat);deck.position.y=0;deck.receiveShadow=false;upper.add(deck);
+     if(MOBILE_RUNNER){
+       const beam=new THREE.Mesh(khBeamGeo,khBeamMat);beam.position.set(0,-.28,0);upper.add(beam)
+     }else{
+       for(const zOff of [-3.3,0,3.3]){const beam=new THREE.Mesh(khBeamGeo,khBeamMat);beam.position.set(0,-.28,zOff);upper.add(beam)}
+       if(s%2===0)for(const x of [-4.05,4.05]){const post=new THREE.Mesh(khPostGeo,khBeamMat);post.position.set(x,-2.45,0);upper.add(post)}
+       for(let mi=0;mi<2;mi++){const moss=new THREE.Mesh(khMossGeo,khMossMat);moss.position.set(mi?2.3:-2.5,-.47,mi?2.5:-2.1);moss.rotation.y=mi?.18:-.22;upper.add(moss)}
+     }
      upper.position.y=.42;seg.add(upper);kharvorUpperBridgeGroups.push(upper)
    }
    if(cfg.id==='forest'){
      const closed=new THREE.Group();closed.name='NERIS_PONTE_FECHADA_INFERIOR';closed.visible=false;
      const roof=new THREE.Mesh(new THREE.BoxGeometry(8.65,.48,10.25),frRoofMat);roof.position.y=0;closed.add(roof);
      for(const side of [-1,1]){const wall=new THREE.Mesh(new THREE.BoxGeometry(.52,4.25,10.25),frWallMat);wall.position.set(side*4.10,-2.0,0);closed.add(wall)}
-     for(const zOff of [-3.6,0,3.6]){const beam=new THREE.Mesh(new THREE.BoxGeometry(8.6,.24,.32),frRootMat);beam.position.set(0,-.36,zOff);closed.add(beam)}
-     for(let ri=0;ri<5;ri++){const root=new THREE.Mesh(new THREE.CylinderGeometry(.06,.10,2.5+(ri%2)*.6,6),frRootMat);root.position.set((ri%2?1:-1)*(2.5+(ri%3)*.45),-1.1,-4+ri*2.0);root.rotation.z=(ri%2?1:-1)*.32;closed.add(root);const moss=new THREE.Mesh(new THREE.PlaneGeometry(.72,.95),frMossMat);moss.position.set((ri%2?1:-1)*3.7,-.85,-4+ri*2.0);moss.rotation.y=ri%2?-Math.PI/2:Math.PI/2;closed.add(moss)}
+     if(!MOBILE_RUNNER){
+       for(const zOff of [-3.6,0,3.6]){const beam=new THREE.Mesh(new THREE.BoxGeometry(8.6,.24,.32),frRootMat);beam.position.set(0,-.36,zOff);closed.add(beam)}
+       for(let ri=0;ri<5;ri++){const root=new THREE.Mesh(new THREE.CylinderGeometry(.06,.10,2.5+(ri%2)*.6,6),frRootMat);root.position.set((ri%2?1:-1)*(2.5+(ri%3)*.45),-1.1,-4+ri*2.0);root.rotation.z=(ri%2?1:-1)*.32;closed.add(root);const moss=new THREE.Mesh(new THREE.PlaneGeometry(.72,.95),frMossMat);moss.position.set((ri%2?1:-1)*3.7,-.85,-4+ri*2.0);moss.rotation.y=ri%2?-Math.PI/2:Math.PI/2;closed.add(moss)}
+     }
      seg.add(closed);forestClosedBridgeGroups.push(closed)
    }
    roadGroup.add(seg);roadSegments.push(seg)
@@ -1998,7 +2005,7 @@ function createGem(laneI,z){const mat=new THREE.MeshStandardMaterial({color:0x54
 function createStar(laneI,z){const shape=new THREE.Shape();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2===0?.38:.17;const x=Math.cos(a)*r,y=Math.sin(a)*r;i?shape.lineTo(x,y):shape.moveTo(x,y)}shape.closePath();const geo=new THREE.ExtrudeGeometry(shape,{depth:.10,bevelEnabled:true,bevelSize:.035,bevelThickness:.035,bevelSegments:1});geo.center();const m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xffd95b,emissive:0x9b6710,emissiveIntensity:.65,metalness:.12,roughness:.24}));m.position.set(LANE_X[laneI],1.12,z);m.userData={kind:'star',lane:laneI,collected:false};itemGroup.add(m);collectibles.push(m)}
 function createWater(laneI,z){const g=new THREE.Group(),glass=new THREE.MeshStandardMaterial({color:0x7bdcff,transparent:true,opacity:.72,roughness:.18,metalness:.05}),cap=new THREE.MeshStandardMaterial({color:0x2e6f84,roughness:.6});const b=new THREE.Mesh(new THREE.CylinderGeometry(.18,.22,.62,12),glass);b.position.y=.36;const c=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.12,12),cap);c.position.y=.73;g.add(b,c);g.position.set(LANE_X[laneI],.25,z);g.userData={kind:'water',lane:laneI,collected:false};itemGroup.add(g);collectibles.push(g)}
 function createHole(laneI,z){
- const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE31';
+ const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE32';
  const cfg=REALMS[realmIndex]||REALMS[0],roadColor=cfg.road[1]||0x51483f,edgeColor=cfg.edge||0x3a342f;
  const voidMat=new THREE.MeshBasicMaterial({color:0x000000,side:THREE.DoubleSide,depthWrite:true});
  const wallMat=new THREE.MeshBasicMaterial({color:0x0a0908,side:THREE.DoubleSide});
@@ -2398,11 +2405,11 @@ function render(){
 }
 function adjustMobileRenderScale(fps,now){
  if(!MOBILE_RUNNER||!renderer||!started)return;
- if(fps<45){mobilePerfLowSamples++;mobilePerfHighSamples=0}else if(fps>56){mobilePerfHighSamples++;mobilePerfLowSamples=0}else{mobilePerfLowSamples=Math.max(0,mobilePerfLowSamples-1);mobilePerfHighSamples=0}
+ if(fps<36){mobilePerfLowSamples++;mobilePerfHighSamples=0}else if(fps>52){mobilePerfHighSamples++;mobilePerfLowSamples=0}else{mobilePerfLowSamples=Math.max(0,mobilePerfLowSamples-1);mobilePerfHighSamples=0}
  if(now-mobilePerfLastAdjust<3500)return;
  let next=mobilePixelRatioCurrent;
- if(mobilePerfLowSamples>=2){next=Math.max(MOBILE_PIXEL_RATIO_MIN,mobilePixelRatioCurrent-.06);mobilePerfLowSamples=0}
- else if(mobilePerfHighSamples>=6){next=Math.min(MOBILE_PIXEL_RATIO_MAX,mobilePixelRatioCurrent+.03);mobilePerfHighSamples=0}
+ if(mobilePerfLowSamples>=3){next=Math.max(MOBILE_PIXEL_RATIO_MIN,mobilePixelRatioCurrent-.04);mobilePerfLowSamples=0}
+ else if(mobilePerfHighSamples>=7){next=Math.min(MOBILE_PIXEL_RATIO_MAX,mobilePixelRatioCurrent+.025);mobilePerfHighSamples=0}
  if(Math.abs(next-mobilePixelRatioCurrent)>.001){mobilePixelRatioCurrent=next;mobilePerfLastAdjust=now;renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobilePixelRatioCurrent));renderer.setSize(W,H,false)}
 }
 function loop(now){if(document.hidden){if(clock)clock.getDelta();requestAnimationFrame(loop);return}const dt=Math.min(.034,clock?clock.getDelta():.016);update(dt);updateVarekFootsteps(dt);updateWeatherVisual(dt);render();fpsAccum+=dt;fpsFrames++;if(fpsAccum>.70){const fps=Math.round(fpsFrames/fpsAccum);UI.fps.textContent=fps;adjustMobileRenderScale(fps,now||performance.now());fpsFrames=0;fpsAccum=0}requestAnimationFrame(loop)}
@@ -2541,7 +2548,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE31';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE32';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
