@@ -1,0 +1,24 @@
+MAX HEALMS — MOBILE22 — REVISÃO GERAL E POLIMENTO
+
+CORREÇÕES FUNCIONAIS
+1. PLAYER MOBILE separado corretamente do PC QA: a build mobile não abre mais automaticamente a Central de Testes.
+2. Continue/revive em Kharvor/Neris preserva a altura da pista inferior; Varek não volta para y=0 no meio da passagem inferior.
+3. Túnel inundado de Vhalor esconde também a decoração externa e restaura cenário/decor ao sair.
+4. Testes rápidos de Kharvor/Neris/Vhalor agora esperam o motor/cenário realmente ficar ativo antes de reposicionar a distância.
+5. Zona de queda de Kharvor/Neris/Vhalor limpa obstáculos próximos e pausa novos spawns por alguns metros, preservando leitura visual da ruptura.
+
+REFINAMENTO VISUAL
+1. Buracos comuns: 15 pontos de borda, menos fragmentos e fragmentos menores para reduzir aparência artificial.
+2. Ruptura especial: mantida menor e removida ao entrar na parte inferior.
+3. Pontes monumentais, horizonte e identidade visual da MOBILE21 foram preservados.
+4. Túnel inundado continua fechado, com teto/laterais, visão de horizonte e sem pilares bloqueando a frente.
+
+PRESERVADO
+- 6 reinos e 2 jornadas.
+- Kharvor inferior, Neris fechada e Vhalor inundada.
+- Tobogã/Descida do Rio, Descida Vulcânica, estrelas e diamantes.
+- Varek/Lyra imóveis na canoa; apenas a canoa se movimenta.
+- Caçadoras com escala fixa.
+- Sons, ambiente, controles de volume e vibração.
+- Reino Celestial original.
+- Finais conforme composição aprovada.

@@ -76,7 +76,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 
 .topRight{display:none!important}
 
-/* ===== MAX HEALMS MOBILE21 • MOBILE CLEAN + DESCIDA DO RIO ===== */
+/* ===== MAX HEALMS MOBILE22 • MOBILE CLEAN + DESCIDA DO RIO ===== */
 #mobileMore{display:none}.mobileMorePanel{display:contents}
 @media(max-width:740px){
   #app{background-size:auto 100%!important;background-position:50% 46%!important;background-repeat:no-repeat!important;background-color:#07110d!important}
@@ -116,7 +116,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 </head>
-<body class="pcQaBuild">
+<body>
 <div class="top"><div class="brand" id="buildBrand">MAX HEALMS</div><div class="topRight"><div class="badge">3D<strong id="status3d">INICIANDO</strong></div><div class="badge">FPS<strong id="fps">--</strong></div></div></div>
 <div id="app">
   <canvas id="threeCanvas"></canvas><canvas id="weatherCanvas"></canvas><div class="weatherFlash" id="weatherFlash"></div><div class="vignette"></div><div class="fallFlash" id="fallFlash"></div><div class="effortPulse" id="effortPulse">ESFORÇO</div>
@@ -165,7 +165,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 
   <button class="pcQaAlways" id="pcQaAlways" type="button">🧪 CENÁRIOS</button>
   <button class="qaReturnBtn" id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
-  <div class="panel show" id="scenarioTestPanel"><div class="card"><div class="qaBadge">PC • CENTRAL QA COMPLETA • MOBILE21</div><div class="eyebrow">CENTRAL DE TESTES • MOBILE21 PC</div><h2>🧪 TODOS OS CENÁRIOS LIBERADOS</h2><p>Os 6 cenários abaixo ficam sempre liberados no PC, independentemente do progresso da campanha. Cada botão inicia apenas o cenário escolhido. O teste usa a jogabilidade real: barreiras, buracos abertos/quebrados, coletáveis, hidratação, abrigo, caçadoras e as sequências especiais implementadas.</p><div class="qaBadge" style="margin-top:10px">✅ 6/6 REINOS LIBERADOS PARA QA</div><div class="qaLaunchStatus" id="qaLaunchStatus">Clique em qualquer reino. O cenário entra imediatamente; caçadoras e Lyra carregam depois em segundo plano e não bloqueiam mais a abertura.</div><div class="shopTabs" style="margin-top:14px"><button class="active" id="scenarioJourney1" type="button">JORNADA 1 • VAREK</button><button id="scenarioJourney2" type="button">JORNADA 2 • VAREK + LYRA</button></div><div class="weatherTestGrid" id="allScenarioButtons"><button class="btn secondary qaRealmLink" id="qaRealm0" data-scenario-test="0" type="button">🐉 TERRAS DOS DRAGÕES<br><small>Completo • garoa + dragão + ponte viva tremendo + chuva forte pós-Descida do Rio</small></button><button class="btn secondary qaRealmLink" id="qaRealm1" data-scenario-test="1" type="button">🌧 RUÍNAS DE KHARVOR<br><small>Completo • 500 m ponte superior + QUEDA REPENTINA + longa passagem inferior + subida nos últimos 500 m</small></button><button class="btn secondary qaRealmLink" id="qaRealm2" data-scenario-test="2" type="button">🌋 VALE DAS CINZAS<br><small>Completo • cinzas + pista vulcânica + DESCIDA VULCÂNICA de lava</small></button><button class="btn secondary qaRealmLink" id="qaRealm3" data-scenario-test="3" type="button">🏛 RUÍNAS DE VHALOR<br><small>Completo • queda da ponte + túnel fechado inundado em canoa, com horizonte visível + retorno à pista</small></button><button class="btn secondary qaRealmLink" id="qaRealm4" data-scenario-test="4" type="button">🍂 FLORESTA DE NERIS<br><small>Completo • trilha viva + QUEDA DA PONTE + passagem fechada inferior + retorno à floresta</small></button><button class="btn secondary qaRealmLink" id="qaRealm5" data-scenario-test="5" type="button">🌬 REINO CELESTIAL<br><small>Completo • vento forte + atmosfera elevada</small></button></div><div class="qaBadge" style="margin-top:16px">⚡ TESTES RÁPIDOS • QUEDAS DE PONTE</div><div class="weatherTestGrid"><button class="btn primary" id="kharvorDropQuick" type="button">💥 KHARVOR • QUEDA 500 m<br><small>Inicia segundos antes do grande buraco e da queda</small></button><button class="btn secondary" id="kharvorLowerQuick" type="button">⬇ KHARVOR • PARTE INFERIOR<br><small>Ponte original visível acima • musgo e ruína</small></button><button class="btn primary" id="nerisDropQuick" type="button">🍂 NERIS • QUEDA 500 m<br><small>Inicia segundos antes da queda para a ponte fechada</small></button><button class="btn secondary" id="nerisLowerQuick" type="button">🌑 NERIS • PONTE FECHADA<br><small>Passagem inferior sem paisagem externa</small></button><button class="btn primary" id="vhalorDropQuick" type="button">💧 VHALOR • QUEDA 500 m<br><small>Inicia segundos antes da ruptura para a área inundada</small></button><button class="btn secondary" id="vhalorFloodQuick" type="button">🛶 VHALOR • PASSAGEM INUNDADA<br><small>Túnel fechado inundado • horizonte livre à frente • canoa até a saída</small></button></div><div class="qaBadge" style="margin-top:16px">🎬 CENAS FINAIS • ACESSO DIRETO</div><div class="weatherTestGrid" id="finalSceneTestGrid"><button class="btn secondary" data-final-test="j1">🎬 FINAL JORNADA 1<br><small>Varek chega sozinho • família de frente • caçadores fora da linha</small></button><button class="btn secondary" data-final-test="j2start">⚔ ABERTURA JORNADA 2<br><small>Início do resgate • Varek + Lyra</small></button><button class="btn secondary" data-final-test="j2final">🏁 FINAL JORNADA 2<br><small>Linha de chegada • Varek + Lyra • família • sem caçadores</small></button></div><div class="weatherTestNote"><b>QA PC COMPLETO:</b> escolha qualquer cenário e Jornada 1 ou 2. O reino fica fixo para testar com calma, mas obstáculos, barreiras, buracos, coletáveis, hidratação, caçadoras e sequências funcionam como no jogo real. As caçadoras aparecem conforme os erros. Kharvor usa queda para o nível inferior; Neris usa passagem fechada; Vhalor cai para uma passagem fechada inundada e segue em canoa até a saída. O Reino Celestial mantém o percurso original, com vento forte e atmosfera elevada. Tobogãs, canoas e túneis possuem estrelas e diamantes coletáveis. A cratera das quedas foi reduzida e some antes da entrada no trecho inferior. Em Vhalor, o túnel é fechado nas laterais e no teto, sem pilares bloqueando a visão do horizonte. Os buracos mantêm o mesmo padrão aberto e quebrado mesmo após morrer várias vezes. Na Jornada 2, Lyra corre com Varek.</div><div class="cardActions"><button class="btn primary" id="scenarioTestClose">VOLTAR</button></div></div></div>
+  <div class="panel" id="scenarioTestPanel"><div class="card"><div class="qaBadge">PC • CENTRAL QA COMPLETA • MOBILE22</div><div class="eyebrow">CENTRAL DE TESTES • MOBILE22 PC</div><h2>🧪 TODOS OS CENÁRIOS LIBERADOS</h2><p>Os 6 cenários abaixo ficam sempre liberados no PC, independentemente do progresso da campanha. Cada botão inicia apenas o cenário escolhido. O teste usa a jogabilidade real: barreiras, buracos abertos/quebrados, coletáveis, hidratação, abrigo, caçadoras e as sequências especiais implementadas.</p><div class="qaBadge" style="margin-top:10px">✅ 6/6 REINOS LIBERADOS PARA QA</div><div class="qaLaunchStatus" id="qaLaunchStatus">Clique em qualquer reino. O cenário entra imediatamente; caçadoras e Lyra carregam depois em segundo plano e não bloqueiam mais a abertura.</div><div class="shopTabs" style="margin-top:14px"><button class="active" id="scenarioJourney1" type="button">JORNADA 1 • VAREK</button><button id="scenarioJourney2" type="button">JORNADA 2 • VAREK + LYRA</button></div><div class="weatherTestGrid" id="allScenarioButtons"><button class="btn secondary qaRealmLink" id="qaRealm0" data-scenario-test="0" type="button">🐉 TERRAS DOS DRAGÕES<br><small>Completo • garoa + dragão + ponte viva tremendo + chuva forte pós-Descida do Rio</small></button><button class="btn secondary qaRealmLink" id="qaRealm1" data-scenario-test="1" type="button">🌧 RUÍNAS DE KHARVOR<br><small>Completo • 500 m ponte superior + QUEDA REPENTINA + longa passagem inferior + subida nos últimos 500 m</small></button><button class="btn secondary qaRealmLink" id="qaRealm2" data-scenario-test="2" type="button">🌋 VALE DAS CINZAS<br><small>Completo • cinzas + pista vulcânica + DESCIDA VULCÂNICA de lava</small></button><button class="btn secondary qaRealmLink" id="qaRealm3" data-scenario-test="3" type="button">🏛 RUÍNAS DE VHALOR<br><small>Completo • queda da ponte + túnel fechado inundado em canoa, com horizonte visível + retorno à pista</small></button><button class="btn secondary qaRealmLink" id="qaRealm4" data-scenario-test="4" type="button">🍂 FLORESTA DE NERIS<br><small>Completo • trilha viva + QUEDA DA PONTE + passagem fechada inferior + retorno à floresta</small></button><button class="btn secondary qaRealmLink" id="qaRealm5" data-scenario-test="5" type="button">🌬 REINO CELESTIAL<br><small>Completo • vento forte + atmosfera elevada</small></button></div><div class="qaBadge" style="margin-top:16px">⚡ TESTES RÁPIDOS • QUEDAS DE PONTE</div><div class="weatherTestGrid"><button class="btn primary" id="kharvorDropQuick" type="button">💥 KHARVOR • QUEDA 500 m<br><small>Inicia segundos antes do grande buraco e da queda</small></button><button class="btn secondary" id="kharvorLowerQuick" type="button">⬇ KHARVOR • PARTE INFERIOR<br><small>Ponte original visível acima • musgo e ruína</small></button><button class="btn primary" id="nerisDropQuick" type="button">🍂 NERIS • QUEDA 500 m<br><small>Inicia segundos antes da queda para a ponte fechada</small></button><button class="btn secondary" id="nerisLowerQuick" type="button">🌑 NERIS • PONTE FECHADA<br><small>Passagem inferior sem paisagem externa</small></button><button class="btn primary" id="vhalorDropQuick" type="button">💧 VHALOR • QUEDA 500 m<br><small>Inicia segundos antes da ruptura para a área inundada</small></button><button class="btn secondary" id="vhalorFloodQuick" type="button">🛶 VHALOR • PASSAGEM INUNDADA<br><small>Túnel fechado inundado • horizonte livre à frente • canoa até a saída</small></button></div><div class="qaBadge" style="margin-top:16px">🎬 CENAS FINAIS • ACESSO DIRETO</div><div class="weatherTestGrid" id="finalSceneTestGrid"><button class="btn secondary" data-final-test="j1">🎬 FINAL JORNADA 1<br><small>Varek chega sozinho • família de frente • caçadores fora da linha</small></button><button class="btn secondary" data-final-test="j2start">⚔ ABERTURA JORNADA 2<br><small>Início do resgate • Varek + Lyra</small></button><button class="btn secondary" data-final-test="j2final">🏁 FINAL JORNADA 2<br><small>Linha de chegada • Varek + Lyra • família • sem caçadores</small></button></div><div class="weatherTestNote"><b>QA PC COMPLETO:</b> escolha qualquer cenário e Jornada 1 ou 2. O reino fica fixo para testar com calma, mas obstáculos, barreiras, buracos, coletáveis, hidratação, caçadoras e sequências funcionam como no jogo real. As caçadoras aparecem conforme os erros. Kharvor usa queda para o nível inferior; Neris usa passagem fechada; Vhalor cai para uma passagem fechada inundada e segue em canoa até a saída. O Reino Celestial mantém o percurso original, com vento forte e atmosfera elevada. Tobogãs, canoas e túneis possuem estrelas e diamantes coletáveis. A cratera das quedas foi reduzida e some antes da entrada no trecho inferior. Em Vhalor, o túnel é fechado nas laterais e no teto, sem pilares bloqueando a visão do horizonte. Os buracos mantêm o mesmo padrão aberto e quebrado mesmo após morrer várias vezes. Na Jornada 2, Lyra corre com Varek.</div><div class="cardActions"><button class="btn primary" id="scenarioTestClose">VOLTAR</button></div></div></div>
   <div class="panel" id="rankingPanel"><div class="card"><h2>🏆 Ranking local</h2><p>Pontuação = distância + 25 pontos por ⭐ estrela. Cada corrida encerrada entra automaticamente no ranking local.</p><div class="rankRow head"><span>#</span><span>Jogador</span><span>m</span><span>⭐</span><span>Pontos</span></div><div id="rankingRows"></div><div class="cardActions"><button class="btn primary" id="rankingClose">Voltar</button></div></div></div>
     <div class="panel" id="shelterChoicePanel"><div class="card"><h2>🏕 Entrar no abrigo?</h2><p>Varek chegou à entrada pela <b>faixa direita</b>. O abrigo pausa a jornada e afasta as caçadoras. A hidratação é opcional e cobrada separadamente.</p><div class="shelterInfo"><b>ENTRADA LIVRE</b><br>Usar o abrigo acrescenta <b>+1 minuto</b> ao tempo do ranking. Você pode sair sem comprar hidratação.</div><div class="cardActions"><button class="btn primary" id="shelterAccept">ENTRAR NO ABRIGO</button><button class="btn secondary" id="shelterDecline">CONTINUAR CORRENDO</button></div></div></div>
   <div class="panel" id="shelterPanel"><div class="card"><h2>🏕 Abrigo • Hidratação</h2><p>A corrida está pausada. Confira sua hidratação e decida se deseja gastar diamantes ou continuar exatamente como está.</p><div class="shelterInfo"><b>HIDRATAÇÃO PAGA SOMENTE SE VOCÊ ESCOLHER</b><br>Chegar a <b>0%</b> durante a corrida causa desidratação. O abrigo adiciona <b>+1 minuto</b> ao ranking.</div><div class="shelterHydrationBox"><div>AO ENTRAR<b id="shelterHydrationBefore">100%</b></div><div>AGORA<b id="shelterHydrationNow">100%</b></div></div><div class="shelterStatus" id="shelterHydrationStatus">💧 Escolha uma opção ou saia sem comprar.</div><div class="grid2" style="margin-top:12px"><button class="btn primary" id="hydr20">+20% • 💎 40</button><button class="btn primary" id="hydr50">+50% • 💎 90</button><button class="btn primary" id="hydr75">+75% • 💎 130</button><button class="btn primary" id="hydrFull">COMPLETAR 100% • 💎 200</button></div><div class="shelterCounter" id="shelterCounter">05:00</div><div class="cardActions"><button class="btn secondary" id="shelterExit">SAIR SEM COMPRAR / CONTINUAR →</button></div></div></div>
@@ -268,7 +268,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE21 • MOBILE FIRST + DESCIDA DO RIO
+// MAX HEALMS MOBILE22 • MOBILE FIRST + DESCIDA DO RIO
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -278,6 +278,11 @@ const bridgeDetailGroups=[];
 const kharvorUpperBridgeGroups=[];
 const forestClosedBridgeGroups=[];
 let kharvorLayerY=0,kharvorFallStage=0,kharvorFallImpact=0,kharvorBreakFx=null,forestUnderpassActive=false,vhalorFloodVisualActive=false;
+let bridgeDropSafetyCleared=false;
+function isBridgeDropRealm(){const id=REALMS[realmIndex]?.id;return id==='vruins'||id==='forest'||id==='ruins'}
+function isBridgeDropTransitionZone(progress){return isBridgeDropRealm()&&progress>=448&&progress<=535}
+function clearBridgeDropApproach(){for(let i=obstacles.length-1;i>=0;i--){const o=obstacles[i];if(o.position.z>-30&&o.position.z<12){itemGroup.remove(o);disposeObject(o);obstacles.splice(i,1)}}}
+
 const KHARVOR_LOWER_Y=-5.2,FOREST_LOWER_Y=-4.6;
 function setForestUnderpassVisual(active){
  active=!!active;if(forestUnderpassActive===active)return;forestUnderpassActive=active;
@@ -299,13 +304,13 @@ function setVhalorFloodVisual(active){
    if(kharvorBreakFx)kharvorBreakFx.visible=false;
    if(app){app.style.backgroundImage='none';app.style.backgroundColor='#101817'}
    if(scene){scene.background=new THREE.Color(0x101817);if(scene.fog){scene.fog.color.set(0x1a2725);scene.fog.near=15;scene.fog.far=96}}
-   if(sceneryGroup)sceneryGroup.visible=false;
+   if(sceneryGroup)sceneryGroup.visible=false;if(decorGroup)decorGroup.visible=false;
  }else if(cfg&&cfg.id==='ruins'&&scene){
-   if(sceneryGroup)sceneryGroup.visible=true;setRealmBackground(cfg);if(scene.fog){scene.fog.color.set(cfg.fog);scene.fog.near=currentJourney===2?Math.max(17,cfg.fogNear-4):cfg.fogNear;scene.fog.far=currentJourney===2?Math.max(78,cfg.fogFar-10):cfg.fogFar}
+   if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;setRealmBackground(cfg);if(scene.fog){scene.fog.color.set(cfg.fog);scene.fog.near=currentJourney===2?Math.max(17,cfg.fogNear-4):cfg.fogNear;scene.fog.far=currentJourney===2?Math.max(78,cfg.fogFar-10):cfg.fogFar}
  }
 }
 function resetKharvorBridge(){
- kharvorLayerY=0;kharvorFallStage=0;kharvorFallImpact=0;setForestUnderpassVisual(false);setVhalorFloodVisual(false);
+ kharvorLayerY=0;kharvorFallStage=0;kharvorFallImpact=0;bridgeDropSafetyCleared=false;setForestUnderpassVisual(false);setVhalorFloodVisual(false);
  if(roadGroup)roadGroup.position.y=0;if(itemGroup)itemGroup.position.y=0;if(shelter3D)shelter3D.position.y=0;
  for(const g of kharvorUpperBridgeGroups){g.visible=false;g.position.y=.45}
  for(const g of forestClosedBridgeGroups){g.visible=false;g.position.y=0}
@@ -351,6 +356,7 @@ function updateKharvorBridge(dt,progress){
  if(!sequenceRealm){if(Math.abs(kharvorLayerY)>.01||forestUnderpassActive||vhalorFloodVisualActive)resetKharvorBridge();return}
  const total=realmTargetDistance(),riseStart=Math.max(700,total-500),lowerY=isForest?FOREST_LOWER_Y:KHARVOR_LOWER_Y;
  const holeFx=ensureKharvorBreakFx(),holeVisible=!tobogganActive&&progress>=458&&progress<502;
+ if(isBridgeDropTransitionZone(progress)&&!bridgeDropSafetyCleared){bridgeDropSafetyCleared=true;clearBridgeDropApproach();spawnTimer=Math.max(spawnTimer,1.35)}
  if(holeFx){
    holeFx.visible=holeVisible;
    if(holeVisible){const approach=Math.max(-1.6,(500-progress)*.25);holeFx.position.set(trackCurveX(-Math.max(0,approach)),0,-approach);holeFx.rotation.y=trackCurveYaw(-Math.max(0,approach));const grow=Math.min(1,Math.max(.72,(progress-458)/34)),craterScale=.37;holeFx.scale.set(grow*craterScale,1,grow*craterScale)}
@@ -905,7 +911,7 @@ function playVarekFootstep(){
  src.buffer=buf;const speedRatio=Math.max(0,Math.min(1,(speed-RUN_SPEED_BASE)/Math.max(.001,RUN_SPEED_MAX-RUN_SPEED_BASE)));
  src.playbackRate.value=.96+speedRatio*.13+(Math.random()-.5)*.035;g.gain.value=.105+(footstepIndex%2?-.008:.006);src.connect(g);g.connect(sfxMaster);src.start();
 }
-function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE21: sem passos contínuos durante a corrida
+function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE22: sem passos contínuos durante a corrida
 function resetFootsteps(){footstepTimer=0}
 
 function getNoiseBuffer(){
@@ -1159,7 +1165,7 @@ function updateWeatherVisual(dt){
  else weatherLightningAlpha=Math.max(0,weatherLightningAlpha-dt*2.45);
  if(UI.weatherFlash)UI.weatherFlash.style.opacity=String(weatherLightningAlpha);
 }
-const PC_QA_BUILD=true;
+const PC_QA_BUILD=false;
 let scenarioTestJourney=1;
 let qaEngineReady=false,qaPendingScenario=null,qaScenarioStarting=false;
 function qaSetStatus(msg){const el=$('qaLaunchStatus');if(el)el.textContent=msg}
@@ -1216,14 +1222,15 @@ async function startScenarioTest(realmIdx,journey=scenarioTestJourney){
  if(!qaEngineReady||!scene||!renderer||!heroRoot||!clock){qaPendingScenario={realm:safeRealm,journey:safeJourney};qaSetStatus('SELECIONADO • '+REALMS[safeRealm].short+' • aguardando o motor 3D terminar...');return false}
  qaPendingScenario=null;return launchScenarioTest(safeRealm,safeJourney);
 }
+async function waitForQaScenario(realm,journey){const startedNow=await startScenarioTest(realm,journey);if(startedNow)return true;for(let i=0;i<100;i++){await new Promise(r=>setTimeout(r,80));if(started&&!paused&&realmIndex===realm)return true}qaSetStatus('ERRO • cenário não ficou pronto para o teste rápido.');return false}
 async function startKharvorQuick(mode='drop'){
- await startScenarioTest(1,scenarioTestJourney);distance=mode==='lower'?760:485;realmStartDistance=0;updateKharvorBridge(.016,distance);updateHUD();toast(mode==='lower'?'TESTE • KHARVOR • PASSAGEM INFERIOR':'TESTE • KHARVOR • QUEDA IMINENTE');
+ if(!await waitForQaScenario(1,scenarioTestJourney))return;distance=mode==='lower'?760:485;realmStartDistance=0;updateKharvorBridge(.016,distance);updateHUD();toast(mode==='lower'?'TESTE • KHARVOR • PASSAGEM INFERIOR':'TESTE • KHARVOR • QUEDA IMINENTE');
 }
 async function startNerisQuick(mode='drop'){
- await startScenarioTest(4,scenarioTestJourney);distance=mode==='lower'?760:485;realmStartDistance=0;updateKharvorBridge(.016,distance);updateHUD();toast(mode==='lower'?'TESTE • NERIS • PONTE FECHADA INFERIOR':'TESTE • NERIS • QUEDA IMINENTE');
+ if(!await waitForQaScenario(4,scenarioTestJourney))return;distance=mode==='lower'?760:485;realmStartDistance=0;updateKharvorBridge(.016,distance);updateHUD();toast(mode==='lower'?'TESTE • NERIS • PONTE FECHADA INFERIOR':'TESTE • NERIS • QUEDA IMINENTE');
 }
 async function startVhalorQuick(mode='drop'){
- await startScenarioTest(3,scenarioTestJourney);distance=mode==='flooded'?510:485;realmStartDistance=0;updateKharvorBridge(.016,distance);updateHUD();toast(mode==='flooded'?'TESTE • VHALOR • PASSAGEM INUNDADA EM CANOA':'TESTE • VHALOR • QUEDA IMINENTE');
+ if(!await waitForQaScenario(3,scenarioTestJourney))return;distance=mode==='flooded'?510:485;realmStartDistance=0;updateKharvorBridge(.016,distance);updateHUD();toast(mode==='flooded'?'TESTE • VHALOR • PASSAGEM INUNDADA EM CANOA':'TESTE • VHALOR • QUEDA IMINENTE');
 }
 async function startFinalSceneTest(mode){
  stopTheme(250);hideFamilyScene();endToboggan(true);resetOpeningImpactVisuals();stopAmbientBed();stopWeatherAudio();resetFootsteps();
@@ -1405,7 +1412,7 @@ function buildRoad(){
  const khUnderMat=new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.78});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
  const frRoofMat=new THREE.MeshStandardMaterial({color:0x302b23,roughness:1}),frWallMat=new THREE.MeshStandardMaterial({color:0x40382b,roughness:1}),frRootMat=new THREE.MeshStandardMaterial({color:0x5a4934,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x314b2d,transparent:true,opacity:.85});
- // MOBILE21 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
+ // MOBILE22 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
  const sigStone=new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
  const sigDark=new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
  const sigWood=new THREE.MeshStandardMaterial({color:0x4c3828,roughness:1});
@@ -1479,7 +1486,7 @@ function buildRoad(){
        for(const x of [-2.25,2.25]){const light=new THREE.Mesh(new THREE.BoxGeometry(.10,.02,2.00),new THREE.MeshBasicMaterial({color:0xf6e6b3,transparent:true,opacity:.46})); light.position.set(x,.03,(rz-1.5)*2.62); seg.add(light)}
      }
    }
-   // MOBILE21 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
+   // MOBILE22 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
    if(s%3===0){
      const signature=new THREE.Group();signature.name='MR_PONTE_ASSINATURA_'+cfg.id;
      if(cfg.id==='vruins'){
@@ -1922,11 +1929,11 @@ function createGem(laneI,z){const mat=new THREE.MeshStandardMaterial({color:0x54
 function createStar(laneI,z){const shape=new THREE.Shape();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2===0?.38:.17;const x=Math.cos(a)*r,y=Math.sin(a)*r;i?shape.lineTo(x,y):shape.moveTo(x,y)}shape.closePath();const geo=new THREE.ExtrudeGeometry(shape,{depth:.10,bevelEnabled:true,bevelSize:.035,bevelThickness:.035,bevelSegments:1});geo.center();const m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xffd95b,emissive:0x9b6710,emissiveIntensity:.65,metalness:.12,roughness:.24}));m.position.set(LANE_X[laneI],1.12,z);m.userData={kind:'star',lane:laneI,collected:false};itemGroup.add(m);collectibles.push(m)}
 function createWater(laneI,z){const g=new THREE.Group(),glass=new THREE.MeshStandardMaterial({color:0x7bdcff,transparent:true,opacity:.72,roughness:.18,metalness:.05}),cap=new THREE.MeshStandardMaterial({color:0x2e6f84,roughness:.6});const b=new THREE.Mesh(new THREE.CylinderGeometry(.18,.22,.62,12),glass);b.position.y=.36;const c=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.12,12),cap);c.position.y=.73;g.add(b,c);g.position.set(LANE_X[laneI],.25,z);g.userData={kind:'water',lane:laneI,collected:false};itemGroup.add(g);collectibles.push(g)}
 function createHole(laneI,z){
- const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE21';
+ const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE22';
  const cfg=REALMS[realmIndex]||REALMS[0],roadColor=cfg.road[1]||0x51483f,edgeColor=cfg.edge||0x3a342f;
  const voidMat=new THREE.MeshBasicMaterial({color:0x000000,side:THREE.DoubleSide,depthWrite:true});
  const wallMat=new THREE.MeshBasicMaterial({color:0x0a0908,side:THREE.DoubleSide});
- const crackCount=13,outer=[],inner=[],squash=.88+Math.random()*.16,stretch=1.04+Math.random()*.18;
+ const crackCount=15,outer=[],inner=[],squash=.90+Math.random()*.13,stretch=1.02+Math.random()*.16;
  for(let i=0;i<crackCount;i++){
    const a=i/crackCount*Math.PI*2;
    const bite=(i===2||i===7?-.18:0)+(i===4||i===10?.12:0);
@@ -1948,10 +1955,10 @@ function createHole(laneI,z){
  const core=new THREE.Mesh(new THREE.ShapeGeometry(new THREE.Shape(inner)),voidMat);core.rotation.x=-Math.PI/2;core.position.y=-1.74;g.add(core);
  const rimMat=new THREE.MeshStandardMaterial({color:edgeColor,roughness:1}),slabMat=new THREE.MeshStandardMaterial({color:roadColor,roughness:1});
  // Poucos fragmentos grandes e assimétricos: evita o antigo aspecto de "anel de pedras".
- const fragments=MOBILE_RUNNER?6:8;
+ const fragments=MOBILE_RUNNER?5:7;
  for(let i=0;i<fragments;i++){
    const a=(i/fragments)*Math.PI*2+(i%2?.15:-.08),oi=outer[(i*2)%crackCount];
-   const rock=new THREE.Mesh(i%2===0?new THREE.BoxGeometry(.30+(i%3)*.12,.07+(i%2)*.05,.34+(i%4)*.09):new THREE.DodecahedronGeometry(.14+(i%3)*.035,0),i%2===0?slabMat:rimMat);
+   const rock=new THREE.Mesh(i%2===0?new THREE.BoxGeometry(.27+(i%3)*.10,.06+(i%2)*.04,.30+(i%4)*.08):new THREE.DodecahedronGeometry(.14+(i%3)*.035,0),i%2===0?slabMat:rimMat);
    rock.position.set(oi.x*1.03,.065+(i%3)*.025,oi.y*1.03);rock.scale.set(.82+(i%3)*.18,.55+(i%2)*.16,.78+(i%4)*.11);rock.rotation.set((i%3-1)*.10,-a+(i%2?.18:-.12),(i%2?1:-1)*.12);g.add(rock)
  }
  // Trincas curtas, em direções diferentes, sem formar estrela perfeita.
@@ -2236,7 +2243,7 @@ function fallIntoAbyss(){haptic([38,28,62]);
 }
 function dehydrationDeath(){if(gameOver)return;water=0;fallingDeath=false;playHero('Roll_Dodge_1',.10);toast('Varek perdeu as forças por desidratação');beginDeath('dehydration','A fuga foi interrompida por desidratação e exaustão',500);updateHUD()}
 function hurt(text){if(hitCooldown>0||gameOver||shelterActive)return;if(shieldCharges>0){shieldCharges--;hitCooldown=.7;playSFX('shield');toast('ESCUDO BLOQUEOU O ERRO');return}hitCooldown=1.1;lives--;hunterStage=Math.min(3,hunterStage+1);playSFX('hit');triggerHunters();if(lives<=0){lives=0;playSFX('lifeLost');jumpY=0;jumpV=0;slideTimer=0;playHero('Roll_Dodge_1',.08);beginDeath('collision','As caçadoras alcançaram Varek',600)}else setTimeout(()=>toast(text+' • -1 VIDA'),420)}
-function resumeAfterContinue(extraLives,sourceLabel){lives=extraLives;gameOver=false;paused=false;deathRecorded=false;fallingDeath=false;holeRecoveryActive=false;fallTimer=0;hitCooldown=1.8;tobogganHitCooldown=1.6;clearDangerZone();if(lastDeathReason==='dehydration')water=Math.max(35,water);if(heroRoot){heroRoot.position.y=tobogganActive?(tobogganY(0)+RIVER_HERO_Y):0;heroRoot.position.z=tobogganActive?RIVER_HERO_Z:0;heroRoot.rotation.x=tobogganActive?-.12:0;heroRoot.rotation.z=0}if(UI.fallFlash)UI.fallFlash.classList.remove('show');UI.revivePanel.classList.remove('show');hunters.forEach(h=>{h.root.visible=false;h.z=h.restZ;h.targetZ=h.restZ;if(h.action)h.action.paused=false});huntersVisible=false;if(lyraAction)lyraAction.paused=false;if(tobogganActive){slideTimer=999;playTobogganPose();playLyraTobogganPose()}else{slideTimer=0;playHero('Running',.10);forceLyraRun()}setLyraJourneyState();toast(sourceLabel+' • +'+extraLives+(extraLives===1?' VIDA':' VIDAS'));lastDeathReason='';lastDeathMessage='';clock.getDelta();updateHUD()}
+function resumeAfterContinue(extraLives,sourceLabel){lives=extraLives;gameOver=false;paused=false;deathRecorded=false;fallingDeath=false;holeRecoveryActive=false;fallTimer=0;hitCooldown=1.8;tobogganHitCooldown=1.6;clearDangerZone();if(lastDeathReason==='dehydration')water=Math.max(35,water);if(heroRoot){heroRoot.position.y=tobogganActive?(tobogganY(0)+RIVER_HERO_Y):kharvorLayerY;heroRoot.position.z=tobogganActive?RIVER_HERO_Z:0;heroRoot.rotation.x=tobogganActive?-.12:0;heroRoot.rotation.z=0}if(UI.fallFlash)UI.fallFlash.classList.remove('show');UI.revivePanel.classList.remove('show');hunters.forEach(h=>{h.root.visible=false;h.z=h.restZ;h.targetZ=h.restZ;if(h.action)h.action.paused=false});huntersVisible=false;if(lyraAction)lyraAction.paused=false;if(tobogganActive){slideTimer=999;playTobogganPose();playLyraTobogganPose()}else{slideTimer=0;playHero('Running',.10);forceLyraRun()}setLyraJourneyState();toast(sourceLabel+' • +'+extraLives+(extraLives===1?' VIDA':' VIDAS'));lastDeathReason='';lastDeathMessage='';clock.getDelta();updateHUD()}
 function reviveWithLives(extraLives){if(!gameOver)return;if(reviveStep>=REVIVE_SEQUENCE.length){setReviveStatus('As continuações pagas desta corrida terminaram. Use o anúncio premiado, se disponível, ou volte ao início.');return}const offer=REVIVE_SEQUENCE[reviveStep];if(extraLives!==offer.lives){setReviveStatus('A oferta atual é +'+offer.lives+(offer.lives===1?' vida':' vidas')+' por 💎 '+offer.price+'.');return}const price=offer.price;if(!canAffordGems(price)){const missing=Math.max(0,price-SAVE.gems);setReviveStatus('SALDO INSUFICIENTE • você possui 💎 '+SAVE.gems+' e precisa de 💎 '+price+'. Faltam 💎 '+missing+'. Você pode assistir ao anúncio para continuar com +1 vida.');toast('SALDO DE DIAMANTES INSUFICIENTE');return}if(!spendGems(price)){setReviveStatus('Não foi possível descontar os diamantes. Tente novamente.');return}reviveStep++;saveState();setReviveStatus('Pagamento confirmado • 💎 '+price+' descontados.',true);resumeAfterContinue(extraLives,'CONTINUAR • 💎 '+price)}
 function finishRewardedAd(result){if(rewardedAdTimer){clearInterval(rewardedAdTimer);rewardedAdTimer=null}rewardedAdRunning=false;const p=$('rewardedAdPanel');if(p)p.classList.remove('show');const done=rewardedAdResolve;rewardedAdResolve=null;if(done)done(!!result)}
 function closeRewardedAd(){finishRewardedAd(false)}
@@ -2288,7 +2295,7 @@ function update(dt){
  for(const obj of decorObjects){obj.position.z+=dz;if(obj.position.z>22)obj.position.z-=225;const u=obj.userData||{};obj.position.x=(u.baseX||0)+trackCurveX(obj.position.z)*.22;obj.position.y=(u.baseY||0);if(u.anim==='vineMonkey'){const t=elapsed*1.45+(u.phase||0),sway=Math.sin(t)*.42;obj.rotation.z=sway*.22*(u.side||1);obj.position.x+=(u.side||1)*Math.sin(t)*.42;obj.position.y=(u.baseY||0)+Math.cos(t*1.1)*.16}else if(u.anim==='lavaSpout'){const t=elapsed*2.2+(u.phase||0),p=.90+Math.sin(t)*.16;obj.scale.set(p,1.0+Math.max(0,Math.sin(t))*0.45,p);obj.position.y=(u.baseY||0)+Math.max(0,Math.sin(t))*.14}else if(u.anim==='bird'){const t=elapsed*1.7+(u.phase||0);obj.position.x+=(u.side||1)*Math.sin(t)*.55;obj.position.y=(u.baseY||0)+Math.sin(t*1.6)*.28;obj.rotation.z=Math.sin(t*1.6)*.16}else if(u.anim==='dustBanner'){const t=elapsed*1.1+(u.phase||0);obj.rotation.y=Math.sin(t)*.35;obj.position.y=(u.baseY||0)+Math.sin(t*1.4)*.08}else if(u.anim==='ribbon'){const t=elapsed*1.25+(u.phase||0);obj.rotation.z=Math.sin(t)*.30;obj.position.y=(u.baseY||0)+Math.cos(t*1.5)*.12}else if(u.anim==='fireflies'){const t=elapsed*1.15+(u.phase||0);obj.rotation.y=Math.sin(t*.7)*.18;obj.position.y=(u.baseY||0)+Math.sin(t)*.18;for(let i=0;i<obj.children.length;i++){const c=obj.children[i];c.position.y=.25+(i%4)*.43+Math.sin(t*1.4+i*.9)*.11;c.material.opacity=.46+.26*(.5+.5*Math.sin(t*2+i))}}else if(u.anim==='mistVeil'){const t=elapsed*.52+(u.phase||0);obj.position.x=(u.baseX||0)+trackCurveX(obj.position.z)*.22+Math.sin(t)*.65;obj.rotation.y=Math.sin(t*.7)*.06}else if(u.anim==='floatingShard'){const t=elapsed*.72+(u.phase||0);obj.rotation.y=t;obj.rotation.z=Math.sin(t)*.16;obj.position.y=(u.baseY||0)+Math.sin(t*1.2)*.32}}
  for(const sc of sceneryChunks){sc.position.z+=dz*.52;const loop=sc.userData.loopLength||160;if(sc.position.z>34)sc.position.z-=loop;sc.position.x=(sc.userData.baseX||0)+trackCurveX(sc.position.z);sc.rotation.y=(sc.userData.baseRotY||0)+trackCurveYaw(sc.position.z)*.22}
  updateShelter(dt,dz);
- spawnTimer-=dt;if(spawnTimer<=0){spawnObstacle();const base=currentJourney===2?1.03:1.18;spawnTimer=Math.max(currentJourney===2?.44:.48,base-(speed-RUN_SPEED_BASE)*.030)+Math.random()*(currentJourney===2?.25:.32)}
+ spawnTimer-=dt;if(spawnTimer<=0){if(!isBridgeDropTransitionZone(currentRealmProgress))spawnObstacle();const base=currentJourney===2?1.03:1.18;spawnTimer=Math.max(currentJourney===2?.44:.48,base-(speed-RUN_SPEED_BASE)*.030)+Math.random()*(currentJourney===2?.25:.32)}
  starTimer-=dt;if(starTimer<=0){spawnStar();starTimer=.72+Math.random()*.75}
  gemTimer-=dt;if(gemTimer<=0){spawnGem();gemTimer=3.2+Math.random()*2.8}
  waterTimer-=dt;if(waterTimer<=0){spawnWater();waterTimer=10+Math.random()*7}
@@ -2446,7 +2453,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE21';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE22';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{

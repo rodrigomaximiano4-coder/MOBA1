@@ -1,0 +1,31 @@
+MAX HEALMS MOBILE22 — VALIDAÇÃO ESTÁTICA
+
+PASS — MOBILE: IDs duplicados — 215 IDs
+PASS — MOBILE: referências DOM
+PASS — MOBILE: assets locais
+PASS — MOBILE: JS inline 0
+PASS — MOBILE: JS inline 1
+PASS — PC: IDs duplicados — 215 IDs
+PASS — PC: referências DOM
+PASS — PC: assets locais
+PASS — PC: JS inline 0
+PASS — PC: JS inline 1
+PASS — MOBILE: QA desativado
+PASS — PC: QA ativado
+PASS — PC: 6 cenários QA
+PASS — updateHUD definido
+PASS — Continue respeita camada inferior
+PASS — Vhalor oculta decor externo
+PASS — Zona de queda sem spawn normal
+PASS — Escala caçadoras fixa
+PASS — Lyra/Varek canoa pausados
+PASS — Celestial sem paraquedas
+PASS — Fundos aprovados
+PASS — Launcher PC presente
+
+RESULTADO: 22/22 verificações de estrutura/código passaram.
+Observação: esta validação cobre estrutura, sintaxe, assets e invariantes de código. Não substitui teste visual/jogável em dispositivo real.
+
+PASS — ZIP MOBILE íntegro — testzip OK
+PASS — ZIP PC íntegro — testzip OK
+RESULTADO FINAL: 24/24 verificações passaram.
