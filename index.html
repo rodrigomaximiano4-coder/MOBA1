@@ -76,7 +76,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 
 .topRight{display:none!important}
 
-/* ===== MAX HEALMS MOBILE32 • MOBILE CLEAN + DESCIDA DO RIO ===== */
+/* ===== MAX HEALMS MOBILE33 • MOBILE CLEAN + DESCIDA DO RIO ===== */
 #mobileMore{display:none}.mobileMorePanel{display:contents}
 @media(max-width:740px){
   #app{background-size:auto 100%!important;background-position:50% 46%!important;background-repeat:no-repeat!important;background-color:#07110d!important}
@@ -270,7 +270,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE32 • MOBILE FIRST + DESCIDA DO RIO
+// MAX HEALMS MOBILE33 • MOBILE FIRST + DESCIDA DO RIO
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -357,7 +357,7 @@ function updateKharvorBridge(dt,progress){
  const sequenceRealm=isKharvor||isForest||isVhalor;
  if(!sequenceRealm){if(Math.abs(kharvorLayerY)>.01||forestUnderpassActive||vhalorFloodVisualActive)resetKharvorBridge();return}
  const total=realmTargetDistance(),riseStart=Math.max(700,total-500),lowerY=isForest?FOREST_LOWER_Y:KHARVOR_LOWER_Y;
- const holeFx=kharvorBreakFx; // MOBILE32: scripted collapse stays invisible until the instant of the fall.
+ const holeFx=kharvorBreakFx; // MOBILE33: scripted collapse stays invisible until the instant of the fall.
  if(isBridgeDropTransitionZone(progress)&&!bridgeDropSafetyCleared){bridgeDropSafetyCleared=true;clearBridgeDropApproach();spawnTimer=Math.max(spawnTimer,1.35)}
  if(holeFx)holeFx.visible=false;
  // Vhalor: queda aos 500 m e a parte inferior vira uma travessia fechada e inundada de canoa.
@@ -508,7 +508,23 @@ const TEST_MODE=false;
 function gemText(){return TEST_MODE?'∞':String(SAVE.gems)}
 function canAffordGems(price){return TEST_MODE||SAVE.gems>=price}
 function spendGems(price){if(TEST_MODE)return true;if(SAVE.gems<price)return false;SAVE.gems-=price;return true}
-function saveState(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}refreshMenuStats()}
+let saveQueueTimer=null;
+function saveState(){
+ if(saveQueueTimer){clearTimeout(saveQueueTimer);saveQueueTimer=null}
+ try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}
+ refreshMenuStats()
+}
+function queueRunSave(){
+ if(saveQueueTimer)return;
+ saveQueueTimer=setTimeout(()=>{saveQueueTimer=null;try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}refreshMenuStats()},1400)
+}
+function flushRunSave(){
+ if(saveQueueTimer){clearTimeout(saveQueueTimer);saveQueueTimer=null}
+ try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}
+ refreshMenuStats()
+}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)flushRunSave()},{passive:true});
+window.addEventListener('pagehide',flushRunSave,{passive:true});
 
 // ===== MAX HEALMS • ECONOMIA COMERCIAL / GOOGLE PLAY READY =====
 const PLAY_STORE_CONFIG={
@@ -888,13 +904,13 @@ async function renderOutfitThumb(canvasId,outfitId,rotationY=Math.PI){
  const canvas=$(canvasId);if(!canvas||canvas.dataset.ready==='1'||canvas.dataset.loading==='1'||!loader)return false;canvas.dataset.loading='1';
  try{
    const cfg=HERO_OUTFITS[outfitId]||HERO_OUTFITS.outfit_varek_original,src=cfg.mode==='varek'?ASSETS.varek:ASSETS[cfg.run];if(!src)throw new Error('asset do visual não encontrado');
-   const gltf=await loadGLTFAsset(src),ps=new THREE.Scene(),aspect=(canvas.width||360)/(canvas.height||340),pc=new THREE.PerspectiveCamera(30,aspect,.01,50);
-   const r=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,preserveDrawingBuffer:true,powerPreference:'low-power'});r.setPixelRatio(1);r.setSize(canvas.width||360,canvas.height||340,false);r.outputEncoding=THREE.sRGBEncoding;
+   const gltf=await loadGLTFAsset(src),ps=new THREE.Scene(),renderW=MOBILE_RUNNER?240:(canvas.width||360),renderH=MOBILE_RUNNER?280:(canvas.height||340),aspect=renderW/renderH,pc=new THREE.PerspectiveCamera(30,aspect,.01,50);
+   const r=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!MOBILE_RUNNER,preserveDrawingBuffer:false,powerPreference:'low-power'});r.setPixelRatio(1);r.setSize(renderW,renderH,false);r.outputEncoding=THREE.sRGBEncoding;
    ps.add(new THREE.HemisphereLight(0xf2fbf7,0x111719,1.85));const key=new THREE.DirectionalLight(0xffdfae,1.9);key.position.set(2.7,4.5,4);ps.add(key);const fill=new THREE.DirectionalLight(0x8fc9ff,1.0);fill.position.set(-3,2.2,2);ps.add(fill);const rim=new THREE.DirectionalLight(0xffffff,.55);rim.position.set(0,3,-4);ps.add(rim);
    const model=cloneModelScene(gltf.scene);setSRGB(model);applyOutfitStyle(model,cfg);model.rotation.y=rotationY;model.updateMatrixWorld(true);
    let box=new THREE.Box3().setFromObject(model),size=box.getSize(new THREE.Vector3());const scale=2.25/Math.max(.001,size.y);model.scale.setScalar(scale);model.updateMatrixWorld(true);box=new THREE.Box3().setFromObject(model);const center=box.getCenter(new THREE.Vector3());model.position.x-=center.x;model.position.y-=box.min.y;model.position.z-=center.z;model.updateMatrixWorld(true);box=new THREE.Box3().setFromObject(model);size=box.getSize(new THREE.Vector3());
    const cy=(box.min.y+box.max.y)/2,half=Math.max(size.y*.58,size.x*.60,.8),fov=THREE.MathUtils.degToRad(pc.fov),dist=half/Math.tan(fov/2)*1.16;pc.position.set(0,cy,dist);pc.lookAt(0,cy,0);pc.near=Math.max(.01,dist-size.z*2);pc.far=dist+size.z*4+10;pc.updateProjectionMatrix();ps.add(model);
-   r.render(ps,pc);canvas.dataset.ready='1';canvas.dataset.loading='';r.dispose();return true;
+   r.render(ps,pc);canvas.dataset.ready='1';canvas.dataset.loading='';if(r.renderLists&&r.renderLists.dispose)r.renderLists.dispose();r.dispose();if(r.forceContextLoss)r.forceContextLoss();return true;
  }catch(e){console.warn('LOJA PREVIEW',canvasId,e);canvas.dataset.loading='';canvas.dataset.error='1';return false}
 }
 async function ensureOutfitPreviews(){
@@ -954,7 +970,7 @@ function playVarekFootstep(){
  src.buffer=buf;const speedRatio=Math.max(0,Math.min(1,(speed-RUN_SPEED_BASE)/Math.max(.001,RUN_SPEED_MAX-RUN_SPEED_BASE)));
  src.playbackRate.value=.96+speedRatio*.13+(Math.random()-.5)*.035;g.gain.value=.105+(footstepIndex%2?-.008:.006);src.connect(g);g.connect(sfxMaster);src.start();
 }
-function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE32: sem passos contínuos durante a corrida
+function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE33: sem passos contínuos durante a corrida
 function resetFootsteps(){footstepTimer=0}
 
 function getNoiseBuffer(){
@@ -1459,7 +1475,7 @@ function init3D(){
 
 function buildSky(){
  while(skyGroup.children.length){const c=skyGroup.children.pop();disposeObject(c)}
- const g=new THREE.SphereGeometry(180,32,20);
+ const g=new THREE.SphereGeometry(180,MOBILE_RUNNER?18:32,MOBILE_RUNNER?12:20);
  const m=new THREE.MeshBasicMaterial({color:0xa8c5b4,side:THREE.BackSide,fog:false});
  const sky=new THREE.Mesh(g,m);
  sky.position.y=-15;
@@ -1477,14 +1493,17 @@ function buildRoad(){
  const bridgeDeckBaseGeo=new THREE.BoxGeometry(8.16,.075,9.92);
  const bridgeRopeMat=new THREE.MeshStandardMaterial({color:0x33261d,roughness:1,metalness:0});
  const bridgePostMat=new THREE.MeshStandardMaterial({color:0x493629,roughness:1,metalness:0,flatShading:true});
- const tileGeo=new THREE.BoxGeometry(2.45,.18,2.62), edgeGeo=new THREE.BoxGeometry(.34,.28,2.75), seamGeo=new THREE.BoxGeometry(.08,.035,2.46), parapetBaseGeo=new THREE.BoxGeometry(.40,.56,10.35), parapetCapGeo=new THREE.BoxGeometry(.56,.14,10.45), guardPostGeo=new THREE.BoxGeometry(.18,1.18,.18), guardRailGeo=new THREE.BoxGeometry(.12,.12,10.12), buttressGeo=new THREE.BoxGeometry(.30,1.68,.42), braceGeo=new THREE.BoxGeometry(.16,.58,.22);
+ const tileGeo=new THREE.BoxGeometry(2.45,.18,2.62),mobileLaneGeo=new THREE.BoxGeometry(2.52,.18,10.38),edgeGeo=new THREE.BoxGeometry(.34,.28,10.38),seamGeo=new THREE.BoxGeometry(.08,.035,2.46),parapetBaseGeo=new THREE.BoxGeometry(.40,.56,10.35),parapetCapGeo=new THREE.BoxGeometry(.56,.14,10.45),guardPostGeo=new THREE.BoxGeometry(.18,1.18,.18),guardRailGeo=new THREE.BoxGeometry(.12,.12,10.12),buttressGeo=new THREE.BoxGeometry(.30,1.68,.42),braceGeo=new THREE.BoxGeometry(.16,.58,.22);
  const railStoneMat=makeStoneMaterial(roundedColor(cfg.edge,.04));
  const railCapMat=makeStoneMaterial(roundedColor(cfg.road[0],.06));
+ const edgeRoadMat=makeStoneMaterial(cfg.edge);
+ const mobileBaseColor=new THREE.Color(cfg.road[0]);
+ const mobileRoadMats=[-.018,0,.018].map((light,i)=>{const c=mobileBaseColor.clone();c.offsetHSL(0,(i===1?-.01:0),light);return new THREE.MeshStandardMaterial({color:c,roughness:.98,metalness:0,flatShading:true})});
  const railWoodMat=new THREE.MeshStandardMaterial({color:0x7b6752,roughness:.9,metalness:.03});
  const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
  const frRoofMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x302b23}):new THREE.MeshStandardMaterial({color:0x302b23,roughness:1}),frWallMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x40382b}):new THREE.MeshStandardMaterial({color:0x40382b,roughness:1}),frRootMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x5a4934}):new THREE.MeshStandardMaterial({color:0x5a4934,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x314b2d,transparent:true,opacity:.78});
- // MOBILE32 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
+ // MOBILE33 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
  const sigStone=new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
  const sigDark=new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
  const sigWood=new THREE.MeshStandardMaterial({color:0x4c3828,roughness:1});
@@ -1498,11 +1517,15 @@ function buildRoad(){
 
  const roadCount=MOBILE_RUNNER?11:20;for(let s=0;s<roadCount;s++){
    const seg=new THREE.Group();seg.position.z=8-s*10.5;seg.userData.baseIndex=s;
-   for(let rz=0;rz<4;rz++)for(let laneI=0;laneI<3;laneI++){
-     const col=cfg.road[(s+rz+laneI)%cfg.road.length];const tile=new THREE.Mesh(tileGeo,makeStoneMaterial(roundedColor(col,.07)));
-     tile.position.set(LANE_X[laneI],-.10,(rz-1.5)*2.62);tile.rotation.y=(Math.random()-.5)*.018;tile.rotation.z=(Math.random()-.5)*.009;tile.position.y+=(Math.random()-.5)*.035;tile.receiveShadow=true;seg.add(tile)
+   if(MOBILE_RUNNER){
+     for(let laneI=0;laneI<3;laneI++){const laneDeck=new THREE.Mesh(mobileLaneGeo,mobileRoadMats[laneI]);laneDeck.position.set(LANE_X[laneI],-.10,0);laneDeck.receiveShadow=false;seg.add(laneDeck)}
+   }else{
+     for(let rz=0;rz<4;rz++)for(let laneI=0;laneI<3;laneI++){
+       const col=cfg.road[(s+rz+laneI)%cfg.road.length];const tile=new THREE.Mesh(tileGeo,makeStoneMaterial(roundedColor(col,.07)));
+       tile.position.set(LANE_X[laneI],-.10,(rz-1.5)*2.62);tile.rotation.y=(Math.random()-.5)*.018;tile.rotation.z=(Math.random()-.5)*.009;tile.position.y+=(Math.random()-.5)*.035;tile.receiveShadow=true;seg.add(tile)
+     }
    }
-   for(const x of [-4.15,4.15]){const e=new THREE.Mesh(edgeGeo,makeStoneMaterial(cfg.edge));e.position.set(x,-.06,0);e.receiveShadow=true;seg.add(e)}
+   for(const x of [-4.15,4.15]){const e=new THREE.Mesh(edgeGeo,edgeRoadMat);e.position.set(x,-.06,0);e.receiveShadow=!MOBILE_RUNNER;seg.add(e)}
    // TESTE 21.7: guarda-corpo reforçado nas pontes maiores/laterais, fora das três faixas jogáveis.
    for(const side of [-1,1]){
      const x=side*4.36;
@@ -1536,35 +1559,30 @@ function buildRoad(){
      for(const y of [.72,1.10]){const rope=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,10.0,6),bridgeRopeMat);rope.position.set(side*4.28,y,0);rope.rotation.x=Math.PI/2;rope.castShadow=shadowsOn;bridgeDetail.add(rope)}
    }
    seg.add(bridgeDetail);bridgeDetailGroups.push(bridgeDetail);
-   // divisores baixos: orientam 3 faixas sem parecer trilho alto
-   for(const x of [-1.125,1.125])for(let rz=0;rz<4;rz++){const seam=new THREE.Mesh(seamGeo,new THREE.MeshStandardMaterial({color:0x5f5b4f,roughness:1}));seam.position.set(x,.015,(rz-1.5)*2.62);seg.add(seam)}
-   // MOBILE7: variações visuais de pista por reino para evitar sensação de mesma estrada sempre.
-   if(cfg.id==='forest'){
-     for(let rz=0;rz<4;rz++){
-       const trail=new THREE.Mesh(new THREE.BoxGeometry(6.3,.04,2.38),new THREE.MeshStandardMaterial({color:0x6d5d42,roughness:1})); trail.position.set(0,-.005,(rz-1.5)*2.62); seg.add(trail);
-       if((s+rz)%2===0){const root=new THREE.Mesh(new THREE.CylinderGeometry(.06,.08,1.45,6),new THREE.MeshStandardMaterial({color:0x5a4630,roughness:1})); root.rotation.z=Math.PI/2; root.rotation.y=.38; root.position.set((rz%2?1:-1)*1.7,.06,(rz-1.5)*2.62+.25); seg.add(root)}
-     }
-   }else if(cfg.id==='ember'){
-     for(let rz=0;rz<4;rz++){
-       const glowMat=new THREE.MeshBasicMaterial({color:0xff7e2f,transparent:true,opacity:.56});
-       for(const x of [-1.12,1.12]){const crack=new THREE.Mesh(new THREE.BoxGeometry(.18,.012,2.10),glowMat); crack.position.set(x,.026,(rz-1.5)*2.62); seg.add(crack)}
-       if((s+rz)%2===0){const slag=new THREE.Mesh(new THREE.BoxGeometry(.46,.08,.46),new THREE.MeshStandardMaterial({color:0x3a2d28,roughness:1})); slag.position.set(rz%2?3.45:-3.45,.05,(rz-1.5)*2.62); slag.rotation.y=.5; seg.add(slag)}
-     }
-   }else if(cfg.id==='vruins'){
-     for(let rz=0;rz<4;rz++){
-       const wet=new THREE.Mesh(new THREE.BoxGeometry(6.0,.015,1.18),new THREE.MeshStandardMaterial({color:0x2d2624,roughness:.62,metalness:.02})); wet.position.set(0,.01,(rz-1.5)*2.62); wet.rotation.y=((s+rz)%3-1)*.04; seg.add(wet)
-     }
-   }else if(cfg.id==='ruins'){
-     for(let rz=0;rz<4;rz++){
-       const strip=new THREE.Mesh(new THREE.BoxGeometry(5.9,.03,2.05),new THREE.MeshStandardMaterial({color:0x857d69,roughness:1})); strip.position.set(0,.012,(rz-1.5)*2.62); seg.add(strip)
-     }
-   }else if(cfg.id==='celestial'){
-     for(let rz=0;rz<4;rz++){
-       const gold=new THREE.Mesh(new THREE.BoxGeometry(.16,.02,2.14),new THREE.MeshBasicMaterial({color:0xf2cf77,transparent:true,opacity:.70})); gold.position.set(0,.03,(rz-1.5)*2.62); seg.add(gold)
-       for(const x of [-2.25,2.25]){const light=new THREE.Mesh(new THREE.BoxGeometry(.10,.02,2.00),new THREE.MeshBasicMaterial({color:0xf6e6b3,transparent:true,opacity:.46})); light.position.set(x,.03,(rz-1.5)*2.62); seg.add(light)}
+   // MOBILE33: sem listras repetitivas no chão. Faixas são sugeridas apenas por tons muito próximos.
+   if(!MOBILE_RUNNER){const seamMat=new THREE.MeshStandardMaterial({color:0x5f5b4f,roughness:1});for(const x of [-1.125,1.125])for(let rz=0;rz<4;rz++){const seam=new THREE.Mesh(seamGeo,seamMat);seam.position.set(x,.015,(rz-1.5)*2.62);seg.add(seam)}}
+   // MOBILE33: identidade visual no mobile vem de tons da pista, background, clima e laterais.
+   // Sem rachaduras/listras repetidas no chão para reduzir fadiga visual e draw calls.
+   if(!MOBILE_RUNNER){
+     if(cfg.id==='forest'){
+       for(let rz=0;rz<4;rz++){
+         const trail=new THREE.Mesh(new THREE.BoxGeometry(6.3,.04,2.38),new THREE.MeshStandardMaterial({color:0x6d5d42,roughness:1}));trail.position.set(0,-.005,(rz-1.5)*2.62);seg.add(trail);
+         if((s+rz)%2===0){const root=new THREE.Mesh(new THREE.CylinderGeometry(.06,.08,1.45,6),new THREE.MeshStandardMaterial({color:0x5a4630,roughness:1}));root.rotation.z=Math.PI/2;root.rotation.y=.38;root.position.set((rz%2?1:-1)*1.7,.06,(rz-1.5)*2.62+.25);seg.add(root)}
+       }
+     }else if(cfg.id==='ember'){
+       for(let rz=0;rz<4;rz++){
+         const glowMat=new THREE.MeshBasicMaterial({color:0xff7e2f,transparent:true,opacity:.56});
+         for(const x of [-1.12,1.12]){const crack=new THREE.Mesh(new THREE.BoxGeometry(.18,.012,2.10),glowMat);crack.position.set(x,.026,(rz-1.5)*2.62);seg.add(crack)}
+       }
+     }else if(cfg.id==='vruins'){
+       for(let rz=0;rz<4;rz++){const wet=new THREE.Mesh(new THREE.BoxGeometry(6.0,.015,1.18),new THREE.MeshStandardMaterial({color:0x2d2624,roughness:.62,metalness:.02}));wet.position.set(0,.01,(rz-1.5)*2.62);seg.add(wet)}
+     }else if(cfg.id==='ruins'){
+       for(let rz=0;rz<4;rz++){const strip=new THREE.Mesh(new THREE.BoxGeometry(5.9,.03,2.05),new THREE.MeshStandardMaterial({color:0x857d69,roughness:1}));strip.position.set(0,.012,(rz-1.5)*2.62);seg.add(strip)}
+     }else if(cfg.id==='celestial'){
+       for(let rz=0;rz<4;rz++){const gold=new THREE.Mesh(new THREE.BoxGeometry(.16,.02,2.14),new THREE.MeshBasicMaterial({color:0xf2cf77,transparent:true,opacity:.70}));gold.position.set(0,.03,(rz-1.5)*2.62);seg.add(gold)}
      }
    }
-   // MOBILE32 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
+   // MOBILE33 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
    if(s%3===0){
      const signature=new THREE.Group();signature.name='MR_PONTE_ASSINATURA_'+cfg.id;
      if(cfg.id==='vruins'){
@@ -1653,7 +1671,7 @@ function buildDecor(){
  const makeRibbon=(phase)=>{const g=new THREE.Group(); const mat=new THREE.MeshBasicMaterial({color:0xf2e2a9,transparent:true,opacity:.42,side:THREE.DoubleSide});
    const plane=new THREE.Mesh(new THREE.PlaneGeometry(2.8,.32),mat); plane.position.y=2.4; g.add(plane); g.userData.anim='ribbon'; g.userData.phase=phase; return g};
  const makeFireflies=(phase,color=0xc9f5a5)=>{const g=new THREE.Group(),mat=new THREE.MeshBasicMaterial({color,transparent:true,opacity:.72,depthWrite:false});for(let i=0;i<(MOBILE_RUNNER?3:9);i++){const o=new THREE.Mesh(new THREE.SphereGeometry(.045+(i%3)*.012,6,5),mat);o.position.set((i%3-1)*.65,.25+(i%4)*.43,(i-4)*.22);g.add(o)}g.userData.anim='fireflies';g.userData.phase=phase;return g};
- const makeMistVeil=(phase,color=0xb9d6cb)=>{const g=new THREE.Group(),mat=new THREE.MeshBasicMaterial({color,transparent:true,opacity:.10,side:THREE.DoubleSide,depthWrite:false});const p=new THREE.Mesh(new THREE.PlaneGeometry(8.4,2.8),mat);p.position.y=1.4;g.add(p);g.userData.anim='mistVeil';g.userData.phase=phase;return g};
+ const makeMistVeil=(phase,color=0xb9d6cb)=>{const g=new THREE.Group(),mat=new THREE.MeshBasicMaterial({color,transparent:true,opacity:MOBILE_RUNNER?.045:.10,side:THREE.DoubleSide,depthWrite:false});const p=new THREE.Mesh(new THREE.PlaneGeometry(MOBILE_RUNNER?6.4:8.4,MOBILE_RUNNER?2.0:2.8),mat);p.position.y=1.4;g.add(p);g.userData.anim='mistVeil';g.userData.phase=phase;return g};
  const makeFloatingShard=(phase,color=0xe9d59b)=>{const g=new THREE.Group(),mat=new THREE.MeshStandardMaterial({color,roughness:.72,metalness:.04});const m=new THREE.Mesh(new THREE.TetrahedronGeometry(.72,0),mat);m.scale.set(.65,1.8,.65);g.add(m);g.userData.anim='floatingShard';g.userData.phase=phase;return g};
 
  if(cfg.id==='forest'){
@@ -2005,7 +2023,7 @@ function createGem(laneI,z){const mat=new THREE.MeshStandardMaterial({color:0x54
 function createStar(laneI,z){const shape=new THREE.Shape();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2===0?.38:.17;const x=Math.cos(a)*r,y=Math.sin(a)*r;i?shape.lineTo(x,y):shape.moveTo(x,y)}shape.closePath();const geo=new THREE.ExtrudeGeometry(shape,{depth:.10,bevelEnabled:true,bevelSize:.035,bevelThickness:.035,bevelSegments:1});geo.center();const m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xffd95b,emissive:0x9b6710,emissiveIntensity:.65,metalness:.12,roughness:.24}));m.position.set(LANE_X[laneI],1.12,z);m.userData={kind:'star',lane:laneI,collected:false};itemGroup.add(m);collectibles.push(m)}
 function createWater(laneI,z){const g=new THREE.Group(),glass=new THREE.MeshStandardMaterial({color:0x7bdcff,transparent:true,opacity:.72,roughness:.18,metalness:.05}),cap=new THREE.MeshStandardMaterial({color:0x2e6f84,roughness:.6});const b=new THREE.Mesh(new THREE.CylinderGeometry(.18,.22,.62,12),glass);b.position.y=.36;const c=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.12,12),cap);c.position.y=.73;g.add(b,c);g.position.set(LANE_X[laneI],.25,z);g.userData={kind:'water',lane:laneI,collected:false};itemGroup.add(g);collectibles.push(g)}
 function createHole(laneI,z){
- const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE32';
+ const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE33';
  const cfg=REALMS[realmIndex]||REALMS[0],roadColor=cfg.road[1]||0x51483f,edgeColor=cfg.edge||0x3a342f;
  const voidMat=new THREE.MeshBasicMaterial({color:0x000000,side:THREE.DoubleSide,depthWrite:true});
  const wallMat=new THREE.MeshBasicMaterial({color:0x0a0908,side:THREE.DoubleSide});
@@ -2294,8 +2312,8 @@ async function startEndless(){
  started=true;paused=false;startRealmMusic(REALMS[realmIndex].id);UI.menu.classList.add('hidden');UI.hud.classList.add('show');UI.pause.classList.add('show');UI.hint.classList.remove('show');playHero('Running',.08);setLyraJourneyState();toast('∞ ENDLESS • SEM CHECKPOINT • BATA SEU RECORDE');clock.getDelta()
 }
 function startGame(){return startJourney(1)}
-function backMenu(){stopRealmMusic();realmCheckpointPanelOpen=false;realmCheckpointNextIndex=null;$('realmCheckpointPanel')?.classList.remove('show');$('mobileMorePanel')?.classList.remove('show');if($('mobileMore'))$('mobileMore').textContent='☰ MAIS';if(UI.menu)UI.menu.scrollTop=0;hideFamilyScene();endToboggan(true);resetOpeningImpactVisuals();stopAmbientBed();stopWeatherAudio();resetFootsteps();weatherTestMode=false;weatherTestOverride=null;setWeatherMode('none');setAtmosphereMode('none');autoRealm=true;endlessMode=false;started=false;paused=false;gameOver=false;shelterActive=false;shelterChoiceOpen=false;shelterDecisionDone=false;portalTransitioning=false;huntersVisible=false;effortTimer=0;hunters.forEach(h=>{h.root.visible=false;if(h.action)h.action.paused=false});if(lyraRoot)lyraRoot.visible=false;const lb=$('lyraBadge');if(lb)lb.classList.remove('show');UI.pausePanel.classList.remove('show');UI.revivePanel?.classList.remove('show');UI.journeyEndPanel?.classList.remove('show');UI.shelterPanel.classList.remove('show');UI.shelterChoicePanel.classList.remove('show');UI.shelterPrompt.classList.remove('show');$('rewardedAdPanel')?.classList.remove('show');$('interstitialAdPanel')?.classList.remove('show');if(UI.effortPulse)UI.effortPulse.classList.remove('show');if(UI.toast)UI.toast.classList.remove('show');const dw=$('descentWarning');if(dw)dw.classList.remove('show');UI.menu.classList.remove('hidden');UI.hud.classList.remove('show');UI.pause.classList.remove('show');UI.hint.classList.remove('show');if(!SAVE.journey2Unlocked){currentJourney=1;realmIndex=JOURNEY1_ORDER[getJourneyCheckpoint(1)]||JOURNEY1_ORDER[0];loadRealm(realmIndex,true)}playHero('Walking',.15);refreshMenuStats();setTimeout(()=>playMenuTheme(),180)}
-function pauseGame(v=true){if(!started||gameOver||shelterActive||shelterChoiceOpen)return;paused=v;UI.pausePanel.classList.toggle('show',paused);if(paused){UI.pauseTitle.textContent='Jornada pausada';UI.pauseText.textContent='Continue da mesma posição ou volte ao menu.'}clock.getDelta()}
+function backMenu(){flushRunSave();stopRealmMusic();realmCheckpointPanelOpen=false;realmCheckpointNextIndex=null;$('realmCheckpointPanel')?.classList.remove('show');$('mobileMorePanel')?.classList.remove('show');if($('mobileMore'))$('mobileMore').textContent='☰ MAIS';if(UI.menu)UI.menu.scrollTop=0;hideFamilyScene();endToboggan(true);resetOpeningImpactVisuals();stopAmbientBed();stopWeatherAudio();resetFootsteps();weatherTestMode=false;weatherTestOverride=null;setWeatherMode('none');setAtmosphereMode('none');autoRealm=true;endlessMode=false;started=false;paused=false;gameOver=false;shelterActive=false;shelterChoiceOpen=false;shelterDecisionDone=false;portalTransitioning=false;huntersVisible=false;effortTimer=0;hunters.forEach(h=>{h.root.visible=false;if(h.action)h.action.paused=false});if(lyraRoot)lyraRoot.visible=false;const lb=$('lyraBadge');if(lb)lb.classList.remove('show');UI.pausePanel.classList.remove('show');UI.revivePanel?.classList.remove('show');UI.journeyEndPanel?.classList.remove('show');UI.shelterPanel.classList.remove('show');UI.shelterChoicePanel.classList.remove('show');UI.shelterPrompt.classList.remove('show');$('rewardedAdPanel')?.classList.remove('show');$('interstitialAdPanel')?.classList.remove('show');if(UI.effortPulse)UI.effortPulse.classList.remove('show');if(UI.toast)UI.toast.classList.remove('show');const dw=$('descentWarning');if(dw)dw.classList.remove('show');UI.menu.classList.remove('hidden');UI.hud.classList.remove('show');UI.pause.classList.remove('show');UI.hint.classList.remove('show');if(!SAVE.journey2Unlocked){currentJourney=1;realmIndex=JOURNEY1_ORDER[getJourneyCheckpoint(1)]||JOURNEY1_ORDER[0];loadRealm(realmIndex,true)}playHero('Walking',.15);refreshMenuStats();setTimeout(()=>playMenuTheme(),180)}
+function pauseGame(v=true){if(!started||gameOver||shelterActive||shelterChoiceOpen)return;paused=v;if(paused)flushRunSave();UI.pausePanel.classList.toggle('show',paused);if(paused){UI.pauseTitle.textContent='Jornada pausada';UI.pauseText.textContent='Continue da mesma posição ou volte ao menu.'}clock.getDelta()}
 function move(d){if(!started||paused||gameOver||fallingDeath||holeRecoveryActive||shelterActive||shelterChoiceOpen)return;ensureAudio();targetLane=Math.max(0,Math.min(2,targetLane+d))}
 function jump(){if(tobogganActive){toast(tobogganGroup?.userData?.mode==='lava'?'DESCIDA VULCÂNICA • USE ← → PARA DESVIAR':'DESCIDA DO RIO • USE ← → PARA DESVIAR');return}if(!started||paused||gameOver||fallingDeath||holeRecoveryActive||shelterActive||shelterChoiceOpen||jumpY>.05||slideTimer>0)return;ensureAudio();jumpV=7.8;playSFX('jump')}
 function slide(){
@@ -2386,7 +2404,7 @@ function update(dt){
  gemTimer-=dt;if(gemTimer<=0){spawnGem();gemTimer=3.2+Math.random()*2.8}
  waterTimer-=dt;if(waterTimer<=0){spawnWater();waterTimer=10+Math.random()*7}
  for(let i=obstacles.length-1;i>=0;i--){const o=obstacles[i];o.position.z+=dz;o.position.x=LANE_X[o.userData.lane]+trackCurveX(o.position.z);o.rotation.y=trackCurveYaw(o.position.z);if(o.position.z>14){itemGroup.remove(o);disposeObject(o);obstacles.splice(i,1);continue}if(!o.userData.hit&&o.position.z>-.95&&o.position.z<1.05&&o.userData.lane===Math.round(lane)){let safe=false;if(o.userData.type==='branch')safe=slideTimer>.05;else if(o.userData.type==='hole')safe=jumpY>.82;else safe=jumpY>(o.userData.type==='rock'?1.15:.72);if(!safe){o.userData.hit=true;if(o.userData.type==='hole'){fallIntoAbyss();return}else hurt(o.userData.type==='branch'?'GALHO BAIXO':'COLISÃO')}else if(!o.userData.cleared){o.userData.cleared=true;effortBurst(o.userData.type==='branch'?'PASSOU RASPANDO':'SUPEROU OBSTÁCULO')}}else if(!o.userData.cleared&&o.position.z>.9&&o.position.z<2.0&&o.userData.lane===Math.round(lane)){o.userData.cleared=true;effortBurst('ESFORÇO')}}
- for(let i=collectibles.length-1;i>=0;i--){const g=collectibles[i];g.position.z+=dz;g.position.x=LANE_X[g.userData.lane]+trackCurveX(g.position.z);if(g.rotation){g.rotation.y+=dt*3.2;g.rotation.x+=dt*.65}if(g.position.z>13){itemGroup.remove(g);disposeObject(g);collectibles.splice(i,1);continue}const heroX=LANE_X[0]+lane*2.25,dx=Math.abs(g.position.x-heroX);const magnetRange=g.userData.kind==='gem'?.55+(SAVE.upgrades.magnet||0)*.82:.62;if(!g.userData.collected&&g.position.z>-.9&&g.position.z<1.15&&dx<magnetRange){g.userData.collected=true;if(g.userData.kind==='gem'){SAVE.gems++;runGems++;playSFX('gemCollect')}else if(g.userData.kind==='star'){runStars++;SAVE.starsTotal++;playSFX('starCollect')}else if(g.userData.kind==='water'){water=Math.min(100,water+22);hydrationBand=water<15?0:(water<35?1:2);playSFX('waterCollect');toast('ÁGUA +22% • HIDRATAÇÃO '+Math.floor(water)+'%')}saveState();itemGroup.remove(g);disposeObject(g);collectibles.splice(i,1)}}
+ for(let i=collectibles.length-1;i>=0;i--){const g=collectibles[i];g.position.z+=dz;g.position.x=LANE_X[g.userData.lane]+trackCurveX(g.position.z);if(g.rotation){g.rotation.y+=dt*3.2;g.rotation.x+=dt*.65}if(g.position.z>13){itemGroup.remove(g);disposeObject(g);collectibles.splice(i,1);continue}const heroX=LANE_X[0]+lane*2.25,dx=Math.abs(g.position.x-heroX);const magnetRange=g.userData.kind==='gem'?.55+(SAVE.upgrades.magnet||0)*.82:.62;if(!g.userData.collected&&g.position.z>-.9&&g.position.z<1.15&&dx<magnetRange){g.userData.collected=true;if(g.userData.kind==='gem'){SAVE.gems++;runGems++;playSFX('gemCollect')}else if(g.userData.kind==='star'){runStars++;SAVE.starsTotal++;playSFX('starCollect')}else if(g.userData.kind==='water'){water=Math.min(100,water+22);hydrationBand=water<15?0:(water<35?1:2);playSFX('waterCollect');toast('ÁGUA +22% • HIDRATAÇÃO '+Math.floor(water)+'%')}queueRunSave();itemGroup.remove(g);disposeObject(g);collectibles.splice(i,1)}}
  const realmProgress=currentRealmProgress;updateOpeningImpact(dt,realmProgress);if(!tobogganAutoDone&&!realmLoading&&!REALMS[realmIndex].celestial&&!['vruins','forest','ruins'].includes(REALMS[realmIndex]?.id)){
    if(tobogganApproachStage<1&&realmProgress>350){tobogganApproachStage=1;showDescentWarning((currentJourney===1&&realmIndex===0)?'🌉 PONTE INSTÁVEL • DESCIDA À FRENTE':'⚠ DESCIDA FORTE À FRENTE • 180 m',2600)}
    if(tobogganApproachStage<2&&realmProgress>430){tobogganApproachStage=2;const lava=REALMS[realmIndex]?.id==='ember';showDescentWarning(lava?'🔥 CALOR EXTREMO • DESCIDA VULCÂNICA À FRENTE':((currentJourney===1&&realmIndex===0)?'🌪 VENTO AUMENTANDO • RIO À FRENTE':'🌊 DESCIDA DO RIO PRÓXIMA • PREPARE-SE'),2500)}
@@ -2548,7 +2566,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE32';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE33';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
