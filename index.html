@@ -76,7 +76,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 
 .topRight{display:none!important}
 
-/* ===== MAX HEALMS MOBILE30 • MOBILE CLEAN + DESCIDA DO RIO ===== */
+/* ===== MAX HEALMS MOBILE31 • MOBILE CLEAN + DESCIDA DO RIO ===== */
 #mobileMore{display:none}.mobileMorePanel{display:contents}
 @media(max-width:740px){
   #app{background-size:auto 100%!important;background-position:50% 46%!important;background-repeat:no-repeat!important;background-color:#07110d!important}
@@ -249,7 +249,9 @@ let forcedAdRunning=false,forcedAdTimer=null,forcedAdResolve=null;const FORCED_A
 const MOBILE_RUNNER=(matchMedia('(pointer:coarse)').matches||innerWidth<=740);
 const DEVICE_MEMORY=navigator.deviceMemory||4,HARDWARE_THREADS=navigator.hardwareConcurrency||4;
 const LOW_END_MOBILE=MOBILE_RUNNER&&(DEVICE_MEMORY<=3||HARDWARE_THREADS<=4);
-const TARGET_PIXEL_RATIO=MOBILE_RUNNER?.85:1.4;
+const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.68:.78,MOBILE_PIXEL_RATIO_MIN=LOW_END_MOBILE?.56:.62;
+const TARGET_PIXEL_RATIO=MOBILE_RUNNER?MOBILE_PIXEL_RATIO_MAX:1.4;
+let mobilePixelRatioCurrent=TARGET_PIXEL_RATIO,mobilePerfLowSamples=0,mobilePerfHighSamples=0,mobilePerfLastAdjust=0;
 const RUN_SPEED_BASE=MOBILE_RUNNER?24.2:20.2;
 const RUN_SPEED_MAX=MOBILE_RUNNER?38.0:34.0;
 let distance=0,lives=3,water=100,speed=RUN_SPEED_BASE,targetLane=0,lane=0,jumpY=0,jumpV=0,slideTimer=0,slideCooldown=0,hitCooldown=0;
@@ -268,7 +270,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE30 • MOBILE FIRST + DESCIDA DO RIO
+// MAX HEALMS MOBILE31 • MOBILE FIRST + DESCIDA DO RIO
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -355,7 +357,7 @@ function updateKharvorBridge(dt,progress){
  const sequenceRealm=isKharvor||isForest||isVhalor;
  if(!sequenceRealm){if(Math.abs(kharvorLayerY)>.01||forestUnderpassActive||vhalorFloodVisualActive)resetKharvorBridge();return}
  const total=realmTargetDistance(),riseStart=Math.max(700,total-500),lowerY=isForest?FOREST_LOWER_Y:KHARVOR_LOWER_Y;
- const holeFx=kharvorBreakFx; // MOBILE30: scripted collapse stays invisible until the instant of the fall.
+ const holeFx=kharvorBreakFx; // MOBILE31: scripted collapse stays invisible until the instant of the fall.
  if(isBridgeDropTransitionZone(progress)&&!bridgeDropSafetyCleared){bridgeDropSafetyCleared=true;clearBridgeDropApproach();spawnTimer=Math.max(spawnTimer,1.35)}
  if(holeFx)holeFx.visible=false;
  // Vhalor: queda aos 500 m e a parte inferior vira uma travessia fechada e inundada de canoa.
@@ -951,7 +953,7 @@ function playVarekFootstep(){
  src.buffer=buf;const speedRatio=Math.max(0,Math.min(1,(speed-RUN_SPEED_BASE)/Math.max(.001,RUN_SPEED_MAX-RUN_SPEED_BASE)));
  src.playbackRate.value=.96+speedRatio*.13+(Math.random()-.5)*.035;g.gain.value=.105+(footstepIndex%2?-.008:.006);src.connect(g);g.connect(sfxMaster);src.start();
 }
-function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE30: sem passos contínuos durante a corrida
+function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE31: sem passos contínuos durante a corrida
 function resetFootsteps(){footstepTimer=0}
 
 function getNoiseBuffer(){
@@ -1181,7 +1183,7 @@ function startWeatherAudio(mode){
 function playThunder(){if(!soundOn||ambientVolume<=0||weatherMode!=='extremeRain')return;ambientNoise(.95,.070,950,80,'lowpass');ambientTone(74,34,.88,.055,'sine',.06);haptic([12,38,18])}
 function resizeWeatherCanvas(){if(!weatherCanvas)return;const w=Math.max(1,app.clientWidth),h=Math.max(1,app.clientHeight);if(weatherCanvas.width!==w||weatherCanvas.height!==h){weatherCanvas.width=w;weatherCanvas.height=h;weatherParticles=[];atmosphereParticles=[]}}
 function seedWeatherParticles(){
- if(!weatherCanvas||weatherMode==='none')return;resizeWeatherCanvas();const w=weatherCanvas.width,h=weatherCanvas.height,count=weatherMode==='extremeRain'?(MOBILE_RUNNER?(LOW_END_MOBILE?30:46):165):weatherMode==='drizzle'?(MOBILE_RUNNER?(LOW_END_MOBILE?12:18):64):(MOBILE_RUNNER?(LOW_END_MOBILE?10:16):60);weatherParticles=[];
+ if(!weatherCanvas||weatherMode==='none')return;resizeWeatherCanvas();const w=weatherCanvas.width,h=weatherCanvas.height,count=weatherMode==='extremeRain'?(MOBILE_RUNNER?(LOW_END_MOBILE?22:34):165):weatherMode==='drizzle'?(MOBILE_RUNNER?(LOW_END_MOBILE?8:12):64):(MOBILE_RUNNER?(LOW_END_MOBILE?7:11):60);weatherParticles=[];
  for(let i=0;i<count;i++){if(weatherMode==='strongWind')weatherParticles.push({x:Math.random()*w,y:Math.random()*h,vx:150+Math.random()*260,vy:(Math.random()-.5)*38,len:8+Math.random()*25,a:.10+Math.random()*.25,w:.6+Math.random()*1.2});else{const heavy=weatherMode==='extremeRain';weatherParticles.push({x:Math.random()*w,y:Math.random()*h,vx:(heavy?-90:-38)-Math.random()*(heavy?95:42),vy:(heavy?620:270)+Math.random()*(heavy?620:210),len:(heavy?15:7)+Math.random()*(heavy?30:15),a:(heavy?.18:.10)+Math.random()*(heavy?.40:.24),w:heavy?1.15:.72})}}
  weatherLightningTimer=6+Math.random()*9;
 }
@@ -1219,7 +1221,7 @@ function drawRealmAtmosphere(c,w,h,dt){
  }
 }
 function updateWeatherVisual(dt){
- updateWeatherAudio();if(!weatherCtx||!weatherCanvas)return;if(MOBILE_RUNNER){weatherFrameAccumulator+=dt;if(weatherFrameAccumulator<1/30)return;dt=Math.min(.07,weatherFrameAccumulator);weatherFrameAccumulator=0}resizeWeatherCanvas();const c=weatherCtx,w=weatherCanvas.width,h=weatherCanvas.height;c.clearRect(0,0,w,h);
+ updateWeatherAudio();if(!weatherCtx||!weatherCanvas)return;if(MOBILE_RUNNER){weatherFrameAccumulator+=dt;if(weatherFrameAccumulator<1/24)return;dt=Math.min(.075,weatherFrameAccumulator);weatherFrameAccumulator=0}resizeWeatherCanvas();const c=weatherCtx,w=weatherCanvas.width,h=weatherCanvas.height;c.clearRect(0,0,w,h);
  if(!started){if(UI.weatherFlash)UI.weatherFlash.style.opacity='0';return}
  if(weatherMode!=='none'){
   if(!weatherParticles.length)seedWeatherParticles();
@@ -1426,7 +1428,7 @@ function updateHydrationWarnings(){if(water<=0)return;if(water<15&&hydrationBand
 
 function init3D(){
  if(!window.THREE||!THREE.GLTFLoader){UI.loading.classList.add('hidden');UI.error.classList.add('show');return}
- renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!MOBILE_RUNNER,powerPreference:'high-performance'});renderer.setClearAlpha(0);renderer.setPixelRatio(Math.min(devicePixelRatio||1,TARGET_PIXEL_RATIO));renderer.outputEncoding=THREE.sRGBEncoding;if(LOW_END_MOBILE){shadowsOn=false}renderer.shadowMap.enabled=shadowsOn;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+ renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!MOBILE_RUNNER,powerPreference:'high-performance'});renderer.setClearAlpha(0);renderer.setPixelRatio(Math.min(devicePixelRatio||1,TARGET_PIXEL_RATIO));renderer.outputEncoding=THREE.sRGBEncoding;if(MOBILE_RUNNER){shadowsOn=false}renderer.shadowMap.enabled=shadowsOn;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
  scene=new THREE.Scene();scene.background=new THREE.Color(0x91a899);scene.fog=new THREE.Fog(0x84978b,28,125);
  camera=new THREE.PerspectiveCamera(60,1,.1,280);camera.position.set(0,3.55,8.4);
  clock=new THREE.Clock();loader=new THREE.GLTFLoader();fbxLoader=THREE.FBXLoader?new THREE.FBXLoader():null;
@@ -1481,7 +1483,7 @@ function buildRoad(){
  const khUnderMat=new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.78});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
  const frRoofMat=new THREE.MeshStandardMaterial({color:0x302b23,roughness:1}),frWallMat=new THREE.MeshStandardMaterial({color:0x40382b,roughness:1}),frRootMat=new THREE.MeshStandardMaterial({color:0x5a4934,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x314b2d,transparent:true,opacity:.85});
- // MOBILE30 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
+ // MOBILE31 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
  const sigStone=new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
  const sigDark=new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
  const sigWood=new THREE.MeshStandardMaterial({color:0x4c3828,roughness:1});
@@ -1493,7 +1495,7 @@ function buildRoad(){
  const sigPillarGeo=new THREE.BoxGeometry(.72,4.8,.78),sigBrokenGeo=new THREE.BoxGeometry(.95,2.6,.95),sigOrbGeo=new THREE.SphereGeometry(.13,7,6),sigShardGeo=new THREE.TetrahedronGeometry(.42,0);
  const addSigOrb=(g,x,y,z,mat,scale=1)=>{const o=new THREE.Mesh(sigOrbGeo,mat);o.position.set(x,y,z);o.scale.setScalar(scale);g.add(o);return o};
 
- const roadCount=MOBILE_RUNNER?12:20;for(let s=0;s<roadCount;s++){
+ const roadCount=MOBILE_RUNNER?11:20;for(let s=0;s<roadCount;s++){
    const seg=new THREE.Group();seg.position.z=8-s*10.5;seg.userData.baseIndex=s;
    for(let rz=0;rz<4;rz++)for(let laneI=0;laneI<3;laneI++){
      const col=cfg.road[(s+rz+laneI)%cfg.road.length];const tile=new THREE.Mesh(tileGeo,makeStoneMaterial(roundedColor(col,.07)));
@@ -1505,7 +1507,7 @@ function buildRoad(){
      const x=side*4.36;
      const base=new THREE.Mesh(parapetBaseGeo,railStoneMat);base.position.set(x,.12,0);base.castShadow=shadowsOn;base.receiveShadow=true;seg.add(base);
      const cap=new THREE.Mesh(parapetCapGeo,railCapMat);cap.position.set(x,.49,0);cap.castShadow=shadowsOn;cap.receiveShadow=true;seg.add(cap);
-     for(const zOff of (MOBILE_RUNNER?[-4.5,-1.5,1.5,4.5]:[-4.5,-3,-1.5,0,1.5,3,4.5])){
+     for(const zOff of (MOBILE_RUNNER?[-4.4,0,4.4]:[-4.5,-3,-1.5,0,1.5,3,4.5])){
        const post=new THREE.Mesh(guardPostGeo,railStoneMat);post.position.set(side*4.54,.98,zOff);post.castShadow=shadowsOn;post.receiveShadow=true;seg.add(post);
        const brace=new THREE.Mesh(braceGeo,railWoodMat);brace.position.set(side*4.44,.71,zOff);brace.rotation.z=side*(Math.PI/12);brace.castShadow=shadowsOn;brace.receiveShadow=true;seg.add(brace);
      }
@@ -1520,11 +1522,16 @@ function buildRoad(){
    }
    // PLAYER 0.38: Ponte Viva. Camada visual reforçada, tremor em pulsos e dano cenográfico fora das faixas jogáveis.
    const bridgeDetail=new THREE.Group();bridgeDetail.name='MR_OPENING_SWING_BRIDGE';bridgeDetail.visible=false;
-   if(MOBILE_RUNNER){const deckBase=new THREE.Mesh(bridgeDeckBaseGeo,bridgeDeckBaseMat);deckBase.position.set(0,.055,0);deckBase.receiveShadow=false;bridgeDetail.add(deckBase)}
-   for(let pz=-4.75,i=0,step=MOBILE_RUNNER?.92:.68;pz<=4.75;pz+=step,i++){const plank=new THREE.Mesh(new THREE.BoxGeometry(8.15,.10,MOBILE_RUNNER?.87:.54),i%2?bridgeDeckMat:bridgeDeckAltMat);plank.position.set(0,.108,pz);plank.rotation.y=MOBILE_RUNNER?0:(i%3-1)*.004;plank.userData.bridgePlank=true;plank.userData.bridgePhase=i*.43+s*.17;plank.castShadow=shadowsOn;plank.receiveShadow=true;bridgeDetail.add(plank)}
+   if(MOBILE_RUNNER){
+     const deckBase=new THREE.Mesh(bridgeDeckBaseGeo,bridgeDeckBaseMat);deckBase.position.set(0,.092,0);deckBase.receiveShadow=false;bridgeDetail.add(deckBase);
+     const seamMat=new THREE.MeshBasicMaterial({color:0x211811});
+     for(const zLine of [-3.2,-1.1,1.1,3.2]){const seam=new THREE.Mesh(new THREE.BoxGeometry(8.02,.012,.045),seamMat);seam.position.set(0,.134,zLine);bridgeDetail.add(seam)}
+   }else{
+     for(let pz=-4.75,i=0,step=.68;pz<=4.75;pz+=step,i++){const plank=new THREE.Mesh(new THREE.BoxGeometry(8.15,.10,.54),i%2?bridgeDeckMat:bridgeDeckAltMat);plank.position.set(0,.108,pz);plank.rotation.y=(i%3-1)*.004;plank.userData.bridgePlank=true;plank.userData.bridgePhase=i*.43+s*.17;plank.castShadow=shadowsOn;plank.receiveShadow=true;bridgeDetail.add(plank)}
+   }
    for(const side of [-1,1]){
      const loose=new THREE.Mesh(new THREE.BoxGeometry(.72,.12,1.20),side<0?bridgeDeckAltMat:bridgeDeckMat);loose.position.set(side*3.72,.18,(s%2?1.9:-2.15));loose.userData.bridgeLoose=true;loose.userData.bridgeSide=side;loose.userData.baseY=.18;loose.castShadow=shadowsOn;loose.receiveShadow=true;bridgeDetail.add(loose);
-     for(const zOff of [-4.7,-3.15,-1.6,0,1.6,3.15,4.7]){const post=new THREE.Mesh(new THREE.CylinderGeometry(.065,.085,1.38,6),bridgePostMat);post.position.set(side*4.28,.79,zOff);post.castShadow=shadowsOn;bridgeDetail.add(post)}
+     for(const zOff of (MOBILE_RUNNER?[-4.4,0,4.4]:[-4.7,-3.15,-1.6,0,1.6,3.15,4.7])){const post=new THREE.Mesh(new THREE.CylinderGeometry(.065,.085,1.38,6),bridgePostMat);post.position.set(side*4.28,.79,zOff);post.castShadow=shadowsOn;bridgeDetail.add(post)}
      for(const y of [.72,1.10]){const rope=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,10.0,6),bridgeRopeMat);rope.position.set(side*4.28,y,0);rope.rotation.x=Math.PI/2;rope.castShadow=shadowsOn;bridgeDetail.add(rope)}
    }
    seg.add(bridgeDetail);bridgeDetailGroups.push(bridgeDetail);
@@ -1556,7 +1563,7 @@ function buildRoad(){
        for(const x of [-2.25,2.25]){const light=new THREE.Mesh(new THREE.BoxGeometry(.10,.02,2.00),new THREE.MeshBasicMaterial({color:0xf6e6b3,transparent:true,opacity:.46})); light.position.set(x,.03,(rz-1.5)*2.62); seg.add(light)}
      }
    }
-   // MOBILE30 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
+   // MOBILE31 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
    if(s%3===0){
      const signature=new THREE.Group();signature.name='MR_PONTE_ASSINATURA_'+cfg.id;
      if(cfg.id==='vruins'){
@@ -1991,7 +1998,7 @@ function createGem(laneI,z){const mat=new THREE.MeshStandardMaterial({color:0x54
 function createStar(laneI,z){const shape=new THREE.Shape();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2===0?.38:.17;const x=Math.cos(a)*r,y=Math.sin(a)*r;i?shape.lineTo(x,y):shape.moveTo(x,y)}shape.closePath();const geo=new THREE.ExtrudeGeometry(shape,{depth:.10,bevelEnabled:true,bevelSize:.035,bevelThickness:.035,bevelSegments:1});geo.center();const m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xffd95b,emissive:0x9b6710,emissiveIntensity:.65,metalness:.12,roughness:.24}));m.position.set(LANE_X[laneI],1.12,z);m.userData={kind:'star',lane:laneI,collected:false};itemGroup.add(m);collectibles.push(m)}
 function createWater(laneI,z){const g=new THREE.Group(),glass=new THREE.MeshStandardMaterial({color:0x7bdcff,transparent:true,opacity:.72,roughness:.18,metalness:.05}),cap=new THREE.MeshStandardMaterial({color:0x2e6f84,roughness:.6});const b=new THREE.Mesh(new THREE.CylinderGeometry(.18,.22,.62,12),glass);b.position.y=.36;const c=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.12,12),cap);c.position.y=.73;g.add(b,c);g.position.set(LANE_X[laneI],.25,z);g.userData={kind:'water',lane:laneI,collected:false};itemGroup.add(g);collectibles.push(g)}
 function createHole(laneI,z){
- const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE30';
+ const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE31';
  const cfg=REALMS[realmIndex]||REALMS[0],roadColor=cfg.road[1]||0x51483f,edgeColor=cfg.edge||0x3a342f;
  const voidMat=new THREE.MeshBasicMaterial({color:0x000000,side:THREE.DoubleSide,depthWrite:true});
  const wallMat=new THREE.MeshBasicMaterial({color:0x0a0908,side:THREE.DoubleSide});
@@ -2389,8 +2396,17 @@ function render(){
  }
  const curveLook=trackCurveX(-34)*.20,targetX=(heroRoot?heroRoot.position.x*.16:0)+curveLook,now=performance.now(),shakeX=Math.sin(now*.081)*openingCameraShake*.10,shakeY=Math.sin(now*.113+1.7)*openingCameraShake*.055,shakeR=Math.sin(now*.097+.8)*openingCameraShake*.012;camera.position.x+=((targetX+shakeX)-camera.position.x)*.075;camera.position.y=3.45+kharvorLayerY+jumpY*.03+(effortTimer>0?Math.sin(now*.045)*.025:0)+shakeY+kharvorFallImpact*.72;camera.rotation.z+=(curveStrength*.012+shakeR-camera.rotation.z)*.065;camera.fov+=(60+Math.max(0,speed-RUN_SPEED_BASE)*.42+(effortTimer>0?1.2:0)+kharvorFallImpact*5.5-camera.fov)*.05;camera.updateProjectionMatrix();camera.lookAt((targetX+shakeX*.35)*.28,1.15+kharvorLayerY+shakeY*.28-kharvorFallImpact*1.30,-7.8);renderer.render(scene,camera)
 }
-function loop(now){if(document.hidden){if(clock)clock.getDelta();requestAnimationFrame(loop);return}const dt=Math.min(.034,clock?clock.getDelta():.016);update(dt);updateVarekFootsteps(dt);updateWeatherVisual(dt);render();fpsAccum+=dt;fpsFrames++;if(fpsAccum>.55){UI.fps.textContent=Math.round(fpsFrames/fpsAccum);fpsFrames=0;fpsAccum=0}requestAnimationFrame(loop)}
-function resize(){W=app.clientWidth;H=app.clientHeight;resizeWeatherCanvas();if(!renderer||!camera)return;renderer.setSize(W,H,false);camera.aspect=W/Math.max(1,H);camera.updateProjectionMatrix()}
+function adjustMobileRenderScale(fps,now){
+ if(!MOBILE_RUNNER||!renderer||!started)return;
+ if(fps<45){mobilePerfLowSamples++;mobilePerfHighSamples=0}else if(fps>56){mobilePerfHighSamples++;mobilePerfLowSamples=0}else{mobilePerfLowSamples=Math.max(0,mobilePerfLowSamples-1);mobilePerfHighSamples=0}
+ if(now-mobilePerfLastAdjust<3500)return;
+ let next=mobilePixelRatioCurrent;
+ if(mobilePerfLowSamples>=2){next=Math.max(MOBILE_PIXEL_RATIO_MIN,mobilePixelRatioCurrent-.06);mobilePerfLowSamples=0}
+ else if(mobilePerfHighSamples>=6){next=Math.min(MOBILE_PIXEL_RATIO_MAX,mobilePixelRatioCurrent+.03);mobilePerfHighSamples=0}
+ if(Math.abs(next-mobilePixelRatioCurrent)>.001){mobilePixelRatioCurrent=next;mobilePerfLastAdjust=now;renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobilePixelRatioCurrent));renderer.setSize(W,H,false)}
+}
+function loop(now){if(document.hidden){if(clock)clock.getDelta();requestAnimationFrame(loop);return}const dt=Math.min(.034,clock?clock.getDelta():.016);update(dt);updateVarekFootsteps(dt);updateWeatherVisual(dt);render();fpsAccum+=dt;fpsFrames++;if(fpsAccum>.70){const fps=Math.round(fpsFrames/fpsAccum);UI.fps.textContent=fps;adjustMobileRenderScale(fps,now||performance.now());fpsFrames=0;fpsAccum=0}requestAnimationFrame(loop)}
+function resize(){W=app.clientWidth;H=app.clientHeight;resizeWeatherCanvas();if(!renderer||!camera)return;if(MOBILE_RUNNER)renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobilePixelRatioCurrent));renderer.setSize(W,H,false);camera.aspect=W/Math.max(1,H);camera.updateProjectionMatrix()}
 window.addEventListener('resize',resize);
 window.addEventListener('pointerdown',()=>ensureAudio(),{once:true,passive:true});window.addEventListener('keydown',()=>ensureAudio(),{once:true});
 window.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' '].includes(e.key))e.preventDefault();if(e.repeat)return;if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')move(-1);if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')move(1);if(e.key==='ArrowUp'||e.key.toLowerCase()==='w')jump();if(e.key==='ArrowDown'||e.key.toLowerCase()==='s')slide();if(e.key===' '&&started)pauseGame(!paused);if(e.key.toLowerCase()==='r')advanceJourneyRealm();if(e.key.toLowerCase()==='e'&&shelterAvailable)enterShelter()},{passive:false});
@@ -2525,7 +2541,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE30';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE31';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
