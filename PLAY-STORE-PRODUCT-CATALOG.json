@@ -1,0 +1,71 @@
+{
+  "version": "player-0.38",
+  "androidPackageCandidate": "com.maxhealms.game",
+  "note": "Catálogo ativo da build PLAYER 0.38. Confirmar os mesmos IDs no Play Console antes da primeira publicação.",
+  "products": [
+    {
+      "sku": "max_healms_varek_adventurer",
+      "type": "nonconsumable",
+      "fallbackBRL": 14.99,
+      "benefits": [
+        "Varek Aventureiro",
+        "desbloqueio permanente do visual"
+      ]
+    },
+    {
+      "sku": "max_healms_varek_voren",
+      "type": "nonconsumable",
+      "fallbackBRL": 14.99,
+      "benefits": [
+        "Varek Voren",
+        "desbloqueio permanente do visual"
+      ]
+    },
+    {
+      "sku": "max_healms_premium",
+      "type": "nonconsumable",
+      "fallbackBRL": 14.99,
+      "benefits": [
+        "remove anúncios obrigatórios após derrotas",
+        "anúncios premiados permanecem opcionais",
+        "completa o bônus inicial até 1.000 diamantes"
+      ]
+    },
+    {
+      "sku": "max_healms_diamonds_100",
+      "type": "consumable",
+      "diamonds": 100,
+      "fallbackBRL": 1.99
+    },
+    {
+      "sku": "max_healms_diamonds_300",
+      "type": "consumable",
+      "diamonds": 300,
+      "fallbackBRL": 4.99
+    },
+    {
+      "sku": "max_healms_diamonds_750",
+      "type": "consumable",
+      "diamonds": 750,
+      "fallbackBRL": 10.99
+    },
+    {
+      "sku": "max_healms_diamonds_1600",
+      "type": "consumable",
+      "diamonds": 1600,
+      "fallbackBRL": 19.99
+    },
+    {
+      "sku": "max_healms_diamonds_3600",
+      "type": "consumable",
+      "diamonds": 3600,
+      "fallbackBRL": 39.99
+    },
+    {
+      "sku": "max_healms_diamonds_5000",
+      "type": "consumable",
+      "diamonds": 5000,
+      "fallbackBRL": 49.99
+    }
+  ]
+}

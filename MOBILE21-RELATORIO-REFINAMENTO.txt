@@ -1,0 +1,35 @@
+MAX HEALMS – MOBILE21 • RELATÓRIO DE REFINAMENTO VISUAL
+
+1. Pontes e silhuetas
+- Kharvor: torres quebradas laterais, musgo, luz fria e profundidade maior.
+- Neris: raízes/troncos monumentais, pontos de luz orgânicos e mais vida lateral.
+- Vhalor: colunas laterais limpas e iluminação fria para reforçar o corredor inundado.
+- Vale das Cinzas: pilares de obsidiana e fissuras luminosas.
+- Celestial: fragmentos suspensos e halos dourados discretos.
+- Terras dos Dragões: espigões e luz quente fora das faixas.
+
+2. Horizonte e atmosfera
+- Fog de geometria ampliado em Kharvor, Vhalor e Neris sem trocar as imagens de fundo aprovadas.
+- Névoas leves em profundidade, vaga-lumes/luzes em Neris/Vhalor/Kharvor e fragmentos flutuantes no Celestial.
+- Túnel inundado com teto mais alto e ponto de fuga mais visível.
+
+3. Buracos comuns
+- Geometria reconstruída com borda irregular de 13 pontos.
+- Parede interna agora acompanha a forma do buraco; cilindro redondo removido.
+- Menos fragmentos ao redor e trincas menos simétricas.
+
+4. Crateras de queda
+- Mais estreitas e irregulares, menos circulares e menos dominantes na tela.
+- Escala visual reduzida para 37% do modelo-base durante aproximação.
+- Mantida a regra de desaparecer ao entrar no trecho inferior.
+
+5. Performance
+- Elementos novos ficam fora das faixas e usam geometrias simples.
+- No mobile, quantidade de pontos luminosos/partículas é reduzida.
+- Fundos aprovados vpath/vruins/ember/ruins/forest/celestial não foram substituídos.
+
+6. Itens preservados
+- Túnel inundado funcional.
+- Tobogãs/canoas funcionais.
+- Estrelas e diamantes nas sequências especiais.
+- Sons/vibração e Jornada 2 com Lyra preservados.

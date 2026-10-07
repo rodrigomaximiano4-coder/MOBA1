@@ -1,0 +1,1 @@
+Three.js r128 e GLTFLoader são preparados automaticamente por INICIAR-MAX-REALMS.ps1 quando há internet. SkeletonUtils.js já está incluído. O index também mantém fontes CDN de contingência.

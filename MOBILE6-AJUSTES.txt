@@ -1,0 +1,10 @@
+MAX HEALMS — MOBILE7
+
+Novidades:
+- Vale das Cinzas: Descida Vulcânica com fluxo de lava, prancha de obsidiana e obstáculos próprios.
+- Ruínas de Kharvor: gigantes caminhando no horizonte/laterais e tremor de terra sincronizado com passos.
+- Haptics no celular: vibração curta e rara em passos de gigantes, quedas, impactos fortes e sequências especiais.
+- Controle de vibração disponível em Configurações.
+- Descida do Rio preservada nos demais reinos.
+- Buracos continuam com padrão aberto/quebrado em todas as tentativas.
+- PC mantém Central de Testes para testar cada cenário individualmente com as mecânicas reais.

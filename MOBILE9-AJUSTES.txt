@@ -1,0 +1,15 @@
+MAX HEALMS — MOBILE9
+
+KHARVOR • QUEDA DA PONTE
+- 0–500 m: ponte original.
+- aos 500 m: queda repentina, sem aviso prévio longo.
+- maior parte do reino: pista inferior, com a ponte original acima, vigas, musgo e sujeira.
+- últimos 500 m: subida progressiva de volta à ponte original.
+- Kharvor não usa Descida do Rio; esta sequência é a assinatura própria do reino.
+- obstáculos, hidratação, caçadoras e buracos abertos/quebrados continuam funcionando na parte inferior.
+- vibração curta no celular apenas no impacto da queda.
+
+PC QA
+- 6/6 reinos permanecem liberados.
+- inclui teste rápido da queda e da passagem inferior de Kharvor.
+- finais continuam acessíveis diretamente.

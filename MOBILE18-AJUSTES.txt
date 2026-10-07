@@ -1,0 +1,19 @@
+MAX HEALMS • MOBILE18
+
+REINO CELESTIAL
+- Sequência final com queda livre.
+- Paraquedas abre após a queda inicial.
+- Controle em 3 faixas durante a descida.
+- Aves grandes como obstáculos aéreos.
+- Após colisão, perseguidores aparecem também com paraquedas.
+- Jornada 2 inclui Lyra durante a sequência.
+- Após o pouso, restam exatamente 500 m de corrida até o fim do reino.
+
+TOBOGÃS / CANOAS / TÚNEIS
+- Estrelas e diamantes adicionados às sequências especiais.
+- Coleta usa os sons aprovados da MOBILE17.
+- Itens alternam faixas e ficam intercalados com os obstáculos.
+
+QA PC
+- Atalho CELESTIAL • QUEDA LIVRE.
+- Atalho CELESTIAL • PARAQUEDAS.

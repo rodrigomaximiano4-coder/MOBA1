@@ -1,0 +1,8 @@
+MAX HEALMS MOBILE20 — REFINAMENTO 1
+
+- Vhalor: túnel inundado redesenhado como túnel fechado, sem pilares/vigas atravessando a visão.
+- Horizonte ampliado: fog mais longa, percurso inferior mais reto e luz distante como ponto de fuga.
+- Teto elevado e contínuo; paredes laterais fechadas.
+- Cratera de queda reduzida e escondida ao entrar no túnel.
+- Buracos comuns menos alongados e com fragmentação mais orgânica.
+- Retorno visual de Vhalor preservado ao sair do trecho inundado.

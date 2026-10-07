@@ -1,0 +1,11 @@
+MAX HEALMS MOBILE15 • VALIDAÇÃO ESTÁTICA
+
+- JavaScript: node --check OK
+- Grande buraco da ponte: presente
+- Kharvor: camada inferior + retorno normal: presente
+- Neris: ponte inferior fechada + fundo externo oculto + retorno normal: presente
+- Jornada 2: mesma lógica de queda por reino, com Lyra ativa: presente
+- Caçadoras: carregamento protegido contra duplicação e escala raiz fixa: presente
+- Tobogã/canoa: animações de Varek e Lyra pausadas; posição sincronizada rigidamente com a canoa: presente
+
+Observação: validação de código/estrutura. Revisão visual final depende do navegador/dispositivo do usuário.

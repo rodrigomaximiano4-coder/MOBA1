@@ -1,0 +1,47 @@
+MAX HEALMS — LICENÇA PROPRIETÁRIA
+Versão 1.0 — 2026
+
+Copyright © 2026 Rodrigo Maximiano. Todos os direitos reservados.
+
+1. TITULARIDADE
+O MAX HEALMS, incluindo seu código original, personagens originais, nomes, universo narrativo, regras, interfaces, artes, modelos, animações, textos, efeitos e demais materiais autorais próprios do projeto, é uma obra proprietária de Rodrigo Maximiano, ressalvados os componentes de terceiros identificados em THIRD-PARTY-NOTICES.txt e quaisquer direitos de terceiros aplicáveis.
+
+2. LICENÇA AO JOGADOR
+Ao usuário final é concedido apenas o direito limitado, pessoal, revogável, não exclusivo e intransferível de executar uma cópia autorizada do jogo para entretenimento pessoal e não comercial.
+
+3. EXPLORAÇÃO COMERCIAL
+Nenhuma pessoa ou empresa, exceto o titular ou quem possua autorização escrita do titular, pode vender, licenciar, sublicenciar, alugar, cobrar pelo acesso, inserir publicidade própria, receber receita de anúncios, vender itens, moedas, assinaturas ou serviços, explorar NFTs, criar versões pagas ou obter qualquer outra vantagem econômica direta ou indireta a partir do MAX HEALMS ou de cópias/derivações substanciais do projeto.
+
+4. PROIBIÇÕES
+Sem autorização escrita do titular, é proibido:
+(a) redistribuir, republicar, espelhar ou hospedar cópias do jogo;
+(b) copiar ou reutilizar personagens, artes, modelos, cenários, textos, identidade visual ou código proprietário em outro produto;
+(c) modificar o jogo para criar ou distribuir produto derivado, especialmente com finalidade comercial;
+(d) remover ou alterar avisos de copyright, licença, autoria ou mecanismos de proteção;
+(e) contornar medidas técnicas de proteção para habilitar distribuição, monetização ou exploração não autorizada;
+(f) extrair e redistribuir assets individualmente;
+(g) usar o nome MAX HEALMS de modo a sugerir versão oficial ou autorizada quando não houver autorização.
+
+5. ENGENHARIA REVERSA E INTEROPERABILIDADE
+Esta licença não pretende restringir direitos que sejam obrigatoriamente assegurados por lei. Fora dessas hipóteses, engenharia reversa, descompilação ou desmontagem com a finalidade de criar, distribuir ou monetizar cópias ou produtos concorrentes não é autorizada.
+
+6. COMPONENTES DE TERCEIROS
+Componentes de terceiros permanecem sujeitos às suas próprias licenças. Esta licença não reduz nem substitui direitos concedidos por essas licenças. Consulte THIRD-PARTY-NOTICES.txt.
+
+7. AUSÊNCIA DE TRANSFERÊNCIA
+A posse de uma cópia dos arquivos não transfere copyright, propriedade intelectual ou direitos comerciais sobre o MAX HEALMS.
+
+8. RESERVA DE DIREITOS
+Todos os direitos não concedidos expressamente nesta licença permanecem reservados a Rodrigo Maximiano.
+
+9. GARANTIAS
+O software é fornecido no estado em que se encontra, sem garantias adicionais, na extensão permitida pela legislação aplicável.
+
+---
+
+MAX HEALMS — PROPRIETARY LICENSE
+Version 1.0 — 2026
+
+Copyright © 2026 Rodrigo Maximiano. All rights reserved.
+
+Authorized end users receive only a limited, personal, non-transferable, non-exclusive license to run an authorized copy for personal, non-commercial entertainment. No third party may sell, monetize, host, redistribute, sublicense, commercially exploit, advertise through, or create a commercial derivative of MAX HEALMS without the copyright holder's prior written permission. Third-party components remain subject to their own licenses. All rights not expressly granted are reserved by Rodrigo Maximiano.

@@ -1,0 +1,9 @@
+MAX HEALMS — MOBILE7 PC QA
+
+Central de Testes inclui:
+- 6 reinos jogáveis individualmente;
+- Jornada 1 e Jornada 2;
+- Final da Jornada 1;
+- Abertura da Jornada 2;
+- Final da Jornada 2;
+- barreiras, buracos, coletáveis, hidratação, caçadoras, clima e sequências especiais.

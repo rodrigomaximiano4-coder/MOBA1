@@ -1,0 +1,15 @@
+MAX HEALMS — MOBILE18 — GITHUB SEM PASTAS
+
+Versão mobile-first para GitHub Pages/celular.
+Todos os arquivos ficam na raiz do repositório.
+
+Principais mudanças:
+- Descida do Rio com água, canoa e Varek sentado.
+- Troncos e pedras como obstáculos.
+- Buracos claramente abertos.
+- Hidratação de volta ao HUD mobile.
+- Ranking local validado e posição destacada ao encerrar uma corrida.
+- Otimização mobile: sombras 3D desligadas no celular, pixel ratio 1, menos partículas e menos segmentos de pista.
+- Fundos cinematográficos mantidos.
+
+Para GitHub: selecione todos os arquivos desta pasta e envie para a raiz do repositório.

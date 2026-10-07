@@ -1,0 +1,12 @@
+MAX HEALMS — MOBILE7
+
+Linha oficial MOBILE7.
+- Mais ação e variedade visual por reino.
+- Pistas com aparência diferente em cada cenário.
+- Floresta com macacos em cipós e trilha viva.
+- Vale das Cinzas com ação de lava e piso vulcânico.
+- Buracos mantidos abertos, quebrados e visíveis em todas as tentativas.
+- Descida do Rio preservada com Varek sentado.
+- Central de testes permanece no código para QA.
+
+Este pacote é SEM PASTAS para GitHub/celular.

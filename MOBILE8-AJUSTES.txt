@@ -1,0 +1,19 @@
+MAX HEALMS — MOBILE8
+
+FINAL JORNADA 1
+- Varek chega sozinho e desacelera até parar.
+- Linha de chegada/fronteira visível.
+- Varek é o único personagem de costas.
+- Esposa e Lyra ficam do lado seguro, de frente para a câmera.
+- Caçadores permanecem do lado de fora da linha de chegada.
+
+FINAL JORNADA 2
+- Linha de chegada visível.
+- Varek e Lyra cruzam juntos.
+- Esposa de frente na área segura.
+- Nenhum caçador aparece no final.
+
+PC QA
+- Todos os 6 reinos ficam sempre liberados para teste.
+- Jornada 1 e Jornada 2 selecionáveis sem depender do progresso.
+- Cenas finais continuam acessíveis diretamente.
