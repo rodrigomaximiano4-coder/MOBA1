@@ -76,7 +76,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 
 .topRight{display:none!important}
 
-/* ===== MAX HEALMS MOBILE33 • MOBILE CLEAN + DESCIDA DO RIO ===== */
+/* ===== MAX HEALMS MOBILE34 • MOBILE CLEAN + DESCIDA DO RIO ===== */
 #mobileMore{display:none}.mobileMorePanel{display:contents}
 @media(max-width:740px){
   #app{background-size:auto 100%!important;background-position:50% 46%!important;background-repeat:no-repeat!important;background-color:#07110d!important}
@@ -270,7 +270,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE33 • MOBILE FIRST + DESCIDA DO RIO
+// MAX HEALMS MOBILE34 • MOBILE FIRST + DESCIDA DO RIO
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -313,7 +313,7 @@ function setVhalorFloodVisual(active){
 }
 function resetKharvorBridge(){
  kharvorLayerY=0;kharvorFallStage=0;kharvorFallImpact=0;bridgeDropSafetyCleared=false;setForestUnderpassVisual(false);setVhalorFloodVisual(false);
- if(roadGroup)roadGroup.position.y=0;if(itemGroup)itemGroup.position.y=0;if(shelter3D)shelter3D.position.y=0;
+ if(roadGroup){roadGroup.position.y=0;roadGroup.visible=true}if(itemGroup){itemGroup.position.y=0;itemGroup.visible=true}if(shelter3D){shelter3D.position.y=0;shelter3D.visible=true}if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;if(heroRoot&&!finalFamilyMode)heroRoot.visible=true;
  for(const g of kharvorUpperBridgeGroups){g.visible=false;g.position.y=.45}
  for(const g of forestClosedBridgeGroups){g.visible=false;g.position.y=0}
  if(kharvorBreakFx)kharvorBreakFx.visible=false;
@@ -357,7 +357,7 @@ function updateKharvorBridge(dt,progress){
  const sequenceRealm=isKharvor||isForest||isVhalor;
  if(!sequenceRealm){if(Math.abs(kharvorLayerY)>.01||forestUnderpassActive||vhalorFloodVisualActive)resetKharvorBridge();return}
  const total=realmTargetDistance(),riseStart=Math.max(700,total-500),lowerY=isForest?FOREST_LOWER_Y:KHARVOR_LOWER_Y;
- const holeFx=kharvorBreakFx; // MOBILE33: scripted collapse stays invisible until the instant of the fall.
+ const holeFx=kharvorBreakFx; // MOBILE34: scripted collapse stays invisible until the instant of the fall.
  if(isBridgeDropTransitionZone(progress)&&!bridgeDropSafetyCleared){bridgeDropSafetyCleared=true;clearBridgeDropApproach();spawnTimer=Math.max(spawnTimer,1.35)}
  if(holeFx)holeFx.visible=false;
  // Vhalor: queda aos 500 m e a parte inferior vira uma travessia fechada e inundada de canoa.
@@ -389,7 +389,7 @@ function updateKharvorBridge(dt,progress){
  if(roadGroup)roadGroup.position.y=kharvorLayerY;if(itemGroup)itemGroup.position.y=kharvorLayerY;if(shelter3D)shelter3D.position.y=kharvorLayerY;
  const under=progress>515&&progress<total-35;if(under&&holeFx)holeFx.visible=false;
  for(const g of kharvorUpperBridgeGroups){g.visible=isKharvor&&under;g.position.y=-kharvorLayerY+.42}
- for(const g of forestClosedBridgeGroups){g.visible=isForest&&under;g.position.y=-kharvorLayerY-.35}
+ for(const g of forestClosedBridgeGroups){g.visible=isForest&&under;g.position.y=4.25}
  if(isForest)setForestUnderpassVisual(under);
  if(isKharvor){if(sceneryGroup)sceneryGroup.visible=!under;if(decorGroup)decorGroup.visible=!under&&!tobogganActive}
  kharvorFallImpact=Math.max(0,kharvorFallImpact-dt*1.20);
@@ -970,7 +970,7 @@ function playVarekFootstep(){
  src.buffer=buf;const speedRatio=Math.max(0,Math.min(1,(speed-RUN_SPEED_BASE)/Math.max(.001,RUN_SPEED_MAX-RUN_SPEED_BASE)));
  src.playbackRate.value=.96+speedRatio*.13+(Math.random()-.5)*.035;g.gain.value=.105+(footstepIndex%2?-.008:.006);src.connect(g);g.connect(sfxMaster);src.start();
 }
-function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE33: sem passos contínuos durante a corrida
+function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE34: sem passos contínuos durante a corrida
 function resetFootsteps(){footstepTimer=0}
 
 function getNoiseBuffer(){
@@ -1503,7 +1503,7 @@ function buildRoad(){
  const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
  const frRoofMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x302b23}):new THREE.MeshStandardMaterial({color:0x302b23,roughness:1}),frWallMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x40382b}):new THREE.MeshStandardMaterial({color:0x40382b,roughness:1}),frRootMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x5a4934}):new THREE.MeshStandardMaterial({color:0x5a4934,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x314b2d,transparent:true,opacity:.78});
- // MOBILE33 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
+ // MOBILE34 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
  const sigStone=new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
  const sigDark=new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
  const sigWood=new THREE.MeshStandardMaterial({color:0x4c3828,roughness:1});
@@ -1526,22 +1526,20 @@ function buildRoad(){
      }
    }
    for(const x of [-4.15,4.15]){const e=new THREE.Mesh(edgeGeo,edgeRoadMat);e.position.set(x,-.06,0);e.receiveShadow=!MOBILE_RUNNER;seg.add(e)}
-   // TESTE 21.7: guarda-corpo reforçado nas pontes maiores/laterais, fora das três faixas jogáveis.
+   // MOBILE34: ponte legível e bonita, mas com bem menos draw calls no celular.
    for(const side of [-1,1]){
      const x=side*4.36;
-     const base=new THREE.Mesh(parapetBaseGeo,railStoneMat);base.position.set(x,.12,0);base.castShadow=shadowsOn;base.receiveShadow=true;seg.add(base);
-     const cap=new THREE.Mesh(parapetCapGeo,railCapMat);cap.position.set(x,.49,0);cap.castShadow=shadowsOn;cap.receiveShadow=true;seg.add(cap);
-     for(const zOff of (MOBILE_RUNNER?[-4.4,0,4.4]:[-4.5,-3,-1.5,0,1.5,3,4.5])){
-       const post=new THREE.Mesh(guardPostGeo,railStoneMat);post.position.set(side*4.54,.98,zOff);post.castShadow=shadowsOn;post.receiveShadow=true;seg.add(post);
-       const brace=new THREE.Mesh(braceGeo,railWoodMat);brace.position.set(side*4.44,.71,zOff);brace.rotation.z=side*(Math.PI/12);brace.castShadow=shadowsOn;brace.receiveShadow=true;seg.add(brace);
-     }
-     for(const y of [.72,1.10]){
-       const rail=new THREE.Mesh(guardRailGeo,railWoodMat);rail.position.set(side*4.49,y,0);rail.castShadow=shadowsOn;rail.receiveShadow=true;seg.add(rail);
-     }
-     if(s%3===0){
-       for(const zOff of [-4.65,4.65]){
-         const buttress=new THREE.Mesh(buttressGeo,railStoneMat);buttress.position.set(side*4.30,.92,zOff);buttress.castShadow=shadowsOn;buttress.receiveShadow=true;seg.add(buttress);
+     const base=new THREE.Mesh(parapetBaseGeo,railStoneMat);base.position.set(x,.12,0);base.castShadow=shadowsOn;base.receiveShadow=!MOBILE_RUNNER;seg.add(base);
+     const cap=new THREE.Mesh(parapetCapGeo,railCapMat);cap.position.set(x,.49,0);cap.castShadow=shadowsOn;cap.receiveShadow=!MOBILE_RUNNER;seg.add(cap);
+     if(MOBILE_RUNNER){
+       const rail=new THREE.Mesh(guardRailGeo,railWoodMat);rail.position.set(side*4.49,.92,0);rail.castShadow=false;rail.receiveShadow=false;seg.add(rail);
+     }else{
+       for(const zOff of [-4.5,-3,-1.5,0,1.5,3,4.5]){
+         const post=new THREE.Mesh(guardPostGeo,railStoneMat);post.position.set(side*4.54,.98,zOff);post.castShadow=shadowsOn;post.receiveShadow=true;seg.add(post);
+         const brace=new THREE.Mesh(braceGeo,railWoodMat);brace.position.set(side*4.44,.71,zOff);brace.rotation.z=side*(Math.PI/12);brace.castShadow=shadowsOn;brace.receiveShadow=true;seg.add(brace);
        }
+       for(const y of [.72,1.10]){const rail=new THREE.Mesh(guardRailGeo,railWoodMat);rail.position.set(side*4.49,y,0);rail.castShadow=shadowsOn;rail.receiveShadow=true;seg.add(rail)}
+       if(s%3===0)for(const zOff of [-4.65,4.65]){const buttress=new THREE.Mesh(buttressGeo,railStoneMat);buttress.position.set(side*4.30,.92,zOff);buttress.castShadow=shadowsOn;buttress.receiveShadow=true;seg.add(buttress)}
      }
    }
    // PLAYER 0.38: Ponte Viva. Camada visual reforçada, tremor em pulsos e dano cenográfico fora das faixas jogáveis.
@@ -1559,9 +1557,9 @@ function buildRoad(){
      for(const y of [.72,1.10]){const rope=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,10.0,6),bridgeRopeMat);rope.position.set(side*4.28,y,0);rope.rotation.x=Math.PI/2;rope.castShadow=shadowsOn;bridgeDetail.add(rope)}
    }
    seg.add(bridgeDetail);bridgeDetailGroups.push(bridgeDetail);
-   // MOBILE33: sem listras repetitivas no chão. Faixas são sugeridas apenas por tons muito próximos.
+   // MOBILE34: sem listras repetitivas no chão. Faixas são sugeridas apenas por tons muito próximos.
    if(!MOBILE_RUNNER){const seamMat=new THREE.MeshStandardMaterial({color:0x5f5b4f,roughness:1});for(const x of [-1.125,1.125])for(let rz=0;rz<4;rz++){const seam=new THREE.Mesh(seamGeo,seamMat);seam.position.set(x,.015,(rz-1.5)*2.62);seg.add(seam)}}
-   // MOBILE33: identidade visual no mobile vem de tons da pista, background, clima e laterais.
+   // MOBILE34: identidade visual no mobile vem de tons da pista, background, clima e laterais.
    // Sem rachaduras/listras repetidas no chão para reduzir fadiga visual e draw calls.
    if(!MOBILE_RUNNER){
      if(cfg.id==='forest'){
@@ -1582,8 +1580,8 @@ function buildRoad(){
        for(let rz=0;rz<4;rz++){const gold=new THREE.Mesh(new THREE.BoxGeometry(.16,.02,2.14),new THREE.MeshBasicMaterial({color:0xf2cf77,transparent:true,opacity:.70}));gold.position.set(0,.03,(rz-1.5)*2.62);seg.add(gold)}
      }
    }
-   // MOBILE33 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
-   if(s%3===0){
+   // MOBILE34 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
+   if(s%(MOBILE_RUNNER?5:3)===0){
      const signature=new THREE.Group();signature.name='MR_PONTE_ASSINATURA_'+cfg.id;
      if(cfg.id==='vruins'){
        for(const side of [-1,1]){
@@ -1675,26 +1673,26 @@ function buildDecor(){
  const makeFloatingShard=(phase,color=0xe9d59b)=>{const g=new THREE.Group(),mat=new THREE.MeshStandardMaterial({color,roughness:.72,metalness:.04});const m=new THREE.Mesh(new THREE.TetrahedronGeometry(.72,0),mat);m.scale.set(.65,1.8,.65);g.add(m);g.userData.anim='floatingShard';g.userData.phase=phase;return g};
 
  if(cfg.id==='forest'){
-   [-16,-52,-88,-124].forEach((z,i)=>addDecor(makeMonkey(i%2?1:-1,i*.9),z,(i%2?8.8:-8.8),7.6+(i%2)*.7));
-   [-28,-74,-118].forEach((z,i)=>addDecor(makeDustBanner(i*.7),z,i%2?7.6:-7.6,2.3));
-   [-38,-92,-146].forEach((z,i)=>addDecor(makeFireflies(i*.8),z,i%2?6.4:-6.4,1.15+(i%2)*.3));
-   [-58,-132].forEach((z,i)=>addDecor(makeMistVeil(i*.9,0xbadac2),z,0,.25));
+   (MOBILE_RUNNER?[-22,-98]:[-16,-52,-88,-124]).forEach((z,i)=>addDecor(makeMonkey(i%2?1:-1,i*.9),z,(i%2?8.8:-8.8),7.6+(i%2)*.7));
+   (MOBILE_RUNNER?[-72]:[-28,-74,-118]).forEach((z,i)=>addDecor(makeDustBanner(i*.7),z,i%2?7.6:-7.6,2.3));
+   (MOBILE_RUNNER?[-46,-132]:[-38,-92,-146]).forEach((z,i)=>addDecor(makeFireflies(i*.8),z,i%2?6.4:-6.4,1.15+(i%2)*.3));
+   if(!MOBILE_RUNNER)[-58,-132].forEach((z,i)=>addDecor(makeMistVeil(i*.9,0xbadac2),z,0,.25));
  }else if(cfg.id==='ember'){
-   [-20,-58,-96,-132].forEach((z,i)=>addDecor(makeLavaSpout(i*.8),z,i%2?7.9:-7.9,.18));
-   [-50,-118].forEach((z,i)=>addDecor(makeMistVeil(i*.9,0xd7774a),z,0,.35));
+   (MOBILE_RUNNER?[-28,-88,-142]:[-20,-58,-96,-132]).forEach((z,i)=>addDecor(makeLavaSpout(i*.8),z,i%2?7.9:-7.9,.18));
+   if(!MOBILE_RUNNER)[-50,-118].forEach((z,i)=>addDecor(makeMistVeil(i*.9,0xd7774a),z,0,.35));
  }else if(cfg.id==='vpath'){
-   [-24,-64,-104].forEach((z,i)=>addDecor(makeBird(i%2?1:-1,i*.6),z,i%2?9.8:-9.8,8.6));
-   [-55,-126].forEach((z,i)=>addDecor(makeMistVeil(i*.7,0xcf9b77),z,0,.6));
+   (MOBILE_RUNNER?[-34,-112]:[-24,-64,-104]).forEach((z,i)=>addDecor(makeBird(i%2?1:-1,i*.6),z,i%2?9.8:-9.8,8.6));
+   if(!MOBILE_RUNNER)[-55,-126].forEach((z,i)=>addDecor(makeMistVeil(i*.7,0xcf9b77),z,0,.6));
  }else if(cfg.id==='vruins'){
-   [-36,-96,-150].forEach((z,i)=>addDecor(makeMistVeil(i*.8,0xa6b7b8),z,0,.45));
-   [-62,-136].forEach((z,i)=>addDecor(makeFireflies(i*.9,0xa8d8d1),z,i%2?6.8:-6.8,1.7));
+   if(!MOBILE_RUNNER)[-36,-96,-150].forEach((z,i)=>addDecor(makeMistVeil(i*.8,0xa6b7b8),z,0,.45));
+   (MOBILE_RUNNER?[-96]:[-62,-136]).forEach((z,i)=>addDecor(makeFireflies(i*.9,0xa8d8d1),z,i%2?6.8:-6.8,1.7));
  }else if(cfg.id==='ruins'){
-   [-24,-68,-112].forEach((z,i)=>addDecor(makeDustBanner(i*.8),z,i%2?8.6:-8.6,1.8));
-   [-46,-118].forEach((z,i)=>addDecor(makeMistVeil(i*.75,0xbddbd3),z,0,.35));
-   [-78,-148].forEach((z,i)=>addDecor(makeFireflies(i*.8,0xaadbd1),z,i%2?6.2:-6.2,1.3));
+   (MOBILE_RUNNER?[-42,-120]:[-24,-68,-112]).forEach((z,i)=>addDecor(makeDustBanner(i*.8),z,i%2?8.6:-8.6,1.8));
+   if(!MOBILE_RUNNER)[-46,-118].forEach((z,i)=>addDecor(makeMistVeil(i*.75,0xbddbd3),z,0,.35));
+   (MOBILE_RUNNER?[-94]:[-78,-148]).forEach((z,i)=>addDecor(makeFireflies(i*.8,0xaadbd1),z,i%2?6.2:-6.2,1.3));
  }else if(cfg.id==='celestial'){
-   [-30,-72,-114].forEach((z,i)=>addDecor(makeRibbon(i*.6),z,i%2?7.2:-7.2,3.0));
-   [-44,-96,-148].forEach((z,i)=>addDecor(makeFloatingShard(i*.7),z,i%2?6.8:-6.8,4.0+(i%2)*.7));
+   (MOBILE_RUNNER?[-46,-122]:[-30,-72,-114]).forEach((z,i)=>addDecor(makeRibbon(i*.6),z,i%2?7.2:-7.2,3.0));
+   (MOBILE_RUNNER?[-76,-150]:[-44,-96,-148]).forEach((z,i)=>addDecor(makeFloatingShard(i*.7),z,i%2?6.8:-6.8,4.0+(i%2)*.7));
  }
 }
 function buildOpeningDragon(){
@@ -2023,11 +2021,11 @@ function createGem(laneI,z){const mat=new THREE.MeshStandardMaterial({color:0x54
 function createStar(laneI,z){const shape=new THREE.Shape();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2===0?.38:.17;const x=Math.cos(a)*r,y=Math.sin(a)*r;i?shape.lineTo(x,y):shape.moveTo(x,y)}shape.closePath();const geo=new THREE.ExtrudeGeometry(shape,{depth:.10,bevelEnabled:true,bevelSize:.035,bevelThickness:.035,bevelSegments:1});geo.center();const m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xffd95b,emissive:0x9b6710,emissiveIntensity:.65,metalness:.12,roughness:.24}));m.position.set(LANE_X[laneI],1.12,z);m.userData={kind:'star',lane:laneI,collected:false};itemGroup.add(m);collectibles.push(m)}
 function createWater(laneI,z){const g=new THREE.Group(),glass=new THREE.MeshStandardMaterial({color:0x7bdcff,transparent:true,opacity:.72,roughness:.18,metalness:.05}),cap=new THREE.MeshStandardMaterial({color:0x2e6f84,roughness:.6});const b=new THREE.Mesh(new THREE.CylinderGeometry(.18,.22,.62,12),glass);b.position.y=.36;const c=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.12,12),cap);c.position.y=.73;g.add(b,c);g.position.set(LANE_X[laneI],.25,z);g.userData={kind:'water',lane:laneI,collected:false};itemGroup.add(g);collectibles.push(g)}
 function createHole(laneI,z){
- const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE33';
+ const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE34';
  const cfg=REALMS[realmIndex]||REALMS[0],roadColor=cfg.road[1]||0x51483f,edgeColor=cfg.edge||0x3a342f;
  const voidMat=new THREE.MeshBasicMaterial({color:0x000000,side:THREE.DoubleSide,depthWrite:true});
  const wallMat=new THREE.MeshBasicMaterial({color:0x0a0908,side:THREE.DoubleSide});
- const crackCount=15,outer=[],inner=[],squash=.90+Math.random()*.13,stretch=1.02+Math.random()*.16;
+ const crackCount=MOBILE_RUNNER?10:15,outer=[],inner=[],squash=.90+Math.random()*.13,stretch=1.02+Math.random()*.16;
  for(let i=0;i<crackCount;i++){
    const a=i/crackCount*Math.PI*2;
    const bite=(i===2||i===7?-.18:0)+(i===4||i===10?.12:0);
@@ -2049,14 +2047,14 @@ function createHole(laneI,z){
  const core=new THREE.Mesh(new THREE.ShapeGeometry(new THREE.Shape(inner)),voidMat);core.rotation.x=-Math.PI/2;core.position.y=-1.74;g.add(core);
  const rimMat=new THREE.MeshStandardMaterial({color:edgeColor,roughness:1}),slabMat=new THREE.MeshStandardMaterial({color:roadColor,roughness:1});
  // Poucos fragmentos grandes e assimétricos: evita o antigo aspecto de "anel de pedras".
- const fragments=MOBILE_RUNNER?5:7;
+ const fragments=MOBILE_RUNNER?3:7;
  for(let i=0;i<fragments;i++){
    const a=(i/fragments)*Math.PI*2+(i%2?.15:-.08),oi=outer[(i*2)%crackCount];
    const rock=new THREE.Mesh(i%2===0?new THREE.BoxGeometry(.27+(i%3)*.10,.06+(i%2)*.04,.30+(i%4)*.08):new THREE.DodecahedronGeometry(.14+(i%3)*.035,0),i%2===0?slabMat:rimMat);
    rock.position.set(oi.x*1.03,.065+(i%3)*.025,oi.y*1.03);rock.scale.set(.82+(i%3)*.18,.55+(i%2)*.16,.78+(i%4)*.11);rock.rotation.set((i%3-1)*.10,-a+(i%2?.18:-.12),(i%2?1:-1)*.12);g.add(rock)
  }
  // Trincas curtas, em direções diferentes, sem formar estrela perfeita.
- const crackAngles=[.18,1.12,2.47,3.58,5.03];
+ const crackAngles=MOBILE_RUNNER?[.35,2.25,4.75]:[.18,1.12,2.47,3.58,5.03];
  for(let i=0;i<crackAngles.length;i++){const a=crackAngles[i]+Math.sin(z*.01+i)*.09,len=.42+(i%3)*.20;const crack=new THREE.Mesh(new THREE.BoxGeometry(.028,.014,len),new THREE.MeshBasicMaterial({color:0x181411,transparent:true,opacity:.90}));crack.position.set(Math.cos(a)*(1.03*squash+len*.28),.052,Math.sin(a)*(1.12*stretch+len*.28));crack.rotation.y=-a;g.add(crack)}
  g.position.set(LANE_X[laneI],0,z);g.userData={kind:'obstacle',type:'hole',lane:laneI,hit:false,cleared:false};g.traverse(n=>{if(n.isMesh){n.castShadow=false;n.receiveShadow=false}});itemGroup.add(g);obstacles.push(g)
 }
@@ -2419,7 +2417,7 @@ function render(){
  if(tobogganActive){
    const center=tobogganCenterX(0),lookX=tobogganCenterX(-25),curve=tobogganYaw(-11),canoeBaseY=tobogganY(0);camera.position.x+=(center*.16+(heroRoot?heroRoot.position.x*.18:0)-camera.position.x)*.12;camera.position.y+=((canoeBaseY+3.15)-camera.position.y)*.12;camera.rotation.z+=(-curve*.16-camera.rotation.z)*.10;camera.fov+=(73-camera.fov)*.10;camera.updateProjectionMatrix();camera.lookAt(lookX*.34,canoeBaseY-.85,-13.5);renderer.render(scene,camera);return
  }
- const curveLook=trackCurveX(-34)*.20,targetX=(heroRoot?heroRoot.position.x*.16:0)+curveLook,now=performance.now(),shakeX=Math.sin(now*.081)*openingCameraShake*.10,shakeY=Math.sin(now*.113+1.7)*openingCameraShake*.055,shakeR=Math.sin(now*.097+.8)*openingCameraShake*.012;camera.position.x+=((targetX+shakeX)-camera.position.x)*.075;camera.position.y=3.45+kharvorLayerY+jumpY*.03+(effortTimer>0?Math.sin(now*.045)*.025:0)+shakeY+kharvorFallImpact*.72;camera.rotation.z+=(curveStrength*.012+shakeR-camera.rotation.z)*.065;camera.fov+=(60+Math.max(0,speed-RUN_SPEED_BASE)*.42+(effortTimer>0?1.2:0)+kharvorFallImpact*5.5-camera.fov)*.05;camera.updateProjectionMatrix();camera.lookAt((targetX+shakeX*.35)*.28,1.15+kharvorLayerY+shakeY*.28-kharvorFallImpact*1.30,-7.8);renderer.render(scene,camera)
+ const curveLook=trackCurveX(-34)*.20,targetX=(heroRoot?heroRoot.position.x*.16:0)+curveLook,now=performance.now(),shakeX=Math.sin(now*.081)*openingCameraShake*.10,shakeY=Math.sin(now*.113+1.7)*openingCameraShake*.055,shakeR=Math.sin(now*.097+.8)*openingCameraShake*.012,coveredCam=MOBILE_RUNNER&&forestUnderpassActive;camera.position.x+=((targetX+shakeX)-camera.position.x)*.075;camera.position.y=(coveredCam?3.02:3.45)+kharvorLayerY+jumpY*.03+(effortTimer>0?Math.sin(now*.045)*.025:0)+shakeY+kharvorFallImpact*.72;camera.rotation.z+=(curveStrength*.012+shakeR-camera.rotation.z)*.065;camera.fov+=((coveredCam?58:60)+Math.max(0,speed-RUN_SPEED_BASE)*.42+(effortTimer>0?1.2:0)+kharvorFallImpact*5.5-camera.fov)*.05;camera.updateProjectionMatrix();camera.lookAt((targetX+shakeX*.35)*.28,(coveredCam?.96:1.15)+kharvorLayerY+shakeY*.28-kharvorFallImpact*1.30,-7.8);renderer.render(scene,camera)
 }
 function adjustMobileRenderScale(fps,now){
  if(!MOBILE_RUNNER||!renderer||!started)return;
@@ -2566,7 +2564,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE33';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE34';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
