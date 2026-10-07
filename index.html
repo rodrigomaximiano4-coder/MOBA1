@@ -76,7 +76,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 
 .topRight{display:none!important}
 
-/* ===== MAX HEALMS MOBILE35 • MOBILE CLEAN + DESCIDA DO RIO ===== */
+/* ===== MAX HEALMS MOBILE36 • MOBILE CLEAN + DESCIDA DO RIO ===== */
 #mobileMore{display:none}.mobileMorePanel{display:contents}
 @media(max-width:740px){
   #app{background-size:auto 100%!important;background-position:50% 46%!important;background-repeat:no-repeat!important;background-color:#07110d!important}
@@ -193,7 +193,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE35</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE36</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -211,9 +211,24 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
     </div>
     <div class="eyebrow" style="margin-top:14px">TRECHOS CRÍTICOS</div>
     <div class="qaQuickGrid">
+      <button class="btn secondary" id="kharvorDropQuick" type="button">KHARVOR • QUEDA DA PONTE</button>
       <button class="btn secondary" id="kharvorLowerQuick" type="button">KHARVOR • EMBAIXO DA PONTE</button>
+      <button class="btn secondary" id="nerisDropQuick" type="button">NERIS • QUEDA / ENTRADA DA PONTE</button>
       <button class="btn secondary" id="nerisLowerQuick" type="button">NERIS • PONTE COBERTA</button>
+      <button class="btn secondary" id="vhalorDropQuick" type="button">VHALOR • QUEDA DA PONTE</button>
       <button class="btn secondary" id="vhalorFloodQuick" type="button">VHALOR • TÚNEL INUNDADO</button>
+    </div>
+    <div class="eyebrow" style="margin-top:14px">DESCIDAS / SEQUÊNCIAS</div>
+    <div class="qaQuickGrid">
+      <button class="btn secondary" id="riverQuick" type="button">TERRAS DOS DRAGÕES • DESCIDA DO RIO</button>
+      <button class="btn secondary" id="lavaQuick" type="button">VALE DAS CINZAS • DESCIDA VULCÂNICA</button>
+      <button class="btn secondary" id="floodedQuick" type="button">VHALOR • CANOA NA PASSAGEM INUNDADA</button>
+    </div>
+    <div class="eyebrow" style="margin-top:14px">HISTÓRIA / FINAIS</div>
+    <div class="qaQuickGrid">
+      <button class="btn secondary" data-final-test="j2start" type="button">JORNADA 2 • ABERTURA COM LYRA</button>
+      <button class="btn secondary" data-final-test="j1" type="button">FINAL • JORNADA 1</button>
+      <button class="btn secondary" data-final-test="j2final" type="button">FINAL • JORNADA 2</button>
     </div>
     <div class="cardActions">
       <button class="btn secondary" id="scenarioTestClose" type="button">VOLTAR AO MENU NORMAL</button>
@@ -313,7 +328,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE35 • MOBILE FIRST + DESCIDA DO RIO
+// MAX HEALMS MOBILE36 • MOBILE FIRST + DESCIDA DO RIO
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -400,7 +415,7 @@ function updateKharvorBridge(dt,progress){
  const sequenceRealm=isKharvor||isForest||isVhalor;
  if(!sequenceRealm){if(Math.abs(kharvorLayerY)>.01||forestUnderpassActive||vhalorFloodVisualActive)resetKharvorBridge();return}
  const total=realmTargetDistance(),riseStart=Math.max(700,total-500),lowerY=isForest?FOREST_LOWER_Y:KHARVOR_LOWER_Y;
- const holeFx=kharvorBreakFx; // MOBILE35: scripted collapse stays invisible until the instant of the fall.
+ const holeFx=kharvorBreakFx; // MOBILE36: scripted collapse stays invisible until the instant of the fall.
  if(isBridgeDropTransitionZone(progress)&&!bridgeDropSafetyCleared){bridgeDropSafetyCleared=true;clearBridgeDropApproach();spawnTimer=Math.max(spawnTimer,1.35)}
  if(holeFx)holeFx.visible=false;
  // Vhalor: queda aos 500 m e a parte inferior vira uma travessia fechada e inundada de canoa.
@@ -1013,7 +1028,7 @@ function playVarekFootstep(){
  src.buffer=buf;const speedRatio=Math.max(0,Math.min(1,(speed-RUN_SPEED_BASE)/Math.max(.001,RUN_SPEED_MAX-RUN_SPEED_BASE)));
  src.playbackRate.value=.96+speedRatio*.13+(Math.random()-.5)*.035;g.gain.value=.105+(footstepIndex%2?-.008:.006);src.connect(g);g.connect(sfxMaster);src.start();
 }
-function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE35: sem passos contínuos durante a corrida
+function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE36: sem passos contínuos durante a corrida
 function resetFootsteps(){footstepTimer=0}
 
 function getNoiseBuffer(){
@@ -1295,8 +1310,11 @@ function updateWeatherVisual(dt){
  if(UI.weatherFlash)UI.weatherFlash.style.opacity=String(weatherLightningAlpha);
 }
 const PC_QA_BUILD=false;
-const MOBILE_SCENARIO_TEST=new URLSearchParams(location.search).get('test')==='1';
+const MOBILE_QA_PARAMS=new URLSearchParams(location.search);
+const MOBILE_QA_VERSION=(MOBILE_QA_PARAMS.get('v')||'').toLowerCase();
+const MOBILE_SCENARIO_TEST=MOBILE_QA_PARAMS.get('test')==='1'||MOBILE_QA_VERSION==='mobile35'||MOBILE_QA_VERSION==='mobile36';
 const QA_SCENARIO_MODE=PC_QA_BUILD||MOBILE_SCENARIO_TEST;
+if(QA_SCENARIO_MODE)document.body.classList.add('pcQaBuild');
 let scenarioTestJourney=1;
 let qaEngineReady=false,qaPendingScenario=null,qaScenarioStarting=false;
 function qaSetStatus(msg){const el=$('qaLaunchStatus');if(el)el.textContent=msg}
@@ -1362,6 +1380,15 @@ async function startNerisQuick(mode='drop'){
 }
 async function startVhalorQuick(mode='drop'){
  if(!await waitForQaScenario(3,scenarioTestJourney))return;distance=mode==='flooded'?510:485;realmStartDistance=0;updateKharvorBridge(.016,distance);updateHUD();toast(mode==='flooded'?'TESTE • VHALOR • PASSAGEM INUNDADA EM CANOA':'TESTE • VHALOR • QUEDA IMINENTE');
+}
+async function startTobogganQuick(realmIdx,forcedMode=null){
+ const r=Math.max(0,Math.min(REALMS.length-1,Number(realmIdx)||0));
+ if(!await waitForQaScenario(r,scenarioTestJourney))return;
+ if(scenarioTestJourney===2&&!lyraRoot){try{await loadLyra();setLyraJourneyState();forceLyraRun()}catch(err){console.warn('QA LYRA DESCIDA',err)}}
+ distance=560;realmStartDistance=0;tobogganAutoDone=false;updateHUD();
+ if(forcedMode==='flooded')setVhalorFloodVisual(true);
+ startToboggan(true,forcedMode);
+ qaSetStatus('TESTE ATIVO • '+REALMS[r].short+' • '+(forcedMode==='lava'?'DESCIDA VULCÂNICA':forcedMode==='flooded'?'PASSAGEM INUNDADA':'DESCIDA DO RIO')+' • JORNADA '+scenarioTestJourney);
 }
 async function startFinalSceneTest(mode){
  stopTheme(250);hideFamilyScene();endToboggan(true);resetOpeningImpactVisuals();stopAmbientBed();stopWeatherAudio();resetFootsteps();
@@ -1511,10 +1538,10 @@ function init3D(){
      if(Number.isInteger(qaRealmNum)&&qaRealmNum>=0&&qaRealmNum<REALMS.length)target={realm:qaRealmNum,journey:qaJourneyNum};
      else if(qaPendingScenario)target={...qaPendingScenario};
      if(target){qaPendingScenario=null;await launchScenarioTest(target.realm,target.journey)}
-     else{openScenarioHub();qaSetStatus('PRONTO • escolha qualquer um dos 6 reinos para iniciar o teste.')}
+     else{openScenarioHub();qaSetStatus('PRONTO • 6 reinos + trechos críticos + descidas + finais liberados para teste.')}
      setTimeout(()=>{if(!hunters.length)loadHunters().catch(err=>console.warn('CAÇADORAS EM SEGUNDO PLANO',err))},120);
    }else if(MOBILE_SCENARIO_TEST){
-     openScenarioHub();qaSetStatus('PRONTO • escolha qualquer um dos 6 cenários para testar no celular.');
+     openScenarioHub();qaSetStatus('PRONTO • 6 reinos + trechos críticos + descidas + finais liberados para teste.');
    }
  }).catch(err=>{console.error('MAX HEALMS INIT 3D',err);qaEngineReady=false;UI.loading.classList.add('hidden');UI.error.classList.add('show');const p=document.getElementById('engineErrorText')||UI.error.querySelector('p');if(p)p.textContent='O motor 3D carregou, mas ocorreu uma falha ao iniciar personagem/cenário: '+(err&&err.message?err.message:String(err));});
  requestAnimationFrame(loop);
@@ -1550,7 +1577,7 @@ function buildRoad(){
  const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
  const frRoofMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x302b23}):new THREE.MeshStandardMaterial({color:0x302b23,roughness:1}),frWallMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x40382b}):new THREE.MeshStandardMaterial({color:0x40382b,roughness:1}),frRootMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x5a4934}):new THREE.MeshStandardMaterial({color:0x5a4934,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x314b2d,transparent:true,opacity:.78});
- // MOBILE35 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
+ // MOBILE36 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
  const sigStone=new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
  const sigDark=new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
  const sigWood=new THREE.MeshStandardMaterial({color:0x4c3828,roughness:1});
@@ -1573,7 +1600,7 @@ function buildRoad(){
      }
    }
    for(const x of [-4.15,4.15]){const e=new THREE.Mesh(edgeGeo,edgeRoadMat);e.position.set(x,-.06,0);e.receiveShadow=!MOBILE_RUNNER;seg.add(e)}
-   // MOBILE35: ponte legível e bonita, mas com bem menos draw calls no celular.
+   // MOBILE36: ponte legível e bonita, mas com bem menos draw calls no celular.
    for(const side of [-1,1]){
      const x=side*4.36;
      const base=new THREE.Mesh(parapetBaseGeo,railStoneMat);base.position.set(x,.12,0);base.castShadow=shadowsOn;base.receiveShadow=!MOBILE_RUNNER;seg.add(base);
@@ -1604,9 +1631,9 @@ function buildRoad(){
      for(const y of [.72,1.10]){const rope=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,10.0,6),bridgeRopeMat);rope.position.set(side*4.28,y,0);rope.rotation.x=Math.PI/2;rope.castShadow=shadowsOn;bridgeDetail.add(rope)}
    }
    seg.add(bridgeDetail);bridgeDetailGroups.push(bridgeDetail);
-   // MOBILE35: sem listras repetitivas no chão. Faixas são sugeridas apenas por tons muito próximos.
+   // MOBILE36: sem listras repetitivas no chão. Faixas são sugeridas apenas por tons muito próximos.
    if(!MOBILE_RUNNER){const seamMat=new THREE.MeshStandardMaterial({color:0x5f5b4f,roughness:1});for(const x of [-1.125,1.125])for(let rz=0;rz<4;rz++){const seam=new THREE.Mesh(seamGeo,seamMat);seam.position.set(x,.015,(rz-1.5)*2.62);seg.add(seam)}}
-   // MOBILE35: identidade visual no mobile vem de tons da pista, background, clima e laterais.
+   // MOBILE36: identidade visual no mobile vem de tons da pista, background, clima e laterais.
    // Sem rachaduras/listras repetidas no chão para reduzir fadiga visual e draw calls.
    if(!MOBILE_RUNNER){
      if(cfg.id==='forest'){
@@ -1627,7 +1654,7 @@ function buildRoad(){
        for(let rz=0;rz<4;rz++){const gold=new THREE.Mesh(new THREE.BoxGeometry(.16,.02,2.14),new THREE.MeshBasicMaterial({color:0xf2cf77,transparent:true,opacity:.70}));gold.position.set(0,.03,(rz-1.5)*2.62);seg.add(gold)}
      }
    }
-   // MOBILE35 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
+   // MOBILE36 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
    if(s%(MOBILE_RUNNER?5:3)===0){
      const signature=new THREE.Group();signature.name='MR_PONTE_ASSINATURA_'+cfg.id;
      if(cfg.id==='vruins'){
@@ -2068,7 +2095,7 @@ function createGem(laneI,z){const mat=new THREE.MeshStandardMaterial({color:0x54
 function createStar(laneI,z){const shape=new THREE.Shape();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2===0?.38:.17;const x=Math.cos(a)*r,y=Math.sin(a)*r;i?shape.lineTo(x,y):shape.moveTo(x,y)}shape.closePath();const geo=new THREE.ExtrudeGeometry(shape,{depth:.10,bevelEnabled:true,bevelSize:.035,bevelThickness:.035,bevelSegments:1});geo.center();const m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xffd95b,emissive:0x9b6710,emissiveIntensity:.65,metalness:.12,roughness:.24}));m.position.set(LANE_X[laneI],1.12,z);m.userData={kind:'star',lane:laneI,collected:false};itemGroup.add(m);collectibles.push(m)}
 function createWater(laneI,z){const g=new THREE.Group(),glass=new THREE.MeshStandardMaterial({color:0x7bdcff,transparent:true,opacity:.72,roughness:.18,metalness:.05}),cap=new THREE.MeshStandardMaterial({color:0x2e6f84,roughness:.6});const b=new THREE.Mesh(new THREE.CylinderGeometry(.18,.22,.62,12),glass);b.position.y=.36;const c=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.12,12),cap);c.position.y=.73;g.add(b,c);g.position.set(LANE_X[laneI],.25,z);g.userData={kind:'water',lane:laneI,collected:false};itemGroup.add(g);collectibles.push(g)}
 function createHole(laneI,z){
- const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE35';
+ const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE36';
  const cfg=REALMS[realmIndex]||REALMS[0],roadColor=cfg.road[1]||0x51483f,edgeColor=cfg.edge||0x3a342f;
  const voidMat=new THREE.MeshBasicMaterial({color:0x000000,side:THREE.DoubleSide,depthWrite:true});
  const wallMat=new THREE.MeshBasicMaterial({color:0x0a0908,side:THREE.DoubleSide});
@@ -2605,13 +2632,13 @@ function bindDirectQaScenarioButtons(){refreshQaRealmLinks()}
 function refreshScenarioJourneyButtons(){const a=$('scenarioJourney1'),b=$('scenarioJourney2');if(a)a.classList.toggle('active',scenarioTestJourney===1);if(b)b.classList.toggle('active',scenarioTestJourney===2)}
 if($('scenarioJourney1'))$('scenarioJourney1').onclick=()=>{scenarioTestJourney=1;refreshScenarioJourneyButtons();refreshQaRealmLinks()};
 if($('scenarioJourney2'))$('scenarioJourney2').onclick=()=>{scenarioTestJourney=2;refreshScenarioJourneyButtons();refreshQaRealmLinks()};
-if($('kharvorDropQuick'))$('kharvorDropQuick').onclick=()=>void startKharvorQuick('drop');if($('kharvorLowerQuick'))$('kharvorLowerQuick').onclick=()=>void startKharvorQuick('lower');if($('nerisDropQuick'))$('nerisDropQuick').onclick=()=>void startNerisQuick('drop');if($('nerisLowerQuick'))$('nerisLowerQuick').onclick=()=>void startNerisQuick('lower');if($('vhalorDropQuick'))$('vhalorDropQuick').onclick=()=>void startVhalorQuick('drop');if($('vhalorFloodQuick'))$('vhalorFloodQuick').onclick=()=>void startVhalorQuick('flooded');
+if($('kharvorDropQuick'))$('kharvorDropQuick').onclick=()=>void startKharvorQuick('drop');if($('kharvorLowerQuick'))$('kharvorLowerQuick').onclick=()=>void startKharvorQuick('lower');if($('nerisDropQuick'))$('nerisDropQuick').onclick=()=>void startNerisQuick('drop');if($('nerisLowerQuick'))$('nerisLowerQuick').onclick=()=>void startNerisQuick('lower');if($('vhalorDropQuick'))$('vhalorDropQuick').onclick=()=>void startVhalorQuick('drop');if($('vhalorFloodQuick'))$('vhalorFloodQuick').onclick=()=>void startVhalorQuick('flooded');if($('riverQuick'))$('riverQuick').onclick=()=>void startTobogganQuick(0,null);if($('lavaQuick'))$('lavaQuick').onclick=()=>void startTobogganQuick(2,'lava');if($('floodedQuick'))$('floodedQuick').onclick=()=>void startTobogganQuick(3,'flooded');
 if(UI.scenarioTestPanel)UI.scenarioTestPanel.addEventListener('click',e=>{const f=e.target.closest('[data-final-test]');if(f){void startFinalSceneTest(f.dataset.finalTest)}});refreshQaRealmLinks();unlockAllPcQaScenarios();
 UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(lane)===2&&targetLane===2)openShelterChoice();else toast('ABRIGO À DIREITA • ENTRE NA FAIXA DIREITA')};$('shelterAccept').onclick=enterShelter;$('shelterDecline').onclick=declineShelter;$('hydr20').onclick=()=>buyShelterHydration(20,40);$('hydr50').onclick=()=>buyShelterHydration(50,90);$('hydr75').onclick=()=>buyShelterHydration(75,130);$('hydrFull').onclick=()=>buyShelterHydration(100,0,true);$('shelterExit').onclick=exitShelter;
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE35';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE36';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
