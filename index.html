@@ -76,7 +76,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 
 .topRight{display:none!important}
 
-/* ===== MAX HEALMS MOBILE34 • MOBILE CLEAN + DESCIDA DO RIO ===== */
+/* ===== MAX HEALMS MOBILE35 • MOBILE CLEAN + DESCIDA DO RIO ===== */
 #mobileMore{display:none}.mobileMorePanel{display:contents}
 @media(max-width:740px){
   #app{background-size:auto 100%!important;background-position:50% 46%!important;background-repeat:no-repeat!important;background-color:#07110d!important}
@@ -177,6 +177,49 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
   <div class="finalVictory" id="finalVictory"><div class="ey">MAX HEALMS • FIM DA JORNADA 2</div><h2>FAMÍLIA REUNIDA</h2><div class="endingText" id="finalEndingText">Varek e Lyra cruzaram a fronteira segura e finalmente reencontraram a família.</div><div class="placement" id="finalPlacement">🏆 COLOCAÇÃO LOCAL #1</div><div class="resultLine" id="finalResultLine">TEMPO 00:00 • 0 PONTOS</div><div class="unlockLine" id="finalUnlockLine">✓ JORNADA 2 CONCLUÍDA • DESBLOQUEADA NO MENU</div><div class="finalActions"><button class="btn primary" id="finalReplay">↻ REJOGAR JORNADA 2</button><button class="btn secondary" id="finalMenu">☰ MENU PRINCIPAL</button></div></div>
   <button class="shelterPrompt" id="shelterPrompt">🏕 ABRIGO PRÓXIMO • FAIXA DIREITA →</button>
 </div>
+
+<style>
+#scenarioTestPanel{z-index:1200;align-items:flex-start;overflow:auto;padding:16px 10px}
+#scenarioTestPanel .card{width:min(94vw,620px);margin:10px auto 28px}
+.qaRealmGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.qaRealmGrid .btn{min-height:50px;font-size:12px;line-height:1.15}
+.qaJourneyRow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.qaQuickGrid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+.qaStatus{margin:10px 0;padding:9px 10px;border:1px solid rgba(255,255,255,.13);border-radius:10px;font-size:12px;opacity:.9}
+#qaReturnBtn{display:none;position:fixed;z-index:1250;right:10px;top:max(58px,calc(env(safe-area-inset-top) + 52px));padding:9px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(8,10,12,.88);color:#fff;font-weight:800;font-size:11px}
+#qaReturnBtn.show{display:block}
+@media(max-width:480px){.qaRealmGrid{grid-template-columns:1fr}.qaRealmGrid .btn{min-height:46px}}
+</style>
+<button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
+<div class="panel" id="scenarioTestPanel" style="display:none">
+  <div class="card">
+    <div class="eyebrow">TESTE MOBILE • MOBILE35</div>
+    <h2>Escolha o cenário</h2>
+    <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
+    <div class="qaJourneyRow">
+      <button class="btn primary active" id="scenarioJourney1" type="button">JORNADA 1</button>
+      <button class="btn secondary" id="scenarioJourney2" type="button">JORNADA 2</button>
+    </div>
+    <div class="qaStatus" id="qaLaunchStatus">CARREGANDO MOTOR 3D...</div>
+    <div class="qaRealmGrid">
+      <button class="btn secondary" data-scenario-test="0" type="button">1 • TERRAS DOS DRAGÕES</button>
+      <button class="btn secondary" data-scenario-test="1" type="button">2 • RUÍNAS DE KHARVOR</button>
+      <button class="btn secondary" data-scenario-test="2" type="button">3 • VALE DAS CINZAS</button>
+      <button class="btn secondary" data-scenario-test="3" type="button">4 • RUÍNAS DE VHALOR</button>
+      <button class="btn secondary" data-scenario-test="4" type="button">5 • FLORESTA DE NERIS</button>
+      <button class="btn secondary" data-scenario-test="5" type="button">6 • REINO CELESTIAL</button>
+    </div>
+    <div class="eyebrow" style="margin-top:14px">TRECHOS CRÍTICOS</div>
+    <div class="qaQuickGrid">
+      <button class="btn secondary" id="kharvorLowerQuick" type="button">KHARVOR • EMBAIXO DA PONTE</button>
+      <button class="btn secondary" id="nerisLowerQuick" type="button">NERIS • PONTE COBERTA</button>
+      <button class="btn secondary" id="vhalorFloodQuick" type="button">VHALOR • TÚNEL INUNDADO</button>
+    </div>
+    <div class="cardActions">
+      <button class="btn secondary" id="scenarioTestClose" type="button">VOLTAR AO MENU NORMAL</button>
+    </div>
+  </div>
+</div>
 <script src="max-realms-security.js"></script>
 <script>
 // MAX HEALMS MOBILE ENGINE LOADER 1.2 • LOCAL FIRST
@@ -270,7 +313,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE34 • MOBILE FIRST + DESCIDA DO RIO
+// MAX HEALMS MOBILE35 • MOBILE FIRST + DESCIDA DO RIO
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -357,7 +400,7 @@ function updateKharvorBridge(dt,progress){
  const sequenceRealm=isKharvor||isForest||isVhalor;
  if(!sequenceRealm){if(Math.abs(kharvorLayerY)>.01||forestUnderpassActive||vhalorFloodVisualActive)resetKharvorBridge();return}
  const total=realmTargetDistance(),riseStart=Math.max(700,total-500),lowerY=isForest?FOREST_LOWER_Y:KHARVOR_LOWER_Y;
- const holeFx=kharvorBreakFx; // MOBILE34: scripted collapse stays invisible until the instant of the fall.
+ const holeFx=kharvorBreakFx; // MOBILE35: scripted collapse stays invisible until the instant of the fall.
  if(isBridgeDropTransitionZone(progress)&&!bridgeDropSafetyCleared){bridgeDropSafetyCleared=true;clearBridgeDropApproach();spawnTimer=Math.max(spawnTimer,1.35)}
  if(holeFx)holeFx.visible=false;
  // Vhalor: queda aos 500 m e a parte inferior vira uma travessia fechada e inundada de canoa.
@@ -970,7 +1013,7 @@ function playVarekFootstep(){
  src.buffer=buf;const speedRatio=Math.max(0,Math.min(1,(speed-RUN_SPEED_BASE)/Math.max(.001,RUN_SPEED_MAX-RUN_SPEED_BASE)));
  src.playbackRate.value=.96+speedRatio*.13+(Math.random()-.5)*.035;g.gain.value=.105+(footstepIndex%2?-.008:.006);src.connect(g);g.connect(sfxMaster);src.start();
 }
-function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE34: sem passos contínuos durante a corrida
+function updateVarekFootsteps(dt){footstepTimer=0;return} // MOBILE35: sem passos contínuos durante a corrida
 function resetFootsteps(){footstepTimer=0}
 
 function getNoiseBuffer(){
@@ -1252,12 +1295,14 @@ function updateWeatherVisual(dt){
  if(UI.weatherFlash)UI.weatherFlash.style.opacity=String(weatherLightningAlpha);
 }
 const PC_QA_BUILD=false;
+const MOBILE_SCENARIO_TEST=new URLSearchParams(location.search).get('test')==='1';
+const QA_SCENARIO_MODE=PC_QA_BUILD||MOBILE_SCENARIO_TEST;
 let scenarioTestJourney=1;
 let qaEngineReady=false,qaPendingScenario=null,qaScenarioStarting=false;
 function qaSetStatus(msg){const el=$('qaLaunchStatus');if(el)el.textContent=msg}
 function qaMarkSelected(idx){document.querySelectorAll('[data-scenario-test]').forEach(b=>{const on=Number(b.dataset.scenarioTest)===Number(idx);b.classList.toggle('active',on);b.style.outline=on?'2px solid rgba(244,197,106,.85)':''})}
 
-function unlockAllPcQaScenarios(){if(!PC_QA_BUILD)return;document.querySelectorAll('[data-scenario-test],[data-scenario-link]').forEach((b,i)=>{b.disabled=false;b.removeAttribute('disabled');b.classList.remove('locked');b.style.opacity='1';b.style.pointerEvents='auto';b.style.filter='none';b.title='CENÁRIO '+(Number(i)+1)+' • LIBERADO PARA TESTE';if(!b.dataset.baseLabel)b.dataset.baseLabel=b.innerHTML});const j1=$('scenarioJourney1'),j2=$('scenarioJourney2');if(j1){j1.disabled=false;j1.removeAttribute('disabled')}if(j2){j2.disabled=false;j2.removeAttribute('disabled')}}
+function unlockAllPcQaScenarios(){if(!QA_SCENARIO_MODE)return;document.querySelectorAll('[data-scenario-test],[data-scenario-link]').forEach((b,i)=>{b.disabled=false;b.removeAttribute('disabled');b.classList.remove('locked');b.style.opacity='1';b.style.pointerEvents='auto';b.style.filter='none';b.title='CENÁRIO '+(Number(i)+1)+' • LIBERADO PARA TESTE';if(!b.dataset.baseLabel)b.dataset.baseLabel=b.innerHTML});const j1=$('scenarioJourney1'),j2=$('scenarioJourney2');if(j1){j1.disabled=false;j1.removeAttribute('disabled')}if(j2){j2.disabled=false;j2.removeAttribute('disabled')}}
 function openScenarioHub(){
  unlockAllPcQaScenarios();bindDirectQaScenarioButtons();paused=true;scenarioTestJourney=scenarioTestJourney===2?2:1;refreshScenarioJourneyButtons();
  UI.pausePanel?.classList.remove('show');UI.menu?.classList.add('hidden');UI.hud?.classList.remove('show');UI.pause?.classList.remove('show');
@@ -1270,7 +1315,7 @@ function returnToScenarioHub(){
  hunters.forEach(h=>{h.root.visible=false;if(h.action)h.action.paused=false});if(lyraRoot)lyraRoot.visible=false;
  UI.pausePanel?.classList.remove('show');UI.revivePanel?.classList.remove('show');UI.journeyEndPanel?.classList.remove('show');
  UI.hud?.classList.remove('show');UI.pause?.classList.remove('show');UI.menu?.classList.add('hidden');
- const q=$('qaReturnBtn');if(q)q.classList.remove('show');UI.scenarioTestPanel?.classList.add('show');playHero('Walking',.12);clock?.getDelta?.();
+ const q=$('qaReturnBtn');if(q)q.classList.remove('show');if(UI.scenarioTestPanel){UI.scenarioTestPanel.style.display='flex';UI.scenarioTestPanel.classList.add('show')}playHero('Walking',.12);clock?.getDelta?.();
 }
 async function launchScenarioTest(realmIdx,journey=scenarioTestJourney){
  const safeRealm=Math.max(0,Math.min(REALMS.length-1,Number(realmIdx)));
@@ -1468,6 +1513,8 @@ function init3D(){
      if(target){qaPendingScenario=null;await launchScenarioTest(target.realm,target.journey)}
      else{openScenarioHub();qaSetStatus('PRONTO • escolha qualquer um dos 6 reinos para iniciar o teste.')}
      setTimeout(()=>{if(!hunters.length)loadHunters().catch(err=>console.warn('CAÇADORAS EM SEGUNDO PLANO',err))},120);
+   }else if(MOBILE_SCENARIO_TEST){
+     openScenarioHub();qaSetStatus('PRONTO • escolha qualquer um dos 6 cenários para testar no celular.');
    }
  }).catch(err=>{console.error('MAX HEALMS INIT 3D',err);qaEngineReady=false;UI.loading.classList.add('hidden');UI.error.classList.add('show');const p=document.getElementById('engineErrorText')||UI.error.querySelector('p');if(p)p.textContent='O motor 3D carregou, mas ocorreu uma falha ao iniciar personagem/cenário: '+(err&&err.message?err.message:String(err));});
  requestAnimationFrame(loop);
@@ -1503,7 +1550,7 @@ function buildRoad(){
  const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
  const frRoofMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x302b23}):new THREE.MeshStandardMaterial({color:0x302b23,roughness:1}),frWallMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x40382b}):new THREE.MeshStandardMaterial({color:0x40382b,roughness:1}),frRootMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x5a4934}):new THREE.MeshStandardMaterial({color:0x5a4934,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x314b2d,transparent:true,opacity:.78});
- // MOBILE34 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
+ // MOBILE35 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
  const sigStone=new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
  const sigDark=new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
  const sigWood=new THREE.MeshStandardMaterial({color:0x4c3828,roughness:1});
@@ -1526,7 +1573,7 @@ function buildRoad(){
      }
    }
    for(const x of [-4.15,4.15]){const e=new THREE.Mesh(edgeGeo,edgeRoadMat);e.position.set(x,-.06,0);e.receiveShadow=!MOBILE_RUNNER;seg.add(e)}
-   // MOBILE34: ponte legível e bonita, mas com bem menos draw calls no celular.
+   // MOBILE35: ponte legível e bonita, mas com bem menos draw calls no celular.
    for(const side of [-1,1]){
      const x=side*4.36;
      const base=new THREE.Mesh(parapetBaseGeo,railStoneMat);base.position.set(x,.12,0);base.castShadow=shadowsOn;base.receiveShadow=!MOBILE_RUNNER;seg.add(base);
@@ -1557,9 +1604,9 @@ function buildRoad(){
      for(const y of [.72,1.10]){const rope=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,10.0,6),bridgeRopeMat);rope.position.set(side*4.28,y,0);rope.rotation.x=Math.PI/2;rope.castShadow=shadowsOn;bridgeDetail.add(rope)}
    }
    seg.add(bridgeDetail);bridgeDetailGroups.push(bridgeDetail);
-   // MOBILE34: sem listras repetitivas no chão. Faixas são sugeridas apenas por tons muito próximos.
+   // MOBILE35: sem listras repetitivas no chão. Faixas são sugeridas apenas por tons muito próximos.
    if(!MOBILE_RUNNER){const seamMat=new THREE.MeshStandardMaterial({color:0x5f5b4f,roughness:1});for(const x of [-1.125,1.125])for(let rz=0;rz<4;rz++){const seam=new THREE.Mesh(seamGeo,seamMat);seam.position.set(x,.015,(rz-1.5)*2.62);seg.add(seam)}}
-   // MOBILE34: identidade visual no mobile vem de tons da pista, background, clima e laterais.
+   // MOBILE35: identidade visual no mobile vem de tons da pista, background, clima e laterais.
    // Sem rachaduras/listras repetidas no chão para reduzir fadiga visual e draw calls.
    if(!MOBILE_RUNNER){
      if(cfg.id==='forest'){
@@ -1580,7 +1627,7 @@ function buildRoad(){
        for(let rz=0;rz<4;rz++){const gold=new THREE.Mesh(new THREE.BoxGeometry(.16,.02,2.14),new THREE.MeshBasicMaterial({color:0xf2cf77,transparent:true,opacity:.70}));gold.position.set(0,.03,(rz-1.5)*2.62);seg.add(gold)}
      }
    }
-   // MOBILE34 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
+   // MOBILE35 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
    if(s%(MOBILE_RUNNER?5:3)===0){
      const signature=new THREE.Group();signature.name='MR_PONTE_ASSINATURA_'+cfg.id;
      if(cfg.id==='vruins'){
@@ -2021,7 +2068,7 @@ function createGem(laneI,z){const mat=new THREE.MeshStandardMaterial({color:0x54
 function createStar(laneI,z){const shape=new THREE.Shape();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2===0?.38:.17;const x=Math.cos(a)*r,y=Math.sin(a)*r;i?shape.lineTo(x,y):shape.moveTo(x,y)}shape.closePath();const geo=new THREE.ExtrudeGeometry(shape,{depth:.10,bevelEnabled:true,bevelSize:.035,bevelThickness:.035,bevelSegments:1});geo.center();const m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xffd95b,emissive:0x9b6710,emissiveIntensity:.65,metalness:.12,roughness:.24}));m.position.set(LANE_X[laneI],1.12,z);m.userData={kind:'star',lane:laneI,collected:false};itemGroup.add(m);collectibles.push(m)}
 function createWater(laneI,z){const g=new THREE.Group(),glass=new THREE.MeshStandardMaterial({color:0x7bdcff,transparent:true,opacity:.72,roughness:.18,metalness:.05}),cap=new THREE.MeshStandardMaterial({color:0x2e6f84,roughness:.6});const b=new THREE.Mesh(new THREE.CylinderGeometry(.18,.22,.62,12),glass);b.position.y=.36;const c=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.12,12),cap);c.position.y=.73;g.add(b,c);g.position.set(LANE_X[laneI],.25,z);g.userData={kind:'water',lane:laneI,collected:false};itemGroup.add(g);collectibles.push(g)}
 function createHole(laneI,z){
- const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE34';
+ const g=new THREE.Group();g.name='MR_ABISMO_ORGANICO_MOBILE35';
  const cfg=REALMS[realmIndex]||REALMS[0],roadColor=cfg.road[1]||0x51483f,edgeColor=cfg.edge||0x3a342f;
  const voidMat=new THREE.MeshBasicMaterial({color:0x000000,side:THREE.DoubleSide,depthWrite:true});
  const wallMat=new THREE.MeshBasicMaterial({color:0x0a0908,side:THREE.DoubleSide});
@@ -2546,7 +2593,7 @@ if($('qaReturnBtn'))$('qaReturnBtn').onclick=()=>returnToScenarioHub();
 if($('pauseScenarioHub'))$('pauseScenarioHub').onclick=()=>returnToScenarioHub();
 
 if($('scenarioTest'))$('scenarioTest').onclick=()=>UI.scenarioTestPanel?.classList.add('show');
-if($('scenarioTestClose'))$('scenarioTestClose').onclick=()=>{if(UI.scenarioTestPanel){UI.scenarioTestPanel.classList.remove('show');UI.scenarioTestPanel.style.display=''}UI.menu?.classList.remove('hidden');paused=false;};
+if($('scenarioTestClose'))$('scenarioTestClose').onclick=()=>{if(UI.scenarioTestPanel){UI.scenarioTestPanel.classList.remove('show');UI.scenarioTestPanel.style.display='none'}const q=$('qaReturnBtn');if(q)q.classList.remove('show');weatherTestMode=false;weatherTestOverride=null;autoRealm=true;started=false;paused=false;gameOver=false;UI.hud?.classList.remove('show');UI.pause?.classList.remove('show');UI.menu?.classList.remove('hidden');playHero('Walking',.12);playMenuTheme();};
 function refreshQaRealmLinks(){
  document.querySelectorAll('[data-scenario-test]').forEach(btn=>{
    const idx=Number(btn.dataset.scenarioTest);
@@ -2564,7 +2611,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE34';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE35';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
