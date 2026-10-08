@@ -1,0 +1,9 @@
+{
+  "appId": "com.maxhealms.game",
+  "appName": "MAX HEALMS",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": false
+  }
+}
