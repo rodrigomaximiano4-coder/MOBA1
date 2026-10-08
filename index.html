@@ -225,7 +225,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE54</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE55</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -361,7 +361,7 @@ let postTobogganExitProgress=null,lastGuidanceRealm=-1,lastRankNoticeAt=0,realmD
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE54 • QA CENÁRIOS CORRIGIDO + RITMO TOBOGÃ
+// MAX HEALMS MOBILE55 • CARREGADOR QA RESILIENTE + FALLBACK DE CENÁRIOS
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -1464,7 +1464,7 @@ async function launchScenarioTest(realmIdx,journey=scenarioTestJourney){
  const qaBtn=$('qaReturnBtn');if(qaBtn)qaBtn.classList.add('show');
  UI.loading?.classList.remove('hidden');if(UI.loadingText)UI.loadingText.textContent='Abrindo '+REALMS[safeRealm].name+'...';
  try{
-   stopTheme(200);reset();weatherTestMode=true;weatherTestOverride=null;autoRealm=false;currentJourney=safeJourney;realmIndex=safeRealm;
+   stopTheme(200);try{reset()}catch(err){console.warn('QA RESET PARCIAL',err);clearItems();distance=0;realmStartDistance=0;gameOver=false;paused=false;started=false}weatherTestMode=true;weatherTestOverride=null;autoRealm=false;currentJourney=safeJourney;realmIndex=safeRealm;
    await loadRealm(safeRealm,true);
    // Proteção QA: nenhum fluxo da campanha pode devolver o teste ao reino 0.
    realmIndex=safeRealm;realmStartDistance=distance;autoRealm=false;weatherTestMode=true;
@@ -2328,19 +2328,68 @@ function updateHunters(dt){
  const activeHunters=hunters.filter(h=>h.minStage<=stage);if(huntersVisible&&huntersTimer<=0&&activeHunters.length&&activeHunters.every(h=>h.z>7.3)){huntersVisible=false;hunters.forEach(h=>{h.root.visible=false;h.z=h.restZ;h.targetZ=h.restZ;h.lanePos=1+h.baseLaneOffset})}
 }
 
+function buildQaSafeRoad(){
+ while(roadGroup.children.length){const old=roadGroup.children[0];roadGroup.remove(old);try{disposeObject(old)}catch(_){}}
+ roadSegments.length=0;bridgeDetailGroups.length=0;kharvorUpperBridgeGroups.length=0;forestClosedBridgeGroups.length=0;
+ const cfg=REALMS[realmIndex]||REALMS[0];
+ const base=new THREE.MeshBasicMaterial({color:(cfg.road&&cfg.road[0])||0x62584c});
+ const edge=new THREE.MeshBasicMaterial({color:cfg.edge||0x3f3a34});
+ const laneGeo=new THREE.BoxGeometry(2.52,.18,10.64),edgeGeoSafe=new THREE.BoxGeometry(.34,.28,10.64);
+ for(let i=0;i<11;i++){
+   const seg=new THREE.Group();seg.position.z=8-i*10.5;seg.userData.baseIndex=i;
+   for(let laneI=0;laneI<3;laneI++){const m=new THREE.Mesh(laneGeo,base);m.position.set(LANE_X[laneI],-.10,0);seg.add(m)}
+   for(const x of [-4.15,4.15]){const e=new THREE.Mesh(edgeGeoSafe,edge);e.position.set(x,-.06,0);seg.add(e)}
+   roadGroup.add(seg);roadSegments.push(seg)
+ }
+}
 async function loadRealm(index,initial=false){
- if(realmLoading)return;
- realmLoading=true;realmIndex=(index+REALMS.length)%REALMS.length;postTobogganExitProgress=null;lastGuidanceRealm=-1;realmDistanceNotices=new Set();const cfg=REALMS[realmIndex];
- UI.status3d.textContent='CARREGANDO';UI.loadingText.textContent='Carregando '+cfg.name+'...';if(!initial)toast('CARREGANDO '+cfg.short);
- while(sceneryGroup.children.length){const old=sceneryGroup.children.pop();disposeObject(old)}sceneryChunks.length=0;resetOpeningImpactVisuals();resetKharvorBridge();
- setRealmBackground(cfg)
- scene.fog.color.set(cfg.fog);scene.fog.near=currentJourney===2?Math.max(17,cfg.fogNear-4):cfg.fogNear;scene.fog.far=currentJourney===2?Math.max(78,cfg.fogFar-10):cfg.fogFar;if(skyGroup.children[0])skyGroup.children[0].visible=false;
- buildRoad();buildDecor();setWeatherForRealm(cfg);
- try{UI.realmName.textContent=cfg.short;UI.activeRealmStatus.textContent=cfg.name;UI.status3d.textContent='ATIVO';realmStartDistance=distance;updateRealmButtons();
- if(cfg.celestial){sun.color.set(0xffd28b);sun.intensity=currentJourney===2?1.88:1.75;hemi.color.set(0xfff2c7);hemi.groundColor.set(0x514934)}
- else if(cfg.id==='ember'||cfg.id==='vpath'||cfg.id==='vruins'){sun.color.set(currentJourney===2?0xff8050:0xff9b58);sun.intensity=currentJourney===2?1.62:1.45;hemi.color.set(0xe8b58a);hemi.groundColor.set(0x2b1010)}
- else{sun.color.set(0xffe1ad);sun.intensity=currentJourney===2?1.68:1.55;hemi.color.set(0xe9f5dc);hemi.groundColor.set(0x28352e)}
- setLyraJourneyState();if(started)startRealmMusic(cfg.id);if(!initial)toast(cfg.short+' • '+(REALM_NOVELTY[cfg.id]||'NOVO DESAFIO'))}finally{realmLoading=false}}
+ if(realmLoading)return false;
+ realmLoading=true;
+ let stage='INÍCIO';
+ try{
+   realmIndex=(index+REALMS.length)%REALMS.length;
+   postTobogganExitProgress=null;lastGuidanceRealm=-1;realmDistanceNotices=new Set();
+   const cfg=REALMS[realmIndex];if(!cfg)throw new Error('Reino inválido');
+   UI.status3d.textContent='CARREGANDO';UI.loadingText.textContent='Carregando '+cfg.name+'...';if(!initial)toast('CARREGANDO '+cfg.short);
+
+   stage='LIMPEZA';
+   while(sceneryGroup.children.length){const old=sceneryGroup.children.pop();try{disposeObject(old)}catch(err){console.warn('QA limpeza cenário',err)}}
+   sceneryChunks.length=0;resetOpeningImpactVisuals();resetKharvorBridge();
+
+   stage='FUNDO';
+   setRealmBackground(cfg);
+   scene.fog.color.set(cfg.fog);scene.fog.near=currentJourney===2?Math.max(17,cfg.fogNear-4):cfg.fogNear;scene.fog.far=currentJourney===2?Math.max(78,cfg.fogFar-10):cfg.fogFar;
+   if(skyGroup.children[0])skyGroup.children[0].visible=false;
+
+   stage='PISTA';
+   try{buildRoad()}
+   catch(err){
+     console.error('PISTA AVANÇADA FALHOU',cfg.id,err);
+     if(QA_SCENARIO_MODE){buildQaSafeRoad();qaSetStatus('MODO SEGURO • '+cfg.short+' • pista simplificada para continuar o teste')}
+     else throw err
+   }
+
+   stage='DECORAÇÃO';
+   try{buildDecor()}catch(err){console.error('DECORAÇÃO FALHOU',cfg.id,err);if(!QA_SCENARIO_MODE)throw err}
+
+   stage='CLIMA';
+   try{setWeatherForRealm(cfg)}catch(err){console.warn('CLIMA FALHOU',cfg.id,err);setWeatherMode('none');setAtmosphereMode('none')}
+
+   stage='FINALIZAÇÃO';
+   UI.realmName.textContent=cfg.short;UI.activeRealmStatus.textContent=cfg.name;UI.status3d.textContent='ATIVO';realmStartDistance=distance;updateRealmButtons();
+   if(cfg.celestial){sun.color.set(0xffd28b);sun.intensity=currentJourney===2?1.88:1.75;hemi.color.set(0xfff2c7);hemi.groundColor.set(0x514934)}
+   else if(cfg.id==='ember'||cfg.id==='vpath'||cfg.id==='vruins'){sun.color.set(currentJourney===2?0xff8050:0xff9b58);sun.intensity=currentJourney===2?1.62:1.45;hemi.color.set(0xe8b58a);hemi.groundColor.set(0x2b1010)}
+   else{sun.color.set(0xffe1ad);sun.intensity=currentJourney===2?1.68:1.55;hemi.color.set(0xe9f5dc);hemi.groundColor.set(0x28352e)}
+   setLyraJourneyState();if(started)startRealmMusic(cfg.id);if(!initial)toast(cfg.short+' • '+(REALM_NOVELTY[cfg.id]||'NOVO DESAFIO'));
+   return true;
+ }catch(err){
+   console.error('LOAD REALM FALHOU • '+stage,err);
+   if(QA_SCENARIO_MODE)qaSetStatus('ERRO • '+(REALMS[realmIndex]?.short||'REINO')+' • ETAPA '+stage+' • '+(err?.message||String(err)));
+   throw err;
+ }finally{
+   realmLoading=false;
+ }
+}
 
 function formatRealmKm(m){const km=m/1000;return (Number.isInteger(km)?String(km):km.toFixed(1).replace('.',','))+' km'}
 function playerRealmStatus(journey,pos){
@@ -2997,7 +3046,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE54';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE55';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
