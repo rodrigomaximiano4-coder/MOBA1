@@ -193,7 +193,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE37</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE38</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -328,7 +328,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE37 • MOBILE FIRST + DESCIDA DO RIO
+// MAX HEALMS MOBILE38 • MOBILE FIRST + PISTA CLARA CONTÍNUA
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -1596,18 +1596,20 @@ function makeStoneMaterial(color){return new THREE.MeshStandardMaterial({color,r
 function buildRoad(){
  while(roadGroup.children.length){const old=roadGroup.children[0];roadGroup.remove(old);disposeObject(old)}roadSegments.length=0;bridgeDetailGroups.length=0;kharvorUpperBridgeGroups.length=0;forestClosedBridgeGroups.length=0;if(renderer&&renderer.renderLists&&renderer.renderLists.dispose)renderer.renderLists.dispose();
  const cfg=REALMS[realmIndex];
- const bridgeDeckMat=new THREE.MeshStandardMaterial({color:0x433126,roughness:1,metalness:0,flatShading:true});
- const bridgeDeckAltMat=new THREE.MeshStandardMaterial({color:0x4d382a,roughness:1,metalness:0,flatShading:true});
- const bridgeDeckBaseMat=new THREE.MeshStandardMaterial({color:0x2d2119,roughness:1,metalness:0,flatShading:true});
+ const firstRealmMobile=MOBILE_RUNNER&&cfg.id==='vpath';
+ const bridgeDeckMat=new THREE.MeshStandardMaterial({color:firstRealmMobile?0x66594d:0x433126,roughness:1,metalness:0,flatShading:true});
+ const bridgeDeckAltMat=new THREE.MeshStandardMaterial({color:firstRealmMobile?0x6d6053:0x4d382a,roughness:1,metalness:0,flatShading:true});
+ const bridgeDeckBaseMat=new THREE.MeshStandardMaterial({color:firstRealmMobile?0x584d43:0x2d2119,roughness:1,metalness:0,flatShading:true});
  const bridgeDeckBaseGeo=new THREE.BoxGeometry(8.16,.075,9.92);
  const bridgeRopeMat=new THREE.MeshStandardMaterial({color:0x33261d,roughness:1,metalness:0});
  const bridgePostMat=new THREE.MeshStandardMaterial({color:0x493629,roughness:1,metalness:0,flatShading:true});
- const tileGeo=new THREE.BoxGeometry(2.45,.18,2.62),mobileLaneGeo=new THREE.BoxGeometry(2.52,.18,10.38),edgeGeo=new THREE.BoxGeometry(.34,.28,10.38),seamGeo=new THREE.BoxGeometry(.08,.035,2.46),parapetBaseGeo=new THREE.BoxGeometry(.40,.56,10.35),parapetCapGeo=new THREE.BoxGeometry(.56,.14,10.45),guardPostGeo=new THREE.BoxGeometry(.18,1.18,.18),guardRailGeo=new THREE.BoxGeometry(.12,.12,10.12),buttressGeo=new THREE.BoxGeometry(.30,1.68,.42),braceGeo=new THREE.BoxGeometry(.16,.58,.22);
+ const tileGeo=new THREE.BoxGeometry(2.45,.18,2.62),mobileLaneGeo=new THREE.BoxGeometry(2.52,.18,10.64),edgeGeo=new THREE.BoxGeometry(.34,.28,10.64),seamGeo=new THREE.BoxGeometry(.08,.035,2.46),parapetBaseGeo=new THREE.BoxGeometry(.40,.56,10.58),parapetCapGeo=new THREE.BoxGeometry(.56,.14,10.62),guardPostGeo=new THREE.BoxGeometry(.18,1.18,.18),guardRailGeo=new THREE.BoxGeometry(.12,.12,10.46),buttressGeo=new THREE.BoxGeometry(.30,1.68,.42),braceGeo=new THREE.BoxGeometry(.16,.58,.22);
  const railStoneMat=makeStoneMaterial(roundedColor(cfg.edge,.04));
  const railCapMat=makeStoneMaterial(roundedColor(cfg.road[0],.06));
- const edgeRoadMat=makeStoneMaterial(cfg.edge);
- const mobileBaseColor=new THREE.Color(cfg.road[0]);
- const mobileRoadMats=[-.018,0,.018].map((light,i)=>{const c=mobileBaseColor.clone();c.offsetHSL(0,(i===1?-.01:0),light);return new THREE.MeshStandardMaterial({color:c,roughness:.98,metalness:0,flatShading:true})});
+ const edgeRoadMat=makeStoneMaterial(firstRealmMobile?0x554b43:cfg.edge);
+ const mobileBaseColor=new THREE.Color(firstRealmMobile?0x756b60:cfg.road[0]);
+ const laneLight=firstRealmMobile?[-.006,0,.006]:[-.018,0,.018];
+ const mobileRoadMats=laneLight.map((light,i)=>{const c=mobileBaseColor.clone();c.offsetHSL(0,(firstRealmMobile?0:(i===1?-.01:0)),light);return new THREE.MeshStandardMaterial({color:c,roughness:1,metalness:0,flatShading:true})});
  const railWoodMat=new THREE.MeshStandardMaterial({color:0x7b6752,roughness:.9,metalness:.03});
  const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
@@ -1655,8 +1657,10 @@ function buildRoad(){
    const bridgeDetail=new THREE.Group();bridgeDetail.name='MR_OPENING_SWING_BRIDGE';bridgeDetail.visible=false;
    if(MOBILE_RUNNER){
      const deckBase=new THREE.Mesh(bridgeDeckBaseGeo,bridgeDeckBaseMat);deckBase.position.set(0,.092,0);deckBase.receiveShadow=false;bridgeDetail.add(deckBase);
-     const seamMat=new THREE.MeshBasicMaterial({color:0x211811});
-     for(const zLine of [-3.2,-1.1,1.1,3.2]){const seam=new THREE.Mesh(new THREE.BoxGeometry(8.02,.012,.045),seamMat);seam.position.set(0,.134,zLine);bridgeDetail.add(seam)}
+     if(cfg.id!=='vpath'){
+       const seamMat=new THREE.MeshBasicMaterial({color:0x211811});
+       for(const zLine of [-3.2,-1.1,1.1,3.2]){const seam=new THREE.Mesh(new THREE.BoxGeometry(8.02,.012,.045),seamMat);seam.position.set(0,.134,zLine);bridgeDetail.add(seam)}
+     }
    }else{
      for(let pz=-4.75,i=0,step=.68;pz<=4.75;pz+=step,i++){const plank=new THREE.Mesh(new THREE.BoxGeometry(8.15,.10,.54),i%2?bridgeDeckMat:bridgeDeckAltMat);plank.position.set(0,.108,pz);plank.rotation.y=(i%3-1)*.004;plank.userData.bridgePlank=true;plank.userData.bridgePhase=i*.43+s*.17;plank.castShadow=shadowsOn;plank.receiveShadow=true;bridgeDetail.add(plank)}
    }
@@ -1666,9 +1670,9 @@ function buildRoad(){
      for(const y of [.72,1.10]){const rope=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,10.0,6),bridgeRopeMat);rope.position.set(side*4.28,y,0);rope.rotation.x=Math.PI/2;rope.castShadow=shadowsOn;bridgeDetail.add(rope)}
    }
    seg.add(bridgeDetail);bridgeDetailGroups.push(bridgeDetail);
-   // MOBILE37: sem listras repetitivas no chão. Faixas são sugeridas apenas por tons muito próximos.
+   // MOBILE38: piso contínuo no celular. Em Terras dos Dragões as faixas usam quase o mesmo tom e os segmentos se sobrepõem levemente para esconder emendas.
    if(!MOBILE_RUNNER){const seamMat=new THREE.MeshStandardMaterial({color:0x5f5b4f,roughness:1});for(const x of [-1.125,1.125])for(let rz=0;rz<4;rz++){const seam=new THREE.Mesh(seamGeo,seamMat);seam.position.set(x,.015,(rz-1.5)*2.62);seg.add(seam)}}
-   // MOBILE37: identidade visual no mobile vem de tons da pista, background, clima e laterais.
+   // MOBILE38: identidade visual no mobile vem de tons foscos da pista, background, clima e laterais.
    // Sem rachaduras/listras repetidas no chão para reduzir fadiga visual e draw calls.
    if(!MOBILE_RUNNER){
      if(cfg.id==='forest'){
@@ -1689,7 +1693,7 @@ function buildRoad(){
        for(let rz=0;rz<4;rz++){const gold=new THREE.Mesh(new THREE.BoxGeometry(.16,.02,2.14),new THREE.MeshBasicMaterial({color:0xf2cf77,transparent:true,opacity:.70}));gold.position.set(0,.03,(rz-1.5)*2.62);seg.add(gold)}
      }
    }
-   // MOBILE37 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
+   // MOBILE38 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
    if(s%(MOBILE_RUNNER?5:3)===0){
      const signature=new THREE.Group();signature.name='MR_PONTE_ASSINATURA_'+cfg.id;
      if(cfg.id==='vruins'){
