@@ -226,7 +226,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE82</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE83</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -1243,13 +1243,30 @@ async function renderOutfitThumb(canvasId,outfitId,rotationY=Math.PI){
  try{
    const cfg=HERO_OUTFITS[outfitId]||HERO_OUTFITS.outfit_varek_original,src=cfg.mode==='varek'?ASSETS.varek:ASSETS[cfg.run];if(!src)throw new Error('asset do visual não encontrado');
    const gltf=await loadGLTFAsset(src),ps=new THREE.Scene(),renderW=MOBILE_RUNNER?240:(canvas.width||360),renderH=MOBILE_RUNNER?280:(canvas.height||340),aspect=renderW/renderH,pc=new THREE.PerspectiveCamera(30,aspect,.01,50);
-   const r=new THREE.WebGLRenderer({canvas,alpha:true,antialias:!MOBILE_RUNNER,preserveDrawingBuffer:false,powerPreference:'low-power'});r.setPixelRatio(1);r.setSize(renderW,renderH,false);r.outputEncoding=THREE.sRGBEncoding;
-   ps.add(new THREE.HemisphereLight(0xf2fbf7,0x111719,1.85));const key=new THREE.DirectionalLight(0xffdfae,1.9);key.position.set(2.7,4.5,4);ps.add(key);const fill=new THREE.DirectionalLight(0x8fc9ff,1.0);fill.position.set(-3,2.2,2);ps.add(fill);const rim=new THREE.DirectionalLight(0xffffff,.55);rim.position.set(0,3,-4);ps.add(rim);
+   const tmp=document.createElement('canvas');tmp.width=renderW;tmp.height=renderH;
+   const r=new THREE.WebGLRenderer({canvas:tmp,alpha:true,antialias:!MOBILE_RUNNER,preserveDrawingBuffer:true,powerPreference:'low-power'});
+   r.setPixelRatio(1);r.setSize(renderW,renderH,false);r.outputEncoding=THREE.sRGBEncoding;
+   ps.add(new THREE.HemisphereLight(0xf2fbf7,0x111719,1.85));
+   const key=new THREE.DirectionalLight(0xffdfae,1.9);key.position.set(2.7,4.5,4);ps.add(key);
+   const fill=new THREE.DirectionalLight(0x8fc9ff,1.0);fill.position.set(-3,2.2,2);ps.add(fill);
+   const rim=new THREE.DirectionalLight(0xffffff,.55);rim.position.set(0,3,-4);ps.add(rim);
    const model=cloneModelScene(gltf.scene);setSRGB(model);applyOutfitStyle(model,cfg);model.rotation.y=rotationY;model.updateMatrixWorld(true);
-   let box=new THREE.Box3().setFromObject(model),size=box.getSize(new THREE.Vector3());const scale=2.25/Math.max(.001,size.y);model.scale.setScalar(scale);model.updateMatrixWorld(true);box=new THREE.Box3().setFromObject(model);const center=box.getCenter(new THREE.Vector3());model.position.x-=center.x;model.position.y-=box.min.y;model.position.z-=center.z;model.updateMatrixWorld(true);box=new THREE.Box3().setFromObject(model);size=box.getSize(new THREE.Vector3());
-   const cy=(box.min.y+box.max.y)/2,half=Math.max(size.y*.58,size.x*.60,.8),fov=THREE.MathUtils.degToRad(pc.fov),dist=half/Math.tan(fov/2)*1.16;pc.position.set(0,cy,dist);pc.lookAt(0,cy,0);pc.near=Math.max(.01,dist-size.z*2);pc.far=dist+size.z*4+10;pc.updateProjectionMatrix();ps.add(model);
-   r.render(ps,pc);canvas.dataset.ready='1';canvas.dataset.loading='';if(r.renderLists&&r.renderLists.dispose)r.renderLists.dispose();r.dispose();if(r.forceContextLoss)r.forceContextLoss();return true;
- }catch(e){console.warn('LOJA PREVIEW',canvasId,e);canvas.dataset.loading='';canvas.dataset.error='1';return false}
+   let box=new THREE.Box3().setFromObject(model),size=box.getSize(new THREE.Vector3());const scale=2.25/Math.max(.001,size.y);model.scale.setScalar(scale);model.updateMatrixWorld(true);
+   box=new THREE.Box3().setFromObject(model);const center=box.getCenter(new THREE.Vector3());model.position.x-=center.x;model.position.y-=box.min.y;model.position.z-=center.z;model.updateMatrixWorld(true);
+   box=new THREE.Box3().setFromObject(model);size=box.getSize(new THREE.Vector3());
+   const cy=(box.min.y+box.max.y)/2,half=Math.max(size.y*.58,size.x*.60,.8),fov=THREE.MathUtils.degToRad(pc.fov),dist=half/Math.tan(fov/2)*1.16;
+   pc.position.set(0,cy,dist);pc.lookAt(0,cy,0);pc.near=Math.max(.01,dist-size.z*2);pc.far=dist+size.z*4+10;pc.updateProjectionMatrix();ps.add(model);
+   r.render(ps,pc);
+   const ctx=canvas.getContext('2d',{alpha:true});if(!ctx)throw new Error('canvas 2D indisponível');
+   canvas.width=renderW;canvas.height=renderH;ctx.clearRect(0,0,renderW,renderH);ctx.drawImage(tmp,0,0,renderW,renderH);
+   canvas.dataset.ready='1';canvas.dataset.loading='';canvas.dataset.error='';
+   if(r.renderLists&&r.renderLists.dispose)r.renderLists.dispose();r.dispose();if(r.forceContextLoss)r.forceContextLoss();
+   return true;
+ }catch(e){
+   console.warn('LOJA PREVIEW',canvasId,e);canvas.dataset.loading='';canvas.dataset.error='1';
+   try{const ctx=canvas.getContext('2d');if(ctx){const w=canvas.width||240,h=canvas.height||280;ctx.clearRect(0,0,w,h);ctx.fillStyle='rgba(12,17,20,.92)';ctx.fillRect(0,0,w,h);ctx.fillStyle='#f4c56a';ctx.textAlign='center';ctx.font='700 14px sans-serif';ctx.fillText((HERO_OUTFITS[outfitId]?.label||'VAREK'),w/2,h/2-4);ctx.fillStyle='rgba(255,255,255,.72)';ctx.font='11px sans-serif';ctx.fillText('3D',w/2,h/2+18)}}catch(_){}
+   return false
+ }
 }
 async function ensureOutfitPreviews(){
  const queue=[
@@ -2030,7 +2047,7 @@ function init3D(){
    // Isto elimina a corrida que fazia qualquer botão voltar para TERRAS DOS DRAGÕES.
    if(!QA_SCENARIO_MODE)await loadRealm(0,true);
    qaEngineReady=true;
-   void applyEquipment();UI.loading.classList.add('hidden');UI.status3d.textContent='ATIVO';playHero('Walking',0);refreshMenuStats();renderUpgrades();renderProfile();renderRanking();render();
+   void applyEquipment();UI.loading.classList.add('hidden');UI.status3d.textContent='ATIVO';playHero('Walking',0);refreshMenuStats();renderUpgrades();renderProfile();renderRanking();render();setTimeout(()=>{void ensureOutfitPreviews()},120);
    if(FRESH_LAUNCH_ONCE&&!QA_SCENARIO_MODE){
      started=false;paused=false;gameOver=false;currentJourney=1;realmIndex=JOURNEY1_ORDER[0];
      UI.menu?.classList.remove('hidden');UI.hud?.classList.remove('show');UI.pause?.classList.remove('show');
@@ -3410,7 +3427,7 @@ if($('settingsMusicVolume'))$('settingsMusicVolume').oninput=e=>saveAudioSetting
 $('story').onclick=openStoryMedia;$('storyClose').onclick=closeStoryMedia;$('storySkip').onclick=closeStoryMedia;$('storyFullBtn').onclick=()=>setStoryMedia('story',true);$('storyTrailerBtn').onclick=()=>setStoryMedia('trailer',true);
 $('upgrades').onclick=()=>{renderUpgrades();UI.upgradePanel.classList.add('show')};$('upgradeClose').onclick=()=>UI.upgradePanel.classList.remove('show');
 $('profile').onclick=()=>{pendingJourneyStart=null;renderProfile();UI.profilePanel.classList.add('show')};$('profileClose').onclick=()=>{pendingJourneyStart=null;UI.profilePanel.classList.remove('show')};$('profileSave').onclick=completeProfileSave;$('accountCreate').onclick=()=>void createPlayerAccount();$('accountSignIn').onclick=()=>void signInPlayerAccount();$('accountGuest').onclick=()=>void useGuestMode();$('accountSignOut').onclick=()=>void signOutPlayerAccount();$('accountPrivacyLink').onclick=()=>openExternalResource('privacy');
-$('characterShop').onclick=()=>{renderShop();setCommerceStatus('');UI.shopPanel.classList.add('show');void syncPlayStorePrices()};$('shopClose').onclick=()=>UI.shopPanel.classList.remove('show');
+$('characterShop').onclick=()=>{renderShop();setCommerceStatus('');UI.shopPanel.classList.add('show');setTimeout(()=>{void ensureOutfitPreviews()},60);void syncPlayStorePrices()};$('shopClose').onclick=()=>UI.shopPanel.classList.remove('show');
 $('diamondShop').onclick=()=>{renderShop();setCommerceStatus('');UI.diamondShopPanel.classList.add('show');void syncPlayStorePrices()};$('diamondShopClose').onclick=()=>UI.diamondShopPanel.classList.remove('show');
 if($('buyPremium'))$('buyPremium').onclick=()=>purchaseCashProduct(PLAY_STORE_CONFIG.premiumSku);if($('revivePremium'))$('revivePremium').onclick=()=>purchaseCashProduct(PLAY_STORE_CONFIG.premiumSku);if($('restorePurchasesDiamonds'))$('restorePurchasesDiamonds').onclick=restoreCommercePurchases;
 function handleStoreInteraction(e){const ob=e.target.closest('[data-buy-outfit]');if(ob){e.preventDefault();e.stopPropagation();void buyOrEquipOutfit(ob.dataset.buyOutfit);return}const pb=e.target.closest('[data-premium-outfit]');if(pb){e.preventDefault();const id=pb.dataset.premiumOutfit;if(ownsOutfit(id))void buyOrEquipOutfit(id);else void purchaseCashProduct(PLAY_STORE_CONFIG.premiumSku);return}const db=e.target.closest('[data-buy-diamonds]');if(db){e.preventDefault();void purchaseCashProduct(db.dataset.buyDiamonds)}}
@@ -3444,7 +3461,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE82';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE83';
  settingsFromSave();applyAudioSettings();refreshMenuStats();applyLanguage(gameLanguage,false);renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
