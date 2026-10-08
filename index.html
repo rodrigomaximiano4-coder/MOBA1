@@ -225,7 +225,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE55</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE56</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -342,7 +342,7 @@ const LOW_END_MOBILE=MOBILE_RUNNER&&(DEVICE_MEMORY<=3||HARDWARE_THREADS<=4);
 const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.78:.94,MOBILE_PIXEL_RATIO_MIN=LOW_END_MOBILE?.66:.76;
 const TARGET_PIXEL_RATIO=MOBILE_RUNNER?MOBILE_PIXEL_RATIO_MAX:1.4;
 let mobilePixelRatioCurrent=TARGET_PIXEL_RATIO,mobilePerfLowSamples=0,mobilePerfHighSamples=0,mobilePerfLastAdjust=0;
-const RUN_SPEED_BASE=MOBILE_RUNNER?34.8:20.2;
+const RUN_SPEED_BASE=MOBILE_RUNNER?36.0:20.2;
 const RUN_SPEED_MAX=MOBILE_RUNNER?40.0:34.0;
 let distance=0,lives=3,water=100,speed=RUN_SPEED_BASE,targetLane=0,lane=0,jumpY=0,jumpV=0,slideTimer=0,slideCooldown=0,hitCooldown=0;
 let runStars=0,runGems=0,elapsed=0,timePenalty=0,shieldCharges=0;
@@ -361,7 +361,7 @@ let postTobogganExitProgress=null,lastGuidanceRealm=-1,lastRankNoticeAt=0,realmD
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE55 • CARREGADOR QA RESILIENTE + FALLBACK DE CENÁRIOS
+// MAX HEALMS MOBILE56 • VELOCIDADE BASE 36 + LARGADA 40
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -1643,24 +1643,23 @@ function mobileRhythmSpeed(progress){
  if(!MOBILE_RUNNER)return Math.min(RUN_SPEED_MAX,RUN_SPEED_BASE+distance/220);
  const p=Math.max(0,progress||0),id=REALMS[realmIndex]?.id;
  let target;
- // MOBILE52: começo rápido. Após uma descida, a saída continua rápida,
- // depois 500 m médios; então alterna blocos rápidos e médios.
+ // MOBILE56: base 36, médio 35, máximo 40, largada em 40.
  if(postTobogganExitProgress!=null&&p>=postTobogganExitProgress){
    const d=p-postTobogganExitProgress;
-   if(d<180)target=38.8;
+   if(d<180)target=40.0;
    else{
      const phase=(d-180)%900;
-     target=phase<500?33.4:38.2;
+     target=phase<500?35.0:39.0;
    }
  }else{
-   if(p<420)target=38.8;
+   if(p<420)target=40.0;
    else{
      const phase=(p-420)%900;
-     target=phase<500?33.6:38.0;
+     target=phase<500?35.0:39.0;
    }
  }
- if(id==='forest')target=Math.max(target,target<35?34.2:target);
- if(id==='celestial')target=Math.max(34.2,Math.min(target,38.0));
+ if(id==='forest')target=Math.max(target,35.5);
+ if(id==='celestial')target=Math.max(35.0,Math.min(target,39.5));
  return Math.min(RUN_SPEED_MAX,target);
 }
 
@@ -3046,7 +3045,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE55';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE56';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
