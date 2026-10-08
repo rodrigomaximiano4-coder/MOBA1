@@ -193,7 +193,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE39</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE40</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -328,7 +328,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE39 • TÚNEIS COM SAÍDA E RETORNO DE NÍVEL
+// MAX HEALMS MOBILE40 • REVITALIZAÇÃO MOBILE
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -467,7 +467,7 @@ function updateKharvorBridge(dt,progress){
  }
 }
 let weatherAudioSource=null,weatherAudioFilter=null,weatherAudioGain=null,weatherAudioMode='none';
-const REALM_WEATHER={vruins:'extremeRain',forest:'drizzle',celestial:'strongWind'};
+const REALM_WEATHER={vpath:'strongWind',vruins:'extremeRain',forest:'drizzle',celestial:'strongWind'};
 const REALM_ATMOSPHERE={ember:'volcanicAsh',ruins:'ruinDust',forest:'fallingLeaves'};
 let footstepBuffers=[],footstepLoadPromise=null,footstepTimer=0,footstepIndex=0;
 const FOOTSTEP_SRCS=['step-01.mp3','step-02.mp3','step-03.mp3','step-04.mp3','step-05.mp3','step-06.mp3'];
@@ -1553,7 +1553,7 @@ function roundedColor(hex,f=.12){const c=new THREE.Color(hex);c.offsetHSL((Math.
 function curveFactor(z){return Math.pow(Math.max(0,Math.min(1,-z/95)),1.28)}
 function trackCurveX(z){const f=curveFactor(z);return curveStrength*7.4*f*f*(.82+.18*Math.cos((-z)*.055))}
 function trackCurveYaw(z){const f=curveFactor(z);return -curveStrength*.19*f}
-function updateCurve(dt){curveTimer-=dt;if(curveTimer<=0){const choices=[-1,-.78,-.52,.48,.75,1];curveTarget=choices[Math.floor(Math.random()*choices.length)];curveTimer=2.7+Math.random()*3.4}curveStrength+=(curveTarget-curveStrength)*Math.min(1,dt*.42)}
+function updateCurve(dt){curveTimer-=dt;if(curveTimer<=0){const choices=MOBILE_RUNNER?[-.88,-.64,-.42,.42,.64,.88]:[-1,-.78,-.52,.48,.75,1];curveTarget=choices[Math.floor(Math.random()*choices.length)];curveTimer=(MOBILE_RUNNER?2.35:2.7)+Math.random()*(MOBILE_RUNNER?2.65:3.4)}curveStrength+=(curveTarget-curveStrength)*Math.min(1,dt*(MOBILE_RUNNER?.50:.42))}
 function effortBurst(label='ESFORÇO'){effortTimer=.55;if(UI.effortPulse){UI.effortPulse.textContent=label;UI.effortPulse.classList.add('show')}}
 function updateHydrationWarnings(){if(water<=0)return;if(water<15&&hydrationBand!==0){hydrationBand=0;toast('DESIDRATAÇÃO GRAVE • PROCURE ÁGUA OU ABRIGO')}else if(water<35&&hydrationBand>1){hydrationBand=1;toast('SEDE • HIDRATAÇÃO ABAIXO DE 35%')}else if(water>=35&&hydrationBand<2){hydrationBand=2}}
 
@@ -1623,7 +1623,7 @@ function buildRoad(){
  const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
  const frRoofMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x302b23}):new THREE.MeshStandardMaterial({color:0x302b23,roughness:1}),frWallMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x40382b}):new THREE.MeshStandardMaterial({color:0x40382b,roughness:1}),frRootMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x5a4934}):new THREE.MeshStandardMaterial({color:0x5a4934,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x314b2d,transparent:true,opacity:.78});
- // MOBILE37 • assinatura visual das pontes: poucos elementos, grandes silhuetas e luz de horizonte.
+ // MOBILE40 • assinatura visual das pontes: poucos elementos, grandes silhuetas e leitura forte no celular.
  const sigStone=new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
  const sigDark=new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
  const sigWood=new THREE.MeshStandardMaterial({color:0x4c3828,roughness:1});
@@ -1639,6 +1639,11 @@ function buildRoad(){
    const seg=new THREE.Group();seg.position.z=8-s*10.5;seg.userData.baseIndex=s;
    if(MOBILE_RUNNER){
      for(let laneI=0;laneI<3;laneI++){const laneDeck=new THREE.Mesh(mobileLaneGeo,mobileRoadMats[laneI]);laneDeck.position.set(LANE_X[laneI],-.10,0);laneDeck.receiveShadow=false;seg.add(laneDeck)}
+     if(cfg.id==='celestial'){
+       // MOBILE40: energia celestial integrada à ponte, sem objetos soltos fora dela.
+       const celestialEdgeMat=new THREE.MeshBasicMaterial({color:0xf6d98a,transparent:true,opacity:.23,depthWrite:false});
+       for(const side of [-1,1]){const glow=new THREE.Mesh(new THREE.BoxGeometry(.08,.025,10.46),celestialEdgeMat);glow.position.set(side*3.98,.045,0);seg.add(glow)}
+     }
    }else{
      for(let rz=0;rz<4;rz++)for(let laneI=0;laneI<3;laneI++){
        const col=cfg.road[(s+rz+laneI)%cfg.road.length];const tile=new THREE.Mesh(tileGeo,makeStoneMaterial(roundedColor(col,.07)));
@@ -1702,8 +1707,10 @@ function buildRoad(){
        for(let rz=0;rz<4;rz++){const gold=new THREE.Mesh(new THREE.BoxGeometry(.16,.02,2.14),new THREE.MeshBasicMaterial({color:0xf2cf77,transparent:true,opacity:.70}));gold.position.set(0,.03,(rz-1.5)*2.62);seg.add(gold)}
      }
    }
-   // MOBILE38 • monumentos laterais ficam fora das três faixas e criam identidade por reino.
-   if(s%(MOBILE_RUNNER?5:3)===0){
+   // MOBILE40 • revitalização mobile: poucos marcos grandes nas laterais, nunca dentro das três faixas.
+   // No celular aparecem um pouco mais vezes para reforçar velocidade e identidade sem voltar a poluir o piso.
+   const signatureStep=MOBILE_RUNNER?(cfg.id==='celestial'?999:4):3;
+   if(s%signatureStep===0){
      const signature=new THREE.Group();signature.name='MR_PONTE_ASSINATURA_'+cfg.id;
      if(cfg.id==='vruins'){
        for(const side of [-1,1]){
@@ -1730,9 +1737,13 @@ function buildRoad(){
          const fissure=new THREE.Mesh(new THREE.BoxGeometry(.08,2.7,.12),sigWarmGlow);fissure.position.set(side*5.72,2.1,.12);fissure.rotation.z=side*.08;signature.add(fissure);
        }
      }else if(cfg.id==='celestial'){
-       for(const side of [-1,1]){
-         const shard=new THREE.Mesh(sigShardGeo,sigStone);shard.scale.set(1.35,3.3,1.0);shard.position.set(side*6.0,2.8,0);shard.rotation.set(.2,side*.35,.18);signature.add(shard);
-         const halo=new THREE.Mesh(new THREE.TorusGeometry(.72,.055,6,22),sigGoldGlow);halo.position.set(side*6.0,4.15,0);halo.rotation.x=Math.PI/2;signature.add(halo);
+       // MOBILE40: Celestial limpo no celular. Sem cristais/halos externos que não estavam ornando.
+       // A identidade fica no céu, vento e acabamento dourado da própria ponte.
+       if(!MOBILE_RUNNER){
+         for(const side of [-1,1]){
+           const shard=new THREE.Mesh(sigShardGeo,sigStone);shard.scale.set(1.05,2.4,.85);shard.position.set(side*6.0,2.4,0);shard.rotation.set(.16,side*.28,.12);signature.add(shard);
+           const halo=new THREE.Mesh(new THREE.TorusGeometry(.62,.045,6,20),sigGoldGlow);halo.position.set(side*6.0,3.75,0);halo.rotation.x=Math.PI/2;signature.add(halo);
+         }
        }
      }else if(cfg.id==='vpath'){
        for(const side of [-1,1]){
