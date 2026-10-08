@@ -125,6 +125,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 .j1ResultGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}
 .j1ResultGrid span{display:flex;flex-direction:column;gap:3px;padding:8px 5px;border-radius:9px;background:rgba(255,255,255,.04);font-size:8px;color:#9fb0aa;text-align:center}
 .j1ResultGrid b{font-size:12px;color:#fff}
+#journeyEndPanel{z-index:1320!important}#journeyEndPanel.show{display:flex!important}
 @media(max-width:520px){.j1ResultGrid{grid-template-columns:repeat(2,1fr)}#journeyEndPanel .card{max-height:92vh;overflow:auto}}
 
 /* ===== MOBILE43 • PRÉ-STORE COMPACTA ===== */
@@ -224,7 +225,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE52</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE53</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -360,7 +361,7 @@ let postTobogganExitProgress=null,lastGuidanceRealm=-1,lastRankNoticeAt=0,realmD
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE52 • RITMO DINÂMICO + AVISOS DE RANKING + JANGADA FORTE
+// MAX HEALMS MOBILE53 • FINAL J1 UNIFICADO + RESULTADO VISÍVEL
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -550,32 +551,38 @@ async function advanceJourneyRealm(){
  if(pos<order.length-1){showRealmCheckpoint(pos,order[pos+1]);return}
  finishJourney()
 }
+function showJourney1ResultPanel(r,isTest=false){
+ const result=r||{distance:distance,finalTime:elapsed+timePenalty,score:runScore(),rank:previewRunRank()};
+ const rawTime=Math.max(0,(result.finalTime||0)-timePenalty);
+ UI.journeyEndEyebrow.textContent='JORNADA 1 • A FUGA CONCLUÍDA';
+ UI.journeyEndTitle.textContent='Lyra foi sequestrada';
+ UI.journeyEndText.innerHTML=
+   '<div class="j1StoryBeat"><b>REENCONTRO</b><br>Depois de atravessar os seis reinos, Varek alcança a fronteira e reencontra sua esposa e Lyra.</div>'+
+   '<div class="j1ResultGrid">'+
+     '<span>DISTÂNCIA<b>'+Math.floor(result.distance||distance)+' m</b></span>'+
+     '<span>TEMPO BRUTO<b>'+fmtTime(rawTime)+'</b></span>'+
+     '<span>PENALIDADES<b>+'+fmtTime(timePenalty)+'</b></span>'+
+     '<span>TEMPO FINAL<b>'+fmtTime(result.finalTime||0)+'</b></span>'+
+     '<span>PONTOS<b>'+(result.score||runScore())+'</b></span>'+
+     '<span>POSIÇÃO<b>#'+Math.max(1,result.rank||1)+'</b></span>'+
+     '<span>ESTRELAS<b>⭐ '+runStars+'</b></span>'+
+     '<span>DIAMANTES<b>💎 '+runGems+'</b></span>'+
+   '</div>'+
+   '<div class="j1Twist"><b>LYRA FOI SEQUESTRADA.</b><br>Serya invade a fronteira, captura Lyra e foge com ela através de um portal. Varek vê a filha ser levada e decide persegui-la.</div>'+
+   '<div class="j1HunterTurn">⚔ <b>O CAÇADO VIROU CAÇADOR.</b><br>A FUGA TERMINOU. A CAÇADA COMEÇA.</div>'+
+   '<div class="j1Unlock">✓ JORNADA 2 DESBLOQUEADA • O RESGATE</div>';
+ const next=$('journeyNext'),menu=$('journeyMenu');
+ if(next){next.textContent=isTest?'↻ REVER FINAL JORNADA 1':'⚔ INICIAR JORNADA 2 • O RESGATE'}
+ if(menu&&isTest)menu.textContent='🧪 VOLTAR AOS CENÁRIOS';
+ UI.journeyEndPanel.classList.add('show');playSFX('finalChime')
+}
 function finishJourney(){
  if(journeyRunFinished||endlessMode)return;journeyRunFinished=true;paused=true;huntersVisible=false;hunters.forEach(h=>{if(h.action)h.action.paused=true;h.root.visible=false});const r=recordRun();
  if(currentJourney===1){
    SAVE.journey2Unlocked=true;SAVE.j1Checkpoint=0;saveState();playThemeMoment(7,7200,.135);
    UI.journeyEndPanel.classList.remove('show');
    showFamilyScene('j1final').catch(err=>console.warn('Cena final J1',err));
-   UI.journeyEndEyebrow.textContent='JORNADA 1 • A FUGA CONCLUÍDA';
-   UI.journeyEndTitle.textContent='Varek encontrou sua família';
-   const rawTime=Math.max(0,(r.finalTime||0)-timePenalty);
-   UI.journeyEndText.innerHTML=
-     '<div class="j1StoryBeat"><b>REENCONTRO</b><br>Depois de atravessar os seis reinos, Varek finalmente alcança a fronteira e reencontra sua esposa e Lyra.</div>'+
-     '<div class="j1ResultGrid">'+
-       '<span>DISTÂNCIA<b>'+Math.floor(r.distance||distance)+' m</b></span>'+
-       '<span>TEMPO BRUTO<b>'+fmtTime(rawTime)+'</b></span>'+
-       '<span>PENALIDADES<b>+'+fmtTime(timePenalty)+'</b></span>'+
-       '<span>TEMPO FINAL<b>'+fmtTime(r.finalTime||0)+'</b></span>'+
-       '<span>PONTOS<b>'+(r.score||runScore())+'</b></span>'+
-       '<span>POSIÇÃO<b>#'+Math.max(1,r.rank||1)+'</b></span>'+
-       '<span>ESTRELAS<b>⭐ '+runStars+'</b></span>'+
-       '<span>DIAMANTES<b>💎 '+runGems+'</b></span>'+
-     '</div>'+
-     '<div class="j1Twist"><b>LYRA FOI SEQUESTRADA.</b><br>Quando a família finalmente se reencontra, Serya invade a fronteira, captura Lyra e desaparece com ela através de um portal. Varek vê a filha ser levada e decide persegui-la.</div>'+
-     '<div class="j1HunterTurn">⚔ <b>O CAÇADO VIROU CAÇADOR.</b><br>A FUGA TERMINOU. A CAÇADA COMEÇA.</div>'+
-     '<div class="j1Unlock">✓ JORNADA 2 DESBLOQUEADA • O RESGATE</div>';
-   $('journeyNext').textContent='⚔ INICIAR JORNADA 2 • O RESGATE';
-   setTimeout(()=>{if(journeyRunFinished&&currentJourney===1){UI.journeyEndPanel.classList.add('show');playSFX('finalChime')}},5200)
+   setTimeout(()=>{if(journeyRunFinished&&currentJourney===1)showJourney1ResultPanel(r,false)},5000)
  }
  else{SAVE.j2Checkpoint=0;saveState();showFinalArrival(r,false).catch(err=>console.warn('FRONTEIRA FINAL',err))}
  refreshJourneyMenu()
@@ -1511,7 +1518,16 @@ async function startFinalSceneTest(mode){
    if(!hunters.length)await loadHunters();if(!lyraRoot)await loadLyra();await loadWife();currentJourney=mode==='j1'?1:2;realmIndex=5;await loadRealm(5,true);
  }catch(err){console.warn('TESTE CENA FINAL',err)}finally{UI.loading.classList.add('hidden')}
  if(mode==='j1'){
-   await showFamilyScene('j1final');if(UI.arrivalBanner){UI.arrivalBanner.textContent='🏁 FINAL JORNADA 1 • VAREK CHEGOU À FRONTEIRA';UI.arrivalBanner.classList.add('show')}toast('TESTE • FINAL JORNADA 1');
+   await showFamilyScene('j1final');
+   if(UI.arrivalBanner){UI.arrivalBanner.textContent='🏁 FINAL JORNADA 1 • VAREK CHEGOU À FRONTEIRA';UI.arrivalBanner.classList.add('show')}
+   toast('TESTE • FINAL JORNADA 1');
+   setTimeout(()=>{
+     if(UI.arrivalBanner)UI.arrivalBanner.classList.remove('show');
+     showJourney1ResultPanel({distance:13200,finalTime:elapsed+timePenalty,score:runScore(),rank:previewRunRank()},true);
+     const next=$('journeyNext'),menu=$('journeyMenu');
+     if(next)next.onclick=()=>void startFinalSceneTest('j1');
+     if(menu)menu.onclick=()=>returnToScenarioHub();
+   },5000);
  }else{
    await showFinalArrival({rank:1,finalTime:0,score:0},true);if($('finalMenu')){$('finalMenu').textContent='🧪 VOLTAR AOS CENÁRIOS';$('finalMenu').onclick=()=>returnToScenarioHub()}if($('finalReplay')){$('finalReplay').textContent='↻ REVER FINAL';$('finalReplay').onclick=()=>void startFinalSceneTest('j2final')}toast('TESTE • FINAL JORNADA 2');
  }
@@ -2981,7 +2997,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE52';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE53';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
