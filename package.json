@@ -1,0 +1,19 @@
+{
+  "name": "max-healms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MAX HEALMS Android wrapper",
+  "scripts": {
+    "prepare:www": "node scripts/prepare-www.mjs",
+    "android:add": "npm run prepare:www && npx cap add android",
+    "android:sync": "npm run prepare:www && npx cap sync android",
+    "android:open": "npm run android:sync && npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/core": "^8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.3"
+  }
+}
