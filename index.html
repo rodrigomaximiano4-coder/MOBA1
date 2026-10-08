@@ -193,7 +193,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE41</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE42</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -211,10 +211,10 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
     </div>
     <div class="eyebrow" style="margin-top:14px">TRECHOS CRÍTICOS</div>
     <div class="qaQuickGrid">
-      <button class="btn secondary" id="kharvorDropQuick" type="button">KHARVOR • QUEDA DA PONTE</button>
-      <button class="btn secondary" id="kharvorLowerQuick" type="button">KHARVOR • EMBAIXO DA PONTE</button>
-      <button class="btn secondary" id="nerisDropQuick" type="button">NERIS • QUEDA / ENTRADA DA PONTE</button>
-      <button class="btn secondary" id="nerisLowerQuick" type="button">NERIS • PONTE COBERTA</button>
+      <button class="btn secondary" id="kharvorDropQuick" type="button">KHARVOR • ENTRADA DO TÚNEL</button>
+      <button class="btn secondary" id="kharvorLowerQuick" type="button">KHARVOR • TÚNEL SECO</button>
+      <button class="btn secondary" id="nerisDropQuick" type="button">NERIS • ENTRADA DO TÚNEL</button>
+      <button class="btn secondary" id="nerisLowerQuick" type="button">NERIS • TÚNEL / PONTE COBERTA</button>
       <button class="btn secondary" id="vhalorDropQuick" type="button">VHALOR • QUEDA DA PONTE</button>
       <button class="btn secondary" id="vhalorFloodQuick" type="button">VHALOR • TÚNEL INUNDADO</button>
     </div>
@@ -328,7 +328,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE41 • CORES PC + RITMO DE VELOCIDADE + TÚNEIS RETOS
+// MAX HEALMS MOBILE42 • TÚNEIS SECOS RETOS + QUEDAS SÓ EM ÁGUA/LAVA
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -438,13 +438,14 @@ function updateKharvorBridge(dt,progress){
    kharvorFallStage=2;for(const g of kharvorUpperBridgeGroups)g.visible=false;for(const g of forestClosedBridgeGroups)g.visible=false;
    if(isForest)setForestUnderpassVisual(false);if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;toast('✓ SAÍDA DO TÚNEL • PONTE ABERTA')
  }
- // Vhalor mantém a canoa, mas a entrada agora é reta: sem queda física.
+ // MOBILE42: Vhalor tem água, então a mudança de nível volta a fazer sentido visualmente.
  if(isVhalor){
    if(progress>=tunnelStart&&!tobogganActive&&!tobogganAutoDone){
-     kharvorFallStage=1;setVhalorFloodVisual(true);toast('🛶 TÚNEL INUNDADO À FRENTE • ENTRADA RETA');
+     kharvorFallStage=1;kharvorFallImpact=1;openingCameraShake=Math.max(openingCameraShake,.72);haptic([20,18,48]);
+     setVhalorFloodVisual(true);toast('🛶 QUEDA PARA A PASSAGEM INUNDADA');
      startToboggan(false,'flooded',distance+(tunnelEnd-progress));
    }
-   if(!tobogganActive&&progress>=tunnelEnd){setVhalorFloodVisual(false);if(kharvorFallStage<2){kharvorFallStage=2;toast('✓ SAÍDA DO TÚNEL INUNDADO')}}
+   if(!tobogganActive&&progress>=tunnelEnd){setVhalorFloodVisual(false);if(kharvorFallStage<2){kharvorFallStage=2;toast('✓ SAÍDA DA PASSAGEM INUNDADA')}}
  }
  kharvorFallImpact=Math.max(0,kharvorFallImpact-dt*1.6);
 }
@@ -2193,7 +2194,7 @@ function tobogganPalette(){
  return p[id]||p.forest;
 }
 function tobogganCenterX(z){const d=Math.max(0,-z)+tobogganTravel*.34;if(tobogganForcedMode==='flooded')return Math.sin(d*.026+tobogganPhase)*.52+Math.sin(d*.011+tobogganPhase*.63)*.22;return Math.sin(d*.047+tobogganPhase)*2.15+Math.sin(d*.018+tobogganPhase*.63)*1.05}
-function tobogganY(z){let base=0;if(tobogganForcedMode==='flooded'){return -Math.min(.18,Math.max(0,-z-1)*.0012)}return base-Math.min(7.1,Math.max(0,-z-1)*.056)}
+function tobogganY(z){let base=0;if(tobogganForcedMode==='flooded'){base=-3.6;if(tobogganExitAtDistance){const rem=Math.max(0,tobogganExitAtDistance-distance);if(rem<180)base=-3.6*Math.max(0,rem/180)}return base-Math.min(.34,Math.max(0,-z-1)*.0022)}return base-Math.min(7.1,Math.max(0,-z-1)*.056)}
 function tobogganYaw(z){const e=.75,a=tobogganCenterX(z-e),b=tobogganCenterX(z+e);return Math.atan2(a-b,e*2)*.78}
 function clearToboggan(){if(!tobogganGroup)return;while(tobogganGroup.children.length){const c=tobogganGroup.children.pop();disposeObject(c)}tobogganCart=null;tobogganLyraCart=null;tobogganSegments.length=0;tobogganHazards.length=0;tobogganTunnel.length=0;tobogganCollectibles.length=0}
 function makeTobogganMuralTexture(theme,accentC){
@@ -2401,7 +2402,7 @@ function endToboggan(silent=false){
    setVhalorFloodVisual(false);
    if(sceneryGroup)sceneryGroup.visible=true;
    if(decorGroup)decorGroup.visible=true;
-   if(!silent&&!gameOver)toast('↗ SAÍDA DA PASSAGEM INUNDADA • NÍVEL NORMAL RESTAURADO')
+   if(!silent&&!gameOver)toast('↗ SUBIDA DA PASSAGEM INUNDADA • NÍVEL NORMAL RESTAURADO')
  }
  tobogganForcedMode=null;tobogganExitAtDistance=null;
  if(!silent&&!gameOver&&currentJourney===1&&realmIndex===0){weatherTestOverride=null;setWeatherMode('extremeRain');weatherLightningTimer=.9;stopWeatherAudio();if(soundOn&&ambientVolume>0)startWeatherAudio('extremeRain');toast('🌧 TEMPESTADE FORTE • A FUGA CONTINUA');}
