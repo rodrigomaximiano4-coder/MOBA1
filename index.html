@@ -224,7 +224,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE49</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE50</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -359,7 +359,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE49 • PISTAS POR REINO + LOGO NO PISO
+// MAX HEALMS MOBILE50 • CORES MOBILE REFORÇADAS + LOGO LEGÍVEL
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -1679,17 +1679,17 @@ function buildRoad(){
  const railCapMat=makeStoneMaterial(roundedColor(cfg.road[0],.06));
  const edgeRoadMat=makeStoneMaterial(cfg.edge);
  const mobileRoadPalette={
-  vpath:0x5a4438,
-  vruins:0x4b4d50,
-  ember:0x4a3f3a,
-  ruins:0x6f756e,
-  forest:0x74684f,
-  celestial:0xa4875f
+  vpath:0x6b4938,      // terra quente
+  vruins:0x454b56,     // pedra fria azulada
+  ember:0x49332f,      // carvão vulcânico
+  ruins:0x66756d,      // pedra úmida esverdeada
+  forest:0x665b3f,     // terra/musgo
+  celestial:0xb39462   // pedra clara dourada
  };
  const stableMobileRoadColor=mobileRoadPalette[cfg.id]??cfg.road[0];
- const mobileRoadMats=[0,1,2].map(()=>new THREE.MeshStandardMaterial({color:stableMobileRoadColor,roughness:1,metalness:0,flatShading:true}));
+ const mobileRoadMats=[0,1,2].map(()=>new THREE.MeshBasicMaterial({color:stableMobileRoadColor}));
  const roadLogoTex=makeRoadBrandTexture(cfg.accent);
- const roadLogoMat=roadLogoTex?new THREE.MeshBasicMaterial({map:roadLogoTex,transparent:true,opacity:cfg.id==='celestial'?.44:.30,depthWrite:false,side:THREE.DoubleSide}):null;
+ const roadLogoMat=roadLogoTex?new THREE.MeshBasicMaterial({map:roadLogoTex,transparent:true,opacity:cfg.id==='celestial'?.66:.48,depthWrite:false,side:THREE.DoubleSide}):null;
  const railWoodMat=new THREE.MeshStandardMaterial({color:0x7b6752,roughness:.9,metalness:.03});
  const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
@@ -1711,9 +1711,9 @@ function buildRoad(){
    if(MOBILE_RUNNER){
      for(let laneI=0;laneI<3;laneI++){const laneDeck=new THREE.Mesh(mobileLaneGeo,mobileRoadMats[laneI]);laneDeck.position.set(LANE_X[laneI],-.10,0);laneDeck.receiveShadow=false;seg.add(laneDeck)}
      // MOBILE49: marca no piso em poucos segmentos; não compete com obstáculos.
-     if(roadLogoMat&&s%5===2){
-       const logo=new THREE.Mesh(new THREE.PlaneGeometry(3.7,1.85),roadLogoMat);
-       logo.position.set(0,.018,-1.45);logo.rotation.x=-Math.PI/2;seg.add(logo)
+     if(roadLogoMat&&s%4===2){
+       const logo=new THREE.Mesh(new THREE.PlaneGeometry(4.15,2.05),roadLogoMat);
+       logo.position.set(0,.020,-1.25);logo.rotation.x=-Math.PI/2;seg.add(logo)
      }
      if(cfg.id==='celestial'){
        // MOBILE43: Celestial premium — ouro integrado à arquitetura da ponte, nunca solto no cenário.
@@ -1735,6 +1735,10 @@ function buildRoad(){
      }
    }
    for(const x of [-4.15,4.15]){const e=new THREE.Mesh(edgeGeo,edgeRoadMat);e.position.set(x,-.06,0);e.receiveShadow=!MOBILE_RUNNER;seg.add(e)}
+   if(MOBILE_RUNNER){
+     const mobileEdgeAccent=new THREE.MeshBasicMaterial({color:cfg.accent,transparent:true,opacity:.22,depthWrite:false});
+     for(const x of [-3.92,3.92]){const line=new THREE.Mesh(new THREE.BoxGeometry(.055,.018,10.42),mobileEdgeAccent);line.position.set(x,.015,0);seg.add(line)}
+   }
    // MOBILE37: ponte legível e bonita, mas com bem menos draw calls no celular.
    for(const side of [-1,1]){
      const x=side*4.36;
@@ -2888,7 +2892,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE49';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE50';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
