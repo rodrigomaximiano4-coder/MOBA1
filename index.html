@@ -116,6 +116,17 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 /* PLAYER PUBLICO • QA REMOVIDO */
 #pcScenarioHub,#scenarioTest,#pcQaAlways,#qaReturnBtn,#scenarioTestPanel,#pauseScenarioHub{display:none!important}
 
+/* ===== MOBILE44 • FINAL J1 + NERIS ===== */
+.j1StoryBeat,.j1Twist,.j1HunterTurn,.j1Unlock{margin:9px 0;padding:9px 10px;border-radius:10px;line-height:1.38}
+.j1StoryBeat{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}
+.j1Twist{background:rgba(155,45,45,.10);border:1px solid rgba(255,115,95,.20)}
+.j1HunterTurn{background:rgba(244,197,106,.10);border:1px solid rgba(244,197,106,.30);color:#ffe3a1;text-align:center}
+.j1Unlock{background:rgba(110,176,118,.10);border:1px solid rgba(145,220,156,.23);color:#bde8c2;text-align:center;font-weight:900}
+.j1ResultGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}
+.j1ResultGrid span{display:flex;flex-direction:column;gap:3px;padding:8px 5px;border-radius:9px;background:rgba(255,255,255,.04);font-size:8px;color:#9fb0aa;text-align:center}
+.j1ResultGrid b{font-size:12px;color:#fff}
+@media(max-width:520px){.j1ResultGrid{grid-template-columns:repeat(2,1fr)}#journeyEndPanel .card{max-height:92vh;overflow:auto}}
+
 /* ===== MOBILE43 • PRÉ-STORE COMPACTA ===== */
 .menu .menuTagline{max-width:520px;margin:0 auto 12px;line-height:1.38}
 .compactStats{grid-template-columns:repeat(3,1fr)!important;gap:6px!important;margin:8px 0 12px!important}
@@ -213,7 +224,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE43</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE44</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -327,7 +338,7 @@ let forcedAdRunning=false,forcedAdTimer=null,forcedAdResolve=null;const FORCED_A
 const MOBILE_RUNNER=(matchMedia('(pointer:coarse)').matches||innerWidth<=740);
 const DEVICE_MEMORY=navigator.deviceMemory||4,HARDWARE_THREADS=navigator.hardwareConcurrency||4;
 const LOW_END_MOBILE=MOBILE_RUNNER&&(DEVICE_MEMORY<=3||HARDWARE_THREADS<=4);
-const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.72:.84,MOBILE_PIXEL_RATIO_MIN=LOW_END_MOBILE?.62:.70;
+const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.78:.94,MOBILE_PIXEL_RATIO_MIN=LOW_END_MOBILE?.66:.76;
 const TARGET_PIXEL_RATIO=MOBILE_RUNNER?MOBILE_PIXEL_RATIO_MAX:1.4;
 let mobilePixelRatioCurrent=TARGET_PIXEL_RATIO,mobilePerfLowSamples=0,mobilePerfHighSamples=0,mobilePerfLastAdjust=0;
 const RUN_SPEED_BASE=MOBILE_RUNNER?31.0:20.2;
@@ -348,7 +359,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE43 • PRÉ-STORE COMPACTA + CELESTIAL PREMIUM
+// MAX HEALMS MOBILE44 • NITIDEZ MOBILE + NERIS VIVO + FINAL J1 CINEMATOGRÁFICO
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -368,8 +379,8 @@ function setForestUnderpassVisual(active){
  active=!!active;if(forestUnderpassActive===active)return;forestUnderpassActive=active;
  const cfg=REALMS[realmIndex];
  if(active){
-   if(app){app.style.backgroundImage='none';app.style.backgroundColor='#0b100d'}
-   if(scene){scene.background=new THREE.Color(0x0b100d);if(scene.fog){scene.fog.color.set(0x101710);scene.fog.near=12;scene.fog.far=56}}
+   if(app){app.style.backgroundImage='none';app.style.backgroundColor='#132018'}
+   if(scene){scene.background=new THREE.Color(0x132018);if(scene.fog){scene.fog.color.set(0x23382a);scene.fog.near=15;scene.fog.far=70}}
    if(sceneryGroup)sceneryGroup.visible=false;if(decorGroup)decorGroup.visible=false;
  }else{
    if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;
@@ -540,7 +551,21 @@ async function advanceJourneyRealm(){
 }
 function finishJourney(){
  if(journeyRunFinished||endlessMode)return;journeyRunFinished=true;paused=true;huntersVisible=false;hunters.forEach(h=>{if(h.action)h.action.paused=true;h.root.visible=false});const r=recordRun();
- if(currentJourney===1){UI.journeyEndPanel.classList.add('show');SAVE.journey2Unlocked=true;SAVE.j1Checkpoint=0;saveState();playThemeMoment(7,7200,.135);showFamilyScene('j1final').catch(err=>console.warn('Cena final J1',err));UI.journeyEndEyebrow.textContent='JORNADA 1 CONCLUÍDA';UI.journeyEndTitle.textContent='Você encontrou sua família';UI.journeyEndText.innerHTML='Varek atravessou <b>'+formatRealmKm(JOURNEY1_ORDER.length*REALM_DISTANCE_J1)+'</b> pelos seis reinos e chegou ao <b>Reino Celestial</b>. Ele encontra a esposa e Lyra, mas a paz dura pouco: <b>Serya rapta Lyra</b> e desaparece por um portal.<br><br><b>A fuga terminou. A caçada começa.</b><br><br>Jornada 2 desbloqueada • '+Math.floor(distance)+' m • '+r.score+' pontos • posição local #'+r.rank+'.';$('journeyNext').textContent='⚔ INICIAR JORNADA 2 • O RESGATE'}
+ if(currentJourney===1){
+   SAVE.journey2Unlocked=true;SAVE.j1Checkpoint=0;saveState();playThemeMoment(7,7200,.135);
+   UI.journeyEndPanel.classList.remove('show');
+   showFamilyScene('j1final').catch(err=>console.warn('Cena final J1',err));
+   UI.journeyEndEyebrow.textContent='JORNADA 1 • A FUGA CONCLUÍDA';
+   UI.journeyEndTitle.textContent='Varek encontrou sua família';
+   UI.journeyEndText.innerHTML=
+     '<div class="j1StoryBeat"><b>REENCONTRO</b><br>Depois de atravessar os seis reinos, Varek finalmente alcança a fronteira e encontra sua esposa e Lyra.</div>'+
+     '<div class="j1ResultGrid"><span>DISTÂNCIA<b>'+Math.floor(r.distance||distance)+' m</b></span><span>TEMPO<b>'+fmtTime(r.finalTime||0)+'</b></span><span>PONTOS<b>'+(r.score||runScore())+'</b></span><span>POSIÇÃO<b>#'+Math.max(1,r.rank||1)+'</b></span></div>'+
+     '<div class="j1Twist"><b>MAS A PAZ DURA POUCO.</b><br>Serya alcança Lyra e a leva através de um portal. Varek deixa de fugir e parte atrás dela.</div>'+
+     '<div class="j1HunterTurn">⚔ <b>O CAÇADO VIROU CAÇADOR.</b><br>A fuga terminou. A caçada começa.</div>'+
+     '<div class="j1Unlock">✓ JORNADA 2 DESBLOQUEADA • O RESGATE</div>';
+   $('journeyNext').textContent='⚔ INICIAR JORNADA 2 • O RESGATE';
+   setTimeout(()=>{if(journeyRunFinished&&currentJourney===1){UI.journeyEndPanel.classList.add('show');playSFX('finalChime')}},3300)
+ }
  else{SAVE.j2Checkpoint=0;saveState();showFinalArrival(r,false).catch(err=>console.warn('FRONTEIRA FINAL',err))}
  refreshJourneyMenu()
 }
@@ -1615,6 +1640,19 @@ function buildSky(){
 }
 
 function makeStoneMaterial(color){return new THREE.MeshStandardMaterial({color,roughness:.91,metalness:.015})}
+function makeNerisBrandTexture(){
+ const c=document.createElement('canvas');c.width=512;c.height=256;const g=c.getContext('2d');if(!g)return null;
+ const bg=g.createLinearGradient(0,0,512,256);bg.addColorStop(0,'#18271d');bg.addColorStop(1,'#354d32');g.fillStyle=bg;g.fillRect(0,0,512,256);
+ g.strokeStyle='rgba(182,221,137,.42)';g.lineWidth=5;g.strokeRect(16,16,480,224);
+ g.fillStyle='rgba(216,238,184,.95)';g.font='900 44px sans-serif';g.textAlign='center';g.fillText('MAX HEALMS',256,74);
+ g.font='700 17px sans-serif';g.fillStyle='rgba(230,240,208,.86)';g.fillText('RUN • SURVIVE • ESCAPE',256,104);
+ g.strokeStyle='rgba(165,205,119,.78)';g.lineWidth=7;g.lineCap='round';
+ // runner + portal + three hunter marks, all original simple glyphs
+ g.beginPath();g.arc(160,145,13,0,Math.PI*2);g.stroke();g.beginPath();g.moveTo(160,158);g.lineTo(150,190);g.lineTo(175,208);g.moveTo(156,171);g.lineTo(184,181);g.moveTo(150,190);g.lineTo(128,211);g.stroke();
+ g.beginPath();g.arc(272,173,36,0,Math.PI*2);g.stroke();g.beginPath();g.arc(272,173,22,0,Math.PI*2);g.stroke();
+ for(let i=0;i<3;i++){const x=365+i*28;g.beginPath();g.moveTo(x,148);g.lineTo(x+10,174);g.lineTo(x-4,203);g.stroke()}
+ const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.minFilter=THREE.LinearFilter;t.magFilter=THREE.LinearFilter;t.needsUpdate=true;return t
+}
 function buildRoad(){
  while(roadGroup.children.length){const old=roadGroup.children[0];roadGroup.remove(old);disposeObject(old)}roadSegments.length=0;bridgeDetailGroups.length=0;kharvorUpperBridgeGroups.length=0;forestClosedBridgeGroups.length=0;if(renderer&&renderer.renderLists&&renderer.renderLists.dispose)renderer.renderLists.dispose();
  const cfg=REALMS[realmIndex];
@@ -1633,7 +1671,7 @@ function buildRoad(){
  const railWoodMat=new THREE.MeshStandardMaterial({color:0x7b6752,roughness:.9,metalness:.03});
  const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
- const frRoofMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x302b23}):new THREE.MeshStandardMaterial({color:0x302b23,roughness:1}),frWallMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x40382b}):new THREE.MeshStandardMaterial({color:0x40382b,roughness:1}),frRootMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x5a4934}):new THREE.MeshStandardMaterial({color:0x5a4934,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x314b2d,transparent:true,opacity:.78});
+ const frRoofMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x273229}):new THREE.MeshStandardMaterial({color:0x273229,roughness:1}),frWallMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x46533d}):new THREE.MeshStandardMaterial({color:0x46533d,roughness:1}),frRootMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x684f35}):new THREE.MeshStandardMaterial({color:0x684f35,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x4f753f,transparent:true,opacity:.84});
  // MOBILE40 • assinatura visual das pontes: poucos elementos, grandes silhuetas e leitura forte no celular.
  const sigStone=new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
  const sigDark=new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
@@ -1787,11 +1825,26 @@ function buildRoad(){
    if(cfg.id==='forest'){
      const closed=new THREE.Group();closed.name='NERIS_PONTE_FECHADA_INFERIOR';closed.visible=false;
      const roof=new THREE.Mesh(new THREE.BoxGeometry(8.65,.48,10.25),frRoofMat);roof.position.y=0;closed.add(roof);
-     for(const side of [-1,1]){const wall=new THREE.Mesh(new THREE.BoxGeometry(.52,4.25,10.25),frWallMat);wall.position.set(side*4.10,-2.0,0);closed.add(wall)}
-     if(!MOBILE_RUNNER){
-       for(const zOff of [-3.6,0,3.6]){const beam=new THREE.Mesh(new THREE.BoxGeometry(8.6,.24,.32),frRootMat);beam.position.set(0,-.36,zOff);closed.add(beam)}
-       for(let ri=0;ri<5;ri++){const root=new THREE.Mesh(new THREE.CylinderGeometry(.06,.10,2.5+(ri%2)*.6,6),frRootMat);root.position.set((ri%2?1:-1)*(2.5+(ri%3)*.45),-1.1,-4+ri*2.0);root.rotation.z=(ri%2?1:-1)*.32;closed.add(root);const moss=new THREE.Mesh(new THREE.PlaneGeometry(.72,.95),frMossMat);moss.position.set((ri%2?1:-1)*3.7,-.85,-4+ri*2.0);moss.rotation.y=ri%2?-Math.PI/2:Math.PI/2;closed.add(moss)}
+     for(const side of [-1,1]){
+       const wall=new THREE.Mesh(new THREE.BoxGeometry(.52,4.25,10.25),frWallMat);wall.position.set(side*4.10,-2.0,0);closed.add(wall);
+       // MOBILE44: faixa de musgo e luz quente dão profundidade sem encher o corredor.
+       const mossStrip=new THREE.Mesh(new THREE.PlaneGeometry(4.6,1.12),frMossMat);mossStrip.position.set(side*3.82,-1.65,(s%2?1.8:-1.8));mossStrip.rotation.y=side<0?Math.PI/2:-Math.PI/2;closed.add(mossStrip);
+       const lightMat=new THREE.MeshBasicMaterial({color:0xc8e59a,transparent:true,opacity:.52,depthWrite:false});
+       for(const zz of [-3.6,3.6]){const lamp=new THREE.Mesh(new THREE.BoxGeometry(.05,.16,1.2),lightMat);lamp.position.set(side*3.78,-.72,zz);lamp.rotation.y=Math.PI/2;closed.add(lamp)}
      }
+     // Branding integrado: poucos murais, como pintura antiga do próprio reino.
+     if(s%3===1){
+       const brandTex=makeNerisBrandTexture();
+       if(brandTex){
+         const brandMat=new THREE.MeshBasicMaterial({map:brandTex,transparent:true,opacity:.92,side:THREE.DoubleSide,depthWrite:false});
+         for(const side of [-1,1]){const mural=new THREE.Mesh(new THREE.PlaneGeometry(2.65,1.32),brandMat);mural.position.set(side*3.80,-2.08,0);mural.rotation.y=side<0?Math.PI/2:-Math.PI/2;closed.add(mural)}
+       }
+     }
+     const beamCount=MOBILE_RUNNER?2:3;
+     const beamZ=MOBILE_RUNNER?[-3.4,3.4]:[-3.6,0,3.6];
+     for(const zOff of beamZ){const beam=new THREE.Mesh(new THREE.BoxGeometry(8.6,.24,.32),frRootMat);beam.position.set(0,-.36,zOff);closed.add(beam)}
+     const roots=MOBILE_RUNNER?3:5;
+     for(let ri=0;ri<roots;ri++){const root=new THREE.Mesh(new THREE.CylinderGeometry(.06,.10,2.25+(ri%2)*.55,6),frRootMat);root.position.set((ri%2?1:-1)*(2.55+(ri%3)*.38),-1.18,-3.3+ri*(MOBILE_RUNNER?3.2:2.0));root.rotation.z=(ri%2?1:-1)*.30;closed.add(root)}
      seg.add(closed);forestClosedBridgeGroups.push(closed)
    }
    roadGroup.add(seg);roadSegments.push(seg)
@@ -2746,7 +2799,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE43';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE44';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
