@@ -89,7 +89,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
   .menu h1{font-size:34px!important;line-height:.88!important;margin:3px 0 10px!important;letter-spacing:-.04em}.menu h1 br{display:none}.menu h1 em{margin-left:7px}
   .menu p{display:none}.menuCopyright{display:none!important}
   .miniStats{display:grid!important;grid-template-columns:1fr 1fr;gap:7px;margin:0 0 10px!important}.miniStat{padding:7px 9px!important;font-size:8px!important;background:rgba(4,12,14,.58)}.miniStat b{font-size:12px!important;margin-top:1px!important}.miniStat:nth-child(n+3){display:none!important}
-  .actions.mainNav{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:none}.mainNav .btn{min-width:0!important;width:100%;padding:11px 8px!important;font-size:9px;letter-spacing:.075em;border-radius:11px}.mainNav #start,.mainNav #journey2,.mainNav #lastRunAnalysisMain{grid-column:1/-1;font-size:10px;padding:13px 10px!important}.mainNav #profile,.mainNav #mobileMore{display:block}.mainNav #mobileMore{background:rgba(8,18,20,.82);border:1px solid rgba(244,197,106,.22);color:#f7d486}
+  .actions.mainNav{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:none}.mainNav .btn{min-width:0!important;width:100%;padding:11px 8px!important;font-size:9px;letter-spacing:.075em;border-radius:11px}.mainNav #start,.mainNav #journey2{grid-column:1/-1;font-size:10px;padding:13px 10px!important}.mainNav #profile,.mainNav #mobileMore{display:block}.mainNav #mobileMore{background:rgba(8,18,20,.82);border:1px solid rgba(244,197,106,.22);color:#f7d486}
   .mobileMorePanel{display:none;grid-column:1/-1;grid-template-columns:1fr 1fr;gap:8px;padding-top:2px}.mobileMorePanel.show{display:grid}.mobileMorePanel .btn{display:block}.mobileMorePanel #scenarioTest{display:none!important}
   .hud{top:7px;left:6px;right:54px;display:grid;grid-template-columns:1.05fr .78fr .90fr .90fr;gap:4px;max-width:none;overflow:visible;transform:translateY(-8px)}.hud.show{transform:translateY(0)}
   .hudBox{min-width:0!important;width:auto;padding:6px 5px!important;border-radius:10px;font-size:7px!important;letter-spacing:.025em;background:rgba(3,10,12,.70)}.hudBox b{font-size:11px!important;margin-top:1px}.hud .hudStars,.hud .hudScore,.hud .hudTime,.hud .realmBox{display:none!important}.hud .hudWater{display:block!important}
@@ -113,8 +113,9 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 @media(max-width:740px){.pcQaAlways{top:55px;right:8px;padding:9px 11px;font-size:9px}.pcQaBuild .mainNav #pcScenarioHub{display:block!important;grid-column:1/-1}}
 
 .qaRealmLink{display:block;text-decoration:none!important;text-align:left;cursor:pointer;pointer-events:auto!important;opacity:1!important}.qaRealmLink small{display:block;margin-top:5px;font-size:9px;line-height:1.35;color:#9fb2ac;text-transform:none;letter-spacing:0}.qaLaunchStatus{margin:12px 0 0;padding:10px 12px;border-radius:10px;background:rgba(244,197,106,.08);border:1px solid rgba(244,197,106,.18);font-size:10px;color:#e7d5a1;font-weight:800}
-/* PLAYER PUBLICO • QA REMOVIDO */
-#pcScenarioHub,#scenarioTest,#pcQaAlways,#qaReturnBtn,#scenarioTestPanel,#pauseScenarioHub{display:none!important}
+/* PLAYER PUBLICO • QA / CONTROLES COMERCIAIS DE TESTE REMOVIDOS */
+#pcScenarioHub,#scenarioTest,#pcQaAlways,#qaReturnBtn,#scenarioTestPanel,#pauseScenarioHub,
+#lastRunAnalysisMain,#lastRunAnalysis,#lastRunAnalysisPanel,#runEconomySummary{display:none!important}
 
 /* ===== MOBILE44 • FINAL J1 + NERIS ===== */
 .j1StoryBeat,.j1Twist,.j1HunterTurn,.j1Unlock{margin:9px 0;padding:9px 10px;border-radius:10px;line-height:1.38}
@@ -157,7 +158,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
   <canvas id="threeCanvas"></canvas><canvas id="weatherCanvas"></canvas><div class="weatherFlash" id="weatherFlash"></div><div class="vignette"></div><div class="fallFlash" id="fallFlash"></div><div class="effortPulse" id="effortPulse">ESFORÇO</div>
   <div class="loading" id="loading"><div class="loaderRing"></div><b>CONSTRUINDO REINO 3D</b><small id="loadingText">Varek + cenário real</small></div>
   <div class="error" id="error"><h2>O motor 3D não carregou.</h2><p id="engineErrorText">A build não conseguiu iniciar o motor 3D. Abra pelo arquivo <b>ABRIR-MAX-HEALMS-PLAYER.bat</b>.</p><pre id="engineDiag" style="white-space:pre-wrap;color:#9fb0aa;font-size:10px;line-height:1.45;margin-top:14px"></pre></div>
-  <div class="menu" id="menu"><div class="eyebrow">RUN • SURVIVE • ESCAPE</div><h1>MAX<br><em>HEALMS</em></h1><p class="menuTagline">Atravesse os reinos. Sobreviva à perseguição. Reencontre sua família.</p><div class="miniStats compactStats"><div class="miniStat">💎<b id="menuGems">0</b></div><div class="miniStat">RECORDE<b id="menuBest">0 pts</b></div><div class="miniStat">PLANO<b id="menuPlan">FREE</b></div><span id="menuStars" hidden>⭐ 0</span><span id="menuPlayer" hidden>LOCAL</span></div><div class="actions mainNav preStoreNav"><button class="btn primary" id="start">▶ JOGAR • JORNADA 1</button><button class="btn secondary" id="journey2" disabled>🔒 JORNADA 2 • O RESGATE</button><button class="btn secondary" id="characterShop">👤 PERSONAGENS</button><button class="btn secondary storeAccent" id="diamondShop">💎 DIAMANTES</button><button class="btn secondary" id="profile">👤 PERFIL</button><button class="btn secondary" id="lastRunAnalysisMain">📊 CUSTO / GANHO</button><button class="btn secondary" id="mobileMore">☰ MAIS</button><div class="mobileMorePanel" id="mobileMorePanel"><button class="btn secondary" id="ranking">🏆 RANKING</button><button class="btn secondary" id="lastRunAnalysis">📊 ÚLTIMA CORRIDA • CUSTO / GANHO</button><button class="btn secondary" id="realms">🌍 PROGRESSO</button><button class="btn secondary" id="story">🎬 HISTÓRIA</button><button class="btn secondary" id="upgrades">⬆ UPGRADES</button><button class="btn secondary" id="settings">⚙ CONFIGURAÇÕES</button><button class="btn secondary" id="endless" disabled>🔒 ENDLESS • CONCLUA A HISTÓRIA</button></div></div><div class="menuCopyright">© 2026 MAX HEALMS • RC16</div></div>
+  <div class="menu" id="menu"><div class="eyebrow">RUN • SURVIVE • ESCAPE</div><h1>MAX<br><em>HEALMS</em></h1><p class="menuTagline">Atravesse os reinos. Sobreviva à perseguição. Reencontre sua família.</p><div class="miniStats compactStats"><div class="miniStat">💎<b id="menuGems">0</b></div><div class="miniStat">RECORDE<b id="menuBest">0 pts</b></div><div class="miniStat">PLANO<b id="menuPlan">FREE</b></div><span id="menuStars" hidden>⭐ 0</span><span id="menuPlayer" hidden>LOCAL</span></div><div class="actions mainNav preStoreNav"><button class="btn primary" id="start">▶ JOGAR • JORNADA 1</button><button class="btn secondary" id="journey2" disabled>🔒 JORNADA 2 • O RESGATE</button><button class="btn secondary" id="characterShop">👤 PERSONAGENS</button><button class="btn secondary storeAccent" id="diamondShop">💎 DIAMANTES</button><button class="btn secondary" id="profile">👤 PERFIL</button><button class="btn secondary" id="lastRunAnalysisMain">📊 CUSTO / GANHO</button><button class="btn secondary" id="mobileMore">☰ MAIS</button><div class="mobileMorePanel" id="mobileMorePanel"><button class="btn secondary" id="ranking">🏆 RANKING</button><button class="btn secondary" id="lastRunAnalysis">📊 ÚLTIMA CORRIDA • CUSTO / GANHO</button><button class="btn secondary" id="realms">🌍 PROGRESSO</button><button class="btn secondary" id="story">🎬 HISTÓRIA</button><button class="btn secondary" id="upgrades">⬆ UPGRADES</button><button class="btn secondary" id="settings">⚙ CONFIGURAÇÕES</button><button class="btn secondary" id="endless" disabled>🔒 ENDLESS • CONCLUA A HISTÓRIA</button></div></div><div class="menuCopyright">© 2026 MAX HEALMS • RC17</div></div>
   <div class="hud" id="hud"><div class="hudBox"><span id="hudDistanceLabel">DISTÂNCIA</span><b id="distance">0 m</b></div><div class="hudBox hudStars"><span id="hudStarsLabel">ESTRELAS</span><b id="stars">⭐ 0</b></div><div class="hudBox hudScore"><span id="hudScoreLabel">PONTOS</span><b id="score">0</b></div><div class="hudBox"><span id="hudLivesLabel">VIDAS</span><b id="lives">❤❤❤</b></div><div class="hudBox hudGems"><span id="hudGemsLabel">DIAMANTES</span><b id="gems">💎 0</b></div><div class="hudBox hudWater"><span id="hudWaterLabel">ÁGUA</span><b id="water">100%</b></div><div class="hudBox hudTime"><span id="hudTimeLabel">TEMPO</span><b id="runTime">00:00</b></div><div class="hudBox realmBox"><span id="hudRealmLabel">REINO</span><b id="realmName">FLORESTA</b></div></div>
   <div class="tobogganHud" id="tobogganHud"><span class="mode">🌊 DESCIDA DO RIO</span><b id="tobogganTime">30.0 s</b><span class="tip">CANOA • ← • CENTRO • →</span></div><div class="tobogganFx" id="tobogganFx"></div><div class="descentWarning" id="descentWarning">⚠ DESCIDA À FRENTE</div><div class="lyraBadge" id="lyraBadge">👧 <b>LYRA</b> • À FRENTE</div><div class="portalFx" id="portalFx"><div class="portalRing"><b id="portalLabel">PORTAL<small>ATRAVESSANDO REINO</small></b></div></div>
   <button class="pauseBtn" id="pause">Ⅱ</button><div class="toast" id="toast"></div><div class="hint" id="hint"></div>
@@ -225,7 +226,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE81</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE82</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -647,6 +648,25 @@ if(FRESH_LAUNCH_ONCE){
 // ?resetProgress=1 zera campanha/ranking/moedas de jogo, mas preserva identidade,
 // configurações e compras permanentes. O parâmetro é removido logo após executar,
 // evitando novo reset ao atualizar a página.
+const PRODUCTION_CLEAN_ONCE=new URLSearchParams(location.search).get('productionClean')==='1';
+if(PRODUCTION_CLEAN_ONCE){
+ try{
+   const remove=[];
+   for(let i=0;i<localStorage.length;i++){
+     const k=localStorage.key(i)||'';
+     if(/^maxHealms\./i.test(k)||/^max_healms_/i.test(k))remove.push(k);
+   }
+   remove.forEach(k=>localStorage.removeItem(k));
+ }catch(e){}
+ SAVE=freshSave();
+ SAVE.qaSession={startedAt:Date.now(),runs:0,distance:0,stars:0,collectedGems:0,realmRewards:0,spentGems:0,rewardedAds:0,interstitialAds:0,paidContinues:0,adEstimateBRL:0};
+ try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}
+ try{
+   const u=new URL(location.href);u.searchParams.delete('productionClean');
+   history.replaceState(null,'',u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash)
+ }catch(e){}
+}
+
 const RESET_PROGRESS_ONCE=new URLSearchParams(location.search).get('resetProgress')==='1';
 if(RESET_PROGRESS_ONCE){
  const previous=SAVE||freshSave(),clean=freshSave();
@@ -907,7 +927,7 @@ function fmtTime(sec){sec=Math.max(0,Math.floor(sec));return String(Math.floor(s
 function runScore(){return Math.floor(distance)+runStars*25}
 function updateHUD(){if(UI.distance)UI.distance.textContent=Math.floor(distance)+' m';if(UI.stars)UI.stars.textContent='⭐ '+runStars;if(UI.score)UI.score.textContent=runScore();if(UI.lives)UI.lives.textContent='❤'.repeat(Math.max(0,lives))+(shieldCharges?' 🛡'+shieldCharges:'');if(UI.gems)UI.gems.textContent='💎 '+gemText();if(UI.water)UI.water.textContent=Math.max(0,Math.floor(water))+'%';if(UI.runTime)UI.runTime.textContent=fmtTime(elapsed+timePenalty)}
 let currentRunResult=null;
-// MOBILE71 • SIMULAÇÃO INTERNA DE MONETIZAÇÃO + CUSTO/GANHO.
+// INTERNO / QA • SIMULAÇÃO DE MONETIZAÇÃO. NÃO EXIBIR NA BUILD DO JOGADOR.
 // Valores abaixo são premissas de teste por impressão, NÃO receita real garantida.
 const MONETIZATION_SIM={rewardedBRL:.015,interstitialBRL:.008};
 const STORE_FEE_SIM_RATE=.15;
@@ -3424,7 +3444,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE81';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE82';
  settingsFromSave();applyAudioSettings();refreshMenuStats();applyLanguage(gameLanguage,false);renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
