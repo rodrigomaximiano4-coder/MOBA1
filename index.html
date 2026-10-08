@@ -225,7 +225,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE59</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE60</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -341,7 +341,7 @@ const DEVICE_MEMORY=navigator.deviceMemory||4,HARDWARE_THREADS=navigator.hardwar
 const LOW_END_MOBILE=MOBILE_RUNNER&&(DEVICE_MEMORY<=3||HARDWARE_THREADS<=4);
 const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.78:.94,MOBILE_PIXEL_RATIO_MIN=LOW_END_MOBILE?.66:.76;
 const TARGET_PIXEL_RATIO=MOBILE_RUNNER?MOBILE_PIXEL_RATIO_MAX:1.4;
-let mobilePixelRatioCurrent=TARGET_PIXEL_RATIO,mobilePerfLowSamples=0,mobilePerfHighSamples=0,mobilePerfLastAdjust=0;
+let mobilePixelRatioCurrent=TARGET_PIXEL_RATIO,mobilePerfLowSamples=0,mobilePerfHighSamples=0,mobilePerfLastAdjust=0,mobilePerfGuard=false;
 const RUN_SPEED_BASE=MOBILE_RUNNER?36.0:20.2;
 const RUN_SPEED_MAX=MOBILE_RUNNER?40.0:34.0;
 let distance=0,lives=3,water=100,speed=RUN_SPEED_BASE,targetLane=0,lane=0,jumpY=0,jumpV=0,slideTimer=0,slideCooldown=0,hitCooldown=0;
@@ -361,7 +361,7 @@ let postTobogganExitProgress=null,lastGuidanceRealm=-1,lastRankNoticeAt=0,realmD
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE59 • LAVA MOBILE LEVE + 40 FPS-FRIENDLY
+// MAX HEALMS MOBILE60 • VARREDURA GLOBAL DE PERFORMANCE MOBILE
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -1374,20 +1374,20 @@ function startWeatherAudio(mode){
 function playThunder(){if(!soundOn||ambientVolume<=0||weatherMode!=='extremeRain')return;ambientNoise(.95,.070,950,80,'lowpass');ambientTone(74,34,.88,.055,'sine',.06);haptic([12,38,18])}
 function resizeWeatherCanvas(){if(!weatherCanvas)return;const w=Math.max(1,app.clientWidth),h=Math.max(1,app.clientHeight);if(weatherCanvas.width!==w||weatherCanvas.height!==h){weatherCanvas.width=w;weatherCanvas.height=h;weatherParticles=[];atmosphereParticles=[]}}
 function seedWeatherParticles(){
- if(!weatherCanvas||weatherMode==='none')return;resizeWeatherCanvas();const w=weatherCanvas.width,h=weatherCanvas.height,count=weatherMode==='extremeRain'?(MOBILE_RUNNER?(LOW_END_MOBILE?22:34):165):weatherMode==='drizzle'?(MOBILE_RUNNER?(LOW_END_MOBILE?8:12):64):(MOBILE_RUNNER?(LOW_END_MOBILE?7:11):60);weatherParticles=[];
+ if(!weatherCanvas||weatherMode==='none')return;resizeWeatherCanvas();const w=weatherCanvas.width,h=weatherCanvas.height,count=weatherMode==='extremeRain'?(MOBILE_RUNNER?(LOW_END_MOBILE?18:28):165):weatherMode==='drizzle'?(MOBILE_RUNNER?(LOW_END_MOBILE?6:10):64):(MOBILE_RUNNER?(LOW_END_MOBILE?6:9):60);weatherParticles=[];
  for(let i=0;i<count;i++){if(weatherMode==='strongWind')weatherParticles.push({x:Math.random()*w,y:Math.random()*h,vx:150+Math.random()*260,vy:(Math.random()-.5)*38,len:8+Math.random()*25,a:.10+Math.random()*.25,w:.6+Math.random()*1.2});else{const heavy=weatherMode==='extremeRain';weatherParticles.push({x:Math.random()*w,y:Math.random()*h,vx:(heavy?-90:-38)-Math.random()*(heavy?95:42),vy:(heavy?620:270)+Math.random()*(heavy?620:210),len:(heavy?15:7)+Math.random()*(heavy?30:15),a:(heavy?.18:.10)+Math.random()*(heavy?.40:.24),w:heavy?1.15:.72})}}
  weatherLightningTimer=6+Math.random()*9;
 }
 function seedAtmosphereParticles(){
  if(!weatherCanvas||atmosphereMode==='none')return;resizeWeatherCanvas();const w=weatherCanvas.width,h=weatherCanvas.height;atmosphereParticles=[];
  if(atmosphereMode==='volcanicAsh'){
-  const count=MOBILE_RUNNER?(LOW_END_MOBILE?18:28):130;
+  const count=MOBILE_RUNNER?(LOW_END_MOBILE?14:22):130;
   for(let i=0;i<count;i++)atmosphereParticles.push({x:Math.random()*w,y:Math.random()*h,vx:-12+Math.random()*34,vy:30+Math.random()*88,r:.8+Math.random()*2.8,a:.16+Math.random()*.46,phase:Math.random()*6.28,spin:(Math.random()-.5)*2.4});
  }else if(atmosphereMode==='fallingLeaves'){
-  const colors=['rgba(184,112,45,.62)','rgba(217,156,61,.58)','rgba(126,146,68,.52)','rgba(154,82,42,.56)'];const count=MOBILE_RUNNER?(LOW_END_MOBILE?10:16):64;
+  const colors=['rgba(184,112,45,.62)','rgba(217,156,61,.58)','rgba(126,146,68,.52)','rgba(154,82,42,.56)'];const count=MOBILE_RUNNER?(LOW_END_MOBILE?8:12):64;
   for(let i=0;i<count;i++)atmosphereParticles.push({x:Math.random()*w,y:Math.random()*h,vx:-18+Math.random()*38,vy:34+Math.random()*70,rx:2.5+Math.random()*4.0,ry:1.2+Math.random()*2.4,a:.45+Math.random()*.35,phase:Math.random()*6.28,rot:Math.random()*6.28,spin:(Math.random()-.5)*2.8,color:colors[Math.floor(Math.random()*colors.length)]});
  }else if(atmosphereMode==='ruinDust'){
-  const count=MOBILE_RUNNER?(LOW_END_MOBILE?7:11):38;for(let i=0;i<count;i++)atmosphereParticles.push({x:Math.random()*w,y:Math.random()*h,vx:8+Math.random()*24,vy:-4+Math.random()*12,r:1+Math.random()*3.2,a:.08+Math.random()*.18,phase:Math.random()*6.28});
+  const count=MOBILE_RUNNER?(LOW_END_MOBILE?5:8):38;for(let i=0;i<count;i++)atmosphereParticles.push({x:Math.random()*w,y:Math.random()*h,vx:8+Math.random()*24,vy:-4+Math.random()*12,r:1+Math.random()*3.2,a:.08+Math.random()*.18,phase:Math.random()*6.28});
  }
 }
 function setWeatherMode(mode='none'){
@@ -1412,7 +1412,7 @@ function drawRealmAtmosphere(c,w,h,dt){
  }
 }
 function updateWeatherVisual(dt){
- updateWeatherAudio();if(!weatherCtx||!weatherCanvas)return;if(MOBILE_RUNNER){weatherFrameAccumulator+=dt;if(weatherFrameAccumulator<1/24)return;dt=Math.min(.075,weatherFrameAccumulator);weatherFrameAccumulator=0}resizeWeatherCanvas();const c=weatherCtx,w=weatherCanvas.width,h=weatherCanvas.height;c.clearRect(0,0,w,h);
+ updateWeatherAudio();if(!weatherCtx||!weatherCanvas)return;if(MOBILE_RUNNER){weatherFrameAccumulator+=dt;const weatherHz=mobilePerfGuard?16:22;if(weatherFrameAccumulator<1/weatherHz)return;dt=Math.min(.075,weatherFrameAccumulator);weatherFrameAccumulator=0}resizeWeatherCanvas();const c=weatherCtx,w=weatherCanvas.width,h=weatherCanvas.height;c.clearRect(0,0,w,h);
  if(!started){if(UI.weatherFlash)UI.weatherFlash.style.opacity='0';return}
  if(weatherMode!=='none'){
   if(!weatherParticles.length)seedWeatherParticles();
@@ -1780,9 +1780,9 @@ function buildRoad(){
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
  const frRoofMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x273229}):new THREE.MeshStandardMaterial({color:0x273229,roughness:1}),frWallMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x46533d}):new THREE.MeshStandardMaterial({color:0x46533d,roughness:1}),frRootMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x684f35}):new THREE.MeshStandardMaterial({color:0x684f35,roughness:1}),frMossMat=new THREE.MeshBasicMaterial({color:0x4f753f,transparent:true,opacity:.84});
  // MOBILE40 • assinatura visual das pontes: poucos elementos, grandes silhuetas e leitura forte no celular.
- const sigStone=new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
- const sigDark=new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
- const sigWood=new THREE.MeshStandardMaterial({color:0x4c3828,roughness:1});
+ const sigStone=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x4c4a43}):new THREE.MeshStandardMaterial({color:0x4c4a43,roughness:.98,metalness:.01});
+ const sigDark=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x292925}):new THREE.MeshStandardMaterial({color:0x292925,roughness:1});
+ const sigWood=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x4c3828}):new THREE.MeshStandardMaterial({color:0x4c3828,roughness:1});
  const sigMoss=new THREE.MeshBasicMaterial({color:0x46623f,transparent:true,opacity:.62,side:THREE.DoubleSide});
  const sigColdGlow=new THREE.MeshBasicMaterial({color:0x9bc9c5,transparent:true,opacity:.48,depthWrite:false});
  const sigWarmGlow=new THREE.MeshBasicMaterial({color:0xff8a3b,transparent:true,opacity:.58,depthWrite:false});
@@ -1803,7 +1803,7 @@ function buildRoad(){
      if(cfg.id==='celestial'){
        // MOBILE43: Celestial premium — ouro integrado à arquitetura da ponte, nunca solto no cenário.
        const celestialEdgeMat=new THREE.MeshBasicMaterial({color:0xf6d98a,transparent:true,opacity:.34,depthWrite:false});
-       const celestialGoldMat=new THREE.MeshStandardMaterial({color:0xd8b760,emissive:0x6b4d12,emissiveIntensity:.18,roughness:.58,metalness:.28});
+       const celestialGoldMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0xd8b760}):new THREE.MeshStandardMaterial({color:0xd8b760,emissive:0x6b4d12,emissiveIntensity:.18,roughness:.58,metalness:.28});
        for(const side of [-1,1]){
          const glow=new THREE.Mesh(new THREE.BoxGeometry(.10,.035,10.46),celestialEdgeMat);glow.position.set(side*3.94,.055,0);seg.add(glow);
          if(s%2===0){
@@ -2657,7 +2657,7 @@ function buildToboggan(){
  for(let i=0;i<count;i++){const seg=new THREE.Group();seg.userData.z=9-i*step;const flow=new THREE.Mesh(flowGeo,flowMat);flow.position.y=-.07;flow.receiveShadow=false;seg.add(flow);for(const side of [-1,1]){const bank=new THREE.Mesh(bankGeo,bankMat);bank.position.set(side*4.45,.42,0);bank.rotation.z=side*.15;seg.add(bank);const edge=new THREE.Mesh(edgeGeo,edgeMat);edge.position.set(side*4.02,.045,0);seg.add(edge)}seg.rotation.x=floodedMode?-.0035:(seg.userData.z< -3&&seg.userData.z> -123?-.056:0);tobogganGroup.add(seg);tobogganSegments.push(seg)}
  if(floodedMode){
    const tunnelStone=new THREE.MeshStandardMaterial({color:0x343b37,roughness:1}),tunnelDark=new THREE.MeshStandardMaterial({color:0x181d1b,roughness:1}),moss=new THREE.MeshBasicMaterial({color:0x395b42,transparent:true,opacity:.42}),lightMat=new THREE.MeshBasicMaterial({color:0xc7fff1,transparent:true,opacity:.72});
-   const tunnelCount=MOBILE_RUNNER?30:48,tunnelStep=9.2;
+   const tunnelCount=MOBILE_RUNNER?(LOW_END_MOBILE?18:22):48,tunnelStep=MOBILE_RUNNER?12.2:9.2;
    // Túnel realmente fechado: paredes e teto contínuos, sem pilares ou vigas atravessando a visão central.
    for(let i=0;i<tunnelCount;i++){
      const r=new THREE.Group();r.userData.z=10-i*tunnelStep;
@@ -2766,7 +2766,7 @@ function updateToboggan(dt){if(kharvorBreakFx)kharvorBreakFx.visible=false;
  if(UI.tobogganTime)UI.tobogganTime.textContent=tobogganTimer.toFixed(1)+' s';if(tobogganTimer<=0&&!gameOver)endToboggan(false)
 }
 
-function reset(){hideFamilyScene();stopAmbientBed();resetFootsteps();ambientAnimalTimer=3.5+Math.random()*4.5;resetTobogganState();resetOpeningImpactVisuals();resetKharvorBridge();tobogganAutoDone=false;tobogganApproachStage=0;tobogganRoadBlend=0;postTobogganExitProgress=null;lastGuidanceRealm=-1;lastRankNoticeAt=0;realmDistanceNotices=new Set();reviveStep=0;rewardedContinueCount=0;currentRunResult=null;portalTransitioning=false;distance=0;lives=3;water=100;speed=RUN_SPEED_BASE;targetLane=1;lane=1;jumpY=0;jumpV=0;slideTimer=0;slideCooldown=0;hitCooldown=0;runStars=0;runGems=0;elapsed=0;timePenalty=0;shieldCharges=(SAVE.upgrades.shield||0)>=3?2:(SAVE.upgrades.shield||0)>=1?1:0;spawnTimer=.8;gemTimer=2.1;starTimer=.35;waterTimer=8.5;clearItems();updateHUD();gameOver=false;fallingDeath=false;holeRecoveryActive=false;fallTimer=0;deathRecorded=false;lastDeathReason='';lastDeathMessage='';effortTimer=0;hydrationBand=2;curveStrength=0;curveTarget=.45;curveTimer=2.5;realmStartDistance=0;huntersVisible=false;huntersTimer=0;hunterStage=0;journeyRunFinished=false;shelterActive=false;shelterAvailable=false;shelterDecisionDone=false;shelterChoiceOpen=false;UI.shelterPanel.classList.remove('show');UI.shelterChoicePanel.classList.remove('show');UI.shelterPrompt.classList.remove('show');UI.revivePanel?.classList.remove('show');UI.journeyEndPanel?.classList.remove('show');if(UI.fallFlash)UI.fallFlash.classList.remove('show');if(UI.effortPulse)UI.effortPulse.classList.remove('show');const dw=$('descentWarning');if(dw)dw.classList.remove('show');const pf=$('portalFx');if(pf)pf.classList.remove('show');if(shelter3D){shelter3D.position.z=SHELTER_START_Z;shelter3D.position.x=7.45;shelter3D.rotation.y=0}hunters.forEach(h=>{if(h.root&&h.fixedScale)h.root.scale.copy(h.fixedScale);h.root.visible=false;h.z=h.restZ;h.targetZ=h.restZ;h.lanePos=1+h.baseLaneOffset;h.root.position.z=h.restZ;if(h.action)h.action.paused=false});if(lyraRoot){lyraRoot.visible=false;lyraRoot.position.set(1.05,0,-2.7)}const lb=$('lyraBadge');if(lb)lb.classList.remove('show');updateReviveOffer()}
+function reset(){hideFamilyScene();stopAmbientBed();resetFootsteps();ambientAnimalTimer=3.5+Math.random()*4.5;resetTobogganState();resetOpeningImpactVisuals();resetKharvorBridge();mobilePerfGuard=false;if(decorGroup)decorGroup.visible=true;tobogganAutoDone=false;tobogganApproachStage=0;tobogganRoadBlend=0;postTobogganExitProgress=null;lastGuidanceRealm=-1;lastRankNoticeAt=0;realmDistanceNotices=new Set();reviveStep=0;rewardedContinueCount=0;currentRunResult=null;portalTransitioning=false;distance=0;lives=3;water=100;speed=RUN_SPEED_BASE;targetLane=1;lane=1;jumpY=0;jumpV=0;slideTimer=0;slideCooldown=0;hitCooldown=0;runStars=0;runGems=0;elapsed=0;timePenalty=0;shieldCharges=(SAVE.upgrades.shield||0)>=3?2:(SAVE.upgrades.shield||0)>=1?1:0;spawnTimer=.8;gemTimer=2.1;starTimer=.35;waterTimer=8.5;clearItems();updateHUD();gameOver=false;fallingDeath=false;holeRecoveryActive=false;fallTimer=0;deathRecorded=false;lastDeathReason='';lastDeathMessage='';effortTimer=0;hydrationBand=2;curveStrength=0;curveTarget=.45;curveTimer=2.5;realmStartDistance=0;huntersVisible=false;huntersTimer=0;hunterStage=0;journeyRunFinished=false;shelterActive=false;shelterAvailable=false;shelterDecisionDone=false;shelterChoiceOpen=false;UI.shelterPanel.classList.remove('show');UI.shelterChoicePanel.classList.remove('show');UI.shelterPrompt.classList.remove('show');UI.revivePanel?.classList.remove('show');UI.journeyEndPanel?.classList.remove('show');if(UI.fallFlash)UI.fallFlash.classList.remove('show');if(UI.effortPulse)UI.effortPulse.classList.remove('show');const dw=$('descentWarning');if(dw)dw.classList.remove('show');const pf=$('portalFx');if(pf)pf.classList.remove('show');if(shelter3D){shelter3D.position.z=SHELTER_START_Z;shelter3D.position.x=7.45;shelter3D.rotation.y=0}hunters.forEach(h=>{if(h.root&&h.fixedScale)h.root.scale.copy(h.fixedScale);h.root.visible=false;h.z=h.restZ;h.targetZ=h.restZ;h.lanePos=1+h.baseLaneOffset;h.root.position.z=h.restZ;if(h.action)h.action.paused=false});if(lyraRoot){lyraRoot.visible=false;lyraRoot.position.set(1.05,0,-2.7)}const lb=$('lyraBadge');if(lb)lb.classList.remove('show');updateReviveOffer()}
 function openProfileForJourney(journey){pendingJourneyStart=journey;renderProfile();const st=$('profileStatus');if(st){st.className='profileStatus';st.textContent='Escolha como continuar. Convidado inicia sem conta; Criar/Entrar usa sua conta.'}UI.profilePanel.classList.add('show');setTimeout(()=>{if($('profileName'))$('profileName').focus()},80)}
 function requestJourneyStart(journey=1){if(!SAVE.profileCompleted){openProfileForJourney(journey);return false}pendingJourneyStart=null;startJourney(journey);return true}
 function completeProfileSave(){
@@ -2916,10 +2916,21 @@ function render(){
 function adjustMobileRenderScale(fps,now){
  if(!MOBILE_RUNNER||!renderer||!started)return;
  if(fps<36){mobilePerfLowSamples++;mobilePerfHighSamples=0}else if(fps>52){mobilePerfHighSamples++;mobilePerfLowSamples=0}else{mobilePerfLowSamples=Math.max(0,mobilePerfLowSamples-1);mobilePerfHighSamples=0}
- if(now-mobilePerfLastAdjust<3500)return;
+ if(mobilePerfLowSamples>=2&&!mobilePerfGuard){
+   mobilePerfGuard=true;
+   if(decorGroup)decorGroup.visible=false;
+   weatherParticles=weatherParticles.slice(0,Math.max(4,Math.floor(weatherParticles.length*.65)));
+   atmosphereParticles=atmosphereParticles.slice(0,Math.max(4,Math.floor(atmosphereParticles.length*.65)));
+ }
+ if(mobilePerfHighSamples>=8&&mobilePerfGuard&&!tobogganActive&&!forestUnderpassActive&&!vhalorFloodVisualActive){
+   mobilePerfGuard=false;
+   if(decorGroup)decorGroup.visible=true;
+   weatherParticles=[];atmosphereParticles=[];
+ }
+ if(now-mobilePerfLastAdjust<3000)return;
  let next=mobilePixelRatioCurrent;
- if(mobilePerfLowSamples>=3){next=Math.max(MOBILE_PIXEL_RATIO_MIN,mobilePixelRatioCurrent-.04);mobilePerfLowSamples=0}
- else if(mobilePerfHighSamples>=7){next=Math.min(MOBILE_PIXEL_RATIO_MAX,mobilePixelRatioCurrent+.025);mobilePerfHighSamples=0}
+ if(mobilePerfLowSamples>=3){next=Math.max(MOBILE_PIXEL_RATIO_MIN,mobilePixelRatioCurrent-.05);mobilePerfLowSamples=0}
+ else if(mobilePerfHighSamples>=7){next=Math.min(MOBILE_PIXEL_RATIO_MAX,mobilePixelRatioCurrent+.02);mobilePerfHighSamples=0}
  if(Math.abs(next-mobilePixelRatioCurrent)>.001){mobilePixelRatioCurrent=next;mobilePerfLastAdjust=now;renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobilePixelRatioCurrent));renderer.setSize(W,H,false)}
 }
 function loop(now){if(document.hidden){if(clock)clock.getDelta();requestAnimationFrame(loop);return}const dt=Math.min(.034,clock?clock.getDelta():.016);update(dt);updateVarekFootsteps(dt);updateWeatherVisual(dt);render();fpsAccum+=dt;fpsFrames++;if(fpsAccum>.70){const fps=Math.round(fpsFrames/fpsAccum);UI.fps.textContent=fps;adjustMobileRenderScale(fps,now||performance.now());fpsFrames=0;fpsAccum=0}requestAnimationFrame(loop)}
@@ -3058,7 +3069,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE59';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE60';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
