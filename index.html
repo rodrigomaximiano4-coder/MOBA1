@@ -224,7 +224,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE51</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE52</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -350,16 +350,17 @@ let fallingDeath=false,holeRecoveryActive=false,fallTimer=0,deathRecorded=false,
 let curveStrength=0,curveTarget=.45,curveTimer=3.2;
 let realmIndex=0,realmStartDistance=0,autoRealm=true,soundOn=true,flipHero=false,shadowsOn=true,hapticsOn=true,musicVolume=.70,sfxVolume=.85,ambientVolume=.65;
 let spawnTimer=1.1,gemTimer=2.8,starTimer=.55,waterTimer=9.5,realmLoading=false;
-const TOBOGGAN_DURATION=30,TOBOGGAN_SPEED=MOBILE_RUNNER?40.5:37.5,TOBOGGAN_LOOP=MOBILE_RUNNER?260:420; // 52 * 5 m on mobile: no uncovered water gap
+const TOBOGGAN_DURATION=30,TOBOGGAN_SPEED=MOBILE_RUNNER?35.6:37.5,TOBOGGAN_LOOP=MOBILE_RUNNER?260:420; // 52 * 5 m on mobile: no uncovered water gap
 const REALM_DISTANCE_J1=2200,REALM_DISTANCE_J2=3000,ENDLESS_REALM_DISTANCE=1800;
 const DISTANCE_SCALE=.50,TOBOGGAN_DISTANCE_SCALE=.52;
 const SHELTER_START_Z=-720,SHELTER_LOOP_Z=2600;
 const REVIVE_SEQUENCE=[{lives:1,price:150},{lives:2,price:300},{lives:3,price:500},{lives:1,price:650},{lives:2,price:900},{lives:3,price:1200}];
 let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobogganPhase=0,tobogganAutoDone=false,tobogganPrevSpeed=RUN_SPEED_BASE,tobogganHitCooldown=0,tobogganTestLaunch=false,tobogganForcedMode=null,tobogganExitAtDistance=null;
+let postTobogganExitProgress=null,lastGuidanceRealm=-1,lastRankNoticeAt=0,realmDistanceNotices=new Set();
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE51 • PISTA QUADRICULADA MOBILE + FINAL J1 COMPLETO
+// MAX HEALMS MOBILE52 • RITMO DINÂMICO + AVISOS DE RANKING + JANGADA FORTE
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -865,6 +866,33 @@ let currentRunResult=null;
 function runSnapshot(){return {id:'run-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),name:(SAVE.nickname||SAVE.name||'JOGADOR'),distance:Math.floor(distance),stars:runStars,score:runScore(),finalTime:Math.max(0,elapsed+timePenalty),journey:endlessMode?'ENDLESS':currentJourney,mode:endlessMode?'endless':'campaign',completed:endlessMode?false:!!journeyRunFinished,at:Date.now()}}
 function rankingSorted(extra=null){const rows=[...(SAVE.runs||[])];if(extra)rows.push(extra);return rows.sort((a,b)=>(Number(b.score)||0)-(Number(a.score)||0)||(Number(b.distance)||0)-(Number(a.distance)||0)||(Number(a.finalTime)||999999)-(Number(b.finalTime)||999999))}
 function previewRunRank(){const x=runSnapshot(),rows=rankingSorted(x),idx=rows.findIndex(r=>r===x);return Math.max(1,idx+1)}
+function updateRunGuidance(progress){
+ if(!started||paused||gameOver||tobogganActive||journeyRunFinished||realmLoading)return;
+ if(lastGuidanceRealm!==realmIndex){lastGuidanceRealm=realmIndex;realmDistanceNotices=new Set();lastRankNoticeAt=distance+260}
+ const order=getJourneyOrder(),pos=order.indexOf(realmIndex),target=realmTargetDistance(),remaining=Math.max(0,Math.ceil(target-progress));
+ // Ranking aparece periodicamente sem ocupar o HUD.
+ if(distance>=lastRankNoticeAt){
+   toast('🏆 COLOCAÇÃO ATUAL • #'+previewRunRank());
+   lastRankNoticeAt=distance+520;
+ }
+ // Avisos de aproximação do próximo reino.
+ if(pos>=0&&pos<order.length-1){
+   const next=REALMS[order[pos+1]];
+   for(const mark of [1000,500,250,100]){
+     if(remaining<=mark&&!realmDistanceNotices.has(mark)){
+       realmDistanceNotices.add(mark);
+       toast('🌍 FALTAM '+remaining+' m PARA '+next.short);
+       break;
+     }
+   }
+   if(remaining<=55&&!realmDistanceNotices.has(55)){
+     realmDistanceNotices.add(55);toast('🌀 PORTAL DE '+next.short+' À FRENTE')
+   }
+ }else if(pos===order.length-1){
+   if(remaining<=250&&!realmDistanceNotices.has(250)){realmDistanceNotices.add(250);toast('🏁 FALTAM '+remaining+' m PARA O FINAL DA JORNADA')}
+   else if(remaining<=80&&!realmDistanceNotices.has(80)){realmDistanceNotices.add(80);toast('🏁 CHEGADA À FRENTE')}
+ }
+}
 function recordRun(){if(currentRunResult)return currentRunResult;const row=runSnapshot();if(endlessMode)SAVE.endlessBestDistance=Math.max(Number(SAVE.endlessBestDistance)||0,row.distance);SAVE.runs=Array.isArray(SAVE.runs)?SAVE.runs:[];SAVE.runs.push(row);if(SAVE.runs.length>100)SAVE.runs=rankingSorted().slice(0,100);SAVE.bestScore=Math.max(Number(SAVE.bestScore)||0,row.score);SAVE.bestDistance=Math.max(Number(SAVE.bestDistance)||0,row.distance);SAVE.bestStars=Math.max(Number(SAVE.bestStars)||0,row.stars);if(row.completed&&(Number(SAVE.bestTime)||0)<=0)SAVE.bestTime=row.finalTime;else if(row.completed)SAVE.bestTime=Math.min(Number(SAVE.bestTime)||row.finalTime,row.finalTime);const rows=rankingSorted(),rank=Math.max(1,rows.findIndex(r=>r.id===row.id)+1);currentRunResult={...row,rank};saveState();renderRanking();return currentRunResult}
 function updateDeathRankPreview(prefix='SE ENCERRAR AGORA'){if(!UI.reviveRank)return;UI.reviveRank.textContent='🏆 '+prefix+' • POSIÇÃO LOCAL #'+previewRunRank()}
 function refreshMenuStats(){const a=$('menuGems'),b=$('menuStars'),c=$('menuBest'),d=$('menuPlayer');if(a)a.textContent='💎 '+gemText();if(b)b.textContent='⭐ '+SAVE.starsTotal;if(c)c.textContent=SAVE.bestScore+' pts';if(d)d.textContent=(SAVE.profileCompleted?(SAVE.nickname||SAVE.name):'CADASTRAR').toUpperCase();const uw=$('upgradeWallet');if(uw)uw.textContent='💎 '+gemText()+(TEST_MODE?' • TESTE':'');refreshJourneyMenu();const mp=$('menuPlan');if(mp)mp.textContent=SAVE.premiumOwned?'PREMIUM • SEM ADS':'FREE • ADS'}
@@ -1598,10 +1626,25 @@ function updateHydrationWarnings(){if(water<=0)return;if(water<15&&hydrationBand
 function mobileRhythmSpeed(progress){
  if(!MOBILE_RUNNER)return Math.min(RUN_SPEED_MAX,RUN_SPEED_BASE+distance/220);
  const p=Math.max(0,progress||0),id=REALMS[realmIndex]?.id;
- // Primeira impressão forte, depois respira e volta a acelerar. Neris mantém a faixa de velocidade que funcionou bem.
- let target=p<240?38.2:p<620?34.2:p<1050?36.0:p<1500?32.8:p<1950?37.0:38.4;
- if(id==='forest')target=Math.max(target,36.0);
- if(id==='celestial')target=Math.max(34.5,Math.min(target,37.4));
+ let target;
+ // MOBILE52: começo rápido. Após uma descida, a saída continua rápida,
+ // depois 500 m médios; então alterna blocos rápidos e médios.
+ if(postTobogganExitProgress!=null&&p>=postTobogganExitProgress){
+   const d=p-postTobogganExitProgress;
+   if(d<180)target=38.8;
+   else{
+     const phase=(d-180)%900;
+     target=phase<500?33.4:38.2;
+   }
+ }else{
+   if(p<420)target=38.8;
+   else{
+     const phase=(p-420)%900;
+     target=phase<500?33.6:38.0;
+   }
+ }
+ if(id==='forest')target=Math.max(target,target<35?34.2:target);
+ if(id==='celestial')target=Math.max(34.2,Math.min(target,38.0));
  return Math.min(RUN_SPEED_MAX,target);
 }
 
@@ -2271,7 +2314,7 @@ function updateHunters(dt){
 
 async function loadRealm(index,initial=false){
  if(realmLoading)return;
- realmLoading=true;realmIndex=(index+REALMS.length)%REALMS.length;const cfg=REALMS[realmIndex];
+ realmLoading=true;realmIndex=(index+REALMS.length)%REALMS.length;postTobogganExitProgress=null;lastGuidanceRealm=-1;realmDistanceNotices=new Set();const cfg=REALMS[realmIndex];
  UI.status3d.textContent='CARREGANDO';UI.loadingText.textContent='Carregando '+cfg.name+'...';if(!initial)toast('CARREGANDO '+cfg.short);
  while(sceneryGroup.children.length){const old=sceneryGroup.children.pop();disposeObject(old)}sceneryChunks.length=0;resetOpeningImpactVisuals();resetKharvorBridge();
  setRealmBackground(cfg)
@@ -2495,11 +2538,12 @@ function createLavaSled(accentC){
 }
 function createRiverCanoe(accentC){
  const g=new THREE.Group();g.name='MAX_HEALMS_RIVER_CANOE_PREMIUM';
- const wood=new THREE.MeshStandardMaterial({color:0x754623,roughness:.72,metalness:.02});
- const woodLight=new THREE.MeshStandardMaterial({color:0xa06a35,roughness:.66,metalness:.02});
- const dark=new THREE.MeshStandardMaterial({color:0x241a14,roughness:.82});
- const trim=new THREE.MeshStandardMaterial({color:accentC,emissive:accentC,emissiveIntensity:.24,roughness:.42,metalness:.06});
- const gold=new THREE.MeshStandardMaterial({color:0xcba65d,emissive:0x51330c,emissiveIntensity:.18,roughness:.48,metalness:.12});
+ const wood=new THREE.MeshStandardMaterial({color:0x5f321d,roughness:.68,metalness:.03});
+ const woodLight=new THREE.MeshStandardMaterial({color:0xb05a2d,roughness:.60,metalness:.03});
+ const dark=new THREE.MeshStandardMaterial({color:0x171a20,roughness:.76});
+ const trim=new THREE.MeshStandardMaterial({color:0x22a9d6,emissive:0x0a5e7a,emissiveIntensity:.42,roughness:.34,metalness:.10});
+ const gold=new THREE.MeshStandardMaterial({color:0xe1b95f,emissive:0x6a4210,emissiveIntensity:.26,roughness:.42,metalness:.16});
+ const red=new THREE.MeshStandardMaterial({color:0xa9362b,emissive:0x4a120e,emissiveIntensity:.18,roughness:.52});
  // Corpo central mais longo e estreito, com proa/traseira elevadas.
  const hull=new THREE.Mesh(new THREE.BoxGeometry(1.48,.28,2.78),wood);hull.position.y=.23;g.add(hull);
  const keel=new THREE.Mesh(new THREE.BoxGeometry(.72,.14,2.92),dark);keel.position.set(0,.06,.02);g.add(keel);
@@ -2517,6 +2561,12 @@ function createRiverCanoe(accentC){
  const stripe=new THREE.Mesh(new THREE.BoxGeometry(.68,.07,.08),trim);stripe.position.set(0,.50,-2.15);g.add(stripe);
  // Pequenos protetores laterais aumentam volume sem pesar.
  for(const sx of [-1,1])for(const z of [-1.35,1.35]){const cap=new THREE.Mesh(new THREE.BoxGeometry(.18,.20,.34),dark);cap.position.set(sx*.72,.46,z);g.add(cap)}
+ // MOBILE52: painéis coloridos e reforço estrutural dão mais presença à jangada.
+ for(const sx of [-1,1]){
+   const panel=new THREE.Mesh(new THREE.BoxGeometry(.10,.34,1.55),red);panel.position.set(sx*.81,.52,.28);panel.rotation.z=sx*-.10;g.add(panel);
+   const guard=new THREE.Mesh(new THREE.BoxGeometry(.08,.18,2.25),trim);guard.position.set(sx*.84,.72,-.10);g.add(guard)
+ }
+ const bowPlate=new THREE.Mesh(new THREE.BoxGeometry(.72,.18,.44),red);bowPlate.position.set(0,.48,-1.72);bowPlate.rotation.x=-.08;g.add(bowPlate);
  tobogganGroup.add(g);tobogganCart=g;return g
 }
 function createRiverLog(laneI,z,mat){const g=new THREE.Group(),m=new THREE.Mesh(new THREE.CylinderGeometry(.28,.36,2.05,9),mat);m.rotation.z=Math.PI/2;m.position.y=.30;g.add(m);for(const x of [-.82,.76]){const knot=new THREE.Mesh(new THREE.CylinderGeometry(.06,.10,.34,7),mat);knot.rotation.z=Math.PI/2;knot.rotation.y=x<0?.65:-.45;knot.position.set(x,.38,.05);g.add(knot)}g.userData={kind:'tobogganHazard',type:'tronco',lane:laneI,z,hit:false,baseY:.04};tobogganGroup.add(g);tobogganHazards.push(g)}
@@ -2606,7 +2656,8 @@ function syncTobogganRiders(){
  if(heroRoot){heroRoot.position.set(cp.x,cp.y+(RIVER_HERO_Y-.02),cp.z+(RIVER_HERO_Z-.12));heroRoot.rotation.set(-.12+cr.x,Math.PI+(flipHero?Math.PI:0)+cr.y,cr.z);if(currentAction)currentAction.paused=true;if(mixer)mixer.update(0);applyTobogganCrouchPose(hero,false)}
  if(lyraRoot&&currentJourney===2){lyraRoot.visible=true;lyraRoot.position.set(cp.x,cp.y+(RIVER_LYRA_Y-.02),cp.z+(RIVER_LYRA_Z-.12));lyraRoot.rotation.set(-.11+cr.x,Math.PI+(flipHero?Math.PI:0)+cr.y,cr.z);if(lyraAction)lyraAction.paused=true;if(lyraMixer)lyraMixer.update(0);applyTobogganCrouchPose(lyraModel,true)}
 }
-function resetTobogganState(){stopTobogganWind();stopTobogganWater();tobogganActive=false;tobogganTimer=0;tobogganElapsed=0;tobogganTravel=0;tobogganHitCooldown=0;tobogganTestLaunch=false;tobogganForcedMode=null;tobogganExitAtDistance=null;setVhalorFloodVisual(false);if(tobogganGroup)tobogganGroup.visible=false;if(roadGroup)roadGroup.visible=true;if(decorGroup)decorGroup.visible=true;if(itemGroup)itemGroup.visible=true;if(shelter3D)shelter3D.visible=true;UI.tobogganHud?.classList.remove('show');UI.tobogganFx?.classList.remove('show')}
+function resetTobogganState(){stopTobogganWind();stopTobogganWater();tobogganActive=false;tobogganTimer=0;tobogganElapsed=0;tobogganTravel=0;tobogganHitCooldown=0;tobogganTestLaunch=false;if(!silent)postTobogganExitProgress=Math.max(0,distance-realmStartDistance);
+ tobogganForcedMode=null;tobogganExitAtDistance=null;setVhalorFloodVisual(false);if(tobogganGroup)tobogganGroup.visible=false;if(roadGroup)roadGroup.visible=true;if(decorGroup)decorGroup.visible=true;if(itemGroup)itemGroup.visible=true;if(shelter3D)shelter3D.visible=true;UI.tobogganHud?.classList.remove('show');UI.tobogganFx?.classList.remove('show')}
 function startToboggan(testLaunch=false,forcedMode=null,exitAtDistance=null){
  if(!started||paused||gameOver||tobogganActive)return;
  tobogganForcedMode=forcedMode;tobogganExitAtDistance=Number.isFinite(exitAtDistance)?exitAtDistance:null;tobogganTestLaunch=!!testLaunch;tobogganActive=true;ensureAudio();startTobogganWind();tobogganAutoDone=true;tobogganTimer=tobogganExitAtDistance?Math.max(1,(tobogganExitAtDistance-distance)/(TOBOGGAN_SPEED*TOBOGGAN_DISTANCE_SCALE)):TOBOGGAN_DURATION;tobogganElapsed=0;tobogganTravel=0;tobogganPhase=Math.random()*Math.PI*2;tobogganPrevSpeed=speed;tobogganHitCooldown=0;tobogganRoadBlend=0;lane=targetLane=1;jumpY=0;jumpV=0;slideTimer=999;
@@ -2647,7 +2698,7 @@ function updateToboggan(dt){if(kharvorBreakFx)kharvorBreakFx.visible=false;
  if(UI.tobogganTime)UI.tobogganTime.textContent=tobogganTimer.toFixed(1)+' s';if(tobogganTimer<=0&&!gameOver)endToboggan(false)
 }
 
-function reset(){hideFamilyScene();stopAmbientBed();resetFootsteps();ambientAnimalTimer=3.5+Math.random()*4.5;resetTobogganState();resetOpeningImpactVisuals();resetKharvorBridge();tobogganAutoDone=false;tobogganApproachStage=0;tobogganRoadBlend=0;reviveStep=0;rewardedContinueCount=0;currentRunResult=null;portalTransitioning=false;distance=0;lives=3;water=100;speed=RUN_SPEED_BASE;targetLane=1;lane=1;jumpY=0;jumpV=0;slideTimer=0;slideCooldown=0;hitCooldown=0;runStars=0;runGems=0;elapsed=0;timePenalty=0;shieldCharges=(SAVE.upgrades.shield||0)>=3?2:(SAVE.upgrades.shield||0)>=1?1:0;spawnTimer=.8;gemTimer=2.1;starTimer=.35;waterTimer=8.5;clearItems();updateHUD();gameOver=false;fallingDeath=false;holeRecoveryActive=false;fallTimer=0;deathRecorded=false;lastDeathReason='';lastDeathMessage='';effortTimer=0;hydrationBand=2;curveStrength=0;curveTarget=.45;curveTimer=2.5;realmStartDistance=0;huntersVisible=false;huntersTimer=0;hunterStage=0;journeyRunFinished=false;shelterActive=false;shelterAvailable=false;shelterDecisionDone=false;shelterChoiceOpen=false;UI.shelterPanel.classList.remove('show');UI.shelterChoicePanel.classList.remove('show');UI.shelterPrompt.classList.remove('show');UI.revivePanel?.classList.remove('show');UI.journeyEndPanel?.classList.remove('show');if(UI.fallFlash)UI.fallFlash.classList.remove('show');if(UI.effortPulse)UI.effortPulse.classList.remove('show');const dw=$('descentWarning');if(dw)dw.classList.remove('show');const pf=$('portalFx');if(pf)pf.classList.remove('show');if(shelter3D){shelter3D.position.z=SHELTER_START_Z;shelter3D.position.x=7.45;shelter3D.rotation.y=0}hunters.forEach(h=>{if(h.root&&h.fixedScale)h.root.scale.copy(h.fixedScale);h.root.visible=false;h.z=h.restZ;h.targetZ=h.restZ;h.lanePos=1+h.baseLaneOffset;h.root.position.z=h.restZ;if(h.action)h.action.paused=false});if(lyraRoot){lyraRoot.visible=false;lyraRoot.position.set(1.05,0,-2.7)}const lb=$('lyraBadge');if(lb)lb.classList.remove('show');updateReviveOffer()}
+function reset(){hideFamilyScene();stopAmbientBed();resetFootsteps();ambientAnimalTimer=3.5+Math.random()*4.5;resetTobogganState();resetOpeningImpactVisuals();resetKharvorBridge();tobogganAutoDone=false;tobogganApproachStage=0;tobogganRoadBlend=0;postTobogganExitProgress=null;lastGuidanceRealm=-1;lastRankNoticeAt=0;realmDistanceNotices=new Set();reviveStep=0;rewardedContinueCount=0;currentRunResult=null;portalTransitioning=false;distance=0;lives=3;water=100;speed=RUN_SPEED_BASE;targetLane=1;lane=1;jumpY=0;jumpV=0;slideTimer=0;slideCooldown=0;hitCooldown=0;runStars=0;runGems=0;elapsed=0;timePenalty=0;shieldCharges=(SAVE.upgrades.shield||0)>=3?2:(SAVE.upgrades.shield||0)>=1?1:0;spawnTimer=.8;gemTimer=2.1;starTimer=.35;waterTimer=8.5;clearItems();updateHUD();gameOver=false;fallingDeath=false;holeRecoveryActive=false;fallTimer=0;deathRecorded=false;lastDeathReason='';lastDeathMessage='';effortTimer=0;hydrationBand=2;curveStrength=0;curveTarget=.45;curveTimer=2.5;realmStartDistance=0;huntersVisible=false;huntersTimer=0;hunterStage=0;journeyRunFinished=false;shelterActive=false;shelterAvailable=false;shelterDecisionDone=false;shelterChoiceOpen=false;UI.shelterPanel.classList.remove('show');UI.shelterChoicePanel.classList.remove('show');UI.shelterPrompt.classList.remove('show');UI.revivePanel?.classList.remove('show');UI.journeyEndPanel?.classList.remove('show');if(UI.fallFlash)UI.fallFlash.classList.remove('show');if(UI.effortPulse)UI.effortPulse.classList.remove('show');const dw=$('descentWarning');if(dw)dw.classList.remove('show');const pf=$('portalFx');if(pf)pf.classList.remove('show');if(shelter3D){shelter3D.position.z=SHELTER_START_Z;shelter3D.position.x=7.45;shelter3D.rotation.y=0}hunters.forEach(h=>{if(h.root&&h.fixedScale)h.root.scale.copy(h.fixedScale);h.root.visible=false;h.z=h.restZ;h.targetZ=h.restZ;h.lanePos=1+h.baseLaneOffset;h.root.position.z=h.restZ;if(h.action)h.action.paused=false});if(lyraRoot){lyraRoot.visible=false;lyraRoot.position.set(1.05,0,-2.7)}const lb=$('lyraBadge');if(lb)lb.classList.remove('show');updateReviveOffer()}
 function openProfileForJourney(journey){pendingJourneyStart=journey;renderProfile();const st=$('profileStatus');if(st){st.className='profileStatus';st.textContent='Escolha como continuar. Convidado inicia sem conta; Criar/Entrar usa sua conta.'}UI.profilePanel.classList.add('show');setTimeout(()=>{if($('profileName'))$('profileName').focus()},80)}
 function requestJourneyStart(journey=1){if(!SAVE.profileCompleted){openProfileForJourney(journey);return false}pendingJourneyStart=null;startJourney(journey);return true}
 function completeProfileSave(){
@@ -2752,7 +2803,7 @@ function update(dt){
  if(fallingDeath&&!gameOver){if(heroRoot){fallTimer+=dt;heroRoot.position.y-=dt*(3.2+fallTimer*6.8);heroRoot.rotation.x+=dt*.72;heroRoot.rotation.z+=dt*.18}if(mixer)mixer.update(dt*.10);updateHUD();return}
  if(gameOver){if(tobogganActive&&!fallingDeath){if(heroRoot){heroRoot.position.y=tobogganY(0)+RIVER_HERO_Y;heroRoot.position.z=RIVER_HERO_Z;heroRoot.rotation.x=-.12}if(currentAction)currentAction.paused=true;applyTobogganCrouchPose(hero,false);if(lyraRoot&&currentJourney===2){if(lyraAction)lyraAction.paused=true;applyTobogganCrouchPose(lyraModel,true)}return}if(fallingDeath&&heroRoot){fallTimer+=dt;heroRoot.position.y-=dt*(3.4+fallTimer*7.5);heroRoot.rotation.x+=dt*1.35;heroRoot.rotation.z+=dt*.48;camera.position.y=Math.max(1.25,camera.position.y-dt*.7)}if(mixer)mixer.update(dt*.12);return}
  if(tobogganActive){updateToboggan(dt);updateHUD();return}
- elapsed+=dt;distance+=speed*dt*DISTANCE_SCALE;const currentRealmProgress=distance-realmStartDistance;updateKharvorBridge(dt,currentRealmProgress);const rhythmTarget=mobileRhythmSpeed(currentRealmProgress);speed+=(rhythmTarget-speed)*Math.min(1,dt*(MOBILE_RUNNER?1.35:.8));water-=dt*(.52+speed*.008);updateHydrationWarnings();if(water<=0){dehydrationDeath();return}updateCurve(dt);effortTimer=Math.max(0,effortTimer-dt);if(UI.effortPulse)UI.effortPulse.classList.toggle('show',effortTimer>0);
+ elapsed+=dt;distance+=speed*dt*DISTANCE_SCALE;const currentRealmProgress=distance-realmStartDistance;updateKharvorBridge(dt,currentRealmProgress);updateRunGuidance(currentRealmProgress);const rhythmTarget=mobileRhythmSpeed(currentRealmProgress);speed+=(rhythmTarget-speed)*Math.min(1,dt*(MOBILE_RUNNER?1.35:.8));water-=dt*(.52+speed*.008);updateHydrationWarnings();if(water<=0){dehydrationDeath();return}updateCurve(dt);effortTimer=Math.max(0,effortTimer-dt);if(UI.effortPulse)UI.effortPulse.classList.toggle('show',effortTimer>0);
  lane+=(targetLane-lane)*Math.min(1,dt*11);
  if(jumpY>0||jumpV>0){const wasAirborne=jumpY>0;jumpV-=18.8*dt;jumpY+=jumpV*dt;if(jumpY<=0){jumpY=0;jumpV=0;if(wasAirborne)playSFX('land')}}
  slideTimer=Math.max(0,slideTimer-dt);slideCooldown=Math.max(0,slideCooldown-dt);hitCooldown=Math.max(0,hitCooldown-dt);
@@ -2930,7 +2981,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE51';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE52';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
