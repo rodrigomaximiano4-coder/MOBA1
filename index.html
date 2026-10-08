@@ -224,7 +224,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE45</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE46</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -341,7 +341,7 @@ const LOW_END_MOBILE=MOBILE_RUNNER&&(DEVICE_MEMORY<=3||HARDWARE_THREADS<=4);
 const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.78:.94,MOBILE_PIXEL_RATIO_MIN=LOW_END_MOBILE?.66:.76;
 const TARGET_PIXEL_RATIO=MOBILE_RUNNER?MOBILE_PIXEL_RATIO_MAX:1.4;
 let mobilePixelRatioCurrent=TARGET_PIXEL_RATIO,mobilePerfLowSamples=0,mobilePerfHighSamples=0,mobilePerfLastAdjust=0;
-const RUN_SPEED_BASE=MOBILE_RUNNER?31.0:20.2;
+const RUN_SPEED_BASE=MOBILE_RUNNER?34.8:20.2;
 const RUN_SPEED_MAX=MOBILE_RUNNER?40.0:34.0;
 let distance=0,lives=3,water=100,speed=RUN_SPEED_BASE,targetLane=0,lane=0,jumpY=0,jumpV=0,slideTimer=0,slideCooldown=0,hitCooldown=0;
 let runStars=0,runGems=0,elapsed=0,timePenalty=0,shieldCharges=0;
@@ -359,7 +359,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE45 • PISTA ESTÁVEL + BARREIRAS PREMIUM
+// MAX HEALMS MOBILE46 • RITMO RÁPIDO + POSTO DE APOIO + CANOA PREMIUM
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -1583,15 +1583,15 @@ function trackCurveX(z){const f=curveFactor(z);return curveStrength*7.4*f*f*(.82
 function trackCurveYaw(z){const f=curveFactor(z);return -curveStrength*.19*f}
 function updateCurve(dt){curveTimer-=dt;if(curveTimer<=0){const choices=MOBILE_RUNNER?[-.88,-.64,-.42,.42,.64,.88]:[-1,-.78,-.52,.48,.75,1];curveTarget=choices[Math.floor(Math.random()*choices.length)];curveTimer=(MOBILE_RUNNER?2.35:2.7)+Math.random()*(MOBILE_RUNNER?2.65:3.4)}curveStrength+=(curveTarget-curveStrength)*Math.min(1,dt*(MOBILE_RUNNER?.50:.42))}
 function effortBurst(label='ESFORÇO'){effortTimer=.55;if(UI.effortPulse){UI.effortPulse.textContent=label;UI.effortPulse.classList.add('show')}}
-function updateHydrationWarnings(){if(water<=0)return;if(water<15&&hydrationBand!==0){hydrationBand=0;toast('DESIDRATAÇÃO GRAVE • PROCURE ÁGUA OU ABRIGO')}else if(water<35&&hydrationBand>1){hydrationBand=1;toast('SEDE • HIDRATAÇÃO ABAIXO DE 35%')}else if(water>=35&&hydrationBand<2){hydrationBand=2}}
+function updateHydrationWarnings(){if(water<=0)return;if(water<15&&hydrationBand!==0){hydrationBand=0;toast('DESIDRATAÇÃO GRAVE • PROCURE ÁGUA OU POSTO DE APOIO')}else if(water<35&&hydrationBand>1){hydrationBand=1;toast('SEDE • HIDRATAÇÃO ABAIXO DE 35%')}else if(water>=35&&hydrationBand<2){hydrationBand=2}}
 
 function mobileRhythmSpeed(progress){
  if(!MOBILE_RUNNER)return Math.min(RUN_SPEED_MAX,RUN_SPEED_BASE+distance/220);
  const p=Math.max(0,progress||0),id=REALMS[realmIndex]?.id;
  // Primeira impressão forte, depois respira e volta a acelerar. Neris mantém a faixa de velocidade que funcionou bem.
- let target=p<260?34.6:p<620?31.8:p<1050?33.4:p<1500?30.8:p<1950?35.0:36.2;
- if(id==='forest')target=Math.max(target,35.0);
- if(id==='celestial')target=Math.max(32.8,Math.min(target,36.0));
+ let target=p<240?38.2:p<620?34.2:p<1050?36.0:p<1500?32.8:p<1950?37.0:38.4;
+ if(id==='forest')target=Math.max(target,36.0);
+ if(id==='celestial')target=Math.max(34.5,Math.min(target,37.4));
  return Math.min(RUN_SPEED_MAX,target);
 }
 
@@ -1974,7 +1974,7 @@ function makeShelterLabel(textLabel){
 }
 function buildShelter3D(){
  if(shelter3D){worldRoot.remove(shelter3D);disposeObject(shelter3D)}
- shelter3D=new THREE.Group();shelter3D.name='MR_SHELTER_HOUSE';
+ shelter3D=new THREE.Group();shelter3D.name='MR_SUPPORT_POST';
  const wood=new THREE.MeshStandardMaterial({color:0x65472d,roughness:.96});
  const woodDark=new THREE.MeshStandardMaterial({color:0x38271b,roughness:1});
  const plank=new THREE.MeshStandardMaterial({color:0x7a5938,roughness:.92});
@@ -1999,13 +1999,19 @@ function buildShelter3D(){
  const lamp=new THREE.PointLight(0xffb45f,1.6,12,2);lamp.position.set(0,2.05,.45);shelter3D.add(lamp);
  const lantern=new THREE.Mesh(new THREE.SphereGeometry(.14,10,8),warm);lantern.position.set(.0,2.58,1.95);shelter3D.add(lantern);
  // Large pitched roof.
- const roof=new THREE.Mesh(new THREE.ConeGeometry(3.55,1.55,4),roofMat);roof.rotation.y=Math.PI/4;roof.scale.z=.78;roof.position.set(0,3.72,-.05);shelter3D.add(roof);
+ const roof=new THREE.Mesh(new THREE.ConeGeometry(3.75,1.68,4),roofMat);roof.rotation.y=Math.PI/4;roof.scale.z=.80;roof.position.set(0,3.76,-.05);shelter3D.add(roof);
+ // MOBILE46: fachada mais marcante e acolhedora.
+ const ridge=new THREE.Mesh(new THREE.BoxGeometry(.18,.18,4.9),trim);ridge.position.set(0,4.48,-.05);ridge.rotation.y=Math.PI/2;shelter3D.add(ridge);
+ const canopy=new THREE.Mesh(new THREE.BoxGeometry(3.25,.14,1.18),roofMat);canopy.position.set(0,2.93,2.05);canopy.rotation.x=-.12;shelter3D.add(canopy);
+ for(const x of [-1.95,1.95]){const brace=new THREE.Mesh(new THREE.BoxGeometry(.14,2.35,.14),trim);brace.position.set(x,1.55,1.82);shelter3D.add(brace)}
+ const emblem=new THREE.Mesh(new THREE.TorusGeometry(.34,.055,8,24),new THREE.MeshStandardMaterial({color:0xf4c56a,emissive:0x6b420d,emissiveIntensity:.45,roughness:.55}));emblem.position.set(0,2.42,1.86);emblem.rotation.x=Math.PI/2;shelter3D.add(emblem);
+ const waterBarrel=new THREE.Mesh(new THREE.CylinderGeometry(.34,.38,.86,12),new THREE.MeshStandardMaterial({color:0x36586a,roughness:.78,metalness:.05}));waterBarrel.position.set(1.72,.62,2.20);shelter3D.add(waterBarrel);
  // Windows with warm light.
  for(const x of [-1.35,1.35]){const win=new THREE.Mesh(new THREE.BoxGeometry(.78,.82,.05),warm);win.position.set(x,1.86,1.76);shelter3D.add(win)}
  // Clear sign above the door.
- const label=makeShelterLabel('ABRIGO');label.position.set(0,3.15,1.91);shelter3D.add(label);
+ const label=makeShelterLabel('POSTO DE APOIO');label.position.set(0,3.15,1.91);shelter3D.add(label);
  // Large advance road sign: arrives before the house and clearly points to the right-side diversion.
- const advanceSign=makeShelterLabel('ABRIGO →');advanceSign.scale.set(1.28,1.28,1.28);advanceSign.position.set(-3.55,2.35,13.5);shelter3D.add(advanceSign);
+ const advanceSign=makeShelterLabel('POSTO →');advanceSign.scale.set(1.28,1.28,1.28);advanceSign.position.set(-3.55,2.35,13.5);shelter3D.add(advanceSign);
  for(const x of [-4.55,-2.55]){const sp=new THREE.Mesh(new THREE.CylinderGeometry(.08,.11,2.0,8),woodDark);sp.position.set(x,1.0,13.5);shelter3D.add(sp)}
  const arrowGlow=new THREE.Mesh(new THREE.ConeGeometry(.42,.92,3),new THREE.MeshStandardMaterial({color:0xf4c56a,emissive:0xb56d12,emissiveIntensity:1.1,roughness:.5}));arrowGlow.rotation.z=-Math.PI/2;arrowGlow.position.set(-2.35,1.45,13.5);shelter3D.add(arrowGlow);
  // Side passage from the right edge of the running track to the porch.
@@ -2026,17 +2032,23 @@ function buildShelter3D(){
  shelter3D.position.set(7.45,0,SHELTER_START_Z);
  shelter3D.traverse(n=>{if(n.isMesh){n.castShadow=shadowsOn;n.receiveShadow=shadowsOn}});worldRoot.add(shelter3D)
 }
-function openShelterChoice(){if(shelterChoiceOpen||shelterActive||shelterDecisionDone||!shelterAvailable)return;if(Math.round(lane)!==2||targetLane!==2){toast('ABRIGO À DIREITA • ENTRE NA FAIXA DIREITA');return}shelterDecisionDone=true;shelterChoiceOpen=true;UI.shelterPrompt.classList.remove('show');UI.shelterChoicePanel.classList.add('show');clock.getDelta()}
+function openShelterChoice(){if(shelterChoiceOpen||shelterActive||shelterDecisionDone||!shelterAvailable)return;if(Math.round(lane)!==2||targetLane!==2){toast('POSTO DE APOIO À DIREITA • ENTRE NA FAIXA DIREITA');return}shelterDecisionDone=true;shelterChoiceOpen=true;UI.shelterPrompt.classList.remove('show');UI.shelterChoicePanel.classList.add('show');clock.getDelta()}
 function declineShelter(){
- if(!shelterChoiceOpen)return;shelterChoiceOpen=false;UI.shelterChoicePanel.classList.remove('show');clock.getDelta();toast('ABRIGO RECUSADO • CONTINUE A FUGA');
+ if(!shelterChoiceOpen)return;shelterChoiceOpen=false;UI.shelterChoicePanel.classList.remove('show');clock.getDelta();toast('POSTO DE APOIO IGNORADO • CONTINUE A FUGA');
 }
-function updateShelter(dt,dz){if(!shelter3D)return;if(started&&!paused&&!gameOver&&!shelterActive&&!shelterChoiceOpen)shelter3D.position.z+=dz;shelter3D.position.x=7.45+trackCurveX(shelter3D.position.z);shelter3D.position.y=kharvorLayerY;shelter3D.rotation.y=trackCurveYaw(shelter3D.position.z);const near=shelter3D.position.z>-32&&shelter3D.position.z<4&&!shelterActive&&!shelterChoiceOpen;shelterAvailable=near;UI.shelterPrompt.classList.toggle('show',near);if(near){const meters=Math.max(0,Math.round(Math.abs(shelter3D.position.z)*.55));const inRight=Math.round(lane)===2&&targetLane===2;UI.shelterPrompt.textContent='🏕 ABRIGO À DIREITA • '+(meters>2?meters+' m • ':'')+(inRight?'FAIXA CORRETA • ENTRADA LIVRE':'ENTRE NA FAIXA DIREITA →')}if(near&&!shelterDecisionDone&&shelter3D.position.z>-1.35&&shelter3D.position.z<1.65&&Math.round(lane)===2&&targetLane===2)openShelterChoice();if(shelter3D.position.z>18){shelter3D.position.z-=SHELTER_LOOP_Z;shelterAvailable=false;shelterDecisionDone=false;shelterChoiceOpen=false;UI.shelterPrompt.classList.remove('show');UI.shelterChoicePanel.classList.remove('show')}}
-function enterShelter(){if(!shelterChoiceOpen||shelterActive)return;shelterChoiceOpen=false;UI.shelterChoicePanel.classList.remove('show');shelterActive=true;shelterTimer=300;shelterHydrationBefore=water;timePenalty+=60;huntersVisible=false;hunters.forEach(h=>h.root.visible=false);UI.shelterPrompt.classList.remove('show');UI.shelterPanel.classList.add('show');UI.shelterCounter.textContent='05:00';if(UI.shelterHydrationBefore)UI.shelterHydrationBefore.textContent=Math.floor(shelterHydrationBefore)+'%';refreshShelterHydrationOffers();toast('ABRIGO • CORRIDA PAUSADA • HIDRATAÇÃO OPCIONAL • +1 MINUTO NO RANKING')}
+function updateShelter(dt,dz){
+ if(!shelter3D)return;
+ if(started&&!paused&&!gameOver&&!shelterActive&&!shelterChoiceOpen)shelter3D.position.z+=dz;
+ // Mantém uma área limpa ao redor do Posto de Apoio, inclusive obstáculos já existentes.
+ if(!shelterActive&&shelter3D.position.z>-105&&shelter3D.position.z<55){
+   for(let i=obstacles.length-1;i>=0;i--){const o=obstacles[i];if(Math.abs(o.position.z-shelter3D.position.z)<48){itemGroup.remove(o);disposeObject(o);obstacles.splice(i,1)}}
+ }shelter3D.position.x=7.45+trackCurveX(shelter3D.position.z);shelter3D.position.y=kharvorLayerY;shelter3D.rotation.y=trackCurveYaw(shelter3D.position.z);const near=shelter3D.position.z>-32&&shelter3D.position.z<4&&!shelterActive&&!shelterChoiceOpen;shelterAvailable=near;UI.shelterPrompt.classList.toggle('show',near);if(near){const meters=Math.max(0,Math.round(Math.abs(shelter3D.position.z)*.55));const inRight=Math.round(lane)===2&&targetLane===2;UI.shelterPrompt.textContent='🏕 POSTO DE APOIO À DIREITA • '+(meters>2?meters+' m • ':'')+(inRight?'FAIXA CORRETA • ENTRADA LIVRE':'ENTRE NA FAIXA DIREITA →')}if(near&&!shelterDecisionDone&&shelter3D.position.z>-1.35&&shelter3D.position.z<1.65&&Math.round(lane)===2&&targetLane===2)openShelterChoice();if(shelter3D.position.z>18){shelter3D.position.z-=SHELTER_LOOP_Z;shelterAvailable=false;shelterDecisionDone=false;shelterChoiceOpen=false;UI.shelterPrompt.classList.remove('show');UI.shelterChoicePanel.classList.remove('show')}}
+function enterShelter(){if(!shelterChoiceOpen||shelterActive)return;shelterChoiceOpen=false;UI.shelterChoicePanel.classList.remove('show');shelterActive=true;shelterTimer=300;shelterHydrationBefore=water;timePenalty+=60;huntersVisible=false;hunters.forEach(h=>h.root.visible=false);UI.shelterPrompt.classList.remove('show');UI.shelterPanel.classList.add('show');UI.shelterCounter.textContent='05:00';if(UI.shelterHydrationBefore)UI.shelterHydrationBefore.textContent=Math.floor(shelterHydrationBefore)+'%';refreshShelterHydrationOffers();toast('POSTO DE APOIO • CORRIDA PAUSADA • HIDRATAÇÃO OPCIONAL • +1 MINUTO NO RANKING')}
 
 function hydrationFullPrice(){const missing=Math.max(0,100-water);return missing<=0?0:Math.min(200,Math.max(40,Math.ceil(missing/20)*40))}
 function refreshShelterHydrationOffers(){if(UI.shelterHydrationNow)UI.shelterHydrationNow.textContent=Math.floor(water)+'%';if(UI.shelterHydrationStatus)UI.shelterHydrationStatus.innerHTML=water>=99.9?'💧 <strong>Hidratação completa.</strong> Você pode continuar sem gastar.':'💧 Hidratação atual: <strong>'+Math.floor(water)+'%</strong>. Escolha quanto recuperar ou saia como está.';const f=$('hydrFull');if(f)f.textContent='COMPLETAR 100% • 💎 '+hydrationFullPrice();[['hydr20',20,40],['hydr50',50,90],['hydr75',75,130]].forEach(([id,pct,price])=>{const b=$(id);if(b)b.textContent='+'+pct+'% • 💎 '+price})}
 function buyShelterHydration(amount,price,full=false){if(!shelterActive)return;if(water>=100){toast('HIDRATAÇÃO JÁ ESTÁ EM 100%');return}const actualPrice=full?hydrationFullPrice():price;if(actualPrice<=0){refreshShelterHydrationOffers();return}if(!canAffordGems(actualPrice)){toast('DIAMANTES INSUFICIENTES');return}if(!spendGems(actualPrice))return;water=full?100:Math.min(100,water+amount);hydrationBand=water<15?0:(water<35?1:2);saveState();refreshShelterHydrationOffers();toast('HIDRATAÇÃO '+Math.floor(water)+'% • 💎 '+actualPrice)}
-function exitShelter(){if(!shelterActive)return;shelterActive=false;UI.shelterPanel.classList.remove('show');if(shelter3D)shelter3D.position.z=SHELTER_START_Z;shelterAvailable=false;shelterDecisionDone=false;shelterChoiceOpen=false;if(currentJourney===2)forceLyraRun();clock.getDelta();toast('SAINDO DO ABRIGO • RETORNO AO MESMO PONTO DA JORNADA')}
+function exitShelter(){if(!shelterActive)return;shelterActive=false;UI.shelterPanel.classList.remove('show');if(shelter3D)shelter3D.position.z=SHELTER_START_Z;shelterAvailable=false;shelterDecisionDone=false;shelterChoiceOpen=false;if(currentJourney===2)forceLyraRun();clock.getDelta();toast('SAINDO DO POSTO DE APOIO • RETORNO AO MESMO PONTO DA JORNADA')}
 
 async function loadHero(){return loadHeroByOutfit(SAVE.equipped.outfit||'outfit_varek_original')}
 function cloneModelScene(src){return (THREE.SkeletonUtils&&THREE.SkeletonUtils.clone)?THREE.SkeletonUtils.clone(src):src.clone(true)}
@@ -2304,7 +2316,16 @@ function createHole(laneI,z){
  for(let i=0;i<crackAngles.length;i++){const a=crackAngles[i]+Math.sin(z*.01+i)*.09,len=.42+(i%3)*.20;const crack=new THREE.Mesh(new THREE.BoxGeometry(.028,.014,len),new THREE.MeshBasicMaterial({color:0x181411,transparent:true,opacity:.90}));crack.position.set(Math.cos(a)*(1.03*squash+len*.28),.052,Math.sin(a)*(1.12*stretch+len*.28));crack.rotation.y=-a;g.add(crack)}
  g.position.set(LANE_X[laneI],0,z);g.userData={kind:'obstacle',type:'hole',lane:laneI,hit:false,cleared:false};g.traverse(n=>{if(n.isMesh){n.castShadow=false;n.receiveShadow=false}});itemGroup.add(g);obstacles.push(g)
 }
-function spawnObstacle(){const laneI=Math.floor(Math.random()*3),r=Math.random(),z=-72-Math.random()*16;const realmId=(REALMS[realmIndex]||REALMS[0]).id;if(realmId==='vpath'){if(r<.52)createRock(laneI,z);else createBranch(laneI,z);const extraChance=currentJourney===2?.26:.18;if(Math.random()<extraChance){const lane2=(laneI+1+Math.floor(Math.random()*2))%3;if(Math.random()<.52)createRock(lane2,z-1.4);else createBranch(lane2,z-1.4)}return}if(r<.18)createHole(laneI,z);else if(r<.44)createRock(laneI,z);else if(r<.70)createLog(laneI,z);else createBranch(laneI,z);const extraChance=currentJourney===2?.31:.22;if(Math.random()<extraChance){let lane2=(laneI+1+Math.floor(Math.random()*2))%3;const r2=Math.random();if(r2<.44)createRock(lane2,z-1.4);else if(r2<.78)createLog(lane2,z-1.4);else createBranch(lane2,z-1.4)}}
+function spawnObstacle(){
+ const progress=Math.max(0,currentRealmProgress||0);
+ // MOBILE46: primeira impressão limpa e zona de decisão segura no Posto de Apoio.
+ if(progress<120)return;
+ const laneI=Math.floor(Math.random()*3),r=Math.random(),z=-72-Math.random()*16;
+ if(shelter3D&&!shelterActive){
+   const futureShelterZ=shelter3D.position.z;
+   if(Math.abs(z-futureShelterZ)<62)return;
+ }
+ const realmId=(REALMS[realmIndex]||REALMS[0]).id;if(realmId==='vpath'){if(r<.52)createRock(laneI,z);else createBranch(laneI,z);const extraChance=currentJourney===2?.26:.18;if(Math.random()<extraChance){const lane2=(laneI+1+Math.floor(Math.random()*2))%3;if(Math.random()<.52)createRock(lane2,z-1.4);else createBranch(lane2,z-1.4)}return}if(r<.18)createHole(laneI,z);else if(r<.44)createRock(laneI,z);else if(r<.70)createLog(laneI,z);else createBranch(laneI,z);const extraChance=currentJourney===2?.31:.22;if(Math.random()<extraChance){let lane2=(laneI+1+Math.floor(Math.random()*2))%3;const r2=Math.random();if(r2<.44)createRock(lane2,z-1.4);else if(r2<.78)createLog(lane2,z-1.4);else createBranch(lane2,z-1.4)}}
 function spawnGem(){const laneI=Math.floor(Math.random()*3),z=-72-Math.random()*13;for(let i=0;i<1+Math.floor(Math.random()*2);i++)createGem(laneI,z-i*2.2)}
 function spawnStar(){let laneI=Math.floor(Math.random()*3),z=-68-Math.random()*13;for(let i=0;i<3+Math.floor(Math.random()*4);i++){if(Math.random()<.18)laneI=Math.floor(Math.random()*3);createStar(laneI,z-i*1.75)}}
 function spawnWater(){createWater(Math.floor(Math.random()*3),-74-Math.random()*16)}
@@ -2405,14 +2426,30 @@ function createLavaSled(accentC){
  for(const sx of [-1,1]){const rail=new THREE.Mesh(new THREE.BoxGeometry(.10,.30,2.62),edge);rail.position.set(sx*.78,.34,0);rail.rotation.z=sx*-.07;g.add(rail)}const seat=new THREE.Mesh(new THREE.BoxGeometry(1.22,.12,.40),obs);seat.position.set(0,.48,-.10);g.add(seat);tobogganGroup.add(g);tobogganCart=g;return g
 }
 function createRiverCanoe(accentC){
- const g=new THREE.Group();g.name='MAX_HEALMS_RIVER_CANOE';
- const wood=new THREE.MeshStandardMaterial({color:0x744525,roughness:.68,metalness:.02}),dark=new THREE.MeshStandardMaterial({color:0x2d2119,roughness:.78}),trim=new THREE.MeshStandardMaterial({color:accentC,emissive:accentC,emissiveIntensity:.18,roughness:.48});
- const base=new THREE.Mesh(new THREE.BoxGeometry(1.42,.32,2.55),wood);base.position.y=.20;g.add(base);
- const nose=new THREE.Mesh(new THREE.ConeGeometry(.73,1.05,4),wood);nose.rotation.x=Math.PI/2;nose.rotation.z=Math.PI/4;nose.position.set(0,.27,-1.63);g.add(nose);
- const tail=new THREE.Mesh(new THREE.ConeGeometry(.66,.86,4),wood);tail.rotation.x=-Math.PI/2;tail.rotation.z=Math.PI/4;tail.position.set(0,.27,1.53);g.add(tail);
- for(const sx of [-1,1]){const side=new THREE.Mesh(new THREE.BoxGeometry(.12,.62,2.54),wood);side.position.set(sx*.73,.50,0);side.rotation.z=sx*-.12;g.add(side)}
- const seat1=new THREE.Mesh(new THREE.BoxGeometry(1.18,.12,.35),dark);seat1.position.set(0,.49,-.15);g.add(seat1);const seat2=new THREE.Mesh(new THREE.BoxGeometry(1.10,.10,.30),dark);seat2.position.set(0,.47,.66);g.add(seat2);
- const stripe=new THREE.Mesh(new THREE.BoxGeometry(.60,.08,.08),trim);stripe.position.set(0,.48,-2.02);g.add(stripe);tobogganGroup.add(g);tobogganCart=g;return g
+ const g=new THREE.Group();g.name='MAX_HEALMS_RIVER_CANOE_PREMIUM';
+ const wood=new THREE.MeshStandardMaterial({color:0x754623,roughness:.72,metalness:.02});
+ const woodLight=new THREE.MeshStandardMaterial({color:0xa06a35,roughness:.66,metalness:.02});
+ const dark=new THREE.MeshStandardMaterial({color:0x241a14,roughness:.82});
+ const trim=new THREE.MeshStandardMaterial({color:accentC,emissive:accentC,emissiveIntensity:.24,roughness:.42,metalness:.06});
+ const gold=new THREE.MeshStandardMaterial({color:0xcba65d,emissive:0x51330c,emissiveIntensity:.18,roughness:.48,metalness:.12});
+ // Corpo central mais longo e estreito, com proa/traseira elevadas.
+ const hull=new THREE.Mesh(new THREE.BoxGeometry(1.48,.28,2.78),wood);hull.position.y=.23;g.add(hull);
+ const keel=new THREE.Mesh(new THREE.BoxGeometry(.72,.14,2.92),dark);keel.position.set(0,.06,.02);g.add(keel);
+ const nose=new THREE.Mesh(new THREE.ConeGeometry(.76,1.30,4),woodLight);nose.rotation.x=Math.PI/2;nose.rotation.z=Math.PI/4;nose.position.set(0,.32,-1.92);g.add(nose);
+ const tail=new THREE.Mesh(new THREE.ConeGeometry(.68,1.02,4),woodLight);tail.rotation.x=-Math.PI/2;tail.rotation.z=Math.PI/4;tail.position.set(0,.30,1.83);g.add(tail);
+ for(const sx of [-1,1]){
+   const side=new THREE.Mesh(new THREE.BoxGeometry(.13,.66,2.86),woodLight);side.position.set(sx*.76,.52,0);side.rotation.z=sx*-.13;g.add(side);
+   const rail=new THREE.Mesh(new THREE.BoxGeometry(.07,.08,2.92),trim);rail.position.set(sx*.80,.84,0);g.add(rail)
+ }
+ // Bancos e travessas dão leitura real de canoa.
+ for(const z of [-.62,.10,.78]){const seat=new THREE.Mesh(new THREE.BoxGeometry(1.18,.11,.30),dark);seat.position.set(0,.57,z);g.add(seat)}
+ for(const z of [-1.18,1.28]){const brace=new THREE.Mesh(new THREE.BoxGeometry(1.24,.07,.09),gold);brace.position.set(0,.70,z);g.add(brace)}
+ // Assinatura MAX HEALMS na proa.
+ const crest=new THREE.Mesh(new THREE.TorusGeometry(.19,.035,7,20),gold);crest.position.set(0,.58,-2.17);crest.rotation.x=Math.PI/2;g.add(crest);
+ const stripe=new THREE.Mesh(new THREE.BoxGeometry(.68,.07,.08),trim);stripe.position.set(0,.50,-2.15);g.add(stripe);
+ // Pequenos protetores laterais aumentam volume sem pesar.
+ for(const sx of [-1,1])for(const z of [-1.35,1.35]){const cap=new THREE.Mesh(new THREE.BoxGeometry(.18,.20,.34),dark);cap.position.set(sx*.72,.46,z);g.add(cap)}
+ tobogganGroup.add(g);tobogganCart=g;return g
 }
 function createRiverLog(laneI,z,mat){const g=new THREE.Group(),m=new THREE.Mesh(new THREE.CylinderGeometry(.28,.36,2.05,9),mat);m.rotation.z=Math.PI/2;m.position.y=.30;g.add(m);for(const x of [-.82,.76]){const knot=new THREE.Mesh(new THREE.CylinderGeometry(.06,.10,.34,7),mat);knot.rotation.z=Math.PI/2;knot.rotation.y=x<0?.65:-.45;knot.position.set(x,.38,.05);g.add(knot)}g.userData={kind:'tobogganHazard',type:'tronco',lane:laneI,z,hit:false,baseY:.04};tobogganGroup.add(g);tobogganHazards.push(g)}
 function createRiverRock(laneI,z,mat){const g=new THREE.Group();for(let i=0;i<3;i++){const r=new THREE.Mesh(new THREE.DodecahedronGeometry(.38+i*.09,1),mat);r.scale.set(1.1,.70,1);r.position.set((i-1)*.28,.28+i*.06,(i%2-.5)*.18);g.add(r)}g.userData={kind:'tobogganHazard',type:'pedra',lane:laneI,z,hit:false,baseY:.02};tobogganGroup.add(g);tobogganHazards.push(g)}
@@ -2821,11 +2858,11 @@ if($('scenarioJourney1'))$('scenarioJourney1').onclick=()=>{scenarioTestJourney=
 if($('scenarioJourney2'))$('scenarioJourney2').onclick=()=>{scenarioTestJourney=2;refreshScenarioJourneyButtons();refreshQaRealmLinks()};
 if($('kharvorDropQuick'))$('kharvorDropQuick').onclick=()=>void startKharvorQuick('drop');if($('kharvorLowerQuick'))$('kharvorLowerQuick').onclick=()=>void startKharvorQuick('lower');if($('nerisDropQuick'))$('nerisDropQuick').onclick=()=>void startNerisQuick('drop');if($('nerisLowerQuick'))$('nerisLowerQuick').onclick=()=>void startNerisQuick('lower');if($('vhalorDropQuick'))$('vhalorDropQuick').onclick=()=>void startVhalorQuick('drop');if($('vhalorFloodQuick'))$('vhalorFloodQuick').onclick=()=>void startVhalorQuick('flooded');if($('riverQuick'))$('riverQuick').onclick=()=>void startTobogganQuick(0,null);if($('lavaQuick'))$('lavaQuick').onclick=()=>void startTobogganQuick(2,'lava');if($('floodedQuick'))$('floodedQuick').onclick=()=>void startTobogganQuick(3,'flooded');
 if(UI.scenarioTestPanel)UI.scenarioTestPanel.addEventListener('click',e=>{const f=e.target.closest('[data-final-test]');if(f){void startFinalSceneTest(f.dataset.finalTest)}});refreshQaRealmLinks();unlockAllPcQaScenarios();
-UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(lane)===2&&targetLane===2)openShelterChoice();else toast('ABRIGO À DIREITA • ENTRE NA FAIXA DIREITA')};$('shelterAccept').onclick=enterShelter;$('shelterDecline').onclick=declineShelter;$('hydr20').onclick=()=>buyShelterHydration(20,40);$('hydr50').onclick=()=>buyShelterHydration(50,90);$('hydr75').onclick=()=>buyShelterHydration(75,130);$('hydrFull').onclick=()=>buyShelterHydration(100,0,true);$('shelterExit').onclick=exitShelter;
+UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(lane)===2&&targetLane===2)openShelterChoice();else toast('POSTO DE APOIO À DIREITA • ENTRE NA FAIXA DIREITA')};$('shelterAccept').onclick=enterShelter;$('shelterDecline').onclick=declineShelter;$('hydr20').onclick=()=>buyShelterHydration(20,40);$('hydr50').onclick=()=>buyShelterHydration(50,90);$('hydr75').onclick=()=>buyShelterHydration(75,130);$('hydrFull').onclick=()=>buyShelterHydration(100,0,true);$('shelterExit').onclick=exitShelter;
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE45';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE46';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
