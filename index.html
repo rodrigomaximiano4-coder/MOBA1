@@ -225,7 +225,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE60</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE61</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -361,7 +361,7 @@ let postTobogganExitProgress=null,lastGuidanceRealm=-1,lastRankNoticeAt=0,realmD
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE60 • VARREDURA GLOBAL DE PERFORMANCE MOBILE
+// MAX HEALMS MOBILE61 • LAVA CONTÍNUA SEM FRESTAS
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -2652,7 +2652,8 @@ function buildToboggan(){
  const waterTex=makeTobogganTrackTexture(lavaMode?'lava':'river');
  const flowMat=lavaMode?(MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0xff5d18,map:waterTex}):new THREE.MeshStandardMaterial({color:0xff5d18,map:waterTex,emissive:0xff2e08,emissiveIntensity:.82,roughness:.34,metalness:.01})):new THREE.MeshStandardMaterial({color:floodedMode?0x315e67:0x5cc7ea,map:waterTex,emissive:floodedMode?0x102d32:0x0b4563,emissiveIntensity:floodedMode?.22:.34,roughness:floodedMode?.38:.24,metalness:.02});
  const bankMat=(lavaMode&&MOBILE_RUNNER)?new THREE.MeshBasicMaterial({color:0x21191a}):new THREE.MeshStandardMaterial({color:lavaMode?0x21191a:(floodedMode?0x303631:0x665848),roughness:.98}),edgeMat=new THREE.MeshBasicMaterial({color:lavaMode?0xff8a2a:(floodedMode?0x8aa9a4:0xdaf7ff),transparent:true,opacity:lavaMode?.58:(floodedMode?.34:.55)});
- const flowGeo=new THREE.BoxGeometry(8.65,.18,5.26),bankGeo=new THREE.BoxGeometry(.82,1.20,5.28),edgeGeo=new THREE.BoxGeometry(.16,.035,5.24);const count=MOBILE_RUNNER?(lavaMode?30:52):84,step=MOBILE_RUNNER&&lavaMode?8.5:5.0;
+ const lavaMobile=MOBILE_RUNNER&&lavaMode,segmentLen=lavaMobile?8.9:5.26;
+ const flowGeo=new THREE.BoxGeometry(8.65,.18,segmentLen),bankGeo=new THREE.BoxGeometry(.82,1.20,segmentLen+.02),edgeGeo=new THREE.BoxGeometry(.16,.035,segmentLen-.02);const count=MOBILE_RUNNER?(lavaMode?30:52):84,step=lavaMobile?8.5:5.0;
  const ambient=new THREE.AmbientLight(lavaMode?0xff6b2a:0x8fdfff,(lavaMode&&MOBILE_RUNNER)?0:(MOBILE_RUNNER?.48:.34));if(ambient.intensity>0)tobogganGroup.add(ambient);
  for(let i=0;i<count;i++){const seg=new THREE.Group();seg.userData.z=9-i*step;const flow=new THREE.Mesh(flowGeo,flowMat);flow.position.y=-.07;flow.receiveShadow=false;seg.add(flow);for(const side of [-1,1]){const bank=new THREE.Mesh(bankGeo,bankMat);bank.position.set(side*4.45,.42,0);bank.rotation.z=side*.15;seg.add(bank);const edge=new THREE.Mesh(edgeGeo,edgeMat);edge.position.set(side*4.02,.045,0);seg.add(edge)}seg.rotation.x=floodedMode?-.0035:(seg.userData.z< -3&&seg.userData.z> -123?-.056:0);tobogganGroup.add(seg);tobogganSegments.push(seg)}
  if(floodedMode){
@@ -3069,7 +3070,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE60';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE61';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
