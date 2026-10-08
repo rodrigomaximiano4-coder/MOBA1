@@ -225,7 +225,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE57</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE58</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -351,7 +351,7 @@ let fallingDeath=false,holeRecoveryActive=false,fallTimer=0,deathRecorded=false,
 let curveStrength=0,curveTarget=.45,curveTimer=3.2;
 let realmIndex=0,realmStartDistance=0,autoRealm=true,soundOn=true,flipHero=false,shadowsOn=true,hapticsOn=true,musicVolume=.70,sfxVolume=.85,ambientVolume=.65;
 let spawnTimer=1.1,gemTimer=2.8,starTimer=.55,waterTimer=9.5,realmLoading=false;
-const TOBOGGAN_DURATION=30,TOBOGGAN_SPEED=MOBILE_RUNNER?35.6:37.5,TOBOGGAN_LOOP=MOBILE_RUNNER?260:420; // 52 * 5 m on mobile: no uncovered water gap
+const TOBOGGAN_DURATION=30,TOBOGGAN_SPEED=MOBILE_RUNNER?35.6:37.5,LAVA_TOBOGGAN_SPEED=MOBILE_RUNNER?39.2:38.4,TOBOGGAN_LOOP=MOBILE_RUNNER?260:420; // 52 * 5 m on mobile: no uncovered water gap
 const REALM_DISTANCE_J1=2200,REALM_DISTANCE_J2=3000,ENDLESS_REALM_DISTANCE=1800;
 const DISTANCE_SCALE=.50,TOBOGGAN_DISTANCE_SCALE=.52;
 const SHELTER_START_Z=-720,SHELTER_LOOP_Z=2600;
@@ -361,7 +361,7 @@ let postTobogganExitProgress=null,lastGuidanceRealm=-1,lastRankNoticeAt=0,realmD
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE57 • ALTURA CORRIGIDA NA DESCIDA DE LAVA
+// MAX HEALMS MOBILE58 • LAVA MAIS RÁPIDA + CÂMERA LATERAL CORRIGIDA
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -2725,7 +2725,7 @@ function syncTobogganRiders(){
 function resetTobogganState(){stopTobogganWind();stopTobogganWater();tobogganActive=false;tobogganTimer=0;tobogganElapsed=0;tobogganTravel=0;tobogganHitCooldown=0;tobogganTestLaunch=false;tobogganForcedMode=null;tobogganExitAtDistance=null;setVhalorFloodVisual(false);if(tobogganGroup)tobogganGroup.visible=false;if(roadGroup)roadGroup.visible=true;if(decorGroup)decorGroup.visible=true;if(itemGroup)itemGroup.visible=true;if(shelter3D)shelter3D.visible=true;UI.tobogganHud?.classList.remove('show');UI.tobogganFx?.classList.remove('show')}
 function startToboggan(testLaunch=false,forcedMode=null,exitAtDistance=null){
  if(!started||paused||gameOver||tobogganActive)return;
- tobogganForcedMode=forcedMode;tobogganExitAtDistance=Number.isFinite(exitAtDistance)?exitAtDistance:null;tobogganTestLaunch=!!testLaunch;tobogganActive=true;ensureAudio();startTobogganWind();tobogganAutoDone=true;tobogganTimer=tobogganExitAtDistance?Math.max(1,(tobogganExitAtDistance-distance)/(TOBOGGAN_SPEED*TOBOGGAN_DISTANCE_SCALE)):TOBOGGAN_DURATION;tobogganElapsed=0;tobogganTravel=0;tobogganPhase=Math.random()*Math.PI*2;tobogganPrevSpeed=speed;tobogganHitCooldown=0;tobogganRoadBlend=0;lane=targetLane=1;jumpY=0;jumpV=0;slideTimer=999;
+ tobogganForcedMode=forcedMode;tobogganExitAtDistance=Number.isFinite(exitAtDistance)?exitAtDistance:null;tobogganTestLaunch=!!testLaunch;tobogganActive=true;ensureAudio();startTobogganWind();tobogganAutoDone=true;const _startTobogganSpeed=(forcedMode==='lava'||(!forcedMode&&REALMS[realmIndex]?.id==='ember'))?LAVA_TOBOGGAN_SPEED:TOBOGGAN_SPEED;tobogganTimer=tobogganExitAtDistance?Math.max(1,(tobogganExitAtDistance-distance)/(_startTobogganSpeed*TOBOGGAN_DISTANCE_SCALE)):TOBOGGAN_DURATION;tobogganElapsed=0;tobogganTravel=0;tobogganPhase=Math.random()*Math.PI*2;tobogganPrevSpeed=speed;tobogganHitCooldown=0;tobogganRoadBlend=0;lane=targetLane=1;jumpY=0;jumpV=0;slideTimer=999;
  setOpeningBridge(false);if(openingDragonGroup)openingDragonGroup.visible=false;roadGroup.rotation.z=0;itemGroup.rotation.z=0;
  clearItems();buildToboggan();tobogganGroup.visible=true;roadGroup.visible=false;decorGroup.visible=false;itemGroup.visible=false;if(shelter3D)shelter3D.visible=false;UI.shelterPrompt.classList.remove('show');UI.tobogganHud?.classList.add('show');if(tobogganGroup?.userData?.mode==='lava')UI.tobogganFx?.classList.add('show');else UI.tobogganFx?.classList.remove('show');huntersVisible=false;hunters.forEach(h=>h.root.visible=false);if(tobogganGroup?.userData?.mode!=='lava')startTobogganWater();if(tobogganCart){const _lava=tobogganGroup?.userData?.mode==='lava';tobogganCart.position.set(tobogganCenterX(0),tobogganY(0)-.035+(_lava?LAVA_CART_LIFT:0),.12)}playTobogganPose();if(currentJourney===2)playLyraTobogganPose();syncTobogganRiders();const mode=tobogganGroup?.userData?.mode,lava=mode==='lava',flooded=mode==='flooded';const modeEl=UI.tobogganHud?.querySelector('.mode'),tipEl=UI.tobogganHud?.querySelector('.tip');if(modeEl)modeEl.textContent=lava?'🔥 DESCIDA VULCÂNICA':(flooded?'💧 PASSAGEM INUNDADA DE VHALOR':'🌊 DESCIDA DO RIO');if(tipEl)tipEl.textContent=lava?'OBSIDIANA • ← • CENTRO • →':'CANOA • ← • CENTRO • →';showDescentWarning(lava?'🔥 DESCIDA VULCÂNICA • DESVIE DAS PEDRAS E BARREIRAS':(flooded?'🛶 PASSAGEM FECHADA INUNDADA • DESVIE DOS OBSTÁCULOS':'🌊 DESCIDA DO RIO • ESCOLHA ESQUERDA, CENTRO OU DIREITA'),1800);toast(lava?'DESCIDA VULCÂNICA • PRANCHA DE OBSIDIANA':(flooded?'VHALOR • CANOA SOB A PONTE ATÉ A SAÍDA':'DESCIDA DO RIO • VAREK SENTADO • DESVIE DE TRONCOS E PEDRAS'));haptic(lava?[18,24,28]:[14,18,22]);
 }
@@ -2753,10 +2753,11 @@ function endToboggan(silent=false){
 }
 function tobogganHurt(label){if(tobogganHitCooldown>0||gameOver)return;tobogganHitCooldown=1.05;if(shieldCharges>0){shieldCharges--;playSFX('shield');toast('ESCUDO BLOQUEOU '+label);return}lives--;playSFX('tobogganHit');effortBurst(label.toUpperCase());const lava=tobogganGroup?.userData?.mode==='lava';if(lives<=0){lives=0;playSFX('lifeLost');beginDeath('toboggan',lava?'Varek não resistiu à Descida Vulcânica':'Varek não resistiu à Descida do Rio',650)}else toast(label.toUpperCase()+' • -1 VIDA')}
 function updateToboggan(dt){if(kharvorBreakFx)kharvorBreakFx.visible=false;
- tobogganElapsed+=dt;tobogganTravel+=TOBOGGAN_SPEED*dt;elapsed+=dt;distance+=TOBOGGAN_SPEED*dt*TOBOGGAN_DISTANCE_SCALE;tobogganTimer=tobogganExitAtDistance?Math.max(0,(tobogganExitAtDistance-distance)/(TOBOGGAN_SPEED*TOBOGGAN_DISTANCE_SCALE)):Math.max(0,TOBOGGAN_DURATION-tobogganElapsed);water-=dt*.34;tobogganHitCooldown=Math.max(0,tobogganHitCooldown-dt);if(water<=0){dehydrationDeath();return}
+ const lavaMode=tobogganGroup?.userData?.mode==='lava',activeTobogganSpeed=lavaMode?LAVA_TOBOGGAN_SPEED:TOBOGGAN_SPEED;
+ tobogganElapsed+=dt;tobogganTravel+=activeTobogganSpeed*dt;elapsed+=dt;distance+=activeTobogganSpeed*dt*TOBOGGAN_DISTANCE_SCALE;tobogganTimer=tobogganExitAtDistance?Math.max(0,(tobogganExitAtDistance-distance)/(activeTobogganSpeed*TOBOGGAN_DISTANCE_SCALE)):Math.max(0,TOBOGGAN_DURATION-tobogganElapsed);water-=dt*.34;tobogganHitCooldown=Math.max(0,tobogganHitCooldown-dt);if(water<=0){dehydrationDeath();return}
  tobogganRoadBlend=Math.max(0,tobogganRoadBlend-dt);if(tobogganRoadBlend<=0){roadGroup.visible=false;decorGroup.visible=false}
- lane+=(targetLane-lane)*Math.min(1,dt*13);const dz=TOBOGGAN_SPEED*dt;updateTobogganWorld(dz);
- const center=tobogganCenterX(0),curve=tobogganYaw(-8),cartX=center+LANE_X[0]+lane*2.25;if(tobogganTrackTexture){const lava=tobogganGroup?.userData?.mode==='lava';tobogganTrackTexture.offset.y=(tobogganTrackTexture.offset.y-dt*(lava?1.58:1.25))%1}if(tobogganCart){tobogganCart.position.set(cartX,tobogganY(0)+(tobogganGroup?.userData?.mode==='lava'?LAVA_CART_LIFT:0)-.035,.12);tobogganCart.rotation.y=curve*.10;tobogganCart.rotation.z=(targetLane-lane)*-.09-curve*.10;tobogganCart.rotation.x=.007+Math.sin(tobogganTravel*.11)*.005}
+ lane+=(targetLane-lane)*Math.min(1,dt*(lavaMode?15:13));const dz=activeTobogganSpeed*dt;updateTobogganWorld(dz);
+ const center=tobogganCenterX(0),curve=tobogganYaw(-8),cartX=center+LANE_X[0]+lane*2.25;if(tobogganTrackTexture){const lava=tobogganGroup?.userData?.mode==='lava';tobogganTrackTexture.offset.y=(tobogganTrackTexture.offset.y-dt*(lava?1.82:1.25))%1}if(tobogganCart){tobogganCart.position.set(cartX,tobogganY(0)+(tobogganGroup?.userData?.mode==='lava'?LAVA_CART_LIFT:0)-.035,.12);tobogganCart.rotation.y=curve*.10;tobogganCart.rotation.z=(targetLane-lane)*-.09-curve*.10;tobogganCart.rotation.x=.007+Math.sin(tobogganTravel*.11)*.005}
  syncTobogganRiders();if(currentJourney===2&&lyraActionName!=='river_seated')playLyraTobogganPose();hunters.forEach(h=>{h.root.visible=false;if(h.root&&h.fixedScale)h.root.scale.copy(h.fixedScale);if(h.mixer)h.mixer.update(dt*.10)});
  for(const h of tobogganHazards){if(!h.userData.hit&&h.userData.z>-.90&&h.userData.z<1.10&&h.userData.lane===Math.round(lane)){h.userData.hit=true;tobogganHurt(h.userData.type)}}
  for(const c of tobogganCollectibles){const u=c.userData;if(!u.collected&&u.z>-.90&&u.z<1.10&&u.lane===Math.round(lane)){u.collected=true;c.visible=false;if(u.kind==='gem'){SAVE.gems++;runGems++;playSFX('gemCollect')}else{runStars++;SAVE.starsTotal++;playSFX('starCollect')}saveState();updateHUD()}}
@@ -2898,7 +2899,16 @@ function update(dt){
 function render(){
  if(!renderer)return;
  if(tobogganActive){
-   const center=tobogganCenterX(0),lookX=tobogganCenterX(-25),curve=tobogganYaw(-11),canoeBaseY=tobogganY(0)+(tobogganGroup?.userData?.mode==='lava'?LAVA_CART_LIFT:0);camera.position.x+=(center*.16+(heroRoot?heroRoot.position.x*.18:0)-camera.position.x)*.12;camera.position.y+=((canoeBaseY+3.15)-camera.position.y)*.12;camera.rotation.z+=(-curve*.16-camera.rotation.z)*.10;camera.fov+=(73-camera.fov)*.10;camera.updateProjectionMatrix();camera.lookAt(lookX*.34,canoeBaseY-.85,-13.5);renderer.render(scene,camera);return
+   const lava=tobogganGroup?.userData?.mode==='lava',center=tobogganCenterX(0),lookX=tobogganCenterX(-25),curve=tobogganYaw(-11),canoeBaseY=tobogganY(0)+(lava?LAVA_CART_LIFT:0);
+   const cartX=tobogganCart?.position.x??center;
+   const desiredCamX=lava?(cartX*.42+center*.08):(center*.16+(heroRoot?heroRoot.position.x*.18:0));
+   camera.position.x+=(desiredCamX-camera.position.x)*(lava?.18:.12);
+   camera.position.y+=((canoeBaseY+(lava?3.32:3.15))-camera.position.y)*(lava?.16:.12);
+   camera.rotation.z+=(-curve*(lava?.11:.16)-camera.rotation.z)*(lava?.14:.10);
+   camera.fov+=(((lava&&MOBILE_RUNNER)?79:73)-camera.fov)*(lava?.14:.10);
+   camera.updateProjectionMatrix();
+   camera.lookAt((lava?cartX*.22:lookX*.34),canoeBaseY+(lava?-.56:-.85),-13.8);
+   renderer.render(scene,camera);return
  }
  const curveLook=trackCurveX(-34)*.20,targetX=(heroRoot?heroRoot.position.x*.16:0)+curveLook,now=performance.now(),shakeX=Math.sin(now*.081)*openingCameraShake*.10,shakeY=Math.sin(now*.113+1.7)*openingCameraShake*.055,shakeR=Math.sin(now*.097+.8)*openingCameraShake*.012,coveredCam=MOBILE_RUNNER&&forestUnderpassActive;camera.position.x+=((targetX+shakeX)-camera.position.x)*.075;camera.position.y=(coveredCam?3.02:3.45)+kharvorLayerY+jumpY*.03+(effortTimer>0?Math.sin(now*.045)*.025:0)+shakeY+kharvorFallImpact*.72;camera.rotation.z+=(curveStrength*.012+shakeR-camera.rotation.z)*.065;camera.fov+=((coveredCam?58:60)+Math.max(0,speed-RUN_SPEED_BASE)*.42+(effortTimer>0?1.2:0)+kharvorFallImpact*5.5-camera.fov)*.05;camera.updateProjectionMatrix();camera.lookAt((targetX+shakeX*.35)*.28,(coveredCam?.96:1.15)+kharvorLayerY+shakeY*.28-kharvorFallImpact*1.30,-7.8);renderer.render(scene,camera)
 }
@@ -3047,7 +3057,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE57';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE58';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
