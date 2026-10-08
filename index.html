@@ -193,7 +193,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE40</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE41</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -310,8 +310,8 @@ const LOW_END_MOBILE=MOBILE_RUNNER&&(DEVICE_MEMORY<=3||HARDWARE_THREADS<=4);
 const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.72:.84,MOBILE_PIXEL_RATIO_MIN=LOW_END_MOBILE?.62:.70;
 const TARGET_PIXEL_RATIO=MOBILE_RUNNER?MOBILE_PIXEL_RATIO_MAX:1.4;
 let mobilePixelRatioCurrent=TARGET_PIXEL_RATIO,mobilePerfLowSamples=0,mobilePerfHighSamples=0,mobilePerfLastAdjust=0;
-const RUN_SPEED_BASE=MOBILE_RUNNER?24.2:20.2;
-const RUN_SPEED_MAX=MOBILE_RUNNER?38.0:34.0;
+const RUN_SPEED_BASE=MOBILE_RUNNER?31.0:20.2;
+const RUN_SPEED_MAX=MOBILE_RUNNER?40.0:34.0;
 let distance=0,lives=3,water=100,speed=RUN_SPEED_BASE,targetLane=0,lane=0,jumpY=0,jumpV=0,slideTimer=0,slideCooldown=0,hitCooldown=0;
 let runStars=0,runGems=0,elapsed=0,timePenalty=0,shieldCharges=0;
 let shelterActive=false,shelterAvailable=false,shelterTimer=0,shelterDecisionDone=false,shelterChoiceOpen=false,shelterHydrationBefore=100;
@@ -328,7 +328,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE40 • REVITALIZAÇÃO MOBILE
+// MAX HEALMS MOBILE41 • CORES PC + RITMO DE VELOCIDADE + TÚNEIS RETOS
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -372,7 +372,7 @@ function setVhalorFloodVisual(active){
 function resetKharvorBridge(){
  kharvorLayerY=0;kharvorFallStage=0;kharvorFallImpact=0;bridgeDropSafetyCleared=false;setForestUnderpassVisual(false);setVhalorFloodVisual(false);
  if(roadGroup){roadGroup.position.y=0;roadGroup.visible=true}if(itemGroup){itemGroup.position.y=0;itemGroup.visible=true}if(shelter3D){shelter3D.position.y=0;shelter3D.visible=true}if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;if(heroRoot&&!finalFamilyMode)heroRoot.visible=true;
- for(const g of kharvorUpperBridgeGroups){g.visible=false;g.position.y=.45}
+ for(const g of kharvorUpperBridgeGroups){g.visible=false;g.position.y=4.70}
  for(const g of forestClosedBridgeGroups){g.visible=false;g.position.y=0}
  if(kharvorBreakFx)kharvorBreakFx.visible=false;
 }
@@ -414,57 +414,39 @@ function updateKharvorBridge(dt,progress){
  const cfg=REALMS[realmIndex],id=cfg&&cfg.id,isKharvor=id==='vruins',isForest=id==='forest',isVhalor=id==='ruins';
  const sequenceRealm=isKharvor||isForest||isVhalor;
  if(!sequenceRealm){if(Math.abs(kharvorLayerY)>.01||forestUnderpassActive||vhalorFloodVisualActive)resetKharvorBridge();return}
- const total=realmTargetDistance(),riseStart=Math.max(700,total-500),lowerY=isForest?FOREST_LOWER_Y:KHARVOR_LOWER_Y;
- const holeFx=kharvorBreakFx; // MOBILE37: scripted collapse stays invisible until the instant of the fall.
- if(isBridgeDropTransitionZone(progress)&&!bridgeDropSafetyCleared){bridgeDropSafetyCleared=true;clearBridgeDropApproach();spawnTimer=Math.max(spawnTimer,1.35)}
- if(holeFx)holeFx.visible=false;
- // Vhalor: queda aos 500 m e a parte inferior vira uma travessia fechada e inundada de canoa.
+ const total=realmTargetDistance();
+ const tunnelStart=500,tunnelEnd=Math.max(980,total-520),previewStart=420;
+ const preview=progress>=previewStart&&progress<tunnelStart;
+ const inside=progress>=tunnelStart&&progress<tunnelEnd;
+ const holeFx=kharvorBreakFx;if(holeFx)holeFx.visible=false;
+ // MOBILE41: nenhum túnel exige queda de nível. Pista, Varek, itens e câmera permanecem em Y=0.
+ kharvorLayerY=0;
+ if(roadGroup)roadGroup.position.y=0;if(itemGroup)itemGroup.position.y=0;if(shelter3D)shelter3D.position.y=0;
+ if(heroRoot&&!finalFamilyMode&&Math.abs(heroRoot.position.y-jumpY)<6)heroRoot.position.y=jumpY-(slideTimer>0?.035:0);
+ // Limpa obstáculos imediatamente antes da boca do túnel para a entrada ser legível.
+ if(progress>=previewStart&&progress<535&&!bridgeDropSafetyCleared){bridgeDropSafetyCleared=true;clearBridgeDropApproach();spawnTimer=Math.max(spawnTimer,1.15)}
+ // Kharvor e Neris usam corredor reto, com teto/paredes visíveis antes da entrada.
+ for(const g of kharvorUpperBridgeGroups){g.visible=isKharvor&&(preview||inside);g.position.y=4.70}
+ for(const g of forestClosedBridgeGroups){g.visible=isForest&&(preview||inside);g.position.y=4.25}
+ if(isForest)setForestUnderpassVisual(inside);
+ if(isKharvor){
+   if(sceneryGroup)sceneryGroup.visible=!inside;
+   if(decorGroup)decorGroup.visible=!inside&&!tobogganActive;
+ }
+ if((isKharvor||isForest)&&progress>=tunnelStart&&kharvorFallStage<1){kharvorFallStage=1;toast('▰ TÚNEL À FRENTE • MANTENHA A LINHA');haptic([12,18,12])}
+ if((isKharvor||isForest)&&progress>=tunnelEnd&&kharvorFallStage<2){
+   kharvorFallStage=2;for(const g of kharvorUpperBridgeGroups)g.visible=false;for(const g of forestClosedBridgeGroups)g.visible=false;
+   if(isForest)setForestUnderpassVisual(false);if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;toast('✓ SAÍDA DO TÚNEL • PONTE ABERTA')
+ }
+ // Vhalor mantém a canoa, mas a entrada agora é reta: sem queda física.
  if(isVhalor){
-   if(progress>=500&&!tobogganActive&&!tobogganAutoDone){
-     if(holeFx)holeFx.visible=false;
-     kharvorFallStage=1;kharvorFallImpact=1;openingCameraShake=Math.max(openingCameraShake,1.15);haptic([30,26,88,20,118]);
-     setVhalorFloodVisual(true);toast('💥 A PONTE CEDEU • PASSAGEM INUNDADA EM CANOA');
-     startToboggan(false,'flooded',distance+(riseStart-progress));
+   if(progress>=tunnelStart&&!tobogganActive&&!tobogganAutoDone){
+     kharvorFallStage=1;setVhalorFloodVisual(true);toast('🛶 TÚNEL INUNDADO À FRENTE • ENTRADA RETA');
+     startToboggan(false,'flooded',distance+(tunnelEnd-progress));
    }
-   if(!tobogganActive&&progress>=riseStart){setVhalorFloodVisual(false);if(kharvorFallStage<2){kharvorFallStage=2;toast('↗ SAÍDA DA PASSAGEM INUNDADA • VOLTA À PONTE')}}
-   if(progress>=total-35){setVhalorFloodVisual(false);if(holeFx)holeFx.visible=false}
-   kharvorFallImpact=Math.max(0,kharvorFallImpact-dt*1.20);return;
+   if(!tobogganActive&&progress>=tunnelEnd){setVhalorFloodVisual(false);if(kharvorFallStage<2){kharvorFallStage=2;toast('✓ SAÍDA DO TÚNEL INUNDADO')}}
  }
- const active=!tobogganActive;
- if(!active)return;
- let desired=0;
- if(progress>=500&&progress<riseStart)desired=lowerY;
- else if(progress>=riseStart){const climbSpan=Math.max(1,(total-35)-riseStart),q=Math.max(0,Math.min(1,(progress-riseStart)/climbSpan));desired=lowerY*(1-q)}
- if(progress>=500&&kharvorFallStage<1){
-   if(holeFx)holeFx.visible=false;
-   kharvorFallStage=1;kharvorFallImpact=1;openingCameraShake=Math.max(openingCameraShake,1.15);haptic([30,26,88,20,118]);
-   if(soundOn){ensureAudio();sfxNoise(.24,.030,620,115,'lowpass');sfxTone(118,54,.20,.026,'triangle',.025);sfxNoise(.10,.012,980,260,'bandpass',.045)}
-   toast(isForest?'💥 GRANDE RUPTURA • QUEDA PARA A PONTE FECHADA':'💥 GRANDE RUPTURA NA PONTE • QUEDA PARA O NÍVEL INFERIOR');
- }
- if(progress>=riseStart&&kharvorFallStage<2){kharvorFallStage=2;toast('↗ SUBIDA PARA A PONTE ORIGINAL • ÚLTIMOS 500 m');haptic([12,18,20])}
- const fallFast=(kharvorFallStage===1&&progress<585),rate=fallFast?22.0:2.9;
- kharvorLayerY+=(desired-kharvorLayerY)*Math.min(1,dt*rate);
- if(roadGroup)roadGroup.position.y=kharvorLayerY;if(itemGroup)itemGroup.position.y=kharvorLayerY;if(shelter3D)shelter3D.position.y=kharvorLayerY;
- const tunnelActive=progress>515&&progress<riseStart;
- const ascentActive=progress>=riseStart&&progress<total-35;
- if((tunnelActive||ascentActive)&&holeFx)holeFx.visible=false;
- // MOBILE39: o teto/ponte superior termina quando a subida começa. Antes ele permanecia sobre o personagem
- // durante toda a subida, fazendo cenário e objetos parecerem "em cima" da pista.
- for(const g of kharvorUpperBridgeGroups){g.visible=isKharvor&&tunnelActive;g.position.y=-kharvorLayerY+.42}
- for(const g of forestClosedBridgeGroups){g.visible=isForest&&tunnelActive;g.position.y=4.25}
- if(isForest)setForestUnderpassVisual(tunnelActive);
- // Durante a subida mantemos a paisagem distante oculta até Varek se aproximar novamente do nível normal,
- // evitando que árvores/ruínas apareçam flutuando acima da pista.
- const worldNearlyRestored=Math.abs(kharvorLayerY)<1.15;
- if(isKharvor){if(sceneryGroup)sceneryGroup.visible=!tunnelActive&&(!ascentActive||worldNearlyRestored);if(decorGroup)decorGroup.visible=!tunnelActive&&(!ascentActive||worldNearlyRestored)&&!tobogganActive}
- if(isForest&&ascentActive&&!worldNearlyRestored){if(sceneryGroup)sceneryGroup.visible=false;if(decorGroup)decorGroup.visible=false}
- if((isForest||isKharvor)&&ascentActive&&worldNearlyRestored){if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true}
- kharvorFallImpact=Math.max(0,kharvorFallImpact-dt*1.20);
- if(progress>=total-35&&kharvorFallStage<3){
-   kharvorFallStage=3;kharvorLayerY=0;if(roadGroup)roadGroup.position.y=0;if(itemGroup)itemGroup.position.y=0;if(shelter3D)shelter3D.position.y=0;
-   for(const g of kharvorUpperBridgeGroups)g.visible=false;for(const g of forestClosedBridgeGroups)g.visible=false;if(isForest)setForestUnderpassVisual(false);if(holeFx)holeFx.visible=false;
-   toast('✓ DE VOLTA À PONTE ORIGINAL • CENÁRIO NORMAL RESTAURADO')
- }
+ kharvorFallImpact=Math.max(0,kharvorFallImpact-dt*1.6);
 }
 let weatherAudioSource=null,weatherAudioFilter=null,weatherAudioGain=null,weatherAudioMode='none';
 const REALM_WEATHER={vpath:'strongWind',vruins:'extremeRain',forest:'drizzle',celestial:'strongWind'};
@@ -1557,6 +1539,16 @@ function updateCurve(dt){curveTimer-=dt;if(curveTimer<=0){const choices=MOBILE_R
 function effortBurst(label='ESFORÇO'){effortTimer=.55;if(UI.effortPulse){UI.effortPulse.textContent=label;UI.effortPulse.classList.add('show')}}
 function updateHydrationWarnings(){if(water<=0)return;if(water<15&&hydrationBand!==0){hydrationBand=0;toast('DESIDRATAÇÃO GRAVE • PROCURE ÁGUA OU ABRIGO')}else if(water<35&&hydrationBand>1){hydrationBand=1;toast('SEDE • HIDRATAÇÃO ABAIXO DE 35%')}else if(water>=35&&hydrationBand<2){hydrationBand=2}}
 
+function mobileRhythmSpeed(progress){
+ if(!MOBILE_RUNNER)return Math.min(RUN_SPEED_MAX,RUN_SPEED_BASE+distance/220);
+ const p=Math.max(0,progress||0),id=REALMS[realmIndex]?.id;
+ // Primeira impressão forte, depois respira e volta a acelerar. Neris mantém a faixa de velocidade que funcionou bem.
+ let target=p<260?34.6:p<620?31.8:p<1050?33.4:p<1500?30.8:p<1950?35.0:36.2;
+ if(id==='forest')target=Math.max(target,35.0);
+ if(id==='celestial')target=Math.max(32.8,Math.min(target,36.0));
+ return Math.min(RUN_SPEED_MAX,target);
+}
+
 
 function init3D(){
  if(!window.THREE||!THREE.GLTFLoader){UI.loading.classList.add('hidden');UI.error.classList.add('show');return}
@@ -1605,20 +1597,18 @@ function makeStoneMaterial(color){return new THREE.MeshStandardMaterial({color,r
 function buildRoad(){
  while(roadGroup.children.length){const old=roadGroup.children[0];roadGroup.remove(old);disposeObject(old)}roadSegments.length=0;bridgeDetailGroups.length=0;kharvorUpperBridgeGroups.length=0;forestClosedBridgeGroups.length=0;if(renderer&&renderer.renderLists&&renderer.renderLists.dispose)renderer.renderLists.dispose();
  const cfg=REALMS[realmIndex];
- const firstRealmMobile=MOBILE_RUNNER&&cfg.id==='vpath';
- const bridgeDeckMat=new THREE.MeshStandardMaterial({color:firstRealmMobile?0x66594d:0x433126,roughness:1,metalness:0,flatShading:true});
- const bridgeDeckAltMat=new THREE.MeshStandardMaterial({color:firstRealmMobile?0x6d6053:0x4d382a,roughness:1,metalness:0,flatShading:true});
- const bridgeDeckBaseMat=new THREE.MeshStandardMaterial({color:firstRealmMobile?0x584d43:0x2d2119,roughness:1,metalness:0,flatShading:true});
+ const firstRealmMobile=false; // MOBILE41: no mobile usar a mesma paleta-base do PC.
+ const bridgeDeckMat=new THREE.MeshStandardMaterial({color:0x433126,roughness:1,metalness:0,flatShading:true});
+ const bridgeDeckAltMat=new THREE.MeshStandardMaterial({color:0x4d382a,roughness:1,metalness:0,flatShading:true});
+ const bridgeDeckBaseMat=new THREE.MeshStandardMaterial({color:0x2d2119,roughness:1,metalness:0,flatShading:true});
  const bridgeDeckBaseGeo=new THREE.BoxGeometry(8.16,.075,9.92);
  const bridgeRopeMat=new THREE.MeshStandardMaterial({color:0x33261d,roughness:1,metalness:0});
  const bridgePostMat=new THREE.MeshStandardMaterial({color:0x493629,roughness:1,metalness:0,flatShading:true});
  const tileGeo=new THREE.BoxGeometry(2.45,.18,2.62),mobileLaneGeo=new THREE.BoxGeometry(2.52,.18,10.64),edgeGeo=new THREE.BoxGeometry(.34,.28,10.64),seamGeo=new THREE.BoxGeometry(.08,.035,2.46),parapetBaseGeo=new THREE.BoxGeometry(.40,.56,10.58),parapetCapGeo=new THREE.BoxGeometry(.56,.14,10.62),guardPostGeo=new THREE.BoxGeometry(.18,1.18,.18),guardRailGeo=new THREE.BoxGeometry(.12,.12,10.46),buttressGeo=new THREE.BoxGeometry(.30,1.68,.42),braceGeo=new THREE.BoxGeometry(.16,.58,.22);
  const railStoneMat=makeStoneMaterial(roundedColor(cfg.edge,.04));
  const railCapMat=makeStoneMaterial(roundedColor(cfg.road[0],.06));
- const edgeRoadMat=makeStoneMaterial(firstRealmMobile?0x554b43:cfg.edge);
- const mobileBaseColor=new THREE.Color(firstRealmMobile?0x756b60:cfg.road[0]);
- const laneLight=firstRealmMobile?[-.006,0,.006]:[-.018,0,.018];
- const mobileRoadMats=laneLight.map((light,i)=>{const c=mobileBaseColor.clone();c.offsetHSL(0,(firstRealmMobile?0:(i===1?-.01:0)),light);return new THREE.MeshStandardMaterial({color:c,roughness:1,metalness:0,flatShading:true})});
+ const edgeRoadMat=makeStoneMaterial(cfg.edge);
+ const mobileRoadMats=cfg.road.map(col=>new THREE.MeshStandardMaterial({color:col,roughness:.96,metalness:0,flatShading:true}));
  const railWoodMat=new THREE.MeshStandardMaterial({color:0x7b6752,roughness:.9,metalness:.03});
  const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
@@ -2203,7 +2193,7 @@ function tobogganPalette(){
  return p[id]||p.forest;
 }
 function tobogganCenterX(z){const d=Math.max(0,-z)+tobogganTravel*.34;if(tobogganForcedMode==='flooded')return Math.sin(d*.026+tobogganPhase)*.52+Math.sin(d*.011+tobogganPhase*.63)*.22;return Math.sin(d*.047+tobogganPhase)*2.15+Math.sin(d*.018+tobogganPhase*.63)*1.05}
-function tobogganY(z){let base=0;if(tobogganForcedMode==='flooded'){base=-4.3;if(tobogganExitAtDistance){const rem=Math.max(0,tobogganExitAtDistance-distance);if(rem<190)base=-4.3*Math.max(0,rem/190)}return base-Math.min(.48,Math.max(0,-z-1)*.0035)}return base-Math.min(7.1,Math.max(0,-z-1)*.056)}
+function tobogganY(z){let base=0;if(tobogganForcedMode==='flooded'){return -Math.min(.18,Math.max(0,-z-1)*.0012)}return base-Math.min(7.1,Math.max(0,-z-1)*.056)}
 function tobogganYaw(z){const e=.75,a=tobogganCenterX(z-e),b=tobogganCenterX(z+e);return Math.atan2(a-b,e*2)*.78}
 function clearToboggan(){if(!tobogganGroup)return;while(tobogganGroup.children.length){const c=tobogganGroup.children.pop();disposeObject(c)}tobogganCart=null;tobogganLyraCart=null;tobogganSegments.length=0;tobogganHazards.length=0;tobogganTunnel.length=0;tobogganCollectibles.length=0}
 function makeTobogganMuralTexture(theme,accentC){
@@ -2323,7 +2313,7 @@ function buildToboggan(){
  const ambient=new THREE.AmbientLight(lavaMode?0xff6b2a:0x8fdfff,MOBILE_RUNNER?.48:.34);tobogganGroup.add(ambient);
  for(let i=0;i<count;i++){const seg=new THREE.Group();seg.userData.z=9-i*step;const flow=new THREE.Mesh(flowGeo,flowMat);flow.position.y=-.07;flow.receiveShadow=false;seg.add(flow);for(const side of [-1,1]){const bank=new THREE.Mesh(bankGeo,bankMat);bank.position.set(side*4.45,.42,0);bank.rotation.z=side*.15;seg.add(bank);const edge=new THREE.Mesh(edgeGeo,edgeMat);edge.position.set(side*4.02,.045,0);seg.add(edge)}seg.rotation.x=floodedMode?-.0035:(seg.userData.z< -3&&seg.userData.z> -123?-.056:0);tobogganGroup.add(seg);tobogganSegments.push(seg)}
  if(floodedMode){
-   const tunnelStone=new THREE.MeshStandardMaterial({color:0x343b37,roughness:1}),tunnelDark=new THREE.MeshStandardMaterial({color:0x222925,roughness:1}),moss=new THREE.MeshBasicMaterial({color:0x395b42,transparent:true,opacity:.48}),lightMat=new THREE.MeshBasicMaterial({color:0x9cc9bd,transparent:true,opacity:.30});
+   const tunnelStone=new THREE.MeshStandardMaterial({color:0x343b37,roughness:1}),tunnelDark=new THREE.MeshStandardMaterial({color:0x181d1b,roughness:1}),moss=new THREE.MeshBasicMaterial({color:0x395b42,transparent:true,opacity:.42}),lightMat=new THREE.MeshBasicMaterial({color:0xc7fff1,transparent:true,opacity:.72});
    const tunnelCount=MOBILE_RUNNER?30:48,tunnelStep=9.2;
    // Túnel realmente fechado: paredes e teto contínuos, sem pilares ou vigas atravessando a visão central.
    for(let i=0;i<tunnelCount;i++){
@@ -2334,7 +2324,8 @@ function buildToboggan(){
        // Relevos finos ficam embutidos na parede, sem formar pilares na pista.
        if(i%3===0){const rib=new THREE.Mesh(new THREE.BoxGeometry(.10,5.4,.16),tunnelDark);rib.position.set(side*4.16,1.50,-3.8);r.add(rib)}
        if(i%2===0){const patch=new THREE.Mesh(new THREE.PlaneGeometry(.62,1.05),moss);patch.position.set(side*4.17,1.05,(i%3-1)*2.25);patch.rotation.y=side<0?Math.PI/2:-Math.PI/2;r.add(patch)}
-       if(i%4===1){const lamp=new THREE.Mesh(new THREE.BoxGeometry(.08,.12,1.4),lightMat);lamp.position.set(side*4.12,2.85,-2.6);lamp.rotation.y=Math.PI/2;r.add(lamp)}
+       if(i%2===1){const crack=new THREE.Mesh(new THREE.BoxGeometry(.035,1.45,.055),lightMat);crack.position.set(side*4.14,1.35,(i%3-1)*2.45);crack.rotation.z=side*(.18+(i%3)*.07);r.add(crack)}
+       if(i%3===1){const lamp=new THREE.Mesh(new THREE.BoxGeometry(.10,.16,1.65),lightMat);lamp.position.set(side*4.10,2.82,-2.5);lamp.rotation.y=Math.PI/2;r.add(lamp)}
      }
      // Linhas longitudinais discretas no teto reforçam perspectiva e horizonte, sem bloquear a frente.
      for(const x of [-2.55,2.55]){const seam=new THREE.Mesh(new THREE.BoxGeometry(.10,.045,9.1),tunnelDark);seam.position.set(x,4.23,0);r.add(seam)}
@@ -2533,7 +2524,7 @@ function update(dt){
  if(fallingDeath&&!gameOver){if(heroRoot){fallTimer+=dt;heroRoot.position.y-=dt*(3.2+fallTimer*6.8);heroRoot.rotation.x+=dt*.72;heroRoot.rotation.z+=dt*.18}if(mixer)mixer.update(dt*.10);updateHUD();return}
  if(gameOver){if(tobogganActive&&!fallingDeath){if(heroRoot){heroRoot.position.y=tobogganY(0)+RIVER_HERO_Y;heroRoot.position.z=RIVER_HERO_Z;heroRoot.rotation.x=-.12}if(currentAction)currentAction.paused=true;applyTobogganCrouchPose(hero,false);if(lyraRoot&&currentJourney===2){if(lyraAction)lyraAction.paused=true;applyTobogganCrouchPose(lyraModel,true)}return}if(fallingDeath&&heroRoot){fallTimer+=dt;heroRoot.position.y-=dt*(3.4+fallTimer*7.5);heroRoot.rotation.x+=dt*1.35;heroRoot.rotation.z+=dt*.48;camera.position.y=Math.max(1.25,camera.position.y-dt*.7)}if(mixer)mixer.update(dt*.12);return}
  if(tobogganActive){updateToboggan(dt);updateHUD();return}
- elapsed+=dt;distance+=speed*dt*DISTANCE_SCALE;const currentRealmProgress=distance-realmStartDistance;updateKharvorBridge(dt,currentRealmProgress);speed=Math.min(RUN_SPEED_MAX,RUN_SPEED_BASE+distance/220);water-=dt*(.52+speed*.008);updateHydrationWarnings();if(water<=0){dehydrationDeath();return}updateCurve(dt);effortTimer=Math.max(0,effortTimer-dt);if(UI.effortPulse)UI.effortPulse.classList.toggle('show',effortTimer>0);
+ elapsed+=dt;distance+=speed*dt*DISTANCE_SCALE;const currentRealmProgress=distance-realmStartDistance;updateKharvorBridge(dt,currentRealmProgress);const rhythmTarget=mobileRhythmSpeed(currentRealmProgress);speed+=(rhythmTarget-speed)*Math.min(1,dt*(MOBILE_RUNNER?1.35:.8));water-=dt*(.52+speed*.008);updateHydrationWarnings();if(water<=0){dehydrationDeath();return}updateCurve(dt);effortTimer=Math.max(0,effortTimer-dt);if(UI.effortPulse)UI.effortPulse.classList.toggle('show',effortTimer>0);
  lane+=(targetLane-lane)*Math.min(1,dt*11);
  if(jumpY>0||jumpV>0){const wasAirborne=jumpY>0;jumpV-=18.8*dt;jumpY+=jumpV*dt;if(jumpY<=0){jumpY=0;jumpV=0;if(wasAirborne)playSFX('land')}}
  slideTimer=Math.max(0,slideTimer-dt);slideCooldown=Math.max(0,slideCooldown-dt);hitCooldown=Math.max(0,hitCooldown-dt);
