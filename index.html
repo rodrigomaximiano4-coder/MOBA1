@@ -224,7 +224,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE50</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE51</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -359,7 +359,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE50 • CORES MOBILE REFORÇADAS + LOGO LEGÍVEL
+// MAX HEALMS MOBILE51 • PISTA QUADRICULADA MOBILE + FINAL J1 COMPLETO
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -557,14 +557,24 @@ function finishJourney(){
    showFamilyScene('j1final').catch(err=>console.warn('Cena final J1',err));
    UI.journeyEndEyebrow.textContent='JORNADA 1 • A FUGA CONCLUÍDA';
    UI.journeyEndTitle.textContent='Varek encontrou sua família';
+   const rawTime=Math.max(0,(r.finalTime||0)-timePenalty);
    UI.journeyEndText.innerHTML=
-     '<div class="j1StoryBeat"><b>REENCONTRO</b><br>Depois de atravessar os seis reinos, Varek finalmente alcança a fronteira e encontra sua esposa e Lyra.</div>'+
-     '<div class="j1ResultGrid"><span>DISTÂNCIA<b>'+Math.floor(r.distance||distance)+' m</b></span><span>TEMPO<b>'+fmtTime(r.finalTime||0)+'</b></span><span>PONTOS<b>'+(r.score||runScore())+'</b></span><span>POSIÇÃO<b>#'+Math.max(1,r.rank||1)+'</b></span></div>'+
-     '<div class="j1Twist"><b>MAS A PAZ DURA POUCO.</b><br>Serya alcança Lyra e a leva através de um portal. Varek deixa de fugir e parte atrás dela.</div>'+
-     '<div class="j1HunterTurn">⚔ <b>O CAÇADO VIROU CAÇADOR.</b><br>A fuga terminou. A caçada começa.</div>'+
+     '<div class="j1StoryBeat"><b>REENCONTRO</b><br>Depois de atravessar os seis reinos, Varek finalmente alcança a fronteira e reencontra sua esposa e Lyra.</div>'+
+     '<div class="j1ResultGrid">'+
+       '<span>DISTÂNCIA<b>'+Math.floor(r.distance||distance)+' m</b></span>'+
+       '<span>TEMPO BRUTO<b>'+fmtTime(rawTime)+'</b></span>'+
+       '<span>PENALIDADES<b>+'+fmtTime(timePenalty)+'</b></span>'+
+       '<span>TEMPO FINAL<b>'+fmtTime(r.finalTime||0)+'</b></span>'+
+       '<span>PONTOS<b>'+(r.score||runScore())+'</b></span>'+
+       '<span>POSIÇÃO<b>#'+Math.max(1,r.rank||1)+'</b></span>'+
+       '<span>ESTRELAS<b>⭐ '+runStars+'</b></span>'+
+       '<span>DIAMANTES<b>💎 '+runGems+'</b></span>'+
+     '</div>'+
+     '<div class="j1Twist"><b>LYRA FOI SEQUESTRADA.</b><br>Quando a família finalmente se reencontra, Serya invade a fronteira, captura Lyra e desaparece com ela através de um portal. Varek vê a filha ser levada e decide persegui-la.</div>'+
+     '<div class="j1HunterTurn">⚔ <b>O CAÇADO VIROU CAÇADOR.</b><br>A FUGA TERMINOU. A CAÇADA COMEÇA.</div>'+
      '<div class="j1Unlock">✓ JORNADA 2 DESBLOQUEADA • O RESGATE</div>';
    $('journeyNext').textContent='⚔ INICIAR JORNADA 2 • O RESGATE';
-   setTimeout(()=>{if(journeyRunFinished&&currentJourney===1){UI.journeyEndPanel.classList.add('show');playSFX('finalChime')}},3300)
+   setTimeout(()=>{if(journeyRunFinished&&currentJourney===1){UI.journeyEndPanel.classList.add('show');playSFX('finalChime')}},5200)
  }
  else{SAVE.j2Checkpoint=0;saveState();showFinalArrival(r,false).catch(err=>console.warn('FRONTEIRA FINAL',err))}
  refreshJourneyMenu()
@@ -1640,6 +1650,22 @@ function buildSky(){
 }
 
 function makeStoneMaterial(color){return new THREE.MeshStandardMaterial({color,roughness:.91,metalness:.015})}
+function makeMobileRoadTileTexture(cfg){
+ const c=document.createElement('canvas');c.width=512;c.height=512;const g=c.getContext('2d');if(!g)return null;
+ const cols=(cfg.road&&cfg.road.length?cfg.road:[0x666666,0x5d5d5d,0x707070]).map(v=>'#'+v.toString(16).padStart(6,'0'));
+ const rows=4,colsN=3,w=c.width/colsN,h=c.height/rows;
+ g.fillStyle=cols[0];g.fillRect(0,0,c.width,c.height);
+ for(let y=0;y<rows;y++)for(let x=0;x<colsN;x++){
+   g.fillStyle=cols[(x+y)%cols.length];
+   g.fillRect(x*w+2,y*h+2,w-4,h-4);
+   g.fillStyle='rgba(255,255,255,.025)';g.fillRect(x*w+8,y*h+8,w-16,8);
+   g.fillStyle='rgba(0,0,0,.045)';g.fillRect(x*w+8,y*h+h-17,w-16,7);
+ }
+ g.strokeStyle='rgba(20,18,16,.20)';g.lineWidth=4;
+ for(let x=1;x<colsN;x++){g.beginPath();g.moveTo(x*w,0);g.lineTo(x*w,c.height);g.stroke()}
+ for(let y=1;y<rows;y++){g.beginPath();g.moveTo(0,y*h);g.lineTo(c.width,y*h);g.stroke()}
+ const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(1,2.15);t.encoding=THREE.sRGBEncoding;t.minFilter=THREE.LinearFilter;t.magFilter=THREE.LinearFilter;t.needsUpdate=true;return t
+}
 function makeRoadBrandTexture(accent=0xf4c56a){
  const c=document.createElement('canvas');c.width=512;c.height=256;const g=c.getContext('2d');if(!g)return null;
  g.clearRect(0,0,512,256);
@@ -1687,7 +1713,8 @@ function buildRoad(){
   celestial:0xb39462   // pedra clara dourada
  };
  const stableMobileRoadColor=mobileRoadPalette[cfg.id]??cfg.road[0];
- const mobileRoadMats=[0,1,2].map(()=>new THREE.MeshBasicMaterial({color:stableMobileRoadColor}));
+ const mobileRoadTileTex=makeMobileRoadTileTexture(cfg);
+ const mobileRoadMats=[0,1,2].map((_,laneI)=>new THREE.MeshBasicMaterial({color:0xffffff,map:mobileRoadTileTex||null}));
  const roadLogoTex=makeRoadBrandTexture(cfg.accent);
  const roadLogoMat=roadLogoTex?new THREE.MeshBasicMaterial({map:roadLogoTex,transparent:true,opacity:cfg.id==='celestial'?.66:.48,depthWrite:false,side:THREE.DoubleSide}):null;
  const railWoodMat=new THREE.MeshStandardMaterial({color:0x7b6752,roughness:.9,metalness:.03});
@@ -1711,7 +1738,7 @@ function buildRoad(){
    if(MOBILE_RUNNER){
      for(let laneI=0;laneI<3;laneI++){const laneDeck=new THREE.Mesh(mobileLaneGeo,mobileRoadMats[laneI]);laneDeck.position.set(LANE_X[laneI],-.10,0);laneDeck.receiveShadow=false;seg.add(laneDeck)}
      // MOBILE49: marca no piso em poucos segmentos; não compete com obstáculos.
-     if(roadLogoMat&&s%4===2){
+     if(roadLogoMat&&s%5===2){
        const logo=new THREE.Mesh(new THREE.PlaneGeometry(4.15,2.05),roadLogoMat);
        logo.position.set(0,.020,-1.25);logo.rotation.x=-Math.PI/2;seg.add(logo)
      }
@@ -2129,7 +2156,7 @@ function updateFinalPetals(dt){
  const t=performance.now()*.001;
  for(let i=finalPetals.length-1;i>=0;i--){const p=finalPetals[i],m=p.mesh;m.position.y-=p.vy*dt;m.position.x+=(p.drift+Math.sin(t*1.15+p.phase)*.11)*dt;m.rotation.x+=p.spin*dt;m.rotation.z+=p.spin*.65*dt;if(m.position.y<.10){finalArrivalGroup.remove(m);m.geometry.dispose();m.material.dispose();finalPetals.splice(i,1)}}
 }
-function hideFamilyScene(){finalFamilyMode=false;finalFamilyPhase='';finalSceneClock=0;clearFinalFireworks();clearFinalPetals();finalChimePlayed=false;if(finalArrivalGroup)finalArrivalGroup.visible=false;if(UI.finalVictory)UI.finalVictory.classList.remove('show');if(UI.arrivalBanner)UI.arrivalBanner.classList.remove('show');if(wifeRoot)wifeRoot.visible=false;if(lyraRoot&&!started)lyraRoot.visible=false;hunters.forEach(h=>{h.root.visible=false;if(h.action)h.action.paused=false})}
+function hideFamilyScene(){const _pf=$('portalFx');if(_pf)_pf.classList.remove('show');finalFamilyMode=false;finalFamilyPhase='';finalSceneClock=0;clearFinalFireworks();clearFinalPetals();finalChimePlayed=false;if(finalArrivalGroup)finalArrivalGroup.visible=false;if(UI.finalVictory)UI.finalVictory.classList.remove('show');if(UI.arrivalBanner)UI.arrivalBanner.classList.remove('show');if(wifeRoot)wifeRoot.visible=false;if(lyraRoot&&!started)lyraRoot.visible=false;hunters.forEach(h=>{h.root.visible=false;if(h.action)h.action.paused=false})}
 async function showFamilyScene(phase='final'){
  finalFamilyMode=true;finalFamilyPhase=phase;finalSceneClock=0;finalFireworkTimer=.55;finalPetalTimer=.10;finalChimePlayed=false;
  if(!lyraRoot){try{await loadLyra()}catch(err){console.warn('LYRA 3D NÃO CARREGOU NA CENA FINAL',err)}}
@@ -2164,12 +2191,23 @@ async function showFinalArrival(result,isTest=false){
 function updateFamilyScene(dt){
  if(!finalFamilyMode)return;finalSceneClock+=dt;if(lyraMixer)lyraMixer.update(dt*.20);if(mixer)mixer.update(dt*.18);const t=performance.now()*.001;
  if(finalFamilyPhase==='j1final'){
-   // Varek aproxima-se sozinho e para antes da linha. Família permanece parada e de frente para a câmera.
+   // 0–2,45s: reencontro. 2,45–4,65s: Serya avança, captura Lyra e foge pelo portal.
    const p=Math.min(1,finalSceneClock/2.45),ease=1-Math.pow(1-p,3);
    if(heroRoot){heroRoot.position.z=2.75+(-1.48-2.75)*ease;heroRoot.position.x=0;heroRoot.rotation.y=Math.PI+(flipHero?Math.PI:0);heroRoot.rotation.z=Math.sin(t*.85)*.006;if(p>=.96&&currentAction){currentAction.timeScale=Math.max(.02,.72*(1-p));if(p>=.995)currentAction.paused=true}}
-   if(lyraRoot){lyraRoot.visible=true;lyraRoot.position.set(.92,0,-4.05);lyraRoot.rotation.set(0,0,0)}
    if(wifeRoot){wifeRoot.visible=true;wifeRoot.position.set(-.78,0,-4.15);wifeRoot.rotation.set(0,0,0)}
-   hunters.forEach((h,i)=>{h.root.visible=true;h.root.position.y=-.04+Math.sin(t*.68+i)*.008;h.root.position.z=[1.30,1.62,1.34][i];h.root.position.x=[-3.0,0,3.0][i]});
+   const serya=hunters[2];
+   hunters.forEach((h,i)=>{h.root.visible=true;if(i!==2){h.root.position.y=-.04+Math.sin(t*.68+i)*.008;h.root.position.z=[1.30,1.62,1.34][i];h.root.position.x=[-3.0,0,3.0][i]}});
+   if(finalSceneClock<2.45){
+     if(lyraRoot){lyraRoot.visible=true;lyraRoot.position.set(.92,0,-4.05);lyraRoot.rotation.set(0,0,0)}
+     if(serya){serya.root.position.set(3.0,-.04,1.34)}
+   }else{
+     const kp=Math.min(1,(finalSceneClock-2.45)/2.20),ke=1-Math.pow(1-kp,2);
+     if(serya){serya.root.visible=true;serya.root.position.set(3.0+(1.02-3.0)*Math.min(1,ke*1.45),-.04,1.34+(-3.55-1.34)*Math.min(1,ke*1.45));serya.root.rotation.y=Math.PI}
+     if(lyraRoot){lyraRoot.visible=kp<.96;lyraRoot.position.set(.92+(1.10-.92)*ke,0,-4.05+(-5.55+4.05)*Math.max(0,(kp-.48)/.52));lyraRoot.rotation.y=Math.PI}
+     if(kp>.48&&serya){serya.root.position.z=-3.55+(-5.70+3.55)*((kp-.48)/.52)}
+     const pf=$('portalFx');if(pf){pf.classList.toggle('show',kp>.52&&kp<.98);const pl=$('portalLabel');if(pl)pl.innerHTML='PORTAL<small>LYRA FOI SEQUESTRADA</small>'}
+     if(kp>=.96){if(lyraRoot)lyraRoot.visible=false;if(serya)serya.root.visible=false}
+   }
    camera.position.x=Math.sin(t*.18)*.06;camera.lookAt(0,1.34,-2.35);return
  }
  if(finalFamilyPhase==='final'){
@@ -2892,7 +2930,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE50';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE51';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
