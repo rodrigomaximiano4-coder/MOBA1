@@ -157,7 +157,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
   <canvas id="threeCanvas"></canvas><canvas id="weatherCanvas"></canvas><div class="weatherFlash" id="weatherFlash"></div><div class="vignette"></div><div class="fallFlash" id="fallFlash"></div><div class="effortPulse" id="effortPulse">ESFORÇO</div>
   <div class="loading" id="loading"><div class="loaderRing"></div><b>CONSTRUINDO REINO 3D</b><small id="loadingText">Varek + cenário real</small></div>
   <div class="error" id="error"><h2>O motor 3D não carregou.</h2><p id="engineErrorText">A build não conseguiu iniciar o motor 3D. Abra pelo arquivo <b>ABRIR-MAX-HEALMS-PLAYER.bat</b>.</p><pre id="engineDiag" style="white-space:pre-wrap;color:#9fb0aa;font-size:10px;line-height:1.45;margin-top:14px"></pre></div>
-  <div class="menu" id="menu"><div class="eyebrow">RUN • SURVIVE • ESCAPE</div><h1>MAX<br><em>HEALMS</em></h1><p class="menuTagline">Atravesse os reinos. Sobreviva à perseguição. Reencontre sua família.</p><div class="miniStats compactStats"><div class="miniStat">💎<b id="menuGems">0</b></div><div class="miniStat">RECORDE<b id="menuBest">0 pts</b></div><div class="miniStat">PLANO<b id="menuPlan">FREE</b></div><span id="menuStars" hidden>⭐ 0</span><span id="menuPlayer" hidden>LOCAL</span></div><div class="actions mainNav preStoreNav"><button class="btn primary" id="start">▶ JOGAR • JORNADA 1</button><button class="btn secondary" id="journey2" disabled>🔒 JORNADA 2 • O RESGATE</button><button class="btn secondary" id="characterShop">👤 PERSONAGENS</button><button class="btn secondary storeAccent" id="diamondShop">💎 DIAMANTES</button><button class="btn secondary" id="profile">👤 PERFIL</button><button class="btn secondary" id="mobileMore">☰ MAIS</button><div class="mobileMorePanel" id="mobileMorePanel"><button class="btn secondary" id="ranking">🏆 RANKING</button><button class="btn secondary" id="realms">🌍 PROGRESSO</button><button class="btn secondary" id="story">🎬 HISTÓRIA</button><button class="btn secondary" id="upgrades">⬆ UPGRADES</button><button class="btn secondary" id="settings">⚙ CONFIGURAÇÕES</button><button class="btn secondary" id="endless" disabled>🔒 ENDLESS • CONCLUA A HISTÓRIA</button></div></div><div class="menuCopyright">© 2026 MAX HEALMS • RC5</div></div>
+  <div class="menu" id="menu"><div class="eyebrow">RUN • SURVIVE • ESCAPE</div><h1>MAX<br><em>HEALMS</em></h1><p class="menuTagline">Atravesse os reinos. Sobreviva à perseguição. Reencontre sua família.</p><div class="miniStats compactStats"><div class="miniStat">💎<b id="menuGems">0</b></div><div class="miniStat">RECORDE<b id="menuBest">0 pts</b></div><div class="miniStat">PLANO<b id="menuPlan">FREE</b></div><span id="menuStars" hidden>⭐ 0</span><span id="menuPlayer" hidden>LOCAL</span></div><div class="actions mainNav preStoreNav"><button class="btn primary" id="start">▶ JOGAR • JORNADA 1</button><button class="btn secondary" id="journey2" disabled>🔒 JORNADA 2 • O RESGATE</button><button class="btn secondary" id="characterShop">👤 PERSONAGENS</button><button class="btn secondary storeAccent" id="diamondShop">💎 DIAMANTES</button><button class="btn secondary" id="profile">👤 PERFIL</button><button class="btn secondary" id="mobileMore">☰ MAIS</button><div class="mobileMorePanel" id="mobileMorePanel"><button class="btn secondary" id="ranking">🏆 RANKING</button><button class="btn secondary" id="lastRunAnalysis">📊 ÚLTIMA CORRIDA • CUSTO / GANHO</button><button class="btn secondary" id="realms">🌍 PROGRESSO</button><button class="btn secondary" id="story">🎬 HISTÓRIA</button><button class="btn secondary" id="upgrades">⬆ UPGRADES</button><button class="btn secondary" id="settings">⚙ CONFIGURAÇÕES</button><button class="btn secondary" id="endless" disabled>🔒 ENDLESS • CONCLUA A HISTÓRIA</button></div></div><div class="menuCopyright">© 2026 MAX HEALMS • RC6</div></div>
   <div class="hud" id="hud"><div class="hudBox">DISTÂNCIA<b id="distance">0 m</b></div><div class="hudBox hudStars">ESTRELAS<b id="stars">⭐ 0</b></div><div class="hudBox hudScore">PONTOS<b id="score">0</b></div><div class="hudBox">VIDAS<b id="lives">❤❤❤</b></div><div class="hudBox hudGems">DIAMANTES<b id="gems">💎 0</b></div><div class="hudBox hudWater">ÁGUA<b id="water">100%</b></div><div class="hudBox hudTime">TEMPO<b id="runTime">00:00</b></div><div class="hudBox realmBox">REINO<b id="realmName">FLORESTA</b></div></div>
   <div class="tobogganHud" id="tobogganHud"><span class="mode">🌊 DESCIDA DO RIO</span><b id="tobogganTime">30.0 s</b><span class="tip">CANOA • ← • CENTRO • →</span></div><div class="tobogganFx" id="tobogganFx"></div><div class="descentWarning" id="descentWarning">⚠ DESCIDA À FRENTE</div><div class="lyraBadge" id="lyraBadge">👧 <b>LYRA</b> • À FRENTE</div><div class="portalFx" id="portalFx"><div class="portalRing"><b id="portalLabel">PORTAL<small>ATRAVESSANDO REINO</small></b></div></div>
   <button class="pauseBtn" id="pause">Ⅱ</button><div class="toast" id="toast"></div><div class="hint" id="hint"></div>
@@ -196,7 +196,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
     <p class="commerceNote"><b>Diamantes são consumíveis:</b> podem ser gastos com personagens, continuações e outros recursos. No navegador, compras em reais são simuladas. No Android publicado, preço e cobrança serão fornecidos pelo Google Play Billing.</p>
   <div class="purchaseStatus" id="diamondPurchaseStatus"></div>
   <div class="cardActions"><button class="btn secondary" id="restorePurchasesDiamonds">↻ RESTAURAR COMPRAS</button><button class="btn primary" id="diamondShopClose">VOLTAR</button></div></div></div>
-  <div class="panel" id="rankingPanel"><div class="card"><h2>🏆 Ranking local</h2><p>Pontuação = distância + 25 pontos por ⭐ estrela. Cada corrida encerrada entra automaticamente no ranking local.</p><div class="rankRow head"><span>#</span><span>Jogador</span><span>m</span><span>⭐</span><span>Pontos</span></div><div id="rankingRows"></div><div class="cardActions"><button class="btn primary" id="rankingClose">Voltar</button></div></div></div>
+  <div class="panel" id="rankingPanel"><div class="card"><h2>🏆 Ranking local</h2><p>Pontuação = distância + 25 pontos por ⭐ estrela. Cada corrida encerrada entra automaticamente no ranking local.</p><div class="rankRow head"><span>#</span><span>Jogador</span><span>m</span><span>⭐</span><span>Pontos</span></div><div id="rankingRows"></div><div class="cardActions"><button class="btn primary" id="rankingClose">Voltar</button></div></div></div><div class="panel" id="lastRunAnalysisPanel"><div class="card"><div class="eyebrow">QA • RESULTADO COMERCIAL</div><h2>📊 Última corrida • custo x ganho</h2><div id="lastRunAnalysisBody" class="statusLine" style="text-align:left;line-height:1.6;margin-top:10px">Nenhuma corrida encerrada ainda.</div><div class="cardActions"><button class="btn primary" id="lastRunAnalysisClose">VOLTAR</button></div></div></div>
     <div class="panel" id="shelterChoicePanel"><div class="card"><h2>🏕 Entrar no abrigo?</h2><p>Varek chegou à entrada pela <b>faixa direita</b>. O abrigo pausa a jornada e afasta as caçadoras. A hidratação é opcional e cobrada separadamente.</p><div class="shelterInfo"><b>ENTRADA LIVRE</b><br>Usar o abrigo acrescenta <b>+1 minuto</b> ao tempo do ranking. Você pode sair sem comprar hidratação.</div><div class="cardActions"><button class="btn primary" id="shelterAccept">ENTRAR NO ABRIGO</button><button class="btn secondary" id="shelterDecline">CONTINUAR CORRENDO</button></div></div></div>
   <div class="panel" id="shelterPanel"><div class="card"><h2>🏕 Abrigo • Hidratação</h2><p>A corrida está pausada. Confira sua hidratação e decida se deseja gastar diamantes ou continuar exatamente como está.</p><div class="shelterInfo"><b>HIDRATAÇÃO PAGA SOMENTE SE VOCÊ ESCOLHER</b><br>Chegar a <b>0%</b> durante a corrida causa desidratação. O abrigo adiciona <b>+1 minuto</b> ao ranking.</div><div class="shelterHydrationBox"><div>AO ENTRAR<b id="shelterHydrationBefore">100%</b></div><div>AGORA<b id="shelterHydrationNow">100%</b></div></div><div class="shelterStatus" id="shelterHydrationStatus">💧 Escolha uma opção ou saia sem comprar.</div><div class="grid2" style="margin-top:12px"><button class="btn primary" id="hydr20">+20% • 💎 40</button><button class="btn primary" id="hydr50">+50% • 💎 90</button><button class="btn primary" id="hydr75">+75% • 💎 130</button><button class="btn primary" id="hydrFull">COMPLETAR 100% • 💎 200</button></div><div class="shelterCounter" id="shelterCounter">05:00</div><div class="cardActions"><button class="btn secondary" id="shelterExit">SAIR SEM COMPRAR / CONTINUAR →</button></div></div></div>
   <div class="panel" id="pausePanel"><div class="card"><h2 id="pauseTitle">Jornada pausada</h2><p id="pauseText">Continue da mesma posição ou volte ao menu.</p><div class="cardActions"><button class="btn primary" id="resume">Continuar</button><button class="btn secondary" id="restart">Reiniciar</button><button class="btn secondary" id="backMenu">Menu</button></div></div></div>
@@ -225,7 +225,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE70</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE71</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -599,7 +599,7 @@ function finishJourney(){
 
 
 const LEGACY_SAVE_KEY='maxHealms.player.preview.v1';
-const SAVE_KEY='maxHealms.player.varek.rc5';
+const SAVE_KEY='maxHealms.player.varek.rc6';
 const HERO_OUTFITS={
  outfit_varek_original:{id:'outfit_varek_original',label:'VAREK ORIGINAL',free:true,price:0,mode:'meshy',height:2.34,run:'varekOriginalRun',walk:'varekOriginalWalk',slide:'varekOriginalSlide'},
  outfit_varek_adventurer:{id:'outfit_varek_adventurer',label:'VAREK AVENTUREIRO',free:false,priceBRL:14.99,storeSku:'max_healms_varek_adventurer',mode:'meshy',height:2.34,run:'varekAdventurer',walk:'varekAdventurer',slide:'varekAdventurer'},
@@ -612,7 +612,7 @@ const ACTIVE_VAREK_IDS=new Set(STORE_OUTFIT_IDS);
 const OUTFIT_PRODUCT_TO_ID={'max_healms_varek_adventurer':'outfit_varek_adventurer','max_healms_varek_voren':'outfit_varek_voren'};
 function makeUUID(){try{return crypto.randomUUID()}catch(_){return 'mr-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,11)}}
 function freshSave(){return {uuid:makeUUID(),name:'',nickname:'',country:'',email:'',profileCompleted:false,profileSavedAt:0,accountMode:'guest',accountLinked:false,accountEmail:'',accountProvider:'guest',privacyConsentAt:0,signupRewardClaimed:false,welcomeBonusGranted:0,premiumOwned:false,premiumBonusClaimed:false,ownedProducts:[],purchaseHistory:[],lastForcedAdAt:0,forcedAdsShown:0,gems:0,starsTotal:0,xp:0,bestScore:0,bestDistance:0,bestStars:0,bestTime:0,journey2Unlocked:false,journey2Completed:false,j1Checkpoint:0,j2Checkpoint:0,realmRewardClaims:[],endlessBestDistance:0,upgrades:{shield:0,magnet:0,xp:0},inventory:['outfit_varek_original'],consumables:{shield:0,magnetMinutes:0,canteen:0},equipped:{cap:null,trail:null,outfit:'outfit_varek_original',boots:null,backpack:null},runs:[],settings:{autoRealm:true,sound:true,shadows:true,flipHero:false,haptics:true,musicVolume:.70,sfxVolume:.85,ambientVolume:.65}}}
-function loadSave(){let s=freshSave();try{const stored=localStorage.getItem(SAVE_KEY)||localStorage.getItem(LEGACY_SAVE_KEY);const raw=JSON.parse(stored||'null');if(raw){s={...s,...raw,upgrades:{...s.upgrades,...(raw.upgrades||{})},consumables:{...s.consumables,...(raw.consumables||{})},equipped:{...s.equipped,...(raw.equipped||{})},settings:{...s.settings,...(raw.settings||{})},inventory:Array.isArray(raw.inventory)?raw.inventory:[],runs:Array.isArray(raw.runs)?raw.runs:[]}}}catch(e){}return s}
+function loadSave(){let s=freshSave();try{const stored=localStorage.getItem(SAVE_KEY)||localStorage.getItem('maxHealms.player.varek.rc5')||localStorage.getItem('maxHealms.player.varek.rc4')||localStorage.getItem(LEGACY_SAVE_KEY);const raw=JSON.parse(stored||'null');if(raw){s={...s,...raw,upgrades:{...s.upgrades,...(raw.upgrades||{})},consumables:{...s.consumables,...(raw.consumables||{})},equipped:{...s.equipped,...(raw.equipped||{})},settings:{...s.settings,...(raw.settings||{})},inventory:Array.isArray(raw.inventory)?raw.inventory:[],runs:Array.isArray(raw.runs)?raw.runs:[]}}}catch(e){}return s}
 let SAVE=loadSave();
 
 // MOBILE66 • RELEASE CANDIDATE — SIMULAÇÃO DE INSTALAÇÃO NOVA.
@@ -905,7 +905,7 @@ function fmtTime(sec){sec=Math.max(0,Math.floor(sec));return String(Math.floor(s
 function runScore(){return Math.floor(distance)+runStars*25}
 function updateHUD(){if(UI.distance)UI.distance.textContent=Math.floor(distance)+' m';if(UI.stars)UI.stars.textContent='⭐ '+runStars;if(UI.score)UI.score.textContent=runScore();if(UI.lives)UI.lives.textContent='❤'.repeat(Math.max(0,lives))+(shieldCharges?' 🛡'+shieldCharges:'');if(UI.gems)UI.gems.textContent='💎 '+gemText();if(UI.water)UI.water.textContent=Math.max(0,Math.floor(water))+'%';if(UI.runTime)UI.runTime.textContent=fmtTime(elapsed+timePenalty)}
 let currentRunResult=null;
-// MOBILE70 • SIMULAÇÃO INTERNA DE MONETIZAÇÃO.
+// MOBILE71 • SIMULAÇÃO INTERNA DE MONETIZAÇÃO + CUSTO/GANHO.
 // Valores abaixo são premissas de teste por impressão, NÃO receita real garantida.
 const MONETIZATION_SIM={rewardedBRL:.015,interstitialBRL:.008};
 function sessionMonetizationAnalysis(result=null,includeProjectedInterstitial=true){
@@ -975,6 +975,39 @@ function updateDeathRankPreview(prefix='SE ENCERRAR AGORA'){if(!UI.reviveRank)re
 function refreshMenuStats(){const a=$('menuGems'),b=$('menuStars'),c=$('menuBest'),d=$('menuPlayer');if(a)a.textContent='💎 '+gemText();if(b)b.textContent='⭐ '+SAVE.starsTotal;if(c)c.textContent=SAVE.bestScore+' pts';if(d)d.textContent=(SAVE.profileCompleted?(SAVE.nickname||SAVE.name):'CADASTRAR').toUpperCase();const uw=$('upgradeWallet');if(uw)uw.textContent='💎 '+gemText()+(TEST_MODE?' • TESTE':'');refreshJourneyMenu();const mp=$('menuPlan');if(mp)mp.textContent=SAVE.premiumOwned?'PREMIUM • SEM ADS':'FREE • ADS'}
 function renderUpgrades(){const grid=$('upgradeGrid');if(!grid)return;refreshMenuStats();const defs=[['shield','Escudo Inicial','Bloqueia colisões antes de perder vida.'],['magnet','Ímã de Diamantes','Aumenta o alcance lateral de coleta.'],['xp','Bônus de XP','Aumenta o XP recebido ao final da corrida.']];grid.innerHTML='';defs.forEach(([k,n,d])=>{const lv=SAVE.upgrades[k]||0,cost=[300,650,1100][lv]||0;const c=document.createElement('div');c.className='systemCard';c.innerHTML='<h3>'+n+'</h3><p>'+d+'</p><b>NÍVEL '+lv+'/3</b>';const b=document.createElement('button');b.className='btn '+(lv>=3?'secondary':'primary');b.style.marginTop='10px';b.textContent=lv>=3?'MAX':'MELHORAR • 💎'+cost;b.disabled=lv>=3;b.onclick=()=>{if(!canAffordGems(cost)){toast('DIAMANTES INSUFICIENTES');return}spendGems(cost);SAVE.upgrades[k]=lv+1;saveState();renderUpgrades();toast(n+' NÍVEL '+(lv+1)+(TEST_MODE?' • 💎∞ TESTE':''))};c.appendChild(b);grid.appendChild(c)})}
 function renderRanking(){const r=$('rankingRows');if(!r)return;r.innerHTML='';const rows=[...SAVE.runs].sort((a,b)=>b.score-a.score).slice(0,10);if(!rows.length){r.innerHTML='<p>Nenhuma corrida finalizada ainda.</p>';return}rows.forEach((x,i)=>{const d=document.createElement('div');d.className='rankRow';d.innerHTML='<span>'+(i+1)+'</span><b>'+String(x.name||'JOGADOR').replace(/[<>]/g,'')+'</b><span>'+x.distance+'</span><span>'+x.stars+'</span><span>'+x.score+'</span>';r.appendChild(d)})}
+function renderLastRunAnalysis(){
+ const box=$('lastRunAnalysisBody');if(!box)return;
+ const runs=Array.isArray(SAVE.runs)?SAVE.runs:[],r=runs.length?runs[runs.length-1]:null;
+ if(!r){box.innerHTML='Nenhuma corrida encerrada ainda.';return}
+ const eco=r.economy||{},a=sessionMonetizationAnalysis(r,false);
+ const rankPos=Math.max(1,rankingSorted().findIndex(x=>x.id===r.id)+1);
+ const pkg=a.packageSuggestion||null;
+ const potentialPurchase=pkg?Number(pkg.price||0):0;
+ const grossPotential=a.adEstimate+potentialPurchase;
+ const virtualCost=Number(eco.spentGems||0);
+ box.innerHTML=
+  '<b>RESULTADO</b><br>'+
+  '🏃 Distância: <b>'+Number(r.distance||0).toLocaleString('pt-BR')+' m</b><br>'+
+  '⏱ Tempo: <b>'+fmtTime(r.finalTime||0)+'</b><br>'+
+  '⭐ Estrelas: <b>'+Number(r.stars||0).toLocaleString('pt-BR')+'</b><br>'+
+  '🏆 Pontos: <b>'+Number(r.score||0).toLocaleString('pt-BR')+'</b><br>'+
+  '📍 Posição local: <b>#'+rankPos+'</b><br><br>'+
+  '<b>ECONOMIA DO JOGADOR</b><br>'+
+  '💎 Saldo inicial: <b>'+Number(eco.startGems||0)+'</b><br>'+
+  '💎 Coletados: <b>'+Number(eco.collectedGems||0)+'</b><br>'+
+  '💎 Recompensas de reino: <b>'+Number(eco.realmRewards||0)+'</b><br>'+
+  '💎 Gastos: <b>'+virtualCost+'</b><br>'+
+  '💎 Saldo final registrado: <b>'+Number(eco.endGems??SAVE.gems)+'</b><br>'+
+  '↻ Continuações pagas: <b>'+Number(eco.paidContinues||0)+'</b><br>'+
+  '▶ Rewarded: <b>'+Number(eco.rewardedAds||0)+'</b> • Intersticiais: <b>'+Number(eco.interstitialAds||0)+'</b><br><br>'+
+  '<b>CUSTO X GANHO • SIMULAÇÃO</b><br>'+
+  '🎮 Custo virtual do jogador: <b>💎 '+virtualCost+'</b><br>'+
+  '💰 Ganho estimado já gerado por anúncios: <b>'+brl(a.adEstimate)+'</b><br>'+
+  '🛒 Pressão para compra: <b>'+a.pressure+'</b><br>'+
+  '📦 Pacote mínimo sugerido: <b>'+(pkg?('💎 '+pkg.gems+' • '+brl(pkg.price)):'nenhum')+'</b><br>'+
+  '💵 Ganho potencial bruto se houver essa compra: <b>'+brl(grossPotential)+'</b><br>'+
+  '<small>Ganho potencial = anúncios simulados + preço cheio do pacote sugerido. Não desconta taxa da loja e não significa que a compra acontecerá.</small>';
+}
 
 function renderProfile(){
  if(!$('profileName'))return;
@@ -3145,7 +3178,7 @@ $('diamondShop').onclick=()=>{renderShop();setCommerceStatus('');UI.diamondShopP
 if($('buyPremium'))$('buyPremium').onclick=()=>purchaseCashProduct(PLAY_STORE_CONFIG.premiumSku);if($('revivePremium'))$('revivePremium').onclick=()=>purchaseCashProduct(PLAY_STORE_CONFIG.premiumSku);if($('restorePurchasesDiamonds'))$('restorePurchasesDiamonds').onclick=restoreCommercePurchases;
 function handleStoreInteraction(e){const ob=e.target.closest('[data-buy-outfit]');if(ob){e.preventDefault();e.stopPropagation();void buyOrEquipOutfit(ob.dataset.buyOutfit);return}const pb=e.target.closest('[data-premium-outfit]');if(pb){e.preventDefault();const id=pb.dataset.premiumOutfit;if(ownsOutfit(id))void buyOrEquipOutfit(id);else void purchaseCashProduct(PLAY_STORE_CONFIG.premiumSku);return}const db=e.target.closest('[data-buy-diamonds]');if(db){e.preventDefault();void purchaseCashProduct(db.dataset.buyDiamonds)}}
 UI.shopPanel.addEventListener('click',handleStoreInteraction);UI.diamondShopPanel.addEventListener('click',handleStoreInteraction);
-$('ranking').onclick=()=>{renderRanking();UI.rankingPanel.classList.add('show')};$('rankingClose').onclick=()=>UI.rankingPanel.classList.remove('show');
+$('ranking').onclick=()=>{renderRanking();UI.rankingPanel.classList.add('show')};$('rankingClose').onclick=()=>UI.rankingPanel.classList.remove('show');$('lastRunAnalysis').onclick=()=>{renderLastRunAnalysis();$('lastRunAnalysisPanel')?.classList.add('show')};$('lastRunAnalysisClose').onclick=()=>$('lastRunAnalysisPanel')?.classList.remove('show');
 $('legalClose').onclick=()=>$('legalPanel')?.classList.remove('show');$('legalPrivacy').onclick=()=>openExternalResource('privacy');$('legalDeleteWeb').onclick=()=>openExternalResource('delete');
 $('realms').onclick=()=>{buildPlayerRealmGallery();UI.realmPanel.classList.add('show')};
 if($('realmClose'))$('realmClose').onclick=()=>UI.realmPanel.classList.remove('show');
@@ -3174,7 +3207,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE70';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE71';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
