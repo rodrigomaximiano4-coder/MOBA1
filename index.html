@@ -224,7 +224,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE48</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE49</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -359,7 +359,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE48 • FIX DO LOOP PRINCIPAL + ZONA SEGURA
+// MAX HEALMS MOBILE49 • PISTAS POR REINO + LOGO NO PISO
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -499,10 +499,10 @@ function setRealmBackground(cfg){applyRealmCssBackground(cfg);if(MOBILE_RUNNER){
 
 const REALMS=[
  {id:'vpath',name:'TERRAS DOS DRAGÕES',short:'TERRAS DOS DRAGÕES',asset:null,bg:0x321611,fog:0x28110d,fogNear:25,fogFar:105,road:[0x4d3d37,0x3b302d,0x5a4640],edge:0x3a2925,accent:0xe05a20,sceneryWidth:24,sceneryZ:-54},
- {id:'vruins',name:'RUÍNAS DE KHARVOR',short:'RUÍNAS DE KHARVOR',asset:null,bg:0x2b1411,fog:0x23100d,fogNear:23,fogFar:116,road:[0x51423d,0x413532,0x5c4942],edge:0x392c29,accent:0xd64d1f,sceneryWidth:23,sceneryZ:-51},
- {id:'ember',name:'VALE DAS CINZAS',short:'VALE DAS CINZAS',asset:null,bg:0x321b1b,fog:0x2b1717,fogNear:26,fogFar:108,road:[0x51443b,0x453831,0x5c4a40],edge:0x3c302b,accent:0x9e472d,sceneryWidth:23,sceneryZ:-52},
- {id:'ruins',name:'RUÍNAS DE VHALOR',short:'RUÍNAS DE VHALOR',asset:null,bg:0x91a899,fog:0x7f9387,fogNear:30,fogFar:136,road:[0x777568,0x66665d,0x858273],edge:0x54584b,accent:0x70845d,sceneryWidth:22,sceneryZ:-50},
- {id:'forest',name:'FLORESTA DE NERIS',short:'FLORESTA DE NERIS',asset:null,bg:0x9dc0a4,fog:0x8ba596,fogNear:34,fogFar:148,road:[0x8b8068,0x776d59,0x9a8d72],edge:0x59624a,accent:0x6e8a51,sceneryWidth:23,sceneryZ:-52},
+ {id:'vruins',name:'RUÍNAS DE KHARVOR',short:'RUÍNAS DE KHARVOR',asset:null,bg:0x2b1411,fog:0x23100d,fogNear:23,fogFar:116,road:[0x4b4d50,0x45474a,0x525458],edge:0x35373a,accent:0x91a7c2,sceneryWidth:23,sceneryZ:-51},
+ {id:'ember',name:'VALE DAS CINZAS',short:'VALE DAS CINZAS',asset:null,bg:0x321b1b,fog:0x2b1717,fogNear:26,fogFar:108,road:[0x4a3f3a,0x443a36,0x514640],edge:0x342a27,accent:0xff6c2d,sceneryWidth:23,sceneryZ:-52},
+ {id:'ruins',name:'RUÍNAS DE VHALOR',short:'RUÍNAS DE VHALOR',asset:null,bg:0x91a899,fog:0x7f9387,fogNear:30,fogFar:136,road:[0x6f756e,0x686e68,0x777d75],edge:0x4f574f,accent:0x9b8c68,sceneryWidth:22,sceneryZ:-50},
+ {id:'forest',name:'FLORESTA DE NERIS',short:'FLORESTA DE NERIS',asset:null,bg:0x9dc0a4,fog:0x8ba596,fogNear:34,fogFar:148,road:[0x74684f,0x6f654e,0x7d7157],edge:0x536048,accent:0x829b61,sceneryWidth:23,sceneryZ:-52},
  {id:'celestial',name:'REINO CELESTIAL',short:'REINO CELESTIAL',asset:null,celestial:true,bg:0xf2c987,fog:0xd8c9a9,fogNear:46,fogFar:185,road:[0xa9885e,0x92724e,0xb69668],edge:0x7d684b,accent:0xe9c36a,sceneryWidth:0,sceneryZ:-54}
 ]
 
@@ -1640,6 +1640,17 @@ function buildSky(){
 }
 
 function makeStoneMaterial(color){return new THREE.MeshStandardMaterial({color,roughness:.91,metalness:.015})}
+function makeRoadBrandTexture(accent=0xf4c56a){
+ const c=document.createElement('canvas');c.width=512;c.height=256;const g=c.getContext('2d');if(!g)return null;
+ g.clearRect(0,0,512,256);
+ const col='#'+accent.toString(16).padStart(6,'0');
+ g.strokeStyle=col;g.globalAlpha=.72;g.lineWidth=9;g.strokeRect(44,38,424,180);
+ g.globalAlpha=.88;g.fillStyle=col;g.font='900 58px sans-serif';g.textAlign='center';g.fillText('MAX HEALMS',256,115);
+ g.globalAlpha=.62;g.font='800 20px sans-serif';g.fillText('RUN • SURVIVE • ESCAPE',256,151);
+ g.globalAlpha=.52;g.beginPath();g.arc(256,190,24,0,Math.PI*2);g.stroke();
+ g.beginPath();g.moveTo(244,190);g.lineTo(268,190);g.moveTo(256,178);g.lineTo(256,202);g.stroke();
+ const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.minFilter=THREE.LinearFilter;t.magFilter=THREE.LinearFilter;t.needsUpdate=true;return t
+}
 function makeNerisBrandTexture(){
  const c=document.createElement('canvas');c.width=512;c.height=256;const g=c.getContext('2d');if(!g)return null;
  const bg=g.createLinearGradient(0,0,512,256);bg.addColorStop(0,'#18271d');bg.addColorStop(1,'#354d32');g.fillStyle=bg;g.fillRect(0,0,512,256);
@@ -1667,8 +1678,18 @@ function buildRoad(){
  const railStoneMat=makeStoneMaterial(roundedColor(cfg.edge,.04));
  const railCapMat=makeStoneMaterial(roundedColor(cfg.road[0],.06));
  const edgeRoadMat=makeStoneMaterial(cfg.edge);
- const stableMobileRoadColor=cfg.id==='vpath'?cfg.road[0]:null;
- const mobileRoadMats=cfg.road.map((col,laneI)=>new THREE.MeshStandardMaterial({color:stableMobileRoadColor!=null?stableMobileRoadColor:col,roughness:1,metalness:0,flatShading:true}));
+ const mobileRoadPalette={
+  vpath:0x5a4438,
+  vruins:0x4b4d50,
+  ember:0x4a3f3a,
+  ruins:0x6f756e,
+  forest:0x74684f,
+  celestial:0xa4875f
+ };
+ const stableMobileRoadColor=mobileRoadPalette[cfg.id]??cfg.road[0];
+ const mobileRoadMats=[0,1,2].map(()=>new THREE.MeshStandardMaterial({color:stableMobileRoadColor,roughness:1,metalness:0,flatShading:true}));
+ const roadLogoTex=makeRoadBrandTexture(cfg.accent);
+ const roadLogoMat=roadLogoTex?new THREE.MeshBasicMaterial({map:roadLogoTex,transparent:true,opacity:cfg.id==='celestial'?.44:.30,depthWrite:false,side:THREE.DoubleSide}):null;
  const railWoodMat=new THREE.MeshStandardMaterial({color:0x7b6752,roughness:.9,metalness:.03});
  const khUnderMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x353432}):new THREE.MeshStandardMaterial({color:0x353432,roughness:1}),khBeamMat=MOBILE_RUNNER?new THREE.MeshBasicMaterial({color:0x2c2926}):new THREE.MeshStandardMaterial({color:0x2c2926,roughness:1}),khMossMat=new THREE.MeshBasicMaterial({color:0x40563b,transparent:true,opacity:.72});
  const khDeckGeo=new THREE.BoxGeometry(8.55,.34,10.20),khBeamGeo=new THREE.BoxGeometry(8.7,.28,.34),khPostGeo=new THREE.BoxGeometry(.34,4.55,.34),khMossGeo=new THREE.BoxGeometry(1.55,.04,2.05);
@@ -1689,6 +1710,11 @@ function buildRoad(){
    const seg=new THREE.Group();seg.position.z=8-s*10.5;seg.userData.baseIndex=s;
    if(MOBILE_RUNNER){
      for(let laneI=0;laneI<3;laneI++){const laneDeck=new THREE.Mesh(mobileLaneGeo,mobileRoadMats[laneI]);laneDeck.position.set(LANE_X[laneI],-.10,0);laneDeck.receiveShadow=false;seg.add(laneDeck)}
+     // MOBILE49: marca no piso em poucos segmentos; não compete com obstáculos.
+     if(roadLogoMat&&s%5===2){
+       const logo=new THREE.Mesh(new THREE.PlaneGeometry(3.7,1.85),roadLogoMat);
+       logo.position.set(0,.018,-1.45);logo.rotation.x=-Math.PI/2;seg.add(logo)
+     }
      if(cfg.id==='celestial'){
        // MOBILE43: Celestial premium — ouro integrado à arquitetura da ponte, nunca solto no cenário.
        const celestialEdgeMat=new THREE.MeshBasicMaterial({color:0xf6d98a,transparent:true,opacity:.34,depthWrite:false});
@@ -1749,7 +1775,7 @@ function buildRoad(){
    if(!MOBILE_RUNNER){
      if(cfg.id==='forest'){
        for(let rz=0;rz<4;rz++){
-         const trail=new THREE.Mesh(new THREE.BoxGeometry(6.3,.04,2.38),new THREE.MeshStandardMaterial({color:0x6d5d42,roughness:1}));trail.position.set(0,-.005,(rz-1.5)*2.62);seg.add(trail);
+         const trail=new THREE.Mesh(new THREE.BoxGeometry(6.3,.025,2.38),new THREE.MeshStandardMaterial({color:0x74684f,roughness:1}));trail.position.set(0,-.005,(rz-1.5)*2.62);seg.add(trail);
          if((s+rz)%2===0){const root=new THREE.Mesh(new THREE.CylinderGeometry(.06,.08,1.45,6),new THREE.MeshStandardMaterial({color:0x5a4630,roughness:1}));root.rotation.z=Math.PI/2;root.rotation.y=.38;root.position.set((rz%2?1:-1)*1.7,.06,(rz-1.5)*2.62+.25);seg.add(root)}
        }
      }else if(cfg.id==='ember'){
@@ -2862,7 +2888,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE48';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE49';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
