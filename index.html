@@ -157,8 +157,8 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
   <canvas id="threeCanvas"></canvas><canvas id="weatherCanvas"></canvas><div class="weatherFlash" id="weatherFlash"></div><div class="vignette"></div><div class="fallFlash" id="fallFlash"></div><div class="effortPulse" id="effortPulse">ESFORÇO</div>
   <div class="loading" id="loading"><div class="loaderRing"></div><b>CONSTRUINDO REINO 3D</b><small id="loadingText">Varek + cenário real</small></div>
   <div class="error" id="error"><h2>O motor 3D não carregou.</h2><p id="engineErrorText">A build não conseguiu iniciar o motor 3D. Abra pelo arquivo <b>ABRIR-MAX-HEALMS-PLAYER.bat</b>.</p><pre id="engineDiag" style="white-space:pre-wrap;color:#9fb0aa;font-size:10px;line-height:1.45;margin-top:14px"></pre></div>
-  <div class="menu" id="menu"><div class="eyebrow">RUN • SURVIVE • ESCAPE</div><h1>MAX<br><em>HEALMS</em></h1><p class="menuTagline">Atravesse os reinos. Sobreviva à perseguição. Reencontre sua família.</p><div class="miniStats compactStats"><div class="miniStat">💎<b id="menuGems">0</b></div><div class="miniStat">RECORDE<b id="menuBest">0 pts</b></div><div class="miniStat">PLANO<b id="menuPlan">FREE</b></div><span id="menuStars" hidden>⭐ 0</span><span id="menuPlayer" hidden>LOCAL</span></div><div class="actions mainNav preStoreNav"><button class="btn primary" id="start">▶ JOGAR • JORNADA 1</button><button class="btn secondary" id="journey2" disabled>🔒 JORNADA 2 • O RESGATE</button><button class="btn secondary" id="characterShop">👤 PERSONAGENS</button><button class="btn secondary storeAccent" id="diamondShop">💎 DIAMANTES</button><button class="btn secondary" id="profile">👤 PERFIL</button><button class="btn secondary" id="lastRunAnalysisMain">📊 CUSTO / GANHO</button><button class="btn secondary" id="mobileMore">☰ MAIS</button><div class="mobileMorePanel" id="mobileMorePanel"><button class="btn secondary" id="ranking">🏆 RANKING</button><button class="btn secondary" id="lastRunAnalysis">📊 ÚLTIMA CORRIDA • CUSTO / GANHO</button><button class="btn secondary" id="realms">🌍 PROGRESSO</button><button class="btn secondary" id="story">🎬 HISTÓRIA</button><button class="btn secondary" id="upgrades">⬆ UPGRADES</button><button class="btn secondary" id="settings">⚙ CONFIGURAÇÕES</button><button class="btn secondary" id="endless" disabled>🔒 ENDLESS • CONCLUA A HISTÓRIA</button></div></div><div class="menuCopyright">© 2026 MAX HEALMS • RC10</div></div>
-  <div class="hud" id="hud"><div class="hudBox">DISTÂNCIA<b id="distance">0 m</b></div><div class="hudBox hudStars">ESTRELAS<b id="stars">⭐ 0</b></div><div class="hudBox hudScore">PONTOS<b id="score">0</b></div><div class="hudBox">VIDAS<b id="lives">❤❤❤</b></div><div class="hudBox hudGems">DIAMANTES<b id="gems">💎 0</b></div><div class="hudBox hudWater">ÁGUA<b id="water">100%</b></div><div class="hudBox hudTime">TEMPO<b id="runTime">00:00</b></div><div class="hudBox realmBox">REINO<b id="realmName">FLORESTA</b></div></div>
+  <div class="menu" id="menu"><div class="eyebrow">RUN • SURVIVE • ESCAPE</div><h1>MAX<br><em>HEALMS</em></h1><p class="menuTagline">Atravesse os reinos. Sobreviva à perseguição. Reencontre sua família.</p><div class="miniStats compactStats"><div class="miniStat">💎<b id="menuGems">0</b></div><div class="miniStat">RECORDE<b id="menuBest">0 pts</b></div><div class="miniStat">PLANO<b id="menuPlan">FREE</b></div><span id="menuStars" hidden>⭐ 0</span><span id="menuPlayer" hidden>LOCAL</span></div><div class="actions mainNav preStoreNav"><button class="btn primary" id="start">▶ JOGAR • JORNADA 1</button><button class="btn secondary" id="journey2" disabled>🔒 JORNADA 2 • O RESGATE</button><button class="btn secondary" id="characterShop">👤 PERSONAGENS</button><button class="btn secondary storeAccent" id="diamondShop">💎 DIAMANTES</button><button class="btn secondary" id="profile">👤 PERFIL</button><button class="btn secondary" id="lastRunAnalysisMain">📊 CUSTO / GANHO</button><button class="btn secondary" id="mobileMore">☰ MAIS</button><div class="mobileMorePanel" id="mobileMorePanel"><button class="btn secondary" id="ranking">🏆 RANKING</button><button class="btn secondary" id="lastRunAnalysis">📊 ÚLTIMA CORRIDA • CUSTO / GANHO</button><button class="btn secondary" id="realms">🌍 PROGRESSO</button><button class="btn secondary" id="story">🎬 HISTÓRIA</button><button class="btn secondary" id="upgrades">⬆ UPGRADES</button><button class="btn secondary" id="settings">⚙ CONFIGURAÇÕES</button><button class="btn secondary" id="endless" disabled>🔒 ENDLESS • CONCLUA A HISTÓRIA</button></div></div><div class="menuCopyright">© 2026 MAX HEALMS • RC11</div></div>
+  <div class="hud" id="hud"><div class="hudBox"><span id="hudDistanceLabel">DISTÂNCIA</span><b id="distance">0 m</b></div><div class="hudBox hudStars"><span id="hudStarsLabel">ESTRELAS</span><b id="stars">⭐ 0</b></div><div class="hudBox hudScore"><span id="hudScoreLabel">PONTOS</span><b id="score">0</b></div><div class="hudBox"><span id="hudLivesLabel">VIDAS</span><b id="lives">❤❤❤</b></div><div class="hudBox hudGems"><span id="hudGemsLabel">DIAMANTES</span><b id="gems">💎 0</b></div><div class="hudBox hudWater"><span id="hudWaterLabel">ÁGUA</span><b id="water">100%</b></div><div class="hudBox hudTime"><span id="hudTimeLabel">TEMPO</span><b id="runTime">00:00</b></div><div class="hudBox realmBox"><span id="hudRealmLabel">REINO</span><b id="realmName">FLORESTA</b></div></div>
   <div class="tobogganHud" id="tobogganHud"><span class="mode">🌊 DESCIDA DO RIO</span><b id="tobogganTime">30.0 s</b><span class="tip">CANOA • ← • CENTRO • →</span></div><div class="tobogganFx" id="tobogganFx"></div><div class="descentWarning" id="descentWarning">⚠ DESCIDA À FRENTE</div><div class="lyraBadge" id="lyraBadge">👧 <b>LYRA</b> • À FRENTE</div><div class="portalFx" id="portalFx"><div class="portalRing"><b id="portalLabel">PORTAL<small>ATRAVESSANDO REINO</small></b></div></div>
   <button class="pauseBtn" id="pause">Ⅱ</button><div class="toast" id="toast"></div><div class="hint" id="hint"></div>
   <div class="mobile"><div class="mobileGroup"><button class="mBtn" data-act="left">←</button><button class="mBtn" data-act="right">→</button></div><div class="mobileGroup"><button class="mBtn" data-act="jump">↑</button><button class="mBtn" data-act="slide">↓</button></div></div>
@@ -206,7 +206,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
   <div class="panel" id="realmCheckpointPanel"><div class="card"><div class="eyebrow">CHECKPOINT • PROGRESSO SALVO</div><h2 id="realmCheckpointTitle">Reino concluído</h2><p id="realmCheckpointText"></p><div class="statusLine" id="realmCheckpointRewardText">✓ PROGRESSO SALVO</div><div class="cardActions"><button class="btn primary" id="realmCheckpointContinue">CONTINUAR</button><button class="btn secondary" id="realmCheckpointDouble">▶ ANÚNCIO • x2 RECOMPENSA</button><button class="btn secondary" id="realmCheckpointExit">SAIR E CONTINUAR DEPOIS</button></div></div></div>
   <div class="panel" id="journeyEndPanel"><div class="card"><div class="eyebrow" id="journeyEndEyebrow">JORNADA CONCLUÍDA</div><h2 id="journeyEndTitle">Você chegou ao fim</h2><p id="journeyEndText"></p><div class="cardActions"><button class="btn primary" id="journeyNext">CONTINUAR</button><button class="btn secondary" id="journeyMenu">MENU</button></div></div></div>
   <div class="arrivalBanner" id="arrivalBanner">🏁 FRONTEIRA SEGURA • CHEGADA</div>
-  <div class="finalVictory" id="finalVictory"><div class="ey">MAX HEALMS • FIM DA JORNADA 2</div><h2>FAMÍLIA REUNIDA</h2><div class="endingText" id="finalEndingText">Varek e Lyra cruzaram a fronteira segura e finalmente reencontraram a família.</div><div class="placement" id="finalPlacement">🏆 COLOCAÇÃO LOCAL #1</div><div class="resultLine" id="finalResultLine">TEMPO 00:00 • 0 PONTOS</div><div class="unlockLine" id="finalUnlockLine">✓ JORNADA 2 CONCLUÍDA • DESBLOQUEADA NO MENU</div><div class="finalActions"><button class="btn primary" id="finalReplay">↻ REJOGAR JORNADA 2</button><button class="btn secondary" id="finalMenu">☰ MENU PRINCIPAL</button></div></div>
+  <div class="finalVictory" id="finalVictory"><div class="ey">MAX HEALMS • FIM DA JORNADA 2</div><h2 id="finalFamilyTitle">FAMÍLIA REUNIDA</h2><div class="endingText" id="finalEndingText">Varek e Lyra cruzaram a fronteira segura e finalmente reencontraram a família.</div><div class="placement" id="finalPlacement">🏆 COLOCAÇÃO LOCAL #1</div><div class="resultLine" id="finalResultLine">TEMPO 00:00 • 0 PONTOS</div><div class="unlockLine" id="finalUnlockLine">✓ JORNADA 2 CONCLUÍDA • DESBLOQUEADA NO MENU</div><div class="finalActions"><button class="btn primary" id="finalReplay">↻ REJOGAR JORNADA 2</button><button class="btn secondary" id="finalMenu">☰ MENU PRINCIPAL</button></div></div>
   <button class="shelterPrompt" id="shelterPrompt">🏕 ABRIGO PRÓXIMO • FAIXA DIREITA →</button>
 </div>
 
@@ -225,7 +225,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE75</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE76</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -535,20 +535,20 @@ function showRealmCheckpoint(pos,nextIndex){
  if(first){claims.push(claimId);SAVE.gems+=realmCheckpointReward;runRealmRewards+=realmCheckpointReward}
  saveState();refreshJourneyMenu();
  const p=$('realmCheckpointPanel'),t=$('realmCheckpointTitle'),x=$('realmCheckpointText'),r=$('realmCheckpointRewardText'),dbl=$('realmCheckpointDouble');
- if(t)t.textContent='✓ '+done.short+' CONCLUÍDO';
- if(x)x.innerHTML='Progresso salvo automaticamente.<br><b>Próximo: '+next.name+'</b><br>Se sair agora, você continuará deste reino na próxima vez.';
- if(r)r.textContent=first?'RECOMPENSA • 💎 +'+realmCheckpointReward:'CHECKPOINT JÁ CONCLUÍDO • PROGRESSO MANTIDO';
- if(dbl){dbl.disabled=!first;dbl.textContent=first?'▶ ANÚNCIO • DOBRAR PARA 💎 +'+(realmCheckpointReward*2):'✓ RECOMPENSA JÁ RECEBIDA'}
+ if(t)t.textContent='✓ '+done.short+' '+gt('completed');
+ if(x)x.innerHTML=gt('saved')+'<br><b>'+gt('next')+': '+next.name+'</b>';
+ if(r)r.textContent=first?gt('reward')+' • 💎 +'+realmCheckpointReward:gt('already');
+ if(dbl){dbl.disabled=!first;dbl.textContent=first?gt('double')+(realmCheckpointReward*2):gt('received')}
  p?.classList.add('show');haptic([16,28,16])
 }
 async function continueRealmCheckpoint(){if(!realmCheckpointPanelOpen||realmCheckpointNextIndex==null)return;const next=realmCheckpointNextIndex;realmCheckpointPanelOpen=false;realmCheckpointNextIndex=null;$('realmCheckpointPanel')?.classList.remove('show');await portalToRealm(next)}
 function exitRealmCheckpoint(){realmCheckpointPanelOpen=false;realmCheckpointNextIndex=null;$('realmCheckpointPanel')?.classList.remove('show');backMenu()}
 async function doubleRealmCheckpointReward(){
  if(!realmCheckpointPanelOpen||realmCheckpointBonusClaimed||realmCheckpointReward<=0)return;
- const b=$('realmCheckpointDouble');if(b){b.disabled=true;b.textContent='PREPARANDO ANÚNCIO...'}
+ const b=$('realmCheckpointDouble');if(b){b.disabled=true;b.textContent=gt('ad')+'...'}
  let ok=false;try{ok=await AdService.showRewardedRealmBonus()}catch(e){console.warn('REWARD REALM BONUS',e)}
- if(ok){realmCheckpointBonusClaimed=true;SAVE.gems+=realmCheckpointReward;saveState();const r=$('realmCheckpointRewardText');if(r)r.textContent='RECOMPENSA DOBRADA • 💎 +'+(realmCheckpointReward*2);if(b)b.textContent='✓ x2 RECEBIDO';toast('RECOMPENSA DOBRADA • 💎 +'+realmCheckpointReward)}
- else if(b){b.disabled=false;b.textContent='▶ ANÚNCIO • DOBRAR PARA 💎 +'+(realmCheckpointReward*2)}
+ if(ok){realmCheckpointBonusClaimed=true;SAVE.gems+=realmCheckpointReward;saveState();const r=$('realmCheckpointRewardText');if(r)r.textContent=gt('reward')+' x2 • 💎 +'+(realmCheckpointReward*2);if(b)b.textContent=gt('received');toast(gt('reward')+' x2 • 💎 +'+realmCheckpointReward)}
+ else if(b){b.disabled=false;b.textContent=gt('double')+(realmCheckpointReward*2)}
 }
 async function advanceJourneyRealm(){
  if(realmLoading||journeyRunFinished||portalTransitioning||realmCheckpointPanelOpen)return;
@@ -560,28 +560,28 @@ async function advanceJourneyRealm(){
 function showJourney1ResultPanel(r,isTest=false){
  const result=r||{distance:distance,finalTime:elapsed+timePenalty,score:runScore(),rank:previewRunRank()};
  const rawTime=Math.max(0,(result.finalTime||0)-timePenalty);
- UI.journeyEndEyebrow.textContent='JORNADA 1 • A FUGA CONCLUÍDA';
- UI.journeyEndTitle.textContent='Lyra foi sequestrada';
+ UI.journeyEndEyebrow.textContent=gt('j1')+' • '+gt('completed');
+ UI.journeyEndTitle.textContent=gt('kidnapped');
  UI.journeyEndText.innerHTML=
-   '<div class="j1StoryBeat"><b>REENCONTRO</b><br>Depois de atravessar os seis reinos, Varek alcança a fronteira e reencontra sua esposa e Lyra.</div>'+
+   '<div class="j1StoryBeat"><b>'+gt('reunion')+'</b></div>'+
    '<div class="j1ResultGrid">'+
-     '<span>DISTÂNCIA<b>'+Math.floor(result.distance||distance)+' m</b></span>'+
-     '<span>TEMPO BRUTO<b>'+fmtTime(rawTime)+'</b></span>'+
-     '<span>PENALIDADES<b>+'+fmtTime(timePenalty)+'</b></span>'+
-     '<span>TEMPO FINAL<b>'+fmtTime(result.finalTime||0)+'</b></span>'+
-     '<span>PONTOS<b>'+(result.score||runScore())+'</b></span>'+
-     '<span>POSIÇÃO<b>#'+Math.max(1,result.rank||1)+'</b></span>'+
-     '<span>ESTRELAS<b>⭐ '+runStars+'</b></span>'+
-     '<span>DIAMANTES<b>💎 '+runGems+'</b></span>'+
-     '<span>GASTOS<b>💎 '+(result.economy?.spentGems??runSpentGems)+'</b></span>'+
-     '<span>ANÚNCIOS<b>▶ '+(result.economy?.rewardedAds??runRewardedAds)+' rewarded • '+(result.economy?.interstitialAds??runInterstitialAds)+' intersticial</b></span>'+
-     '<span>CONTINUAÇÕES<b>'+((result.economy?.paidContinues??runPaidContinues)+(result.economy?.rewardedAds??runRewardedAds))+'</b></span>'+
-     '<span>SALDO FINAL<b>💎 '+(result.economy?.endGems??SAVE.gems)+'</b></span>'+
+     '<span>'+gt('distance')+'<b>'+Math.floor(result.distance||distance)+' m</b></span>'+
+     '<span>'+gt('rawTime')+'<b>'+fmtTime(rawTime)+'</b></span>'+
+     '<span>'+gt('penalties')+'<b>+'+fmtTime(timePenalty)+'</b></span>'+
+     '<span>'+gt('finalTime')+'<b>'+fmtTime(result.finalTime||0)+'</b></span>'+
+     '<span>'+gt('score')+'<b>'+(result.score||runScore())+'</b></span>'+
+     '<span>'+gt('position')+'<b>#'+Math.max(1,result.rank||1)+'</b></span>'+
+     '<span>'+gt('stars')+'<b>⭐ '+runStars+'</b></span>'+
+     '<span>'+gt('gems')+'<b>💎 '+runGems+'</b></span>'+
+     '<span>'+gt('spent')+'<b>💎 '+(result.economy?.spentGems??runSpentGems)+'</b></span>'+
+     '<span>'+gt('ads')+'<b>▶ '+(result.economy?.rewardedAds??runRewardedAds)+' rewarded • '+(result.economy?.interstitialAds??runInterstitialAds)+' intersticial</b></span>'+
+     '<span>'+gt('continues')+'<b>'+((result.economy?.paidContinues??runPaidContinues)+(result.economy?.rewardedAds??runRewardedAds))+'</b></span>'+
+     '<span>'+gt('finalBalance')+'<b>💎 '+(result.economy?.endGems??SAVE.gems)+'</b></span>'+
    '</div>'+
-   '<div class="j1Twist"><b>LYRA FOI SEQUESTRADA.</b><br>Serya invade a fronteira, captura Lyra e foge com ela através de um portal. Varek vê a filha ser levada e decide persegui-la.</div>'+
-   '<div class="j1HunterTurn">⚔ <b>O CAÇADO VIROU CAÇADOR.</b><br>A FUGA TERMINOU. A CAÇADA COMEÇA.</div>'+
+   '<div class="j1Twist"><b>'+gt('kidnapped').toUpperCase()+'.</b></div>'+
+   '<div class="j1HunterTurn">⚔ <b>'+gt('hunter')+'</b><br>'+gt('huntStarts')+'</div>'+
    '<div class="statusLine" style="margin-top:10px;text-align:left">'+renderSessionMonetizationSummary(result,false)+'</div>'+
-   '<div class="j1Unlock">✓ JORNADA 2 DESBLOQUEADA • O RESGATE</div>';
+   '<div class="j1Unlock">'+gt('j2Unlocked')+'</div>';
  const next=$('journeyNext'),menu=$('journeyMenu');
  if(next){next.textContent=isTest?'↻ REVER FINAL JORNADA 1':'⚔ INICIAR JORNADA 2 • O RESGATE'}
  if(menu&&isTest)menu.textContent='🧪 VOLTAR AOS CENÁRIOS';
@@ -975,7 +975,7 @@ function updateRunGuidance(progress){
 function recordRun(){if(currentRunResult)return currentRunResult;const row=runSnapshot();const e=row.economy||{},inferred=Math.max(0,(Number(e.startGems)||0)+(Number(e.collectedGems)||0)+(Number(e.realmRewards)||0)-(Number(e.endGems)||0));if(inferred>(Number(e.spentGems)||0))e.spentGems=inferred;SAVE.qaSession=(SAVE.qaSession&&typeof SAVE.qaSession==='object')?SAVE.qaSession:{startedAt:Date.now(),runs:0,distance:0,stars:0,collectedGems:0,realmRewards:0,spentGems:0,rewardedAds:0,interstitialAds:0,paidContinues:0,adEstimateBRL:0};const qs=SAVE.qaSession;qs.startedAt=qs.startedAt||Date.now();qs.runs=(Number(qs.runs)||0)+1;qs.distance=(Number(qs.distance)||0)+(Number(row.distance)||0);qs.stars=(Number(qs.stars)||0)+(Number(row.stars)||0);qs.collectedGems=(Number(qs.collectedGems)||0)+(Number(e.collectedGems)||0);qs.realmRewards=(Number(qs.realmRewards)||0)+(Number(e.realmRewards)||0);qs.spentGems=(Number(qs.spentGems)||0)+(Number(e.spentGems)||0);qs.rewardedAds=(Number(qs.rewardedAds)||0)+(Number(e.rewardedAds)||0);qs.paidContinues=(Number(qs.paidContinues)||0)+(Number(e.paidContinues)||0);qs.adEstimateBRL=(Number(qs.adEstimateBRL)||0)+(Number(e.rewardedAds)||0)*MONETIZATION_SIM.rewardedBRL+(Number(e.interstitialAds)||0)*MONETIZATION_SIM.interstitialBRL;if(endlessMode)SAVE.endlessBestDistance=Math.max(Number(SAVE.endlessBestDistance)||0,row.distance);SAVE.runs=Array.isArray(SAVE.runs)?SAVE.runs:[];SAVE.runs.push(row);if(SAVE.runs.length>100)SAVE.runs=rankingSorted().slice(0,100);SAVE.bestScore=Math.max(Number(SAVE.bestScore)||0,row.score);SAVE.bestDistance=Math.max(Number(SAVE.bestDistance)||0,row.distance);SAVE.bestStars=Math.max(Number(SAVE.bestStars)||0,row.stars);if(row.completed&&(Number(SAVE.bestTime)||0)<=0)SAVE.bestTime=row.finalTime;else if(row.completed)SAVE.bestTime=Math.min(Number(SAVE.bestTime)||row.finalTime,row.finalTime);const rows=rankingSorted(),rank=Math.max(1,rows.findIndex(r=>r.id===row.id)+1);currentRunResult={...row,rank};saveState();renderRanking();return currentRunResult}
 function updateDeathRankPreview(prefix='SE ENCERRAR AGORA'){if(!UI.reviveRank)return;UI.reviveRank.textContent='🏆 '+prefix+' • POSIÇÃO LOCAL #'+previewRunRank()}
 function refreshMenuStats(){const a=$('menuGems'),b=$('menuStars'),c=$('menuBest'),d=$('menuPlayer');if(a)a.textContent='💎 '+gemText();if(b)b.textContent='⭐ '+SAVE.starsTotal;if(c)c.textContent=SAVE.bestScore+' pts';if(d)d.textContent=(SAVE.profileCompleted?(SAVE.nickname||SAVE.name):'CADASTRAR').toUpperCase();const uw=$('upgradeWallet');if(uw)uw.textContent='💎 '+gemText()+(TEST_MODE?' • TESTE':'');refreshJourneyMenu();const mp=$('menuPlan');if(mp)mp.textContent=SAVE.premiumOwned?'PREMIUM • SEM ADS':'FREE • ADS'}
-function renderUpgrades(){const grid=$('upgradeGrid');if(!grid)return;refreshMenuStats();const defs=[['shield','Escudo Inicial','Bloqueia colisões antes de perder vida.'],['magnet','Ímã de Diamantes','Aumenta o alcance lateral de coleta.'],['xp','Bônus de XP','Aumenta o XP recebido ao final da corrida.']];grid.innerHTML='';defs.forEach(([k,n,d])=>{const lv=SAVE.upgrades[k]||0,cost=[300,650,1100][lv]||0;const c=document.createElement('div');c.className='systemCard';c.innerHTML='<h3>'+n+'</h3><p>'+d+'</p><b>NÍVEL '+lv+'/3</b>';const b=document.createElement('button');b.className='btn '+(lv>=3?'secondary':'primary');b.style.marginTop='10px';b.textContent=lv>=3?'MAX':'MELHORAR • 💎'+cost;b.disabled=lv>=3;b.onclick=()=>{if(!canAffordGems(cost)){toast('DIAMANTES INSUFICIENTES');return}spendGems(cost);SAVE.upgrades[k]=lv+1;saveState();renderUpgrades();toast(n+' NÍVEL '+(lv+1)+(TEST_MODE?' • 💎∞ TESTE':''))};c.appendChild(b);grid.appendChild(c)})}
+function renderUpgrades(){const grid=$('upgradeGrid');if(!grid)return;refreshMenuStats();const defs=[['shield','Escudo Inicial','Bloqueia colisões antes de perder vida.'],['magnet','Ímã de Diamantes','Aumenta o alcance lateral de coleta.'],['xp','Bônus de XP','Aumenta o XP recebido ao final da corrida.']];grid.innerHTML='';defs.forEach(([k,n,d])=>{const lv=SAVE.upgrades[k]||0,cost=[300,650,1100][lv]||0;const c=document.createElement('div');c.className='systemCard';c.innerHTML='<h3>'+n+'</h3><p>'+d+'</p><b>NÍVEL '+lv+'/3</b>';const b=document.createElement('button');b.className='btn '+(lv>=3?'secondary':'primary');b.style.marginTop='10px';b.textContent=lv>=3?'MAX':'MELHORAR • 💎'+cost;b.disabled=lv>=3;b.onclick=()=>{if(!canAffordGems(cost)){toast(gt('insufficient'));return}spendGems(cost);SAVE.upgrades[k]=lv+1;saveState();renderUpgrades();toast(n+' NÍVEL '+(lv+1)+(TEST_MODE?' • 💎∞ TESTE':''))};c.appendChild(b);grid.appendChild(c)})}
 function renderRanking(){const r=$('rankingRows');if(!r)return;r.innerHTML='';const rows=[...SAVE.runs].sort((a,b)=>b.score-a.score).slice(0,10);if(!rows.length){r.innerHTML='<p>Nenhuma corrida finalizada ainda.</p>';return}rows.forEach((x,i)=>{const d=document.createElement('div');d.className='rankRow';d.innerHTML='<span>'+(i+1)+'</span><b>'+String(x.name||'JOGADOR').replace(/[<>]/g,'')+'</b><span>'+x.distance+'</span><span>'+x.stars+'</span><span>'+x.score+'</span>';r.appendChild(d)})}
 function renderLastRunAnalysis(){
  const box=$('lastRunAnalysisBody');if(!box)return;
@@ -1223,6 +1223,137 @@ const I18N={
  ko:{play:'▶ 플레이 • 여정 1',j2:'🔒 여정 2 • 구출',characters:'👤 캐릭터',diamonds:'💎 다이아몬드',profile:'👤 프로필',more:'☰ 더보기',ranking:'🏆 랭킹',progress:'🌍 진행도',story:'🎬 스토리',upgrades:'⬆ 업그레이드',settings:'⚙ 설정',endless:'🔒 ENDLESS • 스토리 완료 후',cost:'📊 비용 / 수익',settingsTitle:'⚙ 설정',language:'언어',saveSettings:'설정 저장',languageText:'기기 언어를 자동 감지하며 언제든 변경할 수 있습니다.',profileTitle:'👤 프로필 및 접속',country:'국가',selectCountry:'국가 선택',save:'변경 저장',back:'메뉴로 돌아가기',name:'이름',nickname:'랭킹 이름',email:'이메일',password:'비밀번호'},
  'zh-CN':{play:'▶ 开始 • 旅程1',j2:'🔒 旅程2 • 营救',characters:'👤 角色',diamonds:'💎 钻石',profile:'👤 个人资料',more:'☰ 更多',ranking:'🏆 排名',progress:'🌍 进度',story:'🎬 故事',upgrades:'⬆ 升级',settings:'⚙ 设置',endless:'🔒 无尽模式 • 完成故事后解锁',cost:'📊 成本 / 收益',settingsTitle:'⚙ 设置',language:'语言',saveSettings:'保存设置',languageText:'游戏会自动检测设备语言，也可以随时手动更改。',profileTitle:'👤 个人资料与登录',country:'国家/地区',selectCountry:'选择国家/地区',save:'保存更改',back:'返回菜单',name:'姓名',nickname:'排名昵称',email:'电子邮箱',password:'密码'}
 };
+
+const GAME_TEXT={
+ 'pt-BR':{
+  distance:'DISTÂNCIA',stars:'ESTRELAS',score:'PONTOS',lives:'VIDAS',gems:'DIAMANTES',water:'ÁGUA',time:'TEMPO',realm:'REINO',
+  j1:'JORNADA 1 • A FUGA',j2:'JORNADA 2 • O RESGATE',continue:'CONTINUAR',menu:'MENU',next:'PRÓXIMO',saved:'Progresso salvo automaticamente.',
+  completed:'CONCLUÍDO',reward:'RECOMPENSA',already:'CHECKPOINT JÁ CONCLUÍDO • PROGRESSO MANTIDO',double:'▶ ANÚNCIO • DOBRAR PARA 💎 +',received:'✓ x2 RECEBIDO',
+  ad:'ANÚNCIO',life:'VIDA',livesWord:'VIDAS',runEnded:'A jornada terminou',paidLimit:'LIMITE DE CONTINUAÇÕES PAGAS DESTA CORRIDA ATINGIDO',
+  portal:'PORTAL',portalCrossed:'PORTAL ATRAVESSADO',pause:'Jornada pausada',resume:'Continuar',restart:'Reiniciar',
+  shelter:'Abrigo • Hidratação',enterShelter:'Entrar no abrigo?',enter:'ENTRAR NO ABRIGO',keepRunning:'CONTINUAR CORRENDO',exitNoBuy:'SAIR SEM COMPRAR / CONTINUAR →',
+  hydrationFull:'Hidratação completa.',hydrationCurrent:'Hidratação atual:',insufficient:'DIAMANTES INSUFICIENTES',
+  kidnapped:'Lyra foi sequestrada',reunion:'REENCONTRO',hunter:'O CAÇADO VIROU CAÇADOR.',huntStarts:'A FUGA TERMINOU. A CAÇADA COMEÇA.',
+  rawTime:'TEMPO BRUTO',penalties:'PENALIDADES',finalTime:'TEMPO FINAL',position:'POSIÇÃO',spent:'GASTOS',ads:'ANÚNCIOS',continues:'CONTINUAÇÕES',finalBalance:'SALDO FINAL',
+  j2Unlocked:'✓ JORNADA 2 DESBLOQUEADA • O RESGATE',family:'FAMÍLIA REUNIDA',localPlacement:'COLOCAÇÃO LOCAL',collected:'COLETADOS',
+  settingsSaved:'CONFIGURAÇÕES SALVAS',profileSaved:'PERFIL SALVO'
+ },
+ en:{
+  distance:'DISTANCE',stars:'STARS',score:'SCORE',lives:'LIVES',gems:'DIAMONDS',water:'WATER',time:'TIME',realm:'REALM',
+  j1:'JOURNEY 1 • THE ESCAPE',j2:'JOURNEY 2 • THE RESCUE',continue:'CONTINUE',menu:'MENU',next:'NEXT',saved:'Progress saved automatically.',
+  completed:'COMPLETED',reward:'REWARD',already:'CHECKPOINT ALREADY COMPLETED • PROGRESS KEPT',double:'▶ AD • DOUBLE TO 💎 +',received:'✓ x2 RECEIVED',
+  ad:'AD',life:'LIFE',livesWord:'LIVES',runEnded:'The run has ended',paidLimit:'PAID CONTINUE LIMIT REACHED FOR THIS RUN',
+  portal:'PORTAL',portalCrossed:'PORTAL CROSSED',pause:'Journey paused',resume:'Continue',restart:'Restart',
+  shelter:'Shelter • Hydration',enterShelter:'Enter the shelter?',enter:'ENTER SHELTER',keepRunning:'KEEP RUNNING',exitNoBuy:'LEAVE WITHOUT BUYING / CONTINUE →',
+  hydrationFull:'Hydration full.',hydrationCurrent:'Current hydration:',insufficient:'NOT ENOUGH DIAMONDS',
+  kidnapped:'Lyra was kidnapped',reunion:'REUNION',hunter:'THE HUNTED BECAME THE HUNTER.',huntStarts:'THE ESCAPE IS OVER. THE HUNT BEGINS.',
+  rawTime:'RAW TIME',penalties:'PENALTIES',finalTime:'FINAL TIME',position:'POSITION',spent:'SPENT',ads:'ADS',continues:'CONTINUES',finalBalance:'FINAL BALANCE',
+  j2Unlocked:'✓ JOURNEY 2 UNLOCKED • THE RESCUE',family:'FAMILY REUNITED',localPlacement:'LOCAL PLACEMENT',collected:'COLLECTED',
+  settingsSaved:'SETTINGS SAVED',profileSaved:'PROFILE SAVED'
+ },
+ es:{
+  distance:'DISTANCIA',stars:'ESTRELLAS',score:'PUNTOS',lives:'VIDAS',gems:'DIAMANTES',water:'AGUA',time:'TIEMPO',realm:'REINO',
+  j1:'JORNADA 1 • LA HUIDA',j2:'JORNADA 2 • EL RESCATE',continue:'CONTINUAR',menu:'MENÚ',next:'SIGUIENTE',saved:'Progreso guardado automáticamente.',
+  completed:'COMPLETADO',reward:'RECOMPENSA',already:'CHECKPOINT YA COMPLETADO • PROGRESO MANTENIDO',double:'▶ ANUNCIO • DUPLICAR A 💎 +',received:'✓ x2 RECIBIDO',
+  ad:'ANUNCIO',life:'VIDA',livesWord:'VIDAS',runEnded:'La carrera terminó',paidLimit:'LÍMITE DE CONTINUACIONES PAGADAS ALCANZADO',
+  portal:'PORTAL',portalCrossed:'PORTAL ATRAVESADO',pause:'Jornada pausada',resume:'Continuar',restart:'Reiniciar',
+  shelter:'Refugio • Hidratación',enterShelter:'¿Entrar al refugio?',enter:'ENTRAR AL REFUGIO',keepRunning:'SEGUIR CORRIENDO',exitNoBuy:'SALIR SIN COMPRAR / CONTINUAR →',
+  hydrationFull:'Hidratación completa.',hydrationCurrent:'Hidratación actual:',insufficient:'DIAMANTES INSUFICIENTES',
+  kidnapped:'Lyra fue secuestrada',reunion:'REENCUENTRO',hunter:'EL CAZADO SE CONVIRTIÓ EN CAZADOR.',huntStarts:'LA HUIDA TERMINÓ. COMIENZA LA CAZA.',
+  rawTime:'TIEMPO BRUTO',penalties:'PENALIZACIONES',finalTime:'TIEMPO FINAL',position:'POSICIÓN',spent:'GASTADO',ads:'ANUNCIOS',continues:'CONTINUACIONES',finalBalance:'SALDO FINAL',
+  j2Unlocked:'✓ JORNADA 2 DESBLOQUEADA • EL RESCATE',family:'FAMILIA REUNIDA',localPlacement:'POSICIÓN LOCAL',collected:'RECOGIDOS',
+  settingsSaved:'CONFIGURACIÓN GUARDADA',profileSaved:'PERFIL GUARDADO'
+ },
+ fr:{
+  distance:'DISTANCE',stars:'ÉTOILES',score:'POINTS',lives:'VIES',gems:'DIAMANTS',water:'EAU',time:'TEMPS',realm:'ROYAUME',
+  j1:'VOYAGE 1 • LA FUITE',j2:'VOYAGE 2 • LE SAUVETAGE',continue:'CONTINUER',menu:'MENU',next:'SUIVANT',saved:'Progression enregistrée automatiquement.',
+  completed:'TERMINÉ',reward:'RÉCOMPENSE',already:'CHECKPOINT DÉJÀ TERMINÉ • PROGRESSION CONSERVÉE',double:'▶ PUB • DOUBLER À 💎 +',received:'✓ x2 REÇU',
+  ad:'PUB',life:'VIE',livesWord:'VIES',runEnded:'La course est terminée',paidLimit:'LIMITE DE CONTINUATIONS PAYANTES ATTEINTE',
+  portal:'PORTAIL',portalCrossed:'PORTAIL TRAVERSÉ',pause:'Voyage en pause',resume:'Continuer',restart:'Recommencer',
+  shelter:'Abri • Hydratation',enterShelter:'Entrer dans l’abri ?',enter:'ENTRER DANS L’ABRI',keepRunning:'CONTINUER À COURIR',exitNoBuy:'SORTIR SANS ACHETER / CONTINUER →',
+  hydrationFull:'Hydratation complète.',hydrationCurrent:'Hydratation actuelle :',insufficient:'DIAMANTS INSUFFISANTS',
+  kidnapped:'Lyra a été enlevée',reunion:'RETROUVAILLES',hunter:'LE TRAQUÉ DEVIENT CHASSEUR.',huntStarts:'LA FUITE EST TERMINÉE. LA CHASSE COMMENCE.',
+  rawTime:'TEMPS BRUT',penalties:'PÉNALITÉS',finalTime:'TEMPS FINAL',position:'POSITION',spent:'DÉPENSÉ',ads:'PUBLICITÉS',continues:'CONTINUATIONS',finalBalance:'SOLDE FINAL',
+  j2Unlocked:'✓ VOYAGE 2 DÉBLOQUÉ • LE SAUVETAGE',family:'FAMILLE RÉUNIE',localPlacement:'CLASSEMENT LOCAL',collected:'COLLECTÉS',
+  settingsSaved:'PARAMÈTRES ENREGISTRÉS',profileSaved:'PROFIL ENREGISTRÉ'
+ },
+ de:{
+  distance:'DISTANZ',stars:'STERNE',score:'PUNKTE',lives:'LEBEN',gems:'DIAMANTEN',water:'WASSER',time:'ZEIT',realm:'REICH',
+  j1:'REISE 1 • DIE FLUCHT',j2:'REISE 2 • DIE RETTUNG',continue:'WEITER',menu:'MENÜ',next:'WEITER',saved:'Fortschritt automatisch gespeichert.',
+  completed:'ABGESCHLOSSEN',reward:'BELOHNUNG',already:'CHECKPOINT BEREITS ABGESCHLOSSEN • FORTSCHRITT BEHALTEN',double:'▶ WERBUNG • VERDOPPELN AUF 💎 +',received:'✓ x2 ERHALTEN',
+  ad:'WERBUNG',life:'LEBEN',livesWord:'LEBEN',runEnded:'Der Lauf ist beendet',paidLimit:'LIMIT FÜR BEZAHLTE FORTSETZUNGEN ERREICHT',
+  portal:'PORTAL',portalCrossed:'PORTAL DURCHQUERT',pause:'Reise pausiert',resume:'Weiter',restart:'Neu starten',
+  shelter:'Unterstand • Hydration',enterShelter:'Unterstand betreten?',enter:'UNTERSTAND BETRETEN',keepRunning:'WEITERLAUFEN',exitNoBuy:'OHNE KAUF VERLASSEN / WEITER →',
+  hydrationFull:'Hydration vollständig.',hydrationCurrent:'Aktuelle Hydration:',insufficient:'NICHT GENUG DIAMANTEN',
+  kidnapped:'Lyra wurde entführt',reunion:'WIEDERVEREINIGUNG',hunter:'DER GEJAGTE WIRD ZUM JÄGER.',huntStarts:'DIE FLUCHT IST VORBEI. DIE JAGD BEGINNT.',
+  rawTime:'ROHZEIT',penalties:'STRAFEN',finalTime:'ENDZEIT',position:'POSITION',spent:'AUSGEGEBEN',ads:'WERBUNG',continues:'FORTSETZUNGEN',finalBalance:'ENDGUTHABEN',
+  j2Unlocked:'✓ REISE 2 FREIGESCHALTET • DIE RETTUNG',family:'FAMILIE VEREINT',localPlacement:'LOKALE PLATZIERUNG',collected:'GESAMMELT',
+  settingsSaved:'EINSTELLUNGEN GESPEICHERT',profileSaved:'PROFIL GESPEICHERT'
+ },
+ it:{
+  distance:'DISTANZA',stars:'STELLE',score:'PUNTI',lives:'VITE',gems:'DIAMANTI',water:'ACQUA',time:'TEMPO',realm:'REGNO',
+  j1:'VIAGGIO 1 • LA FUGA',j2:'VIAGGIO 2 • IL SALVATAGGIO',continue:'CONTINUA',menu:'MENU',next:'SUCCESSIVO',saved:'Progresso salvato automaticamente.',
+  completed:'COMPLETATO',reward:'RICOMPENSA',already:'CHECKPOINT GIÀ COMPLETATO • PROGRESSO MANTENUTO',double:'▶ ANNUNCIO • RADDOPPIA A 💎 +',received:'✓ x2 RICEVUTO',
+  ad:'ANNUNCIO',life:'VITA',livesWord:'VITE',runEnded:'La corsa è terminata',paidLimit:'LIMITE CONTINUA PAGATE RAGGIUNTO',
+  portal:'PORTALE',portalCrossed:'PORTALE ATTRAVERSATO',pause:'Viaggio in pausa',resume:'Continua',restart:'Ricomincia',
+  shelter:'Rifugio • Idratazione',enterShelter:'Entrare nel rifugio?',enter:'ENTRA NEL RIFUGIO',keepRunning:'CONTINUA A CORRERE',exitNoBuy:'ESCI SENZA COMPRARE / CONTINUA →',
+  hydrationFull:'Idratazione completa.',hydrationCurrent:'Idratazione attuale:',insufficient:'DIAMANTI INSUFFICIENTI',
+  kidnapped:'Lyra è stata rapita',reunion:'RICONGIUNGIMENTO',hunter:'LA PREDA DIVENTA CACCIATORE.',huntStarts:'LA FUGA È FINITA. INIZIA LA CACCIA.',
+  rawTime:'TEMPO GREZZO',penalties:'PENALITÀ',finalTime:'TEMPO FINALE',position:'POSIZIONE',spent:'SPESI',ads:'ANNUNCI',continues:'CONTINUE',finalBalance:'SALDO FINALE',
+  j2Unlocked:'✓ VIAGGIO 2 SBLOCCATO • IL SALVATAGGIO',family:'FAMIGLIA RIUNITA',localPlacement:'POSIZIONE LOCALE',collected:'RACCOLTI',
+  settingsSaved:'IMPOSTAZIONI SALVATE',profileSaved:'PROFILO SALVATO'
+ },
+ ja:{
+  distance:'距離',stars:'スター',score:'スコア',lives:'ライフ',gems:'ダイヤ',water:'水分',time:'時間',realm:'王国',
+  j1:'ジャーニー1 • 逃走',j2:'ジャーニー2 • 救出',continue:'続ける',menu:'メニュー',next:'次へ',saved:'進行状況を自動保存しました。',
+  completed:'クリア',reward:'報酬',already:'チェックポイントクリア済み • 進行状況を保持',double:'▶ 広告 • 倍増 💎 +',received:'✓ x2 受取済み',
+  ad:'広告',life:'ライフ',livesWord:'ライフ',runEnded:'ラン終了',paidLimit:'有料コンティニュー上限に到達',
+  portal:'ポータル',portalCrossed:'ポータル通過',pause:'一時停止',resume:'続ける',restart:'やり直す',
+  shelter:'シェルター • 水分補給',enterShelter:'シェルターに入る？',enter:'シェルターに入る',keepRunning:'走り続ける',exitNoBuy:'購入せず退出 / 続ける →',
+  hydrationFull:'水分100%。',hydrationCurrent:'現在の水分:',insufficient:'ダイヤが足りません',
+  kidnapped:'Lyraがさらわれた',reunion:'再会',hunter:'追われる者が追う者へ。',huntStarts:'逃走は終わった。追跡が始まる。',
+  rawTime:'基本タイム',penalties:'ペナルティ',finalTime:'最終タイム',position:'順位',spent:'使用',ads:'広告',continues:'コンティニュー',finalBalance:'最終残高',
+  j2Unlocked:'✓ ジャーニー2 解放 • 救出',family:'家族再会',localPlacement:'ローカル順位',collected:'獲得',
+  settingsSaved:'設定を保存しました',profileSaved:'プロフィールを保存しました'
+ },
+ ko:{
+  distance:'거리',stars:'별',score:'점수',lives:'목숨',gems:'다이아몬드',water:'수분',time:'시간',realm:'왕국',
+  j1:'여정 1 • 탈출',j2:'여정 2 • 구출',continue:'계속',menu:'메뉴',next:'다음',saved:'진행 상황이 자동 저장되었습니다.',
+  completed:'완료',reward:'보상',already:'체크포인트 완료됨 • 진행 유지',double:'▶ 광고 • 두 배 💎 +',received:'✓ x2 받음',
+  ad:'광고',life:'목숨',livesWord:'목숨',runEnded:'달리기가 끝났습니다',paidLimit:'유료 이어하기 한도 도달',
+  portal:'포털',portalCrossed:'포털 통과',pause:'여정 일시정지',resume:'계속',restart:'다시 시작',
+  shelter:'쉼터 • 수분',enterShelter:'쉼터에 들어갈까요?',enter:'쉼터 입장',keepRunning:'계속 달리기',exitNoBuy:'구매 없이 나가기 / 계속 →',
+  hydrationFull:'수분 충전 완료.',hydrationCurrent:'현재 수분:',insufficient:'다이아몬드 부족',
+  kidnapped:'Lyra가 납치되었습니다',reunion:'재회',hunter:'쫓기던 자가 사냥꾼이 되었다.',huntStarts:'도주는 끝났다. 추격이 시작된다.',
+  rawTime:'기본 시간',penalties:'패널티',finalTime:'최종 시간',position:'순위',spent:'사용',ads:'광고',continues:'이어하기',finalBalance:'최종 잔액',
+  j2Unlocked:'✓ 여정 2 잠금 해제 • 구출',family:'가족 재회',localPlacement:'로컬 순위',collected:'획득',
+  settingsSaved:'설정 저장됨',profileSaved:'프로필 저장됨'
+ },
+ 'zh-CN':{
+  distance:'距离',stars:'星星',score:'分数',lives:'生命',gems:'钻石',water:'水分',time:'时间',realm:'王国',
+  j1:'旅程1 • 逃亡',j2:'旅程2 • 营救',continue:'继续',menu:'菜单',next:'下一步',saved:'进度已自动保存。',
+  completed:'完成',reward:'奖励',already:'检查点已完成 • 进度保留',double:'▶ 广告 • 双倍至 💎 +',received:'✓ x2 已领取',
+  ad:'广告',life:'生命',livesWord:'生命',runEnded:'本局已结束',paidLimit:'本局付费续命次数已达上限',
+  portal:'传送门',portalCrossed:'已穿过传送门',pause:'旅程已暂停',resume:'继续',restart:'重新开始',
+  shelter:'避难所 • 补水',enterShelter:'进入避难所？',enter:'进入避难所',keepRunning:'继续奔跑',exitNoBuy:'不购买 / 继续 →',
+  hydrationFull:'水分已满。',hydrationCurrent:'当前水分:',insufficient:'钻石不足',
+  kidnapped:'Lyra被绑架了',reunion:'重逢',hunter:'猎物变成了猎人。',huntStarts:'逃亡结束。追猎开始。',
+  rawTime:'原始时间',penalties:'惩罚',finalTime:'最终时间',position:'排名',spent:'已花费',ads:'广告',continues:'续命',finalBalance:'最终余额',
+  j2Unlocked:'✓ 旅程2 已解锁 • 营救',family:'家人团聚',localPlacement:'本地排名',collected:'已收集',
+  settingsSaved:'设置已保存',profileSaved:'个人资料已保存'
+ }
+};
+function gt(k){return (GAME_TEXT[gameLanguage]&&GAME_TEXT[gameLanguage][k])||GAME_TEXT['pt-BR'][k]||k}
+function applyGameplayLanguage(){
+ const ids={hudDistanceLabel:'distance',hudStarsLabel:'stars',hudScoreLabel:'score',hudLivesLabel:'lives',hudGemsLabel:'gems',hudWaterLabel:'water',hudTimeLabel:'time',hudRealmLabel:'realm'};
+ for(const [id,k] of Object.entries(ids)){const el=$(id);if(el)el.textContent=gt(k)}
+ if(UI.pauseTitle&&!started)UI.pauseTitle.textContent=gt('pause');
+ const ra=$('resume'),rr=$('restart');if(ra)ra.textContent=gt('resume');if(rr)rr.textContent=gt('restart');
+ const sc=$('shelterChoicePanel');if(sc){const h=sc.querySelector('h2');if(h)h.textContent='🏕 '+gt('enterShelter')}
+ if($('shelterAccept'))$('shelterAccept').textContent=gt('enter');if($('shelterDecline'))$('shelterDecline').textContent=gt('keepRunning');if($('shelterExit'))$('shelterExit').textContent=gt('exitNoBuy');
+ const sh=$('shelterPanel');if(sh){const h=sh.querySelector('h2');if(h)h.textContent='🏕 '+gt('shelter')}
+ if($('finalFamilyTitle'))$('finalFamilyTitle').textContent=gt('family');
+}
 function detectGameLanguage(){
  const saved=SAVE?.settings?.language;if(SUPPORTED_LANGS.includes(saved))return saved;
  const list=[...(navigator.languages||[]),navigator.language||''];
@@ -1250,7 +1381,7 @@ function applyLanguage(lang,save=true){
  const labels=$('profilePanel')?.querySelectorAll('.field>label');if(labels){for(const l of labels){const inp=l.parentElement?.querySelector('input,select');if(!inp)continue;if(inp.id==='profileName')l.innerHTML=tr('name')+' <span class="requiredMark">*</span>';if(inp.id==='profileNickname')l.textContent=tr('nickname');if(inp.id==='profileEmail')l.textContent=tr('email');if(inp.id==='accountPassword')l.textContent=tr('password')}}
  set('profileSave',tr('save'));set('profileClose',tr('back'));
  const ls=$('settingsLanguage');if(ls)ls.value=gameLanguage;const pls=$('profileLanguage');if(pls)pls.value=gameLanguage;
- if(save){SAVE.settings={...SAVE.settings,language:gameLanguage};saveState()}
+ applyGameplayLanguage();if(save){SAVE.settings={...SAVE.settings,language:gameLanguage};saveState()}
 }
 function settingsFromSave(){autoRealm=true;shadowsOn=!MOBILE_RUNNER;flipHero=false;hapticsOn=SAVE.settings?.haptics!==false;musicVolume=Math.max(0,Math.min(1,Number(SAVE.settings?.musicVolume??.70)));sfxVolume=Math.max(0,Math.min(1,Number(SAVE.settings?.sfxVolume??.85)));ambientVolume=Math.max(0,Math.min(1,Number(SAVE.settings?.ambientVolume??.65)));soundOn=(musicVolume>0||sfxVolume>0||ambientVolume>0);gameLanguage=detectGameLanguage();SAVE.settings={...SAVE.settings,autoRealm:true,sound:soundOn,shadows:shadowsOn,flipHero:false,haptics:hapticsOn,musicVolume,sfxVolume,ambientVolume,language:gameLanguage}}
 
@@ -2337,7 +2468,7 @@ function updateShelter(dt,dz){
 function enterShelter(){if(!shelterChoiceOpen||shelterActive)return;shelterChoiceOpen=false;UI.shelterChoicePanel.classList.remove('show');shelterActive=true;shelterTimer=300;shelterHydrationBefore=water;timePenalty+=60;huntersVisible=false;hunters.forEach(h=>h.root.visible=false);UI.shelterPrompt.classList.remove('show');UI.shelterPanel.classList.add('show');UI.shelterCounter.textContent='05:00';if(UI.shelterHydrationBefore)UI.shelterHydrationBefore.textContent=Math.floor(shelterHydrationBefore)+'%';refreshShelterHydrationOffers();toast('POSTO DE APOIO • CORRIDA PAUSADA • HIDRATAÇÃO OPCIONAL • +1 MINUTO NO RANKING')}
 
 function hydrationFullPrice(){const missing=Math.max(0,100-water);return missing<=0?0:Math.min(200,Math.max(40,Math.ceil(missing/20)*40))}
-function refreshShelterHydrationOffers(){if(UI.shelterHydrationNow)UI.shelterHydrationNow.textContent=Math.floor(water)+'%';if(UI.shelterHydrationStatus)UI.shelterHydrationStatus.innerHTML=water>=99.9?'💧 <strong>Hidratação completa.</strong> Você pode continuar sem gastar.':'💧 Hidratação atual: <strong>'+Math.floor(water)+'%</strong>. Escolha quanto recuperar ou saia como está.';const f=$('hydrFull');if(f)f.textContent='COMPLETAR 100% • 💎 '+hydrationFullPrice();[['hydr20',20,40],['hydr50',50,90],['hydr75',75,130]].forEach(([id,pct,price])=>{const b=$(id);if(b)b.textContent='+'+pct+'% • 💎 '+price})}
+function refreshShelterHydrationOffers(){if(UI.shelterHydrationNow)UI.shelterHydrationNow.textContent=Math.floor(water)+'%';if(UI.shelterHydrationStatus)UI.shelterHydrationStatus.innerHTML=water>=99.9?'💧 <strong>'+gt('hydrationFull')+'</strong>':'💧 '+gt('hydrationCurrent')+' <strong>'+Math.floor(water)+'%</strong>';const f=$('hydrFull');if(f)f.textContent='COMPLETAR 100% • 💎 '+hydrationFullPrice();[['hydr20',20,40],['hydr50',50,90],['hydr75',75,130]].forEach(([id,pct,price])=>{const b=$(id);if(b)b.textContent='+'+pct+'% • 💎 '+price})}
 function buyShelterHydration(amount,price,full=false){if(!shelterActive)return;if(water>=100){toast('HIDRATAÇÃO JÁ ESTÁ EM 100%');return}const actualPrice=full?hydrationFullPrice():price;if(actualPrice<=0){refreshShelterHydrationOffers();return}if(!canAffordGems(actualPrice)){toast('DIAMANTES INSUFICIENTES');return}if(!spendGems(actualPrice))return;water=full?100:Math.min(100,water+amount);hydrationBand=water<15?0:(water<35?1:2);saveState();refreshShelterHydrationOffers();toast('HIDRATAÇÃO '+Math.floor(water)+'% • 💎 '+actualPrice)}
 function exitShelter(){if(!shelterActive)return;shelterActive=false;UI.shelterPanel.classList.remove('show');if(shelter3D)shelter3D.position.z=SHELTER_START_Z;shelterAvailable=false;shelterDecisionDone=false;shelterChoiceOpen=false;if(currentJourney===2)forceLyraRun();clock.getDelta();toast('SAINDO DO POSTO DE APOIO • RETORNO AO MESMO PONTO DA JORNADA')}
 
@@ -2417,9 +2548,9 @@ async function showFinalArrival(result,isTest=false){
  UI.journeyEndPanel.classList.remove('show');if(!isTest){SAVE.journey2Unlocked=true;SAVE.journey2Completed=true;SAVE.j2Checkpoint=0;saveState();refreshJourneyMenu()}
  playFinalTheme();await showFamilyScene('final');
  if(UI.finalEndingText)UI.finalEndingText.textContent='Varek e Lyra cruzaram juntos a linha de chegada e alcançaram a fronteira segura. A esposa os espera do outro lado. Nenhum caçador consegue chegar até eles.';
- if(UI.finalPlacement)UI.finalPlacement.textContent='🏆 COLOCAÇÃO LOCAL #'+Math.max(1,result.rank||1);
- if(UI.finalResultLine){const eco=result.economy||{},ma=sessionMonetizationAnalysis(result,false);UI.finalResultLine.textContent='TEMPO '+fmtTime(result.finalTime||0)+' • '+(result.score||runScore())+' PONTOS • 💎 COLETADOS '+(eco.collectedGems??runGems)+' • 💎 GASTOS '+(eco.spentGems??runSpentGems)+' • ▶ ADS '+(eco.rewardedAds??runRewardedAds)+'+'+(eco.interstitialAds??runInterstitialAds)+' • RECEITA SIM. '+brl(ma.adEstimate)+(isTest?' • MODO TESTE':'')}
- if(UI.finalUnlockLine)UI.finalUnlockLine.textContent=isTest?'MODO TESTE • O SAVE DA CAMPANHA NÃO FOI ALTERADO':'✓ JORNADA 2 CONCLUÍDA • PERMANECE DESBLOQUEADA NO MENU';
+ if(UI.finalPlacement)UI.finalPlacement.textContent='🏆 '+gt('localPlacement')+' #'+Math.max(1,result.rank||1);
+ if(UI.finalResultLine){const eco=result.economy||{},ma=sessionMonetizationAnalysis(result,false);UI.finalResultLine.textContent=gt('time')+' '+fmtTime(result.finalTime||0)+' • '+(result.score||runScore())+' '+gt('score')+' • 💎 '+gt('collected')+' '+(eco.collectedGems??runGems)+' • 💎 GASTOS '+(eco.spentGems??runSpentGems)+' • ▶ ADS '+(eco.rewardedAds??runRewardedAds)+'+'+(eco.interstitialAds??runInterstitialAds)+' • RECEITA SIM. '+brl(ma.adEstimate)+(isTest?' • MODO TESTE':'')}
+ if(UI.finalUnlockLine)UI.finalUnlockLine.textContent=isTest?'TEST':'✓ '+gt('j2')+' • '+gt('completed');
  setTimeout(()=>{if(finalFamilyMode&&finalFamilyPhase==='final'){playSFX('finalChime');if(UI.finalVictory)UI.finalVictory.classList.add('show')}},2850)
 }
 function updateFamilyScene(dt){
@@ -2470,8 +2601,8 @@ function updateLyra(dt){
 function showDescentWarning(text,ms=2200){const el=$('descentWarning');if(!el)return;el.textContent=text;el.classList.add('show');clearTimeout(showDescentWarning._t);showDescentWarning._t=setTimeout(()=>el.classList.remove('show'),ms)}
 function realmTargetDistance(){return endlessMode?ENDLESS_REALM_DISTANCE:(currentJourney===2?REALM_DISTANCE_J2:REALM_DISTANCE_J1)}
 function setReviveStatus(text='',good=false){const el=$('reviveStatus');if(!el)return;el.textContent=text;el.className='reviveStatus'+(good?' good':'')}
-function updateReviveOffer(){const seq=$('reviveSequence'),btns=[$('revive1'),$('revive2'),$('revive3')],ad=$('reviveAd');btns.forEach(b=>{if(b)b.style.display='none'});setReviveStatus('');updateCommerceUI();if(ad){const left=Math.max(0,MAX_REWARDED_CONTINUES_PER_RUN-rewardedContinueCount);ad.style.display='inline-flex';ad.disabled=left<=0||rewardedAdRunning;ad.textContent=left<=0?'✓ 2 ANÚNCIOS USADOS NESTA CORRIDA':'▶ ANÚNCIO '+(rewardedContinueCount+1)+' DE '+MAX_REWARDED_CONTINUES_PER_RUN+' • +1 VIDA'}if(reviveStep>=REVIVE_SEQUENCE.length){if(seq)seq.textContent='LIMITE DE CONTINUAÇÕES PAGAS DESTA CORRIDA ATINGIDO';if(UI.reviveText)UI.reviveText.textContent=(lastDeathMessage||'A jornada terminou')+' • Você ainda pode usar anúncio premiado, se restar algum dos 2 desta corrida, ou voltar ao início.';return}const offer=REVIVE_SEQUENCE[reviveStep],idx=offer.lives-1,btn=btns[idx];if(btn){btn.style.display='inline-flex';btn.textContent='+'+offer.lives+(offer.lives===1?' VIDA':' VIDAS')+' • 💎 '+offer.price}if(seq)seq.textContent='CONTINUAÇÃO '+(reviveStep+1)+' DE '+REVIVE_SEQUENCE.length+' • OFERTA PAGA: +'+offer.lives+(offer.lives===1?' VIDA':' VIDAS')+' • 💎 '+offer.price+' • REWARDED '+rewardedContinueCount+'/'+MAX_REWARDED_CONTINUES_PER_RUN}
-async function portalToRealm(nextIndex){if(portalTransitioning||realmLoading||journeyRunFinished)return;portalTransitioning=true;paused=true;huntersVisible=false;hunters.forEach(h=>{if(h.action)h.action.paused=true});const fx=$('portalFx'),label=$('portalLabel'),cfg=REALMS[nextIndex];if(cfg&&cfg.id==='celestial')playThemeMoment(14,4800,.090);if(label)label.innerHTML='PORTAL<small>'+cfg.name+'</small>';if(fx)fx.classList.add('show');beep(310,.16,.02,'sine');await new Promise(r=>setTimeout(r,720));clearItems();await loadRealm(nextIndex);await new Promise(r=>setTimeout(r,420));if(fx)fx.classList.remove('show');hunters.forEach(h=>{if(h.action)h.action.paused=false});paused=false;portalTransitioning=false;if(currentJourney===2)forceLyraRun();clock.getDelta();toast('PORTAL ATRAVESSADO • '+cfg.short)}
+function updateReviveOffer(){const seq=$('reviveSequence'),btns=[$('revive1'),$('revive2'),$('revive3')],ad=$('reviveAd');btns.forEach(b=>{if(b)b.style.display='none'});setReviveStatus('');updateCommerceUI();if(ad){const left=Math.max(0,MAX_REWARDED_CONTINUES_PER_RUN-rewardedContinueCount);ad.style.display='inline-flex';ad.disabled=left<=0||rewardedAdRunning;ad.textContent=left<=0?'✓ 2 '+gt('ads'):'▶ '+gt('ad')+' '+(rewardedContinueCount+1)+'/'+MAX_REWARDED_CONTINUES_PER_RUN+' • +1 '+gt('life')}if(reviveStep>=REVIVE_SEQUENCE.length){if(seq)seq.textContent=gt('paidLimit');if(UI.reviveText)UI.reviveText.textContent=(lastDeathMessage||gt('runEnded'));return}const offer=REVIVE_SEQUENCE[reviveStep],idx=offer.lives-1,btn=btns[idx];if(btn){btn.style.display='inline-flex';btn.textContent='+'+offer.lives+' '+(offer.lives===1?gt('life'):gt('livesWord'))+' • 💎 '+offer.price}if(seq)seq.textContent=gt('continue')+' '+(reviveStep+1)+'/'+REVIVE_SEQUENCE.length+' • +'+offer.lives+' '+(offer.lives===1?gt('life'):gt('livesWord'))+' • 💎 '+offer.price+' • REWARDED '+rewardedContinueCount+'/'+MAX_REWARDED_CONTINUES_PER_RUN}
+async function portalToRealm(nextIndex){if(portalTransitioning||realmLoading||journeyRunFinished)return;portalTransitioning=true;paused=true;huntersVisible=false;hunters.forEach(h=>{if(h.action)h.action.paused=true});const fx=$('portalFx'),label=$('portalLabel'),cfg=REALMS[nextIndex];if(cfg&&cfg.id==='celestial')playThemeMoment(14,4800,.090);if(label)label.innerHTML=gt('portal')+'<small>'+cfg.name+'</small>';if(fx)fx.classList.add('show');beep(310,.16,.02,'sine');await new Promise(r=>setTimeout(r,720));clearItems();await loadRealm(nextIndex);await new Promise(r=>setTimeout(r,420));if(fx)fx.classList.remove('show');hunters.forEach(h=>{if(h.action)h.action.paused=false});paused=false;portalTransitioning=false;if(currentJourney===2)forceLyraRun();clock.getDelta();toast(gt('portalCrossed')+' • '+cfg.short)}
 
 async function loadHunters(){
  if(hunters.length)return hunters;if(huntersLoadPromise)return huntersLoadPromise;
@@ -2966,7 +3097,7 @@ function completeProfileSave(){
  if(!result.ok){if(st){st.className='profileStatus error';st.textContent=result.message}$(result.field)?.focus();return false}
  if(SAVE.accountLinked){const email=String($('profileEmail')?.value||SAVE.accountEmail||'').trim().toLowerCase();if(email){SAVE.email=email;SAVE.accountEmail=email;saveState()}}
  renderProfile();const card=$('profileCard');if(card){card.classList.remove('profileSaveFlash');void card.offsetWidth;card.classList.add('profileSaveFlash')}
- toast('PERFIL SALVO • '+SAVE.name.toUpperCase()+(result.signupGrant?' • BÔNUS +💎 '+result.signupGrant:''));
+ toast(gt('profileSaved')+' • '+SAVE.name.toUpperCase()+(result.signupGrant?' • +💎 '+result.signupGrant:''));
  const commerce=pendingCommerceProduct;pendingCommerceProduct=null;
  if(commerce){setTimeout(()=>{UI.profilePanel.classList.remove('show');const isDiamond=!!DIAMOND_PACKS[canonicalProductId(commerce)];(isDiamond?UI.diamondShopPanel:UI.shopPanel)?.classList.add('show');void purchaseCashProduct(commerce)},250);return true}
  finishAccountFlow();return true
@@ -2978,7 +3109,7 @@ async function startJourney(journey=1){
  try{await loadRealm(realmIndex,true)}catch(err){console.warn('Falha ao preparar jornada',err)}
  started=true;paused=false;startRealmMusic(REALMS[realmIndex].id);UI.menu.classList.add('hidden');UI.hud.classList.add('show');UI.pause.classList.add('show');UI.hint.classList.remove('show');playHero('Running',.08);setLyraJourneyState();
  const resume=cp>0?' • CHECKPOINT '+REALMS[realmIndex].short:'';
- if(currentJourney===2){forceLyraRun();toast('JORNADA 2 • O RESGATE • LYRA À FRENTE'+resume)}else toast('JORNADA 1 • A FUGA'+resume);clock.getDelta()
+ if(currentJourney===2){forceLyraRun();toast(gt('j2')+resume)}else toast(gt('j1')+resume);clock.getDelta()
 }
 async function startEndless(){
  if(!SAVE.journey2Completed){toast('CONCLUA A JORNADA 2 PARA LIBERAR O ENDLESS');return}
@@ -3221,7 +3352,7 @@ $('settingsAccount').onclick=()=>{$('settingsPanel').classList.remove('show');pe
 $('settingsPrivacy').onclick=()=>openExternalResource('privacy');
 $('settingsDeleteWeb').onclick=()=>openExternalResource('delete');
 $('settingsDelete').onclick=()=>void deletePlayerData();
-if($('settingsHaptics'))$('settingsHaptics').onclick=()=>{hapticsOn=!hapticsOn;SAVE.settings={...SAVE.settings,haptics:hapticsOn};saveState();if(hapticsOn)haptic([18,22,30]);renderSettings()};if($('settingsLanguage'))$('settingsLanguage').onchange=e=>{applyLanguage(e.target.value,false);renderSettings();renderProfile()};if($('profileLanguage'))$('profileLanguage').onchange=e=>{applyLanguage(e.target.value,false);renderProfile();renderSettings()};if($('settingsSave'))$('settingsSave').onclick=()=>{SAVE.settings={...SAVE.settings,language:gameLanguage,musicVolume,sfxVolume,ambientVolume,haptics:hapticsOn};saveState();toast('CONFIGURAÇÕES SALVAS');renderSettings()};
+if($('settingsHaptics'))$('settingsHaptics').onclick=()=>{hapticsOn=!hapticsOn;SAVE.settings={...SAVE.settings,haptics:hapticsOn};saveState();if(hapticsOn)haptic([18,22,30]);renderSettings()};if($('settingsLanguage'))$('settingsLanguage').onchange=e=>{applyLanguage(e.target.value,false);renderSettings();renderProfile()};if($('profileLanguage'))$('profileLanguage').onchange=e=>{applyLanguage(e.target.value,false);renderProfile();renderSettings()};if($('settingsSave'))$('settingsSave').onclick=()=>{SAVE.settings={...SAVE.settings,language:gameLanguage,musicVolume,sfxVolume,ambientVolume,haptics:hapticsOn};saveState();toast(gt('settingsSaved'));renderSettings()};
 function saveAudioSetting(key,value){const v=Math.max(0,Math.min(1,Number(value)/100));if(key==='musicVolume')musicVolume=v;if(key==='sfxVolume')sfxVolume=v;if(key==='ambientVolume')ambientVolume=v;SAVE.settings={...SAVE.settings,[key]:v,sound:(musicVolume>0||sfxVolume>0||ambientVolume>0)};saveState();applyAudioSettings();renderSettings()}
 if($('settingsMusicVolume'))$('settingsMusicVolume').oninput=e=>saveAudioSetting('musicVolume',e.target.value);if($('settingsSfxVolume'))$('settingsSfxVolume').oninput=e=>saveAudioSetting('sfxVolume',e.target.value);if($('settingsAmbientVolume'))$('settingsAmbientVolume').oninput=e=>saveAudioSetting('ambientVolume',e.target.value);if($('testStarSound'))$('testStarSound').onclick=()=>{ensureAudio();playSFX('starCollect')};if($('testWaterSound'))$('testWaterSound').onclick=()=>{ensureAudio();playSFX('waterCollect')};
 $('story').onclick=openStoryMedia;$('storyClose').onclick=closeStoryMedia;$('storySkip').onclick=closeStoryMedia;$('storyFullBtn').onclick=()=>setStoryMedia('story',true);$('storyTrailerBtn').onclick=()=>setStoryMedia('trailer',true);
@@ -3261,7 +3392,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE75';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE76';
  settingsFromSave();applyAudioSettings();refreshMenuStats();applyLanguage(gameLanguage,false);renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
