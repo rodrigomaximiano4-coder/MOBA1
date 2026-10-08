@@ -225,7 +225,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE64</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE65</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -360,10 +360,10 @@ const SHELTER_START_Z=-720,SHELTER_LOOP_Z=2600;
 const REVIVE_SEQUENCE=[{lives:1,price:150},{lives:2,price:300},{lives:3,price:500},{lives:1,price:650},{lives:2,price:900},{lives:3,price:1200}];
 let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobogganPhase=0,tobogganAutoDone=false,tobogganPrevSpeed=RUN_SPEED_BASE,tobogganHitCooldown=0,tobogganTestLaunch=false,tobogganForcedMode=null,tobogganExitAtDistance=null;
 let postTobogganExitProgress=null,lastGuidanceRealm=-1,lastRankNoticeAt=0,realmDistanceNotices=new Set();
-const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
+const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganLavaBase=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
-// MAX HEALMS MOBILE64 • ACESSO DESTACADO À SAÍDA INUNDADA
+// MAX HEALMS MOBILE65 • BASE CONTÍNUA SOB A LAVA
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 let atmosphereMode='none',atmosphereParticles=[];
@@ -2527,7 +2527,7 @@ function tobogganPalette(){
 function tobogganCenterX(z){const d=Math.max(0,-z)+tobogganTravel*.34;if(tobogganForcedMode==='flooded')return Math.sin(d*.026+tobogganPhase)*.52+Math.sin(d*.011+tobogganPhase*.63)*.22;return Math.sin(d*.047+tobogganPhase)*2.15+Math.sin(d*.018+tobogganPhase*.63)*1.05}
 function tobogganY(z){let base=0;if(tobogganForcedMode==='flooded'){base=-3.6;if(tobogganExitAtDistance){const rem=Math.max(0,tobogganExitAtDistance-distance);if(rem<180)base=-3.6*Math.max(0,rem/180)}return base-Math.min(.34,Math.max(0,-z-1)*.0022)}return base-Math.min(7.1,Math.max(0,-z-1)*.056)}
 function tobogganYaw(z){const e=.75,a=tobogganCenterX(z-e),b=tobogganCenterX(z+e);return Math.atan2(a-b,e*2)*.78}
-function clearToboggan(){if(!tobogganGroup)return;while(tobogganGroup.children.length){const c=tobogganGroup.children.pop();disposeObject(c)}tobogganCart=null;tobogganLyraCart=null;tobogganSegments.length=0;tobogganHazards.length=0;tobogganTunnel.length=0;tobogganCollectibles.length=0}
+function clearToboggan(){if(!tobogganGroup)return;while(tobogganGroup.children.length){const c=tobogganGroup.children.pop();disposeObject(c)}tobogganCart=null;tobogganLyraCart=null;tobogganSegments.length=0;tobogganHazards.length=0;tobogganTunnel.length=0;tobogganLavaBase.length=0;tobogganCollectibles.length=0}
 function makeTobogganMuralTexture(theme,accentC){
  const c=document.createElement('canvas');c.width=512;c.height=256;const g=c.getContext('2d');if(!g)return null;
  const accent='#'+accentC.toString(16).padStart(6,'0'),warm='#ffcf78',lava='#ff7a34',ink='#0d0b0b';
@@ -2669,6 +2669,19 @@ function buildToboggan(){
  const flowGeo=new THREE.BoxGeometry(flowWidth,.18,segmentLen),bankGeo=new THREE.BoxGeometry(.96,1.20,segmentLen+.12),edgeGeo=new THREE.BoxGeometry(.20,.035,segmentLen-.04);const count=MOBILE_RUNNER?(lavaMode?30:52):84,step=lavaMobile?8.5:5.0;
  const ambient=new THREE.AmbientLight(lavaMode?0xff6b2a:0x8fdfff,(lavaMode&&MOBILE_RUNNER)?0:(MOBILE_RUNNER?.48:.34));if(ambient.intensity>0)tobogganGroup.add(ambient);
  for(let i=0;i<count;i++){const seg=new THREE.Group();seg.userData.z=9-i*step;const flow=new THREE.Mesh(flowGeo,flowMat);flow.position.y=-.07;flow.receiveShadow=false;seg.add(flow);for(const side of [-1,1]){const bank=new THREE.Mesh(bankGeo,bankMat);bank.position.set(side*(lavaMobile?4.38:4.45),.42,0);bank.rotation.z=side*.15;seg.add(bank);const edge=new THREE.Mesh(edgeGeo,edgeMat);edge.position.set(side*(lavaMobile?4.08:4.02),.045,0);seg.add(edge)}seg.rotation.x=floodedMode?-.0035:(seg.userData.z< -3&&seg.userData.z> -123?-.056:0);tobogganGroup.add(seg);tobogganSegments.push(seg)}
+ if(lavaMobile){
+   const baseMat=new THREE.MeshBasicMaterial({color:0x7a1d0d,side:THREE.DoubleSide});
+   const baseGeo=new THREE.BoxGeometry(10.6,.10,18.4);
+   const baseCount=16,baseStep=16.0;
+   for(let i=0;i<baseCount;i++){
+     const b=new THREE.Mesh(baseGeo,baseMat);
+     b.userData.z=10-i*baseStep;
+     b.position.y=-.24;
+     b.renderOrder=-2;
+     tobogganGroup.add(b);
+     tobogganLavaBase.push(b)
+   }
+ }
  if(floodedMode){
    const tunnelStone=new THREE.MeshStandardMaterial({color:0x343b37,roughness:1}),tunnelDark=new THREE.MeshStandardMaterial({color:0x181d1b,roughness:1}),moss=new THREE.MeshBasicMaterial({color:0x395b42,transparent:true,opacity:.42}),lightMat=new THREE.MeshBasicMaterial({color:0xc7fff1,transparent:true,opacity:.72});
    const tunnelCount=MOBILE_RUNNER?(LOW_END_MOBILE?18:22):48,tunnelStep=MOBILE_RUNNER?12.2:9.2;
@@ -2703,6 +2716,7 @@ function updateTobogganWorld(dz){
  for(const seg of tobogganSegments){seg.userData.z+=dz;if(seg.userData.z>12)seg.userData.z-=TOBOGGAN_LOOP;const z=seg.userData.z;seg.position.set(tobogganCenterX(z),tobogganY(z),z);seg.rotation.y=tobogganYaw(z);seg.rotation.x=tobogganForcedMode==='flooded'?-.0035:(z< -3&&z> -123?-.056:0);seg.rotation.z=-seg.rotation.y*.34}
  for(const h of tobogganHazards){h.userData.z+=dz;if(h.userData.z>11){h.userData.z-=TOBOGGAN_LOOP;h.userData.hit=false;h.userData.lane=Math.floor(Math.random()*3)}const z=h.userData.z;h.position.set(tobogganCenterX(z)+LANE_X[h.userData.lane],tobogganY(z)+h.userData.baseY,z);h.rotation.y=tobogganYaw(z);h.rotation.z=-h.rotation.y*.24}
  for(const r of tobogganTunnel){r.userData.z+=dz;if(r.userData.z>12)r.userData.z-=TOBOGGAN_LOOP;const z=r.userData.z;r.position.set(tobogganCenterX(z),tobogganY(z),z);r.rotation.y=tobogganYaw(z);r.rotation.z=-r.rotation.y*.16}
+ for(const b of tobogganLavaBase){b.userData.z+=dz;if(b.userData.z>18)b.userData.z-=256;const z=b.userData.z;b.position.set(tobogganCenterX(z),tobogganY(z)-.24,z);b.rotation.y=tobogganYaw(z);b.rotation.x=(z< -3&&z> -123?-.056:0);b.rotation.z=-b.rotation.y*.22}
  const hg=tobogganGroup?.userData?.horizonGlow;if(hg){const hz=-155;hg.position.set(tobogganCenterX(hz),tobogganY(hz)+1.82,hz);hg.rotation.y=tobogganYaw(hz);hg.visible=tobogganForcedMode==='flooded'}
  for(const c of tobogganCollectibles){const u=c.userData;u.z+=dz;if(u.z>11){u.z-=TOBOGGAN_LOOP;if(!u.collected)c.visible=true}const z=u.z;c.position.set(tobogganCenterX(z)+LANE_X[u.lane],tobogganY(z)+u.baseY,z);c.rotation.y+=(dz*.012);c.rotation.x=Math.sin(tobogganTravel*.045+u.spin)*.16}
 }
@@ -3083,7 +3097,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE64';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE65';
  settingsFromSave();applyAudioSettings();refreshMenuStats();renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
