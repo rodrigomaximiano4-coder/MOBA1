@@ -226,7 +226,7 @@ button{font:inherit}.top{position:fixed;z-index:50;top:0;left:0;right:0;height:5
 <button id="qaReturnBtn" type="button">🧪 CENÁRIOS</button>
 <div class="panel" id="scenarioTestPanel" style="display:none">
   <div class="card">
-    <div class="eyebrow">TESTE MOBILE • MOBILE83</div>
+    <div class="eyebrow">TESTE MOBILE • MOBILE84</div>
     <h2>Escolha o cenário</h2>
     <p>Abra cada reino individualmente no celular. O progresso normal do jogador não é usado para bloquear os testes.</p>
     <div class="qaJourneyRow">
@@ -650,6 +650,7 @@ if(FRESH_LAUNCH_ONCE){
 // evitando novo reset ao atualizar a página.
 const PRODUCTION_CLEAN_ONCE=new URLSearchParams(location.search).get('productionClean')==='1';
 if(PRODUCTION_CLEAN_ONCE){
+ const previous=SAVE||freshSave();
  try{
    const remove=[];
    for(let i=0;i<localStorage.length;i++){
@@ -659,6 +660,16 @@ if(PRODUCTION_CLEAN_ONCE){
    remove.forEach(k=>localStorage.removeItem(k));
  }catch(e){}
  SAVE=freshSave();
+ SAVE.uuid=previous.uuid||SAVE.uuid;
+ SAVE.name=previous.name||'';SAVE.nickname=previous.nickname||'';
+ SAVE.country=previous.country||'';SAVE.countryCode=previous.countryCode||'';
+ SAVE.profileCompleted=previous.profileCompleted===true;SAVE.profileSavedAt=Number(previous.profileSavedAt||0);
+ SAVE.settings={...SAVE.settings,...(previous.settings||{})};
+ SAVE.premiumOwned=previous.premiumOwned===true;SAVE.premiumBonusClaimed=previous.premiumBonusClaimed===true;
+ SAVE.ownedProducts=Array.isArray(previous.ownedProducts)?[...previous.ownedProducts]:[];
+ SAVE.purchaseHistory=Array.isArray(previous.purchaseHistory)?[...previous.purchaseHistory]:[];
+ SAVE.inventory=Array.from(new Set(['outfit_varek_original',...(Array.isArray(previous.inventory)?previous.inventory:[])]));
+ SAVE.equipped={...SAVE.equipped,...(previous.equipped||{})};
  SAVE.qaSession={startedAt:Date.now(),runs:0,distance:0,stars:0,collectedGems:0,realmRewards:0,spentGems:0,rewardedAds:0,interstitialAds:0,paidContinues:0,adEstimateBRL:0};
  try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}
  try{
@@ -1208,6 +1219,7 @@ function outfitLabel(id){return (HERO_OUTFITS[id]||HERO_OUTFITS.outfit_varek_ori
 function ownsOutfit(id){const cfg=HERO_OUTFITS[id];return !!(cfg&&cfg.free)||SAVE.inventory.includes(id)}
 function verifyOwnedPersisted(id){const cfg=HERO_OUTFITS[id];if(cfg&&cfg.free)return true;try{const raw=JSON.parse(localStorage.getItem(SAVE_KEY)||'{}');return Array.isArray(raw.inventory)&&raw.inventory.includes(id)}catch(_){return false}}
 function renderShop(){
+ document.querySelectorAll('[data-card-outfit]').forEach(card=>{card.hidden=false;card.style.display=''});
  const selectedOutfit=SAVE.equipped.outfit||'outfit_varek_original',os=$('shopOutfitStatus');if(os)os.textContent=outfitLabel(selectedOutfit);
  const gs=$('shopGemStatus');if(gs)gs.textContent='💎 '+gemText()+(TEST_MODE?' • TESTE':'');
  const premiumIds=new Set(COMMERCE_CONFIG.premiumIncluded);
@@ -1238,33 +1250,54 @@ async function buyOrEquipOutfit(id){
    toast(purchasedNow?'COMPRA SALVA • FALHA APENAS AO EQUIPAR':'ERRO AO PROCESSAR A LOJA');
  }finally{shopBusy=false;renderShop();saveState()}
 }
+let outfitPreviewRenderer=null,outfitPreviewCanvas=null;
+function getOutfitPreviewRenderer(w,h){
+ if(!window.THREE)return null;
+ if(!outfitPreviewCanvas)outfitPreviewCanvas=document.createElement('canvas');
+ if(!outfitPreviewRenderer){
+   outfitPreviewRenderer=new THREE.WebGLRenderer({canvas:outfitPreviewCanvas,alpha:true,antialias:false,preserveDrawingBuffer:true,powerPreference:'low-power'});
+   outfitPreviewRenderer.setPixelRatio(1);
+   outfitPreviewRenderer.outputEncoding=THREE.sRGBEncoding;
+ }
+ outfitPreviewRenderer.setSize(w,h,false);
+ return outfitPreviewRenderer
+}
 async function renderOutfitThumb(canvasId,outfitId,rotationY=Math.PI){
- const canvas=$(canvasId);if(!canvas||canvas.dataset.ready==='1'||canvas.dataset.loading==='1'||!loader)return false;canvas.dataset.loading='1';
+ const canvas=$(canvasId);
+ if(!canvas||canvas.dataset.ready==='1'||canvas.dataset.loading==='1'||!loader)return false;
+ canvas.dataset.loading='1';
  try{
-   const cfg=HERO_OUTFITS[outfitId]||HERO_OUTFITS.outfit_varek_original,src=cfg.mode==='varek'?ASSETS.varek:ASSETS[cfg.run];if(!src)throw new Error('asset do visual não encontrado');
-   const gltf=await loadGLTFAsset(src),ps=new THREE.Scene(),renderW=MOBILE_RUNNER?240:(canvas.width||360),renderH=MOBILE_RUNNER?280:(canvas.height||340),aspect=renderW/renderH,pc=new THREE.PerspectiveCamera(30,aspect,.01,50);
-   const tmp=document.createElement('canvas');tmp.width=renderW;tmp.height=renderH;
-   const r=new THREE.WebGLRenderer({canvas:tmp,alpha:true,antialias:!MOBILE_RUNNER,preserveDrawingBuffer:true,powerPreference:'low-power'});
-   r.setPixelRatio(1);r.setSize(renderW,renderH,false);r.outputEncoding=THREE.sRGBEncoding;
-   ps.add(new THREE.HemisphereLight(0xf2fbf7,0x111719,1.85));
-   const key=new THREE.DirectionalLight(0xffdfae,1.9);key.position.set(2.7,4.5,4);ps.add(key);
-   const fill=new THREE.DirectionalLight(0x8fc9ff,1.0);fill.position.set(-3,2.2,2);ps.add(fill);
-   const rim=new THREE.DirectionalLight(0xffffff,.55);rim.position.set(0,3,-4);ps.add(rim);
+   const cfg=HERO_OUTFITS[outfitId]||HERO_OUTFITS.outfit_varek_original;
+   const src=cfg.mode==='varek'?ASSETS.varek:ASSETS[cfg.run];
+   if(!src)throw new Error('asset do visual não encontrado');
+   const gltf=await loadGLTFAsset(src);
+   const ps=new THREE.Scene(),w=MOBILE_RUNNER?180:260,h=MOBILE_RUNNER?220:300;
+   const pc=new THREE.PerspectiveCamera(30,w/h,.01,50),r=getOutfitPreviewRenderer(w,h);
+   if(!r)throw new Error('renderer indisponível');
+   ps.add(new THREE.HemisphereLight(0xf2fbf7,0x111719,1.75));
+   const key=new THREE.DirectionalLight(0xffdfae,1.8);key.position.set(2.7,4.5,4);ps.add(key);
+   const fill=new THREE.DirectionalLight(0x8fc9ff,.9);fill.position.set(-3,2.2,2);ps.add(fill);
    const model=cloneModelScene(gltf.scene);setSRGB(model);applyOutfitStyle(model,cfg);model.rotation.y=rotationY;model.updateMatrixWorld(true);
-   let box=new THREE.Box3().setFromObject(model),size=box.getSize(new THREE.Vector3());const scale=2.25/Math.max(.001,size.y);model.scale.setScalar(scale);model.updateMatrixWorld(true);
-   box=new THREE.Box3().setFromObject(model);const center=box.getCenter(new THREE.Vector3());model.position.x-=center.x;model.position.y-=box.min.y;model.position.z-=center.z;model.updateMatrixWorld(true);
+   let box=new THREE.Box3().setFromObject(model),size=box.getSize(new THREE.Vector3());
+   model.scale.setScalar(2.25/Math.max(.001,size.y));model.updateMatrixWorld(true);
+   box=new THREE.Box3().setFromObject(model);const center=box.getCenter(new THREE.Vector3());
+   model.position.x-=center.x;model.position.y-=box.min.y;model.position.z-=center.z;model.updateMatrixWorld(true);
    box=new THREE.Box3().setFromObject(model);size=box.getSize(new THREE.Vector3());
-   const cy=(box.min.y+box.max.y)/2,half=Math.max(size.y*.58,size.x*.60,.8),fov=THREE.MathUtils.degToRad(pc.fov),dist=half/Math.tan(fov/2)*1.16;
-   pc.position.set(0,cy,dist);pc.lookAt(0,cy,0);pc.near=Math.max(.01,dist-size.z*2);pc.far=dist+size.z*4+10;pc.updateProjectionMatrix();ps.add(model);
+   const cy=(box.min.y+box.max.y)/2,half=Math.max(size.y*.58,size.x*.60,.8);
+   const dist=half/Math.tan(THREE.MathUtils.degToRad(pc.fov)/2)*1.16;
+   pc.position.set(0,cy,dist);pc.lookAt(0,cy,0);pc.far=dist+size.z*4+10;pc.updateProjectionMatrix();ps.add(model);
    r.render(ps,pc);
-   const ctx=canvas.getContext('2d',{alpha:true});if(!ctx)throw new Error('canvas 2D indisponível');
-   canvas.width=renderW;canvas.height=renderH;ctx.clearRect(0,0,renderW,renderH);ctx.drawImage(tmp,0,0,renderW,renderH);
+   const ctx=canvas.getContext('2d',{alpha:true});if(!ctx)throw new Error('canvas indisponível');
+   canvas.width=w;canvas.height=h;ctx.clearRect(0,0,w,h);ctx.drawImage(outfitPreviewCanvas,0,0,w,h);
    canvas.dataset.ready='1';canvas.dataset.loading='';canvas.dataset.error='';
-   if(r.renderLists&&r.renderLists.dispose)r.renderLists.dispose();r.dispose();if(r.forceContextLoss)r.forceContextLoss();
-   return true;
+   return true
  }catch(e){
-   console.warn('LOJA PREVIEW',canvasId,e);canvas.dataset.loading='';canvas.dataset.error='1';
-   try{const ctx=canvas.getContext('2d');if(ctx){const w=canvas.width||240,h=canvas.height||280;ctx.clearRect(0,0,w,h);ctx.fillStyle='rgba(12,17,20,.92)';ctx.fillRect(0,0,w,h);ctx.fillStyle='#f4c56a';ctx.textAlign='center';ctx.font='700 14px sans-serif';ctx.fillText((HERO_OUTFITS[outfitId]?.label||'VAREK'),w/2,h/2-4);ctx.fillStyle='rgba(255,255,255,.72)';ctx.font='11px sans-serif';ctx.fillText('3D',w/2,h/2+18)}}catch(_){}
+   console.warn('LOJA PREVIEW',canvasId,e);
+   canvas.dataset.loading='';canvas.dataset.error='1';
+   try{
+     const ctx=canvas.getContext('2d'),w=canvas.width||180,h=canvas.height||220;
+     if(ctx){ctx.clearRect(0,0,w,h);ctx.fillStyle='rgba(12,17,20,.94)';ctx.fillRect(0,0,w,h);ctx.fillStyle='#f4c56a';ctx.textAlign='center';ctx.font='700 13px sans-serif';ctx.fillText(HERO_OUTFITS[outfitId]?.label||'VAREK',w/2,h/2)}
+   }catch(_){}
    return false
  }
 }
@@ -1272,9 +1305,14 @@ async function ensureOutfitPreviews(){
  const queue=[
   ['previewOriginalFront','previewOriginalBack','outfit_varek_original'],
   ['previewAdventurerFront','previewAdventurerBack','outfit_varek_adventurer'],
-  ['previewVorenFront','previewVorenBack','outfit_varek_voren'],
+  ['previewVorenFront','previewVorenBack','outfit_varek_voren']
  ];
- for(const [frontId,backId,id] of queue){await renderOutfitThumb(frontId,id,Math.PI);await new Promise(r=>setTimeout(r,18));await renderOutfitThumb(backId,id,0);await new Promise(r=>setTimeout(r,18))}
+ for(const [frontId,backId,id] of queue){
+   await renderOutfitThumb(frontId,id,Math.PI);
+   await new Promise(r=>setTimeout(r,50));
+   await renderOutfitThumb(backId,id,0);
+   await new Promise(r=>setTimeout(r,50));
+ }
 }
 function trailPulse(dt){}
 
@@ -3461,7 +3499,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE83';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE84';
  settingsFromSave();applyAudioSettings();refreshMenuStats();applyLanguage(gameLanguage,false);renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
