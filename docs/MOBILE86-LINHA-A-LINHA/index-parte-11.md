@@ -1,6 +1,6 @@
 # index.html — Parte 11
 
-Linhas **2501 a 2750** da MOBILE86.
+Linhas **2501 a 2750** da MOBILE87.
 
 ### Linha 2501
 
@@ -32,7 +32,7 @@ function makeShelterLabel(textLabel){
  ctx.fillStyle='rgba(26,18,10,.94)';ctx.fillRect(0,0,c.width,c.height);ctx.strokeStyle='#f4c56a';ctx.lineWidth=10;ctx.strokeRect(6,6,c.width-12,c.height-12);
 ```
 
-**Explicação:** Atribui ou atualiza um valor da lógica/interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 2505
 
@@ -40,7 +40,7 @@ function makeShelterLabel(textLabel){
  ctx.fillStyle='#ffe1a0';ctx.font='900 76px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(textLabel,c.width/2,c.height/2+4);
 ```
 
-**Explicação:** Atribui ou atualiza um valor da lógica/interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 2506
 
@@ -56,7 +56,7 @@ function makeShelterLabel(textLabel){
  return new THREE.Mesh(new THREE.PlaneGeometry(2.9,.9),new THREE.MeshBasicMaterial({map:tex,transparent:true,side:THREE.DoubleSide}));
 ```
 
-**Explicação:** Retorna/encerra a função.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 2508
 
@@ -208,7 +208,7 @@ function buildShelter3D(){
  for(const x of [-1.62,1.62]){const front=new THREE.Mesh(new THREE.BoxGeometry(1.46,2.9,.24),wood);front.position.set(x,1.72,1.62);shelter3D.add(front)}
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 2527
 
@@ -232,7 +232,7 @@ function buildShelter3D(){
  for(const x of [-.86,.86]){const p=new THREE.Mesh(new THREE.BoxGeometry(.16,2.45,.22),trim);p.position.set(x,1.55,1.78);shelter3D.add(p)}
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 2530
 
@@ -320,7 +320,7 @@ function buildShelter3D(){
  for(const x of [-1.95,1.95]){const brace=new THREE.Mesh(new THREE.BoxGeometry(.14,2.35,.14),trim);brace.position.set(x,1.55,1.82);shelter3D.add(brace)}
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 2541
 
@@ -352,7 +352,7 @@ function buildShelter3D(){
  for(const x of [-1.35,1.35]){const win=new THREE.Mesh(new THREE.BoxGeometry(.78,.82,.05),warm);win.position.set(x,1.86,1.76);shelter3D.add(win)}
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 2545
 
@@ -392,7 +392,7 @@ function buildShelter3D(){
  for(const x of [-4.55,-2.55]){const sp=new THREE.Mesh(new THREE.CylinderGeometry(.08,.11,2.0,8),woodDark);sp.position.set(x,1.0,13.5);shelter3D.add(sp)}
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 2550
 
@@ -416,7 +416,7 @@ function buildShelter3D(){
  for(let i=0;i<7;i++){
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 2553
 
@@ -432,7 +432,7 @@ function buildShelter3D(){
    step.position.set(-3.28+i*.41,.18,2.40);step.rotation.y=(i%2?-.025:.025);shelter3D.add(step);
 ```
 
-**Explicação:** Atribui ou atualiza um valor da lógica/interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 2555
 
@@ -456,7 +456,7 @@ function buildShelter3D(){
  for(const zOff of [1.82,3.00]){
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 2558
 
@@ -512,7 +512,7 @@ function buildShelter3D(){
  for(const [x,z,s] of [[1.55,2.35,.52],[-1.55,2.55,.44]]){const crate=new THREE.Mesh(new THREE.BoxGeometry(s,s,s),woodDark);crate.position.set(x,.56,z);crate.rotation.y=.18;shelter3D.add(crate)}
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 2565
 
@@ -536,7 +536,7 @@ function buildShelter3D(){
  shelter3D.traverse(n=>{if(n.isMesh){n.castShadow=shadowsOn;n.receiveShadow=shadowsOn}});worldRoot.add(shelter3D)
 ```
 
-**Explicação:** Atribui ou atualiza um valor da lógica/interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 2568
 
@@ -624,7 +624,7 @@ function updateShelter(dt,dz){
    for(let i=obstacles.length-1;i>=0;i--){const o=obstacles[i];if(Math.abs(o.position.z-shelter3D.position.z)<48){itemGroup.remove(o);disposeObject(o);obstacles.splice(i,1)}}
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 2579
 
@@ -632,7 +632,7 @@ function updateShelter(dt,dz){
  }shelter3D.position.x=7.45+trackCurveX(shelter3D.position.z);shelter3D.position.y=kharvorLayerY;shelter3D.rotation.y=trackCurveYaw(shelter3D.position.z);const near=shelter3D.position.z>-32&&shelter3D.position.z<4&&!shelterActive&&!shelterChoiceOpen;shelterAvailable=near;UI.shelterPrompt.classList.toggle('show',near);if(near){const meters=Math.max(0,Math.round(Math.abs(shelter3D.position.z)*.55));const inRight=Math.round(lane)===2&&targetLane===2;UI.shelterPrompt.textContent='🏕 POSTO DE APOIO À DIREITA • '+(meters>2?meters+' m • ':'')+(inRight?'FAIXA CORRETA • ENTRADA LIVRE':'ENTRE NA FAIXA DIREITA →')}if(near&&!shelterDecisionDone&&shelter3D.position.z>-1.35&&shelter3D.position.z<1.65&&Math.round(lane)===2&&targetLane===2)openShelterChoice();if(shelter3D.position.z>18){shelter3D.position.z-=SHELTER_LOOP_Z;shelterAvailable=false;shelterDecisionDone=false;shelterChoiceOpen=false;UI.shelterPrompt.classList.remove('show');UI.shelterChoicePanel.classList.remove('show')}}
 ```
 
-**Explicação:** Atribui ou atualiza um valor da lógica/interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 2580
 
@@ -792,7 +792,7 @@ function parseGLB64(s){
  return Promise.reject(new Error('Referência 3D inválida: '+v.slice(0,80)))
 ```
 
-**Explicação:** Retorna/encerra a função.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 2600
 
@@ -896,7 +896,7 @@ function ensureFinalArrivalSet(){
  for(const x of [-4.1,4.1]){const post=new THREE.Mesh(new THREE.CylinderGeometry(.28,.34,4.8,10),wood);post.position.set(x,2.25,-2.35);post.castShadow=shadowsOn;finalArrivalGroup.add(post);const base=new THREE.Mesh(new THREE.CylinderGeometry(.48,.62,.38,10),wood2);base.position.set(x,.19,-2.35);finalArrivalGroup.add(base)}
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 2613
 
@@ -936,7 +936,7 @@ function ensureFinalArrivalSet(){
  for(const x of [-3.35,3.35]){const pole=new THREE.Mesh(new THREE.CylinderGeometry(.07,.08,2.6,8),wood2);pole.position.set(x,4.9,-2.35);finalArrivalGroup.add(pole);const flag=new THREE.Mesh(new THREE.PlaneGeometry(1.15,.60),new THREE.MeshBasicMaterial({color:x<0?0xf2c86e:0x8bd4ff,side:THREE.DoubleSide}));flag.position.set(x+(x<0?.58:-.58),5.62,-2.34);flag.rotation.y=x<0?0:Math.PI;finalArrivalGroup.add(flag)}
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 2618
 
@@ -1056,7 +1056,7 @@ function updateFinalPetals(dt){
  finalPetalTimer-=dt;if(finalSceneClock>1.55&&finalPetalTimer<=0&&finalPetals.length<44){spawnFinalPetal();finalPetalTimer=.10+Math.random()*.16}
 ```
 
-**Explicação:** Atribui ou atualiza um valor da lógica/interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 2633
 
@@ -1072,7 +1072,7 @@ function updateFinalPetals(dt){
  for(let i=finalPetals.length-1;i>=0;i--){const p=finalPetals[i],m=p.mesh;m.position.y-=p.vy*dt;m.position.x+=(p.drift+Math.sin(t*1.15+p.phase)*.11)*dt;m.rotation.x+=p.spin*dt;m.rotation.z+=p.spin*.65*dt;if(m.position.y<.10){finalArrivalGroup.remove(m);m.geometry.dispose();m.material.dispose();finalPetals.splice(i,1)}}
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 2635
 
@@ -1101,10 +1101,10 @@ async function showFamilyScene(phase='final'){
 ### Linha 2638
 
 ```text
- finalFamilyMode=true;finalFamilyPhase=phase;finalSceneClock=0;finalFireworkTimer=.55;finalPetalTimer=.10;finalChimePlayed=false;
+ finalFamilyMode=true;finalFamilyPhase=phase;finalSceneClock=0;finalFireworkTimer=.55;finalPetalTimer=.10;finalChimePlayed=false;if(phase==='j1final')j1KidnapTriggered=false;
 ```
 
-**Explicação:** Atribui ou atualiza um valor da lógica/interface.
+**Explicação:** Controla a cena cinematográfica, painel compacto ou o momento do sequestro no final.
 
 ### Linha 2639
 
@@ -1136,7 +1136,7 @@ async function showFamilyScene(phase='final'){
  // A linha de chegada está em z=-2.05. A câmera olha do lado externo para a área segura.
 ```
 
-**Explicação:** Atribui ou atualiza um valor da lógica/interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 2643
 
@@ -1328,7 +1328,7 @@ async function showFinalArrival(result,isTest=false){
  playFinalTheme();await showFamilyScene('final');
 ```
 
-**Explicação:** Controla a cena e painel compacto de final.
+**Explicação:** Controla a cena cinematográfica, painel compacto ou o momento do sequestro no final.
 
 ### Linha 2667
 
@@ -1368,7 +1368,7 @@ async function showFinalArrival(result,isTest=false){
  setTimeout(()=>{if(finalFamilyMode&&finalFamilyPhase==='final'){playSFX('finalChime');if(UI.finalVictory)UI.finalVictory.classList.add('show')}},2850)
 ```
 
-**Explicação:** Controla a cena e painel compacto de final.
+**Explicação:** Controla a cena cinematográfica, painel compacto ou o momento do sequestro no final.
 
 ### Linha 2672
 
@@ -1405,15 +1405,15 @@ function updateFamilyScene(dt){
 ### Linha 2676
 
 ```text
-   // 0–2,45s: reencontro. 2,45–4,65s: Serya avança, captura Lyra e foge pelo portal.
+   // Reencontro permanece visível com o painel compacto. O sequestro só começa quando o jogador inicia a Jornada 2.
 ```
 
-**Explicação:** Controla Lyra.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 2677
 
 ```text
-   const p=Math.min(1,finalSceneClock/2.45),ease=1-Math.pow(1-p,3);
+   const visualClock=j1KidnapTriggered?finalSceneClock:Math.min(finalSceneClock,2.44);
 ```
 
 **Explicação:** Declara constante JavaScript.
@@ -1421,15 +1421,15 @@ function updateFamilyScene(dt){
 ### Linha 2678
 
 ```text
-   if(heroRoot){heroRoot.position.z=2.75+(-1.48-2.75)*ease;heroRoot.position.x=0;heroRoot.rotation.y=Math.PI+(flipHero?Math.PI:0);heroRoot.rotation.z=Math.sin(t*.85)*.006;if(p>=.96&&currentAction){currentAction.timeScale=Math.max(.02,.72*(1-p));if(p>=.995)currentAction.paused=true}}
+   const p=Math.min(1,visualClock/2.45),ease=1-Math.pow(1-p,3);
 ```
 
-**Explicação:** Executa condicionalmente.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 2679
 
 ```text
-   if(wifeRoot){wifeRoot.visible=true;wifeRoot.position.set(-.78,0,-4.15);wifeRoot.rotation.set(0,0,0)}
+   if(heroRoot){heroRoot.position.z=2.75+(-1.48-2.75)*ease;heroRoot.position.x=0;heroRoot.rotation.y=Math.PI+(flipHero?Math.PI:0);heroRoot.rotation.z=Math.sin(t*.85)*.006;if(p>=.96&&currentAction){currentAction.timeScale=Math.max(.02,.72*(1-p));if(p>=.995)currentAction.paused=true}}
 ```
 
 **Explicação:** Executa condicionalmente.
@@ -1437,12 +1437,20 @@ function updateFamilyScene(dt){
 ### Linha 2680
 
 ```text
+   if(wifeRoot){wifeRoot.visible=true;wifeRoot.position.set(-.78,0,-4.15);wifeRoot.rotation.set(0,0,0)}
+```
+
+**Explicação:** Executa condicionalmente.
+
+### Linha 2681
+
+```text
    const serya=hunters[2];
 ```
 
 **Explicação:** Declara constante JavaScript.
 
-### Linha 2681
+### Linha 2682
 
 ```text
    hunters.forEach((h,i)=>{h.root.visible=true;if(i!==2){h.root.position.y=-.04+Math.sin(t*.68+i)*.008;h.root.position.z=[1.30,1.62,1.34][i];h.root.position.x=[-3.0,0,3.0][i]}});
@@ -1450,18 +1458,10 @@ function updateFamilyScene(dt){
 
 **Explicação:** Controla caçadores.
 
-### Linha 2682
-
-```text
-   if(finalSceneClock<2.45){
-```
-
-**Explicação:** Executa condicionalmente.
-
 ### Linha 2683
 
 ```text
-     if(lyraRoot){lyraRoot.visible=true;lyraRoot.position.set(.92,0,-4.05);lyraRoot.rotation.set(0,0,0)}
+   if(!j1KidnapTriggered||finalSceneClock<2.45){
 ```
 
 **Explicação:** Executa condicionalmente.
@@ -1469,7 +1469,7 @@ function updateFamilyScene(dt){
 ### Linha 2684
 
 ```text
-     if(serya){serya.root.position.set(3.0,-.04,1.34)}
+     if(lyraRoot){lyraRoot.visible=true;lyraRoot.position.set(.92,0,-4.05);lyraRoot.rotation.set(0,0,0)}
 ```
 
 **Explicação:** Executa condicionalmente.
@@ -1477,12 +1477,20 @@ function updateFamilyScene(dt){
 ### Linha 2685
 
 ```text
+     if(serya){serya.root.position.set(3.0,-.04,1.34)}
+```
+
+**Explicação:** Executa condicionalmente.
+
+### Linha 2686
+
+```text
    }else{
 ```
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2686
+### Linha 2687
 
 ```text
      const kp=Math.min(1,(finalSceneClock-2.45)/2.20),ke=1-Math.pow(1-kp,2);
@@ -1490,7 +1498,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Declara constante JavaScript.
 
-### Linha 2687
+### Linha 2688
 
 ```text
      if(serya){serya.root.visible=true;serya.root.position.set(3.0+(1.02-3.0)*Math.min(1,ke*1.45),-.04,1.34+(-3.55-1.34)*Math.min(1,ke*1.45));serya.root.rotation.y=Math.PI}
@@ -1498,7 +1506,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2688
+### Linha 2689
 
 ```text
      if(lyraRoot){lyraRoot.visible=kp<.96;lyraRoot.position.set(.92+(1.10-.92)*ke,0,-4.05+(-5.55+4.05)*Math.max(0,(kp-.48)/.52));lyraRoot.rotation.y=Math.PI}
@@ -1506,7 +1514,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2689
+### Linha 2690
 
 ```text
      if(kp>.48&&serya){serya.root.position.z=-3.55+(-5.70+3.55)*((kp-.48)/.52)}
@@ -1514,7 +1522,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2690
+### Linha 2691
 
 ```text
      const pf=$('portalFx');if(pf){pf.classList.toggle('show',kp>.52&&kp<.98);const pl=$('portalLabel');if(pl)pl.innerHTML='PORTAL<small>LYRA FOI SEQUESTRADA</small>'}
@@ -1522,7 +1530,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Declara constante JavaScript.
 
-### Linha 2691
+### Linha 2692
 
 ```text
      if(kp>=.96){if(lyraRoot)lyraRoot.visible=false;if(serya)serya.root.visible=false}
@@ -1530,7 +1538,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2692
+### Linha 2693
 
 ```text
    }
@@ -1538,7 +1546,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2693
+### Linha 2694
 
 ```text
    camera.position.x=Math.sin(t*.18)*.06;camera.lookAt(0,1.34,-2.35);return
@@ -1546,7 +1554,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Controla renderização/câmera/cena 3D.
 
-### Linha 2694
+### Linha 2695
 
 ```text
  }
@@ -1554,7 +1562,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2695
+### Linha 2696
 
 ```text
  if(finalFamilyPhase==='final'){
@@ -1562,7 +1570,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2696
+### Linha 2697
 
 ```text
    const p=Math.min(1,finalSceneClock/2.65),ease=1-Math.pow(1-p,3);
@@ -1570,7 +1578,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Declara constante JavaScript.
 
-### Linha 2697
+### Linha 2698
 
 ```text
    if(heroRoot){heroRoot.position.z=2.85+(-3.55-2.85)*ease;heroRoot.position.x=-.44+ease*.10;heroRoot.rotation.z=Math.sin(t*.9)*.008;if(p>=.99&&currentAction)currentAction.paused=true}
@@ -1578,7 +1586,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2698
+### Linha 2699
 
 ```text
    if(lyraRoot){lyraRoot.position.z=2.62+(-3.45-2.62)*ease;lyraRoot.position.x=.48-ease*.08;lyraRoot.rotation.z=Math.sin(t*1.1)*.010;if(p>=.99&&lyraAction){lyraAction.timeScale=.06;lyraAction.paused=true}}
@@ -1586,7 +1594,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2699
+### Linha 2700
 
 ```text
    if(wifeRoot){wifeRoot.visible=true;wifeRoot.position.z=-4.55;wifeRoot.position.x=.02;wifeRoot.rotation.y=0}
@@ -1594,7 +1602,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2700
+### Linha 2701
 
 ```text
    hunters.forEach(h=>h.root.visible=false);
@@ -1602,7 +1610,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Controla caçadores.
 
-### Linha 2701
+### Linha 2702
 
 ```text
    updateFinalFireworks(dt);updateFinalPetals(dt);camera.position.x=Math.sin(t*.20)*.09;camera.lookAt(0,1.40,-2.65);return
@@ -1610,7 +1618,7 @@ function updateFamilyScene(dt){
 
 **Explicação:** Controla renderização/câmera/cena 3D.
 
-### Linha 2702
+### Linha 2703
 
 ```text
  }
@@ -1618,21 +1626,13 @@ function updateFamilyScene(dt){
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2703
+### Linha 2704
 
 ```text
 }
 ```
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
-
-### Linha 2704
-
-```text
-
-```
-
-**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 2705
 
@@ -1645,15 +1645,15 @@ function updateFamilyScene(dt){
 ### Linha 2706
 
 ```text
-function playLyra(name,fade=.10){if(!lyraRoot||!lyraActions[name])return;const next=lyraActions[name];if(lyraAction===next&&lyraActionName===name)return;if(lyraAction)lyraAction.fadeOut(fade);next.reset().fadeIn(fade).play();next.setLoop(THREE.LoopRepeat,Infinity);lyraAction=next;lyraActionName=name}
+
 ```
 
-**Explicação:** Declara função reutilizável.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 2707
 
 ```text
-function setLyraJourneyState(){const active=!!(lyraRoot&&started&&currentJourney===2&&!journeyRunFinished);if(lyraRoot)lyraRoot.visible=active;const badge=$('lyraBadge');if(badge)badge.classList.toggle('show',active)}
+function playLyra(name,fade=.10){if(!lyraRoot||!lyraActions[name])return;const next=lyraActions[name];if(lyraAction===next&&lyraActionName===name)return;if(lyraAction)lyraAction.fadeOut(fade);next.reset().fadeIn(fade).play();next.setLoop(THREE.LoopRepeat,Infinity);lyraAction=next;lyraActionName=name}
 ```
 
 **Explicação:** Declara função reutilizável.
@@ -1661,7 +1661,7 @@ function setLyraJourneyState(){const active=!!(lyraRoot&&started&&currentJourney
 ### Linha 2708
 
 ```text
-function updateLyra(dt){
+function setLyraJourneyState(){const active=!!(lyraRoot&&started&&currentJourney===2&&!journeyRunFinished);if(lyraRoot)lyraRoot.visible=active;const badge=$('lyraBadge');if(badge)badge.classList.toggle('show',active)}
 ```
 
 **Explicação:** Declara função reutilizável.
@@ -1669,15 +1669,15 @@ function updateLyra(dt){
 ### Linha 2709
 
 ```text
- if(!lyraRoot)return;
+function updateLyra(dt){
 ```
 
-**Explicação:** Executa condicionalmente.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 2710
 
 ```text
- if(!started||currentJourney!==2||journeyRunFinished||shelterActive||shelterChoiceOpen){lyraRoot.visible=false;if(tobogganLyraCart)tobogganLyraCart.visible=false;const badge=$('lyraBadge');if(badge)badge.classList.remove('show');return}
+ if(!lyraRoot)return;
 ```
 
 **Explicação:** Executa condicionalmente.
@@ -1685,12 +1685,20 @@ function updateLyra(dt){
 ### Linha 2711
 
 ```text
+ if(!started||currentJourney!==2||journeyRunFinished||shelterActive||shelterChoiceOpen){lyraRoot.visible=false;if(tobogganLyraCart)tobogganLyraCart.visible=false;const badge=$('lyraBadge');if(badge)badge.classList.remove('show');return}
+```
+
+**Explicação:** Executa condicionalmente.
+
+### Linha 2712
+
+```text
  lyraRoot.visible=true;const badge=$('lyraBadge');if(badge)badge.classList.add('show');const side=lane>1.35?-1.05:1.05;
 ```
 
 **Explicação:** Controla Lyra.
 
-### Linha 2712
+### Linha 2713
 
 ```text
  if(tobogganActive){
@@ -1698,7 +1706,7 @@ function updateLyra(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2713
+### Linha 2714
 
 ```text
   if(tobogganLyraCart)tobogganLyraCart.visible=false;if(lyraActionName!=='river_seated')playLyraTobogganPose();syncTobogganRiders();return
@@ -1706,7 +1714,7 @@ function updateLyra(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2714
+### Linha 2715
 
 ```text
  }else{
@@ -1714,7 +1722,7 @@ function updateLyra(dt){
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2715
+### Linha 2716
 
 ```text
   const z=-2.7,baseLane=LANE_X[0]+lane*2.25;lyraRoot.position.x+=(baseLane+side-lyraRoot.position.x)*Math.min(1,dt*6.5);lyraRoot.position.y=kharvorLayerY;lyraRoot.position.z=z;lyraRoot.rotation.y=Math.PI+(flipHero?Math.PI:0);lyraRoot.rotation.z=(targetLane-lane)*-.07;lyraRoot.rotation.x=0;ensureLyraRun();if(lyraAction)lyraAction.timeScale=Math.min(1.18,.94+(speed-RUN_SPEED_BASE)*.009);if(lyraMixer)lyraMixer.update(dt)
@@ -1722,7 +1730,7 @@ function updateLyra(dt){
 
 **Explicação:** Declara constante JavaScript.
 
-### Linha 2716
+### Linha 2717
 
 ```text
  }
@@ -1730,7 +1738,7 @@ function updateLyra(dt){
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2717
+### Linha 2718
 
 ```text
 }
@@ -1738,7 +1746,7 @@ function updateLyra(dt){
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2718
+### Linha 2719
 
 ```text
 function showDescentWarning(text,ms=2200){const el=$('descentWarning');if(!el)return;el.textContent=text;el.classList.add('show');clearTimeout(showDescentWarning._t);showDescentWarning._t=setTimeout(()=>el.classList.remove('show'),ms)}
@@ -1746,7 +1754,7 @@ function showDescentWarning(text,ms=2200){const el=$('descentWarning');if(!el)re
 
 **Explicação:** Declara função reutilizável.
 
-### Linha 2719
+### Linha 2720
 
 ```text
 function realmTargetDistance(){return endlessMode?ENDLESS_REALM_DISTANCE:(currentJourney===2?REALM_DISTANCE_J2:REALM_DISTANCE_J1)}
@@ -1754,7 +1762,7 @@ function realmTargetDistance(){return endlessMode?ENDLESS_REALM_DISTANCE:(curren
 
 **Explicação:** Declara função reutilizável.
 
-### Linha 2720
+### Linha 2721
 
 ```text
 function setReviveStatus(text='',good=false){const el=$('reviveStatus');if(!el)return;el.textContent=text;el.className='reviveStatus'+(good?' good':'')}
@@ -1762,7 +1770,7 @@ function setReviveStatus(text='',good=false){const el=$('reviveStatus');if(!el)r
 
 **Explicação:** Declara função reutilizável.
 
-### Linha 2721
+### Linha 2722
 
 ```text
 function updateReviveOffer(){const seq=$('reviveSequence'),btns=[$('revive1'),$('revive2'),$('revive3')],ad=$('reviveAd');btns.forEach(b=>{if(b)b.style.display='none'});setReviveStatus('');updateCommerceUI();if(ad){const left=Math.max(0,MAX_REWARDED_CONTINUES_PER_RUN-rewardedContinueCount);ad.style.display='inline-flex';ad.disabled=left<=0||rewardedAdRunning;ad.textContent=left<=0?'✓ 2 '+gt('ads'):'▶ '+gt('ad')+' '+(rewardedContinueCount+1)+'/'+MAX_REWARDED_CONTINUES_PER_RUN+' • +1 '+gt('life')}if(reviveStep>=REVIVE_SEQUENCE.length){if(seq)seq.textContent=gt('paidLimit');if(UI.reviveText)UI.reviveText.textContent=(lastDeathMessage||gt('runEnded'));return}const offer=REVIVE_SEQUENCE[reviveStep],idx=offer.lives-1,btn=btns[idx];if(btn){btn.style.display='inline-flex';btn.textContent='+'+offer.lives+' '+(offer.lives===1?gt('life'):gt('livesWord'))+' • 💎 '+offer.price}if(seq)seq.textContent=gt('continue')+' '+(reviveStep+1)+'/'+REVIVE_SEQUENCE.length+' • +'+offer.lives+' '+(offer.lives===1?gt('life'):gt('livesWord'))+' • 💎 '+offer.price+' • REWARDED '+rewardedContinueCount+'/'+MAX_REWARDED_CONTINUES_PER_RUN}
@@ -1770,7 +1778,7 @@ function updateReviveOffer(){const seq=$('reviveSequence'),btns=[$('revive1'),$(
 
 **Explicação:** Declara função reutilizável.
 
-### Linha 2722
+### Linha 2723
 
 ```text
 async function portalToRealm(nextIndex){if(portalTransitioning||realmLoading||journeyRunFinished)return;portalTransitioning=true;paused=true;huntersVisible=false;hunters.forEach(h=>{if(h.action)h.action.paused=true});const fx=$('portalFx'),label=$('portalLabel'),cfg=REALMS[nextIndex];if(cfg&&cfg.id==='celestial')playThemeMoment(14,4800,.090);if(label)label.innerHTML=gt('portal')+'<small>'+cfg.name+'</small>';if(fx)fx.classList.add('show');beep(310,.16,.02,'sine');await new Promise(r=>setTimeout(r,720));clearItems();await loadRealm(nextIndex);await new Promise(r=>setTimeout(r,420));if(fx)fx.classList.remove('show');hunters.forEach(h=>{if(h.action)h.action.paused=false});paused=false;portalTransitioning=false;if(currentJourney===2)forceLyraRun();clock.getDelta();toast(gt('portalCrossed')+' • '+cfg.short)}
@@ -1778,7 +1786,7 @@ async function portalToRealm(nextIndex){if(portalTransitioning||realmLoading||jo
 
 **Explicação:** Declara função assíncrona.
 
-### Linha 2723
+### Linha 2724
 
 ```text
 
@@ -1786,7 +1794,7 @@ async function portalToRealm(nextIndex){if(portalTransitioning||realmLoading||jo
 
 **Explicação:** Separa visualmente blocos do arquivo.
 
-### Linha 2724
+### Linha 2725
 
 ```text
 async function loadHunters(){
@@ -1794,7 +1802,7 @@ async function loadHunters(){
 
 **Explicação:** Declara função assíncrona.
 
-### Linha 2725
+### Linha 2726
 
 ```text
  if(hunters.length)return hunters;if(huntersLoadPromise)return huntersLoadPromise;
@@ -1802,7 +1810,7 @@ async function loadHunters(){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2726
+### Linha 2727
 
 ```text
  huntersLoadPromise=(async()=>{
@@ -1810,7 +1818,7 @@ async function loadHunters(){
 
 **Explicação:** Controla caçadores.
 
-### Linha 2727
+### Linha 2728
 
 ```text
   const defs=[{name:'Raven',laneOffset:-.34,z:5.45,tint:0xa98cff},{name:'Nyx',laneOffset:.04,z:5.92,tint:0xff6d66},{name:'Serya',laneOffset:.34,z:6.38,tint:0x6fa7ff}];
@@ -1818,7 +1826,7 @@ async function loadHunters(){
 
 **Explicação:** Declara constante JavaScript.
 
-### Linha 2728
+### Linha 2729
 
 ```text
   const gltf=await parseGLB64(ASSETS.hunterRaven);hunters=[];
@@ -1826,15 +1834,15 @@ async function loadHunters(){
 
 **Explicação:** Declara constante JavaScript.
 
-### Linha 2729
+### Linha 2730
 
 ```text
   for(let i=0;i<defs.length;i++){
 ```
 
-**Explicação:** Inicia repetição.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
-### Linha 2730
+### Linha 2731
 
 ```text
    const def=defs[i],root=new THREE.Group(),model=(THREE.SkeletonUtils&&THREE.SkeletonUtils.clone)?THREE.SkeletonUtils.clone(gltf.scene):gltf.scene.clone(true);setSRGB(model);
@@ -1842,7 +1850,7 @@ async function loadHunters(){
 
 **Explicação:** Declara constante JavaScript.
 
-### Linha 2731
+### Linha 2732
 
 ```text
    model.traverse(n=>{if(n.isMesh&&n.material){if(Array.isArray(n.material)){n.material=n.material.map(m=>{const c=m.clone();if(c.color)c.color.multiply(new THREE.Color(def.tint));return c})}else{n.material=n.material.clone();if(n.material.color)n.material.color.multiply(new THREE.Color(def.tint))}}});
@@ -1850,7 +1858,7 @@ async function loadHunters(){
 
 **Explicação:** Usa Three.js para renderização 3D.
 
-### Linha 2732
+### Linha 2733
 
 ```text
    let box=new THREE.Box3().setFromObject(model),size=box.getSize(new THREE.Vector3());const sc=2.15/Math.max(.001,size.y);model.scale.setScalar(sc);box=new THREE.Box3().setFromObject(model);const center=box.getCenter(new THREE.Vector3());model.position.set(-center.x,-box.min.y,-center.z);root.add(model);
@@ -1858,7 +1866,7 @@ async function loadHunters(){
 
 **Explicação:** Declara variável mutável.
 
-### Linha 2733
+### Linha 2734
 
 ```text
    root.scale.set(1,1,1);root.rotation.y=Math.PI;root.position.set(LANE_X[1]+def.laneOffset*2.25,0,def.z);root.visible=false;scene.add(root);
@@ -1866,7 +1874,7 @@ async function loadHunters(){
 
 **Explicação:** Controla renderização/câmera/cena 3D.
 
-### Linha 2734
+### Linha 2735
 
 ```text
    const mixerLocal=new THREE.AnimationMixer(model);const clip=(gltf.animations||[]).find(a=>/running/i.test(a.name))||(gltf.animations||[])[0];let action=null;if(clip){action=mixerLocal.clipAction(clip);action.setLoop(THREE.LoopRepeat,Infinity);action.play();action.timeScale=1.0+i*.035}
@@ -1874,7 +1882,7 @@ async function loadHunters(){
 
 **Explicação:** Declara constante JavaScript.
 
-### Linha 2735
+### Linha 2736
 
 ```text
    hunters.push({name:def.name,root,mixer:mixerLocal,action,baseLaneOffset:def.laneOffset,lanePos:1+def.laneOffset,z:def.z,targetZ:def.z,restZ:def.z,minStage:i+1,fixedScale:new THREE.Vector3(1,1,1)});
@@ -1882,7 +1890,7 @@ async function loadHunters(){
 
 **Explicação:** Usa Three.js para renderização 3D.
 
-### Linha 2736
+### Linha 2737
 
 ```text
   }
@@ -1890,15 +1898,15 @@ async function loadHunters(){
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2737
+### Linha 2738
 
 ```text
   return hunters;
 ```
 
-**Explicação:** Retorna/encerra a função.
+**Explicação:** Controla caçadores.
 
-### Linha 2738
+### Linha 2739
 
 ```text
  })();
@@ -1906,7 +1914,7 @@ async function loadHunters(){
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2739
+### Linha 2740
 
 ```text
  try{return await huntersLoadPromise}finally{huntersLoadPromise=null}
@@ -1914,7 +1922,7 @@ async function loadHunters(){
 
 **Explicação:** Controla caçadores.
 
-### Linha 2740
+### Linha 2741
 
 ```text
 }
@@ -1922,7 +1930,7 @@ async function loadHunters(){
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2741
+### Linha 2742
 
 ```text
 function pursuitStage(){return Math.max(0,Math.min(3,hunterStage))}
@@ -1930,7 +1938,7 @@ function pursuitStage(){return Math.max(0,Math.min(3,hunterStage))}
 
 **Explicação:** Declara função reutilizável.
 
-### Linha 2742
+### Linha 2743
 
 ```text
 function triggerHunters(){
@@ -1938,7 +1946,7 @@ function triggerHunters(){
 
 **Explicação:** Declara função reutilizável.
 
-### Linha 2743
+### Linha 2744
 
 ```text
  if(tobogganActive||gameOver)return;if(!hunters.length){loadHunters().then(()=>{if(started&&!gameOver&&!tobogganActive)triggerHunters()}).catch(err=>console.warn('CAÇADORAS LAZY LOAD',err));return}huntersVisible=true;huntersTimer=5.0;const stage=pursuitStage(),base=stage>=3?2.75:stage===2?3.45:4.15;
@@ -1946,7 +1954,7 @@ function triggerHunters(){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2744
+### Linha 2745
 
 ```text
  hunters.forEach((h,i)=>{if(h.root&&h.fixedScale)h.root.scale.copy(h.fixedScale);const active=h.minStage<=stage;h.root.visible=active;if(h.action)h.action.paused=false;if(active){h.targetZ=base+i*.42;h.z=Math.min(h.z,h.targetZ+1.0)}else{h.z=h.restZ;h.targetZ=h.restZ;h.lanePos=1+h.baseLaneOffset}});
@@ -1954,7 +1962,7 @@ function triggerHunters(){
 
 **Explicação:** Controla caçadores.
 
-### Linha 2745
+### Linha 2746
 
 ```text
  const names=hunters.filter(h=>h.minStage<=stage).map(h=>h.name.toUpperCase()).join(' + ');toast(names+' NA PERSEGUIÇÃO');
@@ -1962,7 +1970,7 @@ function triggerHunters(){
 
 **Explicação:** Declara constante JavaScript.
 
-### Linha 2746
+### Linha 2747
 
 ```text
 }
@@ -1970,7 +1978,7 @@ function triggerHunters(){
 
 **Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
-### Linha 2747
+### Linha 2748
 
 ```text
 function updateHunters(dt){
@@ -1978,7 +1986,7 @@ function updateHunters(dt){
 
 **Explicação:** Declara função reutilizável.
 
-### Linha 2748
+### Linha 2749
 
 ```text
  if(!hunters.length)return;if(!started||gameOver||tobogganActive){if(!gameOver)hunters.forEach(h=>{h.root.visible=false;if(h.mixer)h.mixer.update(dt*.20)});return}
@@ -1986,19 +1994,11 @@ function updateHunters(dt){
 
 **Explicação:** Executa condicionalmente.
 
-### Linha 2749
+### Linha 2750
 
 ```text
  const stage=pursuitStage();if(huntersVisible){huntersTimer-=dt;if(huntersTimer<=0)hunters.forEach(h=>{if(h.minStage<=stage)h.targetZ=7.9+(h.minStage-1)*.48})}
 ```
 
 **Explicação:** Declara constante JavaScript.
-
-### Linha 2750
-
-```text
- hunters.forEach((h,i)=>{if(h.root&&h.fixedScale)h.root.scale.copy(h.fixedScale);const active=huntersVisible&&h.minStage<=stage;if(active){h.z+=(h.targetZ-h.z)*Math.min(1,dt*(huntersTimer>0?3.25:1.45));const wantedLane=Math.max(0,Math.min(2,lane+h.baseLaneOffset));h.lanePos+=(wantedLane-h.lanePos)*Math.min(1,dt*3.1);h.root.position.x=LANE_X[0]+h.lanePos*2.25;h.root.position.z=h.z;h.root.position.y=kharvorLayerY;h.root.rotation.y=Math.PI+(flipHero?Math.PI:0);h.root.visible=true;if(h.action){h.action.paused=false;h.action.timeScale=1+(speed-RUN_SPEED_BASE)*.008}if(h.mixer)h.mixer.update(dt)}else{h.root.visible=false;if(h.mixer)h.mixer.update(dt*.20)}});
-```
-
-**Explicação:** Controla caçadores.
 
