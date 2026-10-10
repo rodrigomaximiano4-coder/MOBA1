@@ -1,6 +1,6 @@
 # index.html — Parte 3
 
-Linhas **501 a 750** da MOBILE86.
+Linhas **501 a 750** da MOBILE87.
 
 ### Linha 501
 
@@ -8,7 +8,7 @@ Linhas **501 a 750** da MOBILE86.
 let weatherAudioSource=null,weatherAudioFilter=null,weatherAudioGain=null,weatherAudioMode='none';
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 502
 
@@ -16,7 +16,7 @@ let weatherAudioSource=null,weatherAudioFilter=null,weatherAudioGain=null,weathe
 const REALM_WEATHER={vpath:'strongWind',vruins:'extremeRain',forest:'drizzle',celestial:'strongWind'};
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 503
 
@@ -24,7 +24,7 @@ const REALM_WEATHER={vpath:'strongWind',vruins:'extremeRain',forest:'drizzle',ce
 const REALM_ATMOSPHERE={ember:'volcanicAsh',ruins:'ruinDust',forest:'fallingLeaves'};
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 504
 
@@ -32,7 +32,7 @@ const REALM_ATMOSPHERE={ember:'volcanicAsh',ruins:'ruinDust',forest:'fallingLeav
 let footstepBuffers=[],footstepLoadPromise=null,footstepTimer=0,footstepIndex=0;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 505
 
@@ -40,7 +40,7 @@ let footstepBuffers=[],footstepLoadPromise=null,footstepTimer=0,footstepIndex=0;
 const FOOTSTEP_SRCS=['step-01.mp3','step-02.mp3','step-03.mp3','step-04.mp3','step-05.mp3','step-06.mp3'];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 506
 
@@ -48,7 +48,7 @@ const FOOTSTEP_SRCS=['step-01.mp3','step-02.mp3','step-03.mp3','step-04.mp3','st
 const LANE_X=[-2.25,0,2.25];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 507
 
@@ -56,7 +56,7 @@ const LANE_X=[-2.25,0,2.25];
 const CELESTIAL_BG='celestial.png';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 508
 
@@ -64,7 +64,7 @@ const CELESTIAL_BG='celestial.png';
 let celestialTexture=null;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 509
 
@@ -72,7 +72,7 @@ let celestialTexture=null;
 const REALM_BACKGROUNDS={'forest':'forest.jpg','ruins':'ruins.jpg','ember':'ember.jpg','vpath':'vpath.jpg','vruins':'vruins.jpg'};
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 510
 
@@ -80,7 +80,7 @@ const REALM_BACKGROUNDS={'forest':'forest.jpg','ruins':'ruins.jpg','ember':'embe
 const REALM_BG_CACHE={};
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 511
 
@@ -88,7 +88,7 @@ const REALM_BG_CACHE={};
 function realmBackgroundSrc(cfg){return cfg&&cfg.celestial?CELESTIAL_BG:(cfg?REALM_BACKGROUNDS[cfg.id]:null)}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 512
 
@@ -96,7 +96,7 @@ function realmBackgroundSrc(cfg){return cfg&&cfg.celestial?CELESTIAL_BG:(cfg?REA
 function applyRealmCssBackground(cfg){const src=realmBackgroundSrc(cfg);if(!app)return;if(src){app.style.backgroundImage=`url("${src}")`;app.style.backgroundColor='#07110d';if(MOBILE_RUNNER){app.style.backgroundSize='auto 100%';const pos={vpath:'50% 45%',vruins:'50% 45%',ember:'50% 46%',ruins:'50% 44%',forest:'50% 43%',celestial:'50% 44%'};app.style.backgroundPosition=pos[(cfg&&cfg.id)||'']||'50% 45%'}else{app.style.backgroundSize='cover';app.style.backgroundPosition='center center'}}else{app.style.backgroundImage='none';app.style.backgroundColor='#07110d'}}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 513
 
@@ -104,7 +104,7 @@ function applyRealmCssBackground(cfg){const src=realmBackgroundSrc(cfg);if(!app)
 function prepareRealmTexture(src,key){if(!src)return null;if(REALM_BG_CACHE[key])return REALM_BG_CACHE[key];const loaderBg=new THREE.TextureLoader();const t=loaderBg.load(src,tex=>{tex.encoding=THREE.sRGBEncoding;tex.minFilter=THREE.LinearFilter;tex.magFilter=THREE.LinearFilter;tex.needsUpdate=true;const current=REALMS&&REALMS[realmIndex];if(current&&((current.celestial&&key==='celestial')||current.id===key)){scene.background=tex}},undefined,err=>{console.warn('FUNDO DO REINO NÃO CARREGOU NO WEBGL • fallback CSS mantido',src,err)});t.encoding=THREE.sRGBEncoding;t.minFilter=THREE.LinearFilter;t.magFilter=THREE.LinearFilter;REALM_BG_CACHE[key]=t;return t}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 514
 
@@ -112,7 +112,7 @@ function prepareRealmTexture(src,key){if(!src)return null;if(REALM_BG_CACHE[key]
 function getRealmBackground(id){const src=REALM_BACKGROUNDS[id];return prepareRealmTexture(src,id)}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 515
 
@@ -120,7 +120,7 @@ function getRealmBackground(id){const src=REALM_BACKGROUNDS[id];return prepareRe
 function getCelestialTexture(){if(celestialTexture)return celestialTexture;celestialTexture=prepareRealmTexture(CELESTIAL_BG,'celestial');return celestialTexture}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 516
 
@@ -128,7 +128,7 @@ function getCelestialTexture(){if(celestialTexture)return celestialTexture;celes
 function setRealmBackground(cfg){applyRealmCssBackground(cfg);if(MOBILE_RUNNER){scene.background=null;return}const tex=cfg&&cfg.celestial?getCelestialTexture():getRealmBackground(cfg&&cfg.id);scene.background=tex||new THREE.Color((cfg&&cfg.bg)||0x07110d)}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 517
 
@@ -136,7 +136,7 @@ function setRealmBackground(cfg){applyRealmCssBackground(cfg);if(MOBILE_RUNNER){
 
 ```
 
-**Explicação:** Linha em branco usada para separar blocos e melhorar a leitura do arquivo.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 518
 
@@ -144,7 +144,7 @@ function setRealmBackground(cfg){applyRealmCssBackground(cfg);if(MOBILE_RUNNER){
 const REALMS=[
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 519
 
@@ -152,7 +152,7 @@ const REALMS=[
  {id:'vpath',name:'TERRAS DOS DRAGÕES',short:'TERRAS DOS DRAGÕES',asset:null,bg:0x321611,fog:0x28110d,fogNear:25,fogFar:105,road:[0x4d3d37,0x3b302d,0x5a4640],edge:0x3a2925,accent:0xe05a20,sceneryWidth:24,sceneryZ:-54},
 ```
 
-**Explicação:** Ajusta elementos centrais da renderização 3D, como cena, câmera ou renderizador.
+**Explicação:** Controla renderização/câmera/cena 3D.
 
 ### Linha 520
 
@@ -160,7 +160,7 @@ const REALMS=[
  {id:'vruins',name:'RUÍNAS DE KHARVOR',short:'RUÍNAS DE KHARVOR',asset:null,bg:0x2b1411,fog:0x23100d,fogNear:23,fogFar:116,road:[0x4b4d50,0x45474a,0x525458],edge:0x35373a,accent:0x91a7c2,sceneryWidth:23,sceneryZ:-51},
 ```
 
-**Explicação:** Ajusta elementos centrais da renderização 3D, como cena, câmera ou renderizador.
+**Explicação:** Controla renderização/câmera/cena 3D.
 
 ### Linha 521
 
@@ -168,7 +168,7 @@ const REALMS=[
  {id:'ember',name:'VALE DAS CINZAS',short:'VALE DAS CINZAS',asset:null,bg:0x321b1b,fog:0x2b1717,fogNear:26,fogFar:108,road:[0x4a3f3a,0x443a36,0x514640],edge:0x342a27,accent:0xff6c2d,sceneryWidth:23,sceneryZ:-52},
 ```
 
-**Explicação:** Ajusta elementos centrais da renderização 3D, como cena, câmera ou renderizador.
+**Explicação:** Controla renderização/câmera/cena 3D.
 
 ### Linha 522
 
@@ -176,7 +176,7 @@ const REALMS=[
  {id:'ruins',name:'RUÍNAS DE VHALOR',short:'RUÍNAS DE VHALOR',asset:null,bg:0x91a899,fog:0x7f9387,fogNear:30,fogFar:136,road:[0x6f756e,0x686e68,0x777d75],edge:0x4f574f,accent:0x9b8c68,sceneryWidth:22,sceneryZ:-50},
 ```
 
-**Explicação:** Ajusta elementos centrais da renderização 3D, como cena, câmera ou renderizador.
+**Explicação:** Controla renderização/câmera/cena 3D.
 
 ### Linha 523
 
@@ -184,7 +184,7 @@ const REALMS=[
  {id:'forest',name:'FLORESTA DE NERIS',short:'FLORESTA DE NERIS',asset:null,bg:0x9dc0a4,fog:0x8ba596,fogNear:34,fogFar:148,road:[0x74684f,0x6f654e,0x7d7157],edge:0x536048,accent:0x829b61,sceneryWidth:23,sceneryZ:-52},
 ```
 
-**Explicação:** Ajusta elementos centrais da renderização 3D, como cena, câmera ou renderizador.
+**Explicação:** Controla renderização/câmera/cena 3D.
 
 ### Linha 524
 
@@ -192,7 +192,7 @@ const REALMS=[
  {id:'celestial',name:'REINO CELESTIAL',short:'REINO CELESTIAL',asset:null,celestial:true,bg:0xf2c987,fog:0xd8c9a9,fogNear:46,fogFar:185,road:[0xa9885e,0x92724e,0xb69668],edge:0x7d684b,accent:0xe9c36a,sceneryWidth:0,sceneryZ:-54}
 ```
 
-**Explicação:** Ajusta elementos centrais da renderização 3D, como cena, câmera ou renderizador.
+**Explicação:** Controla renderização/câmera/cena 3D.
 
 ### Linha 525
 
@@ -200,7 +200,7 @@ const REALMS=[
 ]
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 526
 
@@ -208,7 +208,7 @@ const REALMS=[
 
 ```
 
-**Explicação:** Linha em branco usada para separar blocos e melhorar a leitura do arquivo.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 527
 
@@ -216,7 +216,7 @@ const REALMS=[
 const JOURNEY1_ORDER=[0,1,2,3,4,5];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 528
 
@@ -224,7 +224,7 @@ const JOURNEY1_ORDER=[0,1,2,3,4,5];
 const JOURNEY2_ORDER=[0,1,2,3,4,5];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 529
 
@@ -232,7 +232,7 @@ const JOURNEY2_ORDER=[0,1,2,3,4,5];
 function getJourneyOrder(){return currentJourney===2?JOURNEY2_ORDER:JOURNEY1_ORDER}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 530
 
@@ -240,7 +240,7 @@ function getJourneyOrder(){return currentJourney===2?JOURNEY2_ORDER:JOURNEY1_ORD
 function checkpointField(journey){return Number(journey)===2?'j2Checkpoint':'j1Checkpoint'}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 531
 
@@ -248,7 +248,7 @@ function checkpointField(journey){return Number(journey)===2?'j2Checkpoint':'j1C
 function getJourneyCheckpoint(journey=currentJourney){const order=Number(journey)===2?JOURNEY2_ORDER:JOURNEY1_ORDER;return Math.max(0,Math.min(order.length-1,Number(SAVE?.[checkpointField(journey)]||0)))}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 532
 
@@ -256,7 +256,7 @@ function getJourneyCheckpoint(journey=currentJourney){const order=Number(journey
 function setJourneyCheckpoint(journey,pos){const order=Number(journey)===2?JOURNEY2_ORDER:JOURNEY1_ORDER;SAVE[checkpointField(journey)]=Math.max(0,Math.min(order.length-1,Number(pos)||0))}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 533
 
@@ -264,7 +264,7 @@ function setJourneyCheckpoint(journey,pos){const order=Number(journey)===2?JOURN
 function realmRewardClaimId(journey,idx){return 'J'+Number(journey)+'-R'+Number(idx)}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 534
 
@@ -272,7 +272,7 @@ function realmRewardClaimId(journey,idx){return 'J'+Number(journey)+'-R'+Number(
 function refreshJourneyMenu(){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 535
 
@@ -280,7 +280,7 @@ function refreshJourneyMenu(){
  if(SAVE&&!SAVE.profileCompleted){SAVE.j1Checkpoint=0;SAVE.j2Checkpoint=0;SAVE.journey2Unlocked=false;SAVE.journey2Completed=false}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 536
 
@@ -288,7 +288,7 @@ function refreshJourneyMenu(){
  const j1=$('start'),j2=$('journey2'),end=$('endless'),cp1=getJourneyCheckpoint(1),cp2=getJourneyCheckpoint(2),u2=!!SAVE?.journey2Unlocked,ue=!!SAVE?.journey2Completed;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 537
 
@@ -296,7 +296,7 @@ function refreshJourneyMenu(){
  if(j1)j1.textContent=cp1>0&&!u2?'▶ CONTINUAR • '+REALMS[JOURNEY1_ORDER[cp1]].short:'▶ JORNADA 1 • A FUGA';
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 538
 
@@ -304,7 +304,7 @@ function refreshJourneyMenu(){
  if(j2){j2.disabled=!u2;j2.textContent=!u2?'🔒 JORNADA 2 • O RESGATE':(cp2>0&&!ue?'⚔ CONTINUAR • '+REALMS[JOURNEY2_ORDER[cp2]].short:'⚔ JORNADA 2 • O RESGATE')}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 539
 
@@ -312,7 +312,7 @@ function refreshJourneyMenu(){
  if(end){end.disabled=!ue;end.textContent=ue?'∞ ENDLESS • CORRIDA SEM FIM':tr('endless')}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 540
 
@@ -320,7 +320,7 @@ function refreshJourneyMenu(){
  if(j1&&cp1===0&&!u2)j1.textContent=tr('play');
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 541
 
@@ -328,7 +328,7 @@ function refreshJourneyMenu(){
  if(j2&&!u2)j2.textContent=tr('j2');
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 542
 
@@ -336,7 +336,7 @@ function refreshJourneyMenu(){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 543
 
@@ -344,7 +344,7 @@ function refreshJourneyMenu(){
 function showRealmCheckpoint(pos,nextIndex){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 544
 
@@ -352,7 +352,7 @@ function showRealmCheckpoint(pos,nextIndex){
  if(realmCheckpointPanelOpen||endlessMode)return;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 545
 
@@ -360,7 +360,7 @@ function showRealmCheckpoint(pos,nextIndex){
  const journey=currentJourney,done=REALMS[realmIndex],next=REALMS[nextIndex],claimId=realmRewardClaimId(journey,realmIndex),claims=SAVE.realmRewardClaims||(SAVE.realmRewardClaims=[]),first=!claims.includes(claimId);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 546
 
@@ -368,7 +368,7 @@ function showRealmCheckpoint(pos,nextIndex){
  realmCheckpointPanelOpen=true;realmCheckpointNextIndex=nextIndex;realmCheckpointBonusClaimed=false;paused=true;huntersVisible=false;hunters.forEach(h=>h.root.visible=false);
 ```
 
-**Explicação:** Controla os caçadores e sua posição, animação ou participação na perseguição.
+**Explicação:** Controla caçadores.
 
 ### Linha 547
 
@@ -376,7 +376,7 @@ function showRealmCheckpoint(pos,nextIndex){
  setJourneyCheckpoint(journey,pos+1);realmCheckpointReward=first?(journey===2?15:10):0;
 ```
 
-**Explicação:** Controla o fluxo de Jornada 1, Jornada 2, checkpoints ou finalização.
+**Explicação:** Controla Jornada 1/2 e progressão.
 
 ### Linha 548
 
@@ -384,7 +384,7 @@ function showRealmCheckpoint(pos,nextIndex){
  if(first){claims.push(claimId);SAVE.gems+=realmCheckpointReward;runRealmRewards+=realmCheckpointReward}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 549
 
@@ -392,7 +392,7 @@ function showRealmCheckpoint(pos,nextIndex){
  saveState();refreshJourneyMenu();
 ```
 
-**Explicação:** Controla o fluxo de Jornada 1, Jornada 2, checkpoints ou finalização.
+**Explicação:** Controla Jornada 1/2 e progressão.
 
 ### Linha 550
 
@@ -400,7 +400,7 @@ function showRealmCheckpoint(pos,nextIndex){
  const p=$('realmCheckpointPanel'),t=$('realmCheckpointTitle'),x=$('realmCheckpointText'),r=$('realmCheckpointRewardText'),dbl=$('realmCheckpointDouble');
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 551
 
@@ -408,7 +408,7 @@ function showRealmCheckpoint(pos,nextIndex){
  if(t)t.textContent='✓ '+done.short+' '+gt('completed');
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 552
 
@@ -416,7 +416,7 @@ function showRealmCheckpoint(pos,nextIndex){
  if(x)x.innerHTML=gt('saved')+'<br><b>'+gt('next')+': '+next.name+'</b>';
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 553
 
@@ -424,7 +424,7 @@ function showRealmCheckpoint(pos,nextIndex){
  if(r)r.textContent=first?gt('reward')+' • 💎 +'+realmCheckpointReward:gt('already');
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 554
 
@@ -432,7 +432,7 @@ function showRealmCheckpoint(pos,nextIndex){
  if(dbl){dbl.disabled=!first;dbl.textContent=first?gt('double')+(realmCheckpointReward*2):gt('received')}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 555
 
@@ -440,7 +440,7 @@ function showRealmCheckpoint(pos,nextIndex){
  p?.classList.add('show');haptic([16,28,16])
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 556
 
@@ -448,7 +448,7 @@ function showRealmCheckpoint(pos,nextIndex){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 557
 
@@ -456,7 +456,7 @@ function showRealmCheckpoint(pos,nextIndex){
 async function continueRealmCheckpoint(){if(!realmCheckpointPanelOpen||realmCheckpointNextIndex==null)return;const next=realmCheckpointNextIndex;realmCheckpointPanelOpen=false;realmCheckpointNextIndex=null;$('realmCheckpointPanel')?.classList.remove('show');await portalToRealm(next)}
 ```
 
-**Explicação:** Declara uma função assíncrona, permitindo aguardar carregamentos ou operações antes de continuar.
+**Explicação:** Declara função assíncrona.
 
 ### Linha 558
 
@@ -464,7 +464,7 @@ async function continueRealmCheckpoint(){if(!realmCheckpointPanelOpen||realmChec
 function exitRealmCheckpoint(){realmCheckpointPanelOpen=false;realmCheckpointNextIndex=null;$('realmCheckpointPanel')?.classList.remove('show');backMenu()}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 559
 
@@ -472,7 +472,7 @@ function exitRealmCheckpoint(){realmCheckpointPanelOpen=false;realmCheckpointNex
 async function doubleRealmCheckpointReward(){
 ```
 
-**Explicação:** Declara uma função assíncrona, permitindo aguardar carregamentos ou operações antes de continuar.
+**Explicação:** Declara função assíncrona.
 
 ### Linha 560
 
@@ -480,7 +480,7 @@ async function doubleRealmCheckpointReward(){
  if(!realmCheckpointPanelOpen||realmCheckpointBonusClaimed||realmCheckpointReward<=0)return;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 561
 
@@ -488,7 +488,7 @@ async function doubleRealmCheckpointReward(){
  const b=$('realmCheckpointDouble');if(b){b.disabled=true;b.textContent=gt('ad')+'...'}
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 562
 
@@ -496,7 +496,7 @@ async function doubleRealmCheckpointReward(){
  let ok=false;try{ok=await AdService.showRewardedRealmBonus()}catch(e){console.warn('REWARD REALM BONUS',e)}
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 563
 
@@ -504,7 +504,7 @@ async function doubleRealmCheckpointReward(){
  if(ok){realmCheckpointBonusClaimed=true;SAVE.gems+=realmCheckpointReward;saveState();const r=$('realmCheckpointRewardText');if(r)r.textContent=gt('reward')+' x2 • 💎 +'+(realmCheckpointReward*2);if(b)b.textContent=gt('received');toast(gt('reward')+' x2 • 💎 +'+realmCheckpointReward)}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 564
 
@@ -512,7 +512,7 @@ async function doubleRealmCheckpointReward(){
  else if(b){b.disabled=false;b.textContent=gt('double')+(realmCheckpointReward*2)}
 ```
 
-**Explicação:** Define o caminho alternativo quando a condição anterior não é atendida.
+**Explicação:** Define caminho alternativo.
 
 ### Linha 565
 
@@ -520,7 +520,7 @@ async function doubleRealmCheckpointReward(){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 566
 
@@ -528,7 +528,7 @@ async function doubleRealmCheckpointReward(){
 async function advanceJourneyRealm(){
 ```
 
-**Explicação:** Declara uma função assíncrona, permitindo aguardar carregamentos ou operações antes de continuar.
+**Explicação:** Declara função assíncrona.
 
 ### Linha 567
 
@@ -536,7 +536,7 @@ async function advanceJourneyRealm(){
  if(realmLoading||journeyRunFinished||portalTransitioning||realmCheckpointPanelOpen)return;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 568
 
@@ -544,7 +544,7 @@ async function advanceJourneyRealm(){
  const order=getJourneyOrder(),pos=order.indexOf(realmIndex);if(pos<0){await portalToRealm(order[0]);return}
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 569
 
@@ -552,7 +552,7 @@ async function advanceJourneyRealm(){
  if(endlessMode){if(pos<order.length-1)await portalToRealm(order[pos+1]);else{endlessLap++;await portalToRealm(order[0]);toast('∞ ENDLESS • VOLTA '+endlessLap)}return}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 570
 
@@ -560,7 +560,7 @@ async function advanceJourneyRealm(){
  if(pos<order.length-1){showRealmCheckpoint(pos,order[pos+1]);return}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 571
 
@@ -568,7 +568,7 @@ async function advanceJourneyRealm(){
  finishJourney()
 ```
 
-**Explicação:** Controla o fluxo de Jornada 1, Jornada 2, checkpoints ou finalização.
+**Explicação:** Controla Jornada 1/2 e progressão.
 
 ### Linha 572
 
@@ -576,7 +576,7 @@ async function advanceJourneyRealm(){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 573
 
@@ -584,7 +584,7 @@ async function advanceJourneyRealm(){
 function showJourney1ResultPanel(r,isTest=false){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 574
 
@@ -592,7 +592,7 @@ function showJourney1ResultPanel(r,isTest=false){
  const result=r||{distance:distance,finalTime:elapsed+timePenalty,score:runScore(),rank:previewRunRank()};
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 575
 
@@ -600,7 +600,7 @@ function showJourney1ResultPanel(r,isTest=false){
  const eco=result.economy||{},ma=sessionMonetizationAnalysis(result,false);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 576
 
@@ -608,7 +608,7 @@ function showJourney1ResultPanel(r,isTest=false){
  UI.journeyEndPanel.classList.remove('show');
 ```
 
-**Explicação:** Controla o fluxo de Jornada 1, Jornada 2, checkpoints ou finalização.
+**Explicação:** Controla Jornada 1/2 e progressão.
 
 ### Linha 577
 
@@ -616,7 +616,7 @@ function showJourney1ResultPanel(r,isTest=false){
  const ey=UI.finalVictory?.querySelector('.ey');if(ey)ey.textContent='MAX HEALMS • FIM DA JORNADA 1';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 578
 
@@ -624,7 +624,7 @@ function showJourney1ResultPanel(r,isTest=false){
  if($('finalFamilyTitle'))$('finalFamilyTitle').textContent=gt('reunion');
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 579
 
@@ -632,7 +632,7 @@ function showJourney1ResultPanel(r,isTest=false){
  if(UI.finalEndingText)UI.finalEndingText.textContent='Varek alcançou a fronteira e reencontrou sua família. A paz dura pouco: Lyra é sequestrada, e a Jornada 2 começa com o resgate.';
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 580
 
@@ -640,7 +640,7 @@ function showJourney1ResultPanel(r,isTest=false){
  if(UI.finalPlacement)UI.finalPlacement.textContent='🏆 '+gt('localPlacement')+' #'+Math.max(1,result.rank||1);
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 581
 
@@ -648,7 +648,7 @@ function showJourney1ResultPanel(r,isTest=false){
  if(UI.finalResultLine)UI.finalResultLine.textContent=
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 582
 
@@ -656,7 +656,7 @@ function showJourney1ResultPanel(r,isTest=false){
    gt('time')+' '+fmtTime(result.finalTime||0)+' • '+(result.score||runScore())+' '+gt('score')+
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 583
 
@@ -664,7 +664,7 @@ function showJourney1ResultPanel(r,isTest=false){
    ' • ⭐ '+runStars+' • 💎 '+gt('collected')+' '+(eco.collectedGems??runGems)+
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 584
 
@@ -672,7 +672,7 @@ function showJourney1ResultPanel(r,isTest=false){
    ' • 💎 GASTOS '+(eco.spentGems??runSpentGems)+' • ▶ ADS '+(eco.rewardedAds??runRewardedAds)+'+'+(eco.interstitialAds??runInterstitialAds)+
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 585
 
@@ -680,7 +680,7 @@ function showJourney1ResultPanel(r,isTest=false){
    ' • RECEITA SIM. '+brl(ma.adEstimate)+(isTest?' • MODO TESTE':'');
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 586
 
@@ -688,7 +688,7 @@ function showJourney1ResultPanel(r,isTest=false){
  if(UI.finalUnlockLine)UI.finalUnlockLine.textContent=isTest?'TESTE • FINAL JORNADA 1':'✓ '+gt('j2Unlocked');
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 587
 
@@ -696,7 +696,7 @@ function showJourney1ResultPanel(r,isTest=false){
  const replay=$('finalReplay'),menu=$('finalMenu');
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 588
 
@@ -704,7 +704,7 @@ function showJourney1ResultPanel(r,isTest=false){
  if(replay){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 589
 
@@ -712,15 +712,15 @@ function showJourney1ResultPanel(r,isTest=false){
    replay.textContent=isTest?'↻ REVER FINAL JORNADA 1':'⚔ INICIAR JORNADA 2 • O RESGATE';
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 590
 
 ```text
-   replay.onclick=isTest?(()=>{UI.finalVictory?.classList.remove('show');void startFinalSceneTest('j1')}):(()=>{hideFamilyScene();UI.finalVictory?.classList.remove('show');requestJourneyStart(2)});
+   replay.onclick=isTest?(()=>{UI.finalVictory?.classList.remove('show');void startFinalSceneTest('j1')}):(()=>{UI.finalVictory?.classList.remove('show');j1KidnapTriggered=true;finalSceneClock=2.45;toast(gt('kidnapped'));setTimeout(()=>{hideFamilyScene();requestJourneyStart(2)},2350)});
 ```
 
-**Explicação:** Define diretamente a ação executada ao tocar ou clicar no elemento.
+**Explicação:** Define ação executada ao clicar/tocar.
 
 ### Linha 591
 
@@ -728,7 +728,7 @@ function showJourney1ResultPanel(r,isTest=false){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 592
 
@@ -736,7 +736,7 @@ function showJourney1ResultPanel(r,isTest=false){
  if(menu){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 593
 
@@ -744,7 +744,7 @@ function showJourney1ResultPanel(r,isTest=false){
    menu.textContent=isTest?'🧪 VOLTAR AOS CENÁRIOS':'☰ MENU PRINCIPAL';
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 594
 
@@ -752,7 +752,7 @@ function showJourney1ResultPanel(r,isTest=false){
    menu.onclick=isTest?(()=>returnToScenarioHub()):(()=>{hideFamilyScene();backMenu()});
 ```
 
-**Explicação:** Define diretamente a ação executada ao tocar ou clicar no elemento.
+**Explicação:** Define ação executada ao clicar/tocar.
 
 ### Linha 595
 
@@ -760,7 +760,7 @@ function showJourney1ResultPanel(r,isTest=false){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 596
 
@@ -768,7 +768,7 @@ function showJourney1ResultPanel(r,isTest=false){
  if(UI.finalVictory)UI.finalVictory.classList.add('show');
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 597
 
@@ -776,7 +776,7 @@ function showJourney1ResultPanel(r,isTest=false){
  playSFX('finalChime')
 ```
 
-**Explicação:** Controla áudio, música, efeitos sonoros ou volume.
+**Explicação:** Controla áudio e efeitos.
 
 ### Linha 598
 
@@ -784,7 +784,7 @@ function showJourney1ResultPanel(r,isTest=false){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 599
 
@@ -792,7 +792,7 @@ function showJourney1ResultPanel(r,isTest=false){
 function finishJourney(){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 600
 
@@ -800,7 +800,7 @@ function finishJourney(){
  if(journeyRunFinished||endlessMode)return;journeyRunFinished=true;paused=true;huntersVisible=false;hunters.forEach(h=>{if(h.action)h.action.paused=true;h.root.visible=false});const r=recordRun();
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 601
 
@@ -808,7 +808,7 @@ function finishJourney(){
  if(currentJourney===1){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 602
 
@@ -816,7 +816,7 @@ function finishJourney(){
    SAVE.journey2Unlocked=true;SAVE.j1Checkpoint=0;saveState();playThemeMoment(7,7200,.135);
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 603
 
@@ -824,7 +824,7 @@ function finishJourney(){
    UI.journeyEndPanel.classList.remove('show');
 ```
 
-**Explicação:** Controla o fluxo de Jornada 1, Jornada 2, checkpoints ou finalização.
+**Explicação:** Controla Jornada 1/2 e progressão.
 
 ### Linha 604
 
@@ -832,7 +832,7 @@ function finishJourney(){
    showFamilyScene('j1final').catch(err=>console.warn('Cena final J1',err));
 ```
 
-**Explicação:** Controla a apresentação cinematográfica e o quadro compacto dos finais.
+**Explicação:** Controla a cena cinematográfica, painel compacto ou o momento do sequestro no final.
 
 ### Linha 605
 
@@ -840,7 +840,7 @@ function finishJourney(){
    setTimeout(()=>{if(journeyRunFinished&&currentJourney===1)showJourney1ResultPanel(r,false)},2200)
 ```
 
-**Explicação:** Controla o fluxo de Jornada 1, Jornada 2, checkpoints ou finalização.
+**Explicação:** Controla Jornada 1/2 e progressão.
 
 ### Linha 606
 
@@ -848,7 +848,7 @@ function finishJourney(){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 607
 
@@ -856,7 +856,7 @@ function finishJourney(){
  else{SAVE.j2Checkpoint=0;saveState();showFinalArrival(r,false).catch(err=>console.warn('FRONTEIRA FINAL',err))}
 ```
 
-**Explicação:** Define o caminho alternativo quando a condição anterior não é atendida.
+**Explicação:** Define caminho alternativo.
 
 ### Linha 608
 
@@ -864,7 +864,7 @@ function finishJourney(){
  refreshJourneyMenu()
 ```
 
-**Explicação:** Controla o fluxo de Jornada 1, Jornada 2, checkpoints ou finalização.
+**Explicação:** Controla Jornada 1/2 e progressão.
 
 ### Linha 609
 
@@ -872,7 +872,7 @@ function finishJourney(){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 610
 
@@ -880,7 +880,7 @@ function finishJourney(){
 
 ```
 
-**Explicação:** Linha em branco usada para separar blocos e melhorar a leitura do arquivo.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 611
 
@@ -888,7 +888,7 @@ function finishJourney(){
 
 ```
 
-**Explicação:** Linha em branco usada para separar blocos e melhorar a leitura do arquivo.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 612
 
@@ -896,7 +896,7 @@ function finishJourney(){
 const LEGACY_SAVE_KEY='maxHealms.player.preview.v1';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 613
 
@@ -904,7 +904,7 @@ const LEGACY_SAVE_KEY='maxHealms.player.preview.v1';
 const SAVE_KEY='maxHealms.player.varek.rc6';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 614
 
@@ -912,7 +912,7 @@ const SAVE_KEY='maxHealms.player.varek.rc6';
 const HERO_OUTFITS={
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 615
 
@@ -920,7 +920,7 @@ const HERO_OUTFITS={
  outfit_varek_original:{id:'outfit_varek_original',label:'VAREK ORIGINAL',free:true,price:0,mode:'meshy',height:2.34,run:'varekOriginalRun',walk:'varekOriginalWalk',slide:'varekOriginalSlide'},
 ```
 
-**Explicação:** Linha de configuração, estilo ou objeto que define propriedades usadas pelo jogo.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 616
 
@@ -928,7 +928,7 @@ const HERO_OUTFITS={
  outfit_varek_adventurer:{id:'outfit_varek_adventurer',label:'VAREK AVENTUREIRO',free:false,priceBRL:14.99,storeSku:'max_healms_varek_adventurer',mode:'meshy',height:2.34,run:'varekAdventurer',walk:'varekAdventurer',slide:'varekAdventurer'},
 ```
 
-**Explicação:** Linha de configuração, estilo ou objeto que define propriedades usadas pelo jogo.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 617
 
@@ -936,7 +936,7 @@ const HERO_OUTFITS={
  outfit_varek_voren:{id:'outfit_varek_voren',label:'VAREK VOREN',free:false,priceBRL:14.99,storeSku:'max_healms_varek_voren',mode:'meshy',height:2.34,run:'varekVorenRun',walk:'varekVorenWalk',slide:'varekVorenSlide'}
 ```
 
-**Explicação:** Linha de configuração, estilo ou objeto que define propriedades usadas pelo jogo.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 618
 
@@ -944,7 +944,7 @@ const HERO_OUTFITS={
 };
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 619
 
@@ -952,7 +952,7 @@ const HERO_OUTFITS={
 const STORE_OUTFIT_IDS=['outfit_varek_original','outfit_varek_adventurer','outfit_varek_voren'];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 620
 
@@ -960,7 +960,7 @@ const STORE_OUTFIT_IDS=['outfit_varek_original','outfit_varek_adventurer','outfi
 const LEGACY_OUTFIT_MAP={outfit_varek:'outfit_varek_original',outfit_darik_original:'outfit_varek_original',outfit_darik_voren:'outfit_varek_voren'};
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 621
 
@@ -968,7 +968,7 @@ const LEGACY_OUTFIT_MAP={outfit_varek:'outfit_varek_original',outfit_darik_origi
 const VALID_OUTFITS=Object.keys(HERO_OUTFITS);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 622
 
@@ -976,7 +976,7 @@ const VALID_OUTFITS=Object.keys(HERO_OUTFITS);
 const ACTIVE_VAREK_IDS=new Set(STORE_OUTFIT_IDS);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 623
 
@@ -984,7 +984,7 @@ const ACTIVE_VAREK_IDS=new Set(STORE_OUTFIT_IDS);
 const OUTFIT_PRODUCT_TO_ID={'max_healms_varek_adventurer':'outfit_varek_adventurer','max_healms_varek_voren':'outfit_varek_voren'};
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 624
 
@@ -992,7 +992,7 @@ const OUTFIT_PRODUCT_TO_ID={'max_healms_varek_adventurer':'outfit_varek_adventur
 function makeUUID(){try{return crypto.randomUUID()}catch(_){return 'mr-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,11)}}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 625
 
@@ -1000,7 +1000,7 @@ function makeUUID(){try{return crypto.randomUUID()}catch(_){return 'mr-'+Date.no
 function freshSave(){return {uuid:makeUUID(),name:'',nickname:'',country:'',email:'',profileCompleted:false,profileSavedAt:0,accountMode:'guest',accountLinked:false,accountEmail:'',accountProvider:'guest',privacyConsentAt:0,signupRewardClaimed:false,welcomeBonusGranted:0,premiumOwned:false,premiumBonusClaimed:false,ownedProducts:[],purchaseHistory:[],lastForcedAdAt:0,forcedAdsShown:0,gems:0,starsTotal:0,xp:0,bestScore:0,bestDistance:0,bestStars:0,bestTime:0,journey2Unlocked:false,journey2Completed:false,j1Checkpoint:0,j2Checkpoint:0,realmRewardClaims:[],endlessBestDistance:0,upgrades:{shield:0,magnet:0,xp:0},inventory:['outfit_varek_original'],consumables:{shield:0,magnetMinutes:0,canteen:0},equipped:{cap:null,trail:null,outfit:'outfit_varek_original',boots:null,backpack:null},runs:[],qaSession:{startedAt:0,runs:0,distance:0,stars:0,collectedGems:0,realmRewards:0,spentGems:0,rewardedAds:0,interstitialAds:0,paidContinues:0,adEstimateBRL:0},settings:{autoRealm:true,sound:true,shadows:true,flipHero:false,haptics:true,musicVolume:.70,sfxVolume:.85,ambientVolume:.65}}}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 626
 
@@ -1008,7 +1008,7 @@ function freshSave(){return {uuid:makeUUID(),name:'',nickname:'',country:'',emai
 function loadSave(){let s=freshSave();try{const stored=localStorage.getItem(SAVE_KEY)||localStorage.getItem('maxHealms.player.varek.rc5')||localStorage.getItem('maxHealms.player.varek.rc4')||localStorage.getItem(LEGACY_SAVE_KEY);const raw=JSON.parse(stored||'null');if(raw){s={...s,...raw,upgrades:{...s.upgrades,...(raw.upgrades||{})},consumables:{...s.consumables,...(raw.consumables||{})},equipped:{...s.equipped,...(raw.equipped||{})},settings:{...s.settings,...(raw.settings||{})},inventory:Array.isArray(raw.inventory)?raw.inventory:[],runs:Array.isArray(raw.runs)?raw.runs:[]}}}catch(e){}return s}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 627
 
@@ -1016,7 +1016,7 @@ function loadSave(){let s=freshSave();try{const stored=localStorage.getItem(SAVE
 let SAVE=loadSave();
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 628
 
@@ -1024,7 +1024,7 @@ let SAVE=loadSave();
 
 ```
 
-**Explicação:** Linha em branco usada para separar blocos e melhorar a leitura do arquivo.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 629
 
@@ -1032,7 +1032,7 @@ let SAVE=loadSave();
 // MOBILE66 • RELEASE CANDIDATE — SIMULAÇÃO DE INSTALAÇÃO NOVA.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 630
 
@@ -1040,7 +1040,7 @@ let SAVE=loadSave();
 // ?freshLaunch=1 apaga todo o save local do jogador UMA VEZ: perfil, ranking,
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 631
 
@@ -1048,7 +1048,7 @@ let SAVE=loadSave();
 // campanha, moedas, inventário e configurações. Depois remove o parâmetro da URL
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 632
 
@@ -1056,7 +1056,7 @@ let SAVE=loadSave();
 // e o jogo volta a salvar normalmente, como aconteceria após uma instalação limpa.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 633
 
@@ -1064,7 +1064,7 @@ let SAVE=loadSave();
 const FRESH_LAUNCH_ONCE=new URLSearchParams(location.search).get('freshLaunch')==='1';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 634
 
@@ -1072,7 +1072,7 @@ const FRESH_LAUNCH_ONCE=new URLSearchParams(location.search).get('freshLaunch')=
 if(FRESH_LAUNCH_ONCE){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 635
 
@@ -1080,7 +1080,7 @@ if(FRESH_LAUNCH_ONCE){
  try{
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 636
 
@@ -1088,7 +1088,7 @@ if(FRESH_LAUNCH_ONCE){
    const remove=[];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 637
 
@@ -1096,7 +1096,7 @@ if(FRESH_LAUNCH_ONCE){
    for(let i=0;i<localStorage.length;i++){
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Usa armazenamento local.
 
 ### Linha 638
 
@@ -1104,7 +1104,7 @@ if(FRESH_LAUNCH_ONCE){
      const k=localStorage.key(i)||'';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 639
 
@@ -1112,7 +1112,7 @@ if(FRESH_LAUNCH_ONCE){
      if(/^maxHealms\./i.test(k)||/^max_healms_/i.test(k))remove.push(k);
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 640
 
@@ -1120,7 +1120,7 @@ if(FRESH_LAUNCH_ONCE){
    }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 641
 
@@ -1128,7 +1128,7 @@ if(FRESH_LAUNCH_ONCE){
    remove.forEach(k=>localStorage.removeItem(k));
 ```
 
-**Explicação:** Lê ou grava dados persistentes do jogador no armazenamento local.
+**Explicação:** Usa armazenamento local.
 
 ### Linha 642
 
@@ -1136,7 +1136,7 @@ if(FRESH_LAUNCH_ONCE){
  }catch(e){}
 ```
 
-**Explicação:** Captura e trata um erro ocorrido no bloco anterior.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 643
 
@@ -1144,7 +1144,7 @@ if(FRESH_LAUNCH_ONCE){
  SAVE=freshSave();
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 644
 
@@ -1152,7 +1152,7 @@ if(FRESH_LAUNCH_ONCE){
  SAVE.j1Checkpoint=0;SAVE.j2Checkpoint=0;SAVE.journey2Unlocked=false;SAVE.journey2Completed=false;
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 645
 
@@ -1160,7 +1160,7 @@ if(FRESH_LAUNCH_ONCE){
  SAVE.runs=[];SAVE.bestScore=0;SAVE.bestDistance=0;SAVE.bestStars=0;SAVE.bestTime=0;
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 646
 
@@ -1168,7 +1168,7 @@ if(FRESH_LAUNCH_ONCE){
  SAVE.gems=0;SAVE.starsTotal=0;SAVE.xp=0;SAVE.realmRewardClaims=[];SAVE.profileCompleted=false;
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 647
 
@@ -1176,7 +1176,7 @@ if(FRESH_LAUNCH_ONCE){
  SAVE.name='';SAVE.nickname='';SAVE.country='';SAVE.email='';SAVE.accountLinked=false;SAVE.accountMode='guest';SAVE.accountEmail='';SAVE.accountProvider='guest';SAVE.qaSession={startedAt:Date.now(),runs:0,distance:0,stars:0,collectedGems:0,realmRewards:0,spentGems:0,rewardedAds:0,interstitialAds:0,paidContinues:0,adEstimateBRL:0};
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 648
 
@@ -1184,7 +1184,7 @@ if(FRESH_LAUNCH_ONCE){
  try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 649
 
@@ -1192,7 +1192,7 @@ if(FRESH_LAUNCH_ONCE){
  try{
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 650
 
@@ -1200,7 +1200,7 @@ if(FRESH_LAUNCH_ONCE){
    const u=new URL(location.href);u.searchParams.delete('freshLaunch');
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 651
 
@@ -1208,7 +1208,7 @@ if(FRESH_LAUNCH_ONCE){
    history.replaceState(null,'',u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash)
 ```
 
-**Explicação:** Controla clima, partículas ou efeitos atmosféricos.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 652
 
@@ -1216,7 +1216,7 @@ if(FRESH_LAUNCH_ONCE){
  }catch(e){}
 ```
 
-**Explicação:** Captura e trata um erro ocorrido no bloco anterior.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 653
 
@@ -1224,7 +1224,7 @@ if(FRESH_LAUNCH_ONCE){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 654
 
@@ -1232,7 +1232,7 @@ if(FRESH_LAUNCH_ONCE){
 
 ```
 
-**Explicação:** Linha em branco usada para separar blocos e melhorar a leitura do arquivo.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 655
 
@@ -1240,7 +1240,7 @@ if(FRESH_LAUNCH_ONCE){
 // MOBILE37 • RESET SEGURO DE PROGRESSO PARA TESTE.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 656
 
@@ -1248,7 +1248,7 @@ if(FRESH_LAUNCH_ONCE){
 // ?resetProgress=1 zera campanha/ranking/moedas de jogo, mas preserva identidade,
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 657
 
@@ -1256,7 +1256,7 @@ if(FRESH_LAUNCH_ONCE){
 // configurações e compras permanentes. O parâmetro é removido logo após executar,
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 658
 
@@ -1264,7 +1264,7 @@ if(FRESH_LAUNCH_ONCE){
 // evitando novo reset ao atualizar a página.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 659
 
@@ -1272,7 +1272,7 @@ if(FRESH_LAUNCH_ONCE){
 const PRODUCTION_CLEAN_ONCE=new URLSearchParams(location.search).get('productionClean')==='1';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 660
 
@@ -1280,7 +1280,7 @@ const PRODUCTION_CLEAN_ONCE=new URLSearchParams(location.search).get('production
 if(PRODUCTION_CLEAN_ONCE){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 661
 
@@ -1288,7 +1288,7 @@ if(PRODUCTION_CLEAN_ONCE){
  const previous=SAVE||freshSave();
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 662
 
@@ -1296,7 +1296,7 @@ if(PRODUCTION_CLEAN_ONCE){
  try{
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 663
 
@@ -1304,7 +1304,7 @@ if(PRODUCTION_CLEAN_ONCE){
    const remove=[];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 664
 
@@ -1312,7 +1312,7 @@ if(PRODUCTION_CLEAN_ONCE){
    for(let i=0;i<localStorage.length;i++){
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Usa armazenamento local.
 
 ### Linha 665
 
@@ -1320,7 +1320,7 @@ if(PRODUCTION_CLEAN_ONCE){
      const k=localStorage.key(i)||'';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 666
 
@@ -1328,7 +1328,7 @@ if(PRODUCTION_CLEAN_ONCE){
      if(/^maxHealms\./i.test(k)||/^max_healms_/i.test(k))remove.push(k);
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 667
 
@@ -1336,7 +1336,7 @@ if(PRODUCTION_CLEAN_ONCE){
    }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 668
 
@@ -1344,7 +1344,7 @@ if(PRODUCTION_CLEAN_ONCE){
    remove.forEach(k=>localStorage.removeItem(k));
 ```
 
-**Explicação:** Lê ou grava dados persistentes do jogador no armazenamento local.
+**Explicação:** Usa armazenamento local.
 
 ### Linha 669
 
@@ -1352,7 +1352,7 @@ if(PRODUCTION_CLEAN_ONCE){
  }catch(e){}
 ```
 
-**Explicação:** Captura e trata um erro ocorrido no bloco anterior.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 670
 
@@ -1360,7 +1360,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE=freshSave();
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 671
 
@@ -1368,7 +1368,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.uuid=previous.uuid||SAVE.uuid;
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 672
 
@@ -1376,7 +1376,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.name=previous.name||'';SAVE.nickname=previous.nickname||'';
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 673
 
@@ -1384,7 +1384,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.country=previous.country||'';SAVE.countryCode=previous.countryCode||'';
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 674
 
@@ -1392,7 +1392,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.profileCompleted=previous.profileCompleted===true;SAVE.profileSavedAt=Number(previous.profileSavedAt||0);
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 675
 
@@ -1400,7 +1400,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.settings={...SAVE.settings,...(previous.settings||{})};
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 676
 
@@ -1408,7 +1408,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.premiumOwned=previous.premiumOwned===true;SAVE.premiumBonusClaimed=previous.premiumBonusClaimed===true;
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 677
 
@@ -1416,7 +1416,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.ownedProducts=Array.isArray(previous.ownedProducts)?[...previous.ownedProducts]:[];
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 678
 
@@ -1424,7 +1424,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.purchaseHistory=Array.isArray(previous.purchaseHistory)?[...previous.purchaseHistory]:[];
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 679
 
@@ -1432,7 +1432,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.inventory=Array.from(new Set(['outfit_varek_original',...(Array.isArray(previous.inventory)?previous.inventory:[])]));
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 680
 
@@ -1440,7 +1440,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.equipped={...SAVE.equipped,...(previous.equipped||{})};
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 681
 
@@ -1448,7 +1448,7 @@ if(PRODUCTION_CLEAN_ONCE){
  SAVE.qaSession={startedAt:Date.now(),runs:0,distance:0,stars:0,collectedGems:0,realmRewards:0,spentGems:0,rewardedAds:0,interstitialAds:0,paidContinues:0,adEstimateBRL:0};
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 682
 
@@ -1456,7 +1456,7 @@ if(PRODUCTION_CLEAN_ONCE){
  try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 683
 
@@ -1464,7 +1464,7 @@ if(PRODUCTION_CLEAN_ONCE){
  try{
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 684
 
@@ -1472,7 +1472,7 @@ if(PRODUCTION_CLEAN_ONCE){
    const u=new URL(location.href);u.searchParams.delete('productionClean');
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 685
 
@@ -1480,7 +1480,7 @@ if(PRODUCTION_CLEAN_ONCE){
    history.replaceState(null,'',u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash)
 ```
 
-**Explicação:** Controla clima, partículas ou efeitos atmosféricos.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 686
 
@@ -1488,7 +1488,7 @@ if(PRODUCTION_CLEAN_ONCE){
  }catch(e){}
 ```
 
-**Explicação:** Captura e trata um erro ocorrido no bloco anterior.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 687
 
@@ -1496,7 +1496,7 @@ if(PRODUCTION_CLEAN_ONCE){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 688
 
@@ -1504,7 +1504,7 @@ if(PRODUCTION_CLEAN_ONCE){
 
 ```
 
-**Explicação:** Linha em branco usada para separar blocos e melhorar a leitura do arquivo.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 689
 
@@ -1512,7 +1512,7 @@ if(PRODUCTION_CLEAN_ONCE){
 const RESET_PROGRESS_ONCE=new URLSearchParams(location.search).get('resetProgress')==='1';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 690
 
@@ -1520,7 +1520,7 @@ const RESET_PROGRESS_ONCE=new URLSearchParams(location.search).get('resetProgres
 if(RESET_PROGRESS_ONCE){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 691
 
@@ -1528,7 +1528,7 @@ if(RESET_PROGRESS_ONCE){
  const previous=SAVE||freshSave(),clean=freshSave();
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 692
 
@@ -1536,7 +1536,7 @@ if(RESET_PROGRESS_ONCE){
  clean.uuid=previous.uuid||clean.uuid;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 693
 
@@ -1544,7 +1544,7 @@ if(RESET_PROGRESS_ONCE){
  clean.name=previous.name||'';
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 694
 
@@ -1552,7 +1552,7 @@ if(RESET_PROGRESS_ONCE){
  clean.nickname=previous.nickname||'';
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 695
 
@@ -1560,7 +1560,7 @@ if(RESET_PROGRESS_ONCE){
  clean.country=previous.country||'';
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 696
 
@@ -1568,7 +1568,7 @@ if(RESET_PROGRESS_ONCE){
  clean.email=previous.email||'';
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 697
 
@@ -1576,7 +1576,7 @@ if(RESET_PROGRESS_ONCE){
  clean.profileCompleted=previous.profileCompleted===true;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 698
 
@@ -1584,7 +1584,7 @@ if(RESET_PROGRESS_ONCE){
  clean.profileSavedAt=Number(previous.profileSavedAt||0);
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 699
 
@@ -1592,7 +1592,7 @@ if(RESET_PROGRESS_ONCE){
  clean.accountMode=previous.accountMode||'guest';
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 700
 
@@ -1600,7 +1600,7 @@ if(RESET_PROGRESS_ONCE){
  clean.accountLinked=previous.accountLinked===true;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 701
 
@@ -1608,7 +1608,7 @@ if(RESET_PROGRESS_ONCE){
  clean.accountEmail=previous.accountEmail||'';
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 702
 
@@ -1616,7 +1616,7 @@ if(RESET_PROGRESS_ONCE){
  clean.accountProvider=previous.accountProvider||'guest';
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 703
 
@@ -1624,7 +1624,7 @@ if(RESET_PROGRESS_ONCE){
  clean.privacyConsentAt=Number(previous.privacyConsentAt||0);
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 704
 
@@ -1632,7 +1632,7 @@ if(RESET_PROGRESS_ONCE){
  clean.premiumOwned=previous.premiumOwned===true;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 705
 
@@ -1640,7 +1640,7 @@ if(RESET_PROGRESS_ONCE){
  clean.premiumBonusClaimed=previous.premiumBonusClaimed===true;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 706
 
@@ -1648,7 +1648,7 @@ if(RESET_PROGRESS_ONCE){
  clean.ownedProducts=Array.isArray(previous.ownedProducts)?[...previous.ownedProducts]:[];
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 707
 
@@ -1656,7 +1656,7 @@ if(RESET_PROGRESS_ONCE){
  clean.purchaseHistory=Array.isArray(previous.purchaseHistory)?[...previous.purchaseHistory]:[];
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 708
 
@@ -1664,7 +1664,7 @@ if(RESET_PROGRESS_ONCE){
  clean.inventory=Array.isArray(previous.inventory)?[...previous.inventory]:['outfit_varek_original'];
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 709
 
@@ -1672,7 +1672,7 @@ if(RESET_PROGRESS_ONCE){
  clean.equipped={...clean.equipped,...(previous.equipped||{})};
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 710
 
@@ -1680,7 +1680,7 @@ if(RESET_PROGRESS_ONCE){
  clean.settings={...clean.settings,...(previous.settings||{})};
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 711
 
@@ -1688,7 +1688,7 @@ if(RESET_PROGRESS_ONCE){
  SAVE=clean;
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 712
 
@@ -1696,7 +1696,7 @@ if(RESET_PROGRESS_ONCE){
  try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 713
 
@@ -1704,7 +1704,7 @@ if(RESET_PROGRESS_ONCE){
  try{
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 714
 
@@ -1712,7 +1712,7 @@ if(RESET_PROGRESS_ONCE){
    const u=new URL(location.href);u.searchParams.delete('resetProgress');
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 715
 
@@ -1720,7 +1720,7 @@ if(RESET_PROGRESS_ONCE){
    history.replaceState(null,'',u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash)
 ```
 
-**Explicação:** Controla clima, partículas ou efeitos atmosféricos.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 716
 
@@ -1728,7 +1728,7 @@ if(RESET_PROGRESS_ONCE){
  }catch(e){}
 ```
 
-**Explicação:** Captura e trata um erro ocorrido no bloco anterior.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 717
 
@@ -1736,7 +1736,7 @@ if(RESET_PROGRESS_ONCE){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 718
 
@@ -1744,7 +1744,7 @@ if(RESET_PROGRESS_ONCE){
 const migrateOutfitId=id=>LEGACY_OUTFIT_MAP[id]||id;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 719
 
@@ -1752,7 +1752,7 @@ const migrateOutfitId=id=>LEGACY_OUTFIT_MAP[id]||id;
 SAVE.ownedProducts=Array.isArray(SAVE.ownedProducts)?Array.from(new Set(SAVE.ownedProducts.map(id=>id==='max_healms_darik_adventurer'?'max_healms_varek_adventurer':id==='max_healms_darik_voren'?'max_healms_varek_voren':id))):[];
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 720
 
@@ -1760,7 +1760,7 @@ SAVE.ownedProducts=Array.isArray(SAVE.ownedProducts)?Array.from(new Set(SAVE.own
 const ownedPaidOutfits=new Set(Object.entries(OUTFIT_PRODUCT_TO_ID).filter(([sku])=>SAVE.ownedProducts.includes(sku)).map(([,id])=>id));
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 721
 
@@ -1768,7 +1768,7 @@ const ownedPaidOutfits=new Set(Object.entries(OUTFIT_PRODUCT_TO_ID).filter(([sku
 SAVE.inventory=Array.from(new Set(['outfit_varek_original',...(SAVE.inventory||[]).map(migrateOutfitId).filter(id=>id==='outfit_varek_original'||ownedPaidOutfits.has(id))]));
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 722
 
@@ -1776,7 +1776,7 @@ SAVE.inventory=Array.from(new Set(['outfit_varek_original',...(SAVE.inventory||[
 const migratedEquipped=migrateOutfitId(SAVE.equipped&&SAVE.equipped.outfit);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 723
 
@@ -1784,7 +1784,7 @@ const migratedEquipped=migrateOutfitId(SAVE.equipped&&SAVE.equipped.outfit);
 SAVE.equipped={cap:null,trail:null,outfit:(SAVE.inventory.includes(migratedEquipped)&&ACTIVE_VAREK_IDS.has(migratedEquipped))?migratedEquipped:'outfit_varek_original',boots:null,backpack:null};
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 724
 
@@ -1792,7 +1792,7 @@ SAVE.equipped={cap:null,trail:null,outfit:(SAVE.inventory.includes(migratedEquip
 SAVE.consumables={shield:0,magnetMinutes:0,canteen:0};
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 725
 
@@ -1800,7 +1800,7 @@ SAVE.consumables={shield:0,magnetMinutes:0,canteen:0};
 SAVE.profileCompleted=SAVE.profileCompleted===true;
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 726
 
@@ -1808,7 +1808,7 @@ SAVE.profileCompleted=SAVE.profileCompleted===true;
 SAVE.profileSavedAt=Number(SAVE.profileSavedAt||0);
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 727
 
@@ -1816,7 +1816,7 @@ SAVE.profileSavedAt=Number(SAVE.profileSavedAt||0);
 SAVE.j1Checkpoint=Math.max(0,Math.min(5,Number(SAVE.j1Checkpoint||0)));SAVE.j2Checkpoint=Math.max(0,Math.min(5,Number(SAVE.j2Checkpoint||0)));SAVE.realmRewardClaims=Array.isArray(SAVE.realmRewardClaims)?SAVE.realmRewardClaims:[];SAVE.endlessBestDistance=Math.max(0,Number(SAVE.endlessBestDistance||0));SAVE.qaSession=(SAVE.qaSession&&typeof SAVE.qaSession==='object')?SAVE.qaSession:{startedAt:0,runs:0,distance:0,stars:0,collectedGems:0,realmRewards:0,spentGems:0,rewardedAds:0,interstitialAds:0,paidContinues:0,adEstimateBRL:0};
 ```
 
-**Explicação:** Manipula o estado persistente do jogador, como progresso, perfil, moedas ou desbloqueios.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 728
 
@@ -1824,7 +1824,7 @@ SAVE.j1Checkpoint=Math.max(0,Math.min(5,Number(SAVE.j1Checkpoint||0)));SAVE.j2Ch
 if(!SAVE.profileCompleted){if((SAVE.name||'').toUpperCase()==='JOGADOR')SAVE.name='';if((SAVE.nickname||'').toUpperCase()==='JOGADOR')SAVE.nickname='';if((SAVE.country||'').toUpperCase()==='BRASIL')SAVE.country=''}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 729
 
@@ -1832,7 +1832,7 @@ if(!SAVE.profileCompleted){if((SAVE.name||'').toUpperCase()==='JOGADOR')SAVE.nam
 
 ```
 
-**Explicação:** Linha em branco usada para separar blocos e melhorar a leitura do arquivo.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 730
 
@@ -1840,7 +1840,7 @@ if(!SAVE.profileCompleted){if((SAVE.name||'').toUpperCase()==='JOGADOR')SAVE.nam
 const TEST_MODE=false;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 731
 
@@ -1848,7 +1848,7 @@ const TEST_MODE=false;
 function gemText(){return TEST_MODE?'∞':String(SAVE.gems)}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 732
 
@@ -1856,7 +1856,7 @@ function gemText(){return TEST_MODE?'∞':String(SAVE.gems)}
 function canAffordGems(price){return TEST_MODE||SAVE.gems>=price}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 733
 
@@ -1864,7 +1864,7 @@ function canAffordGems(price){return TEST_MODE||SAVE.gems>=price}
 function spendGems(price){if(TEST_MODE)return true;if(SAVE.gems<price)return false;SAVE.gems-=price;if(started||gameOver||shelterActive)runSpentGems+=Number(price)||0;return true}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 734
 
@@ -1872,7 +1872,7 @@ function spendGems(price){if(TEST_MODE)return true;if(SAVE.gems<price)return fal
 let saveQueueTimer=null;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 735
 
@@ -1880,7 +1880,7 @@ let saveQueueTimer=null;
 function saveState(){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 736
 
@@ -1888,7 +1888,7 @@ function saveState(){
  if(saveQueueTimer){clearTimeout(saveQueueTimer);saveQueueTimer=null}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 737
 
@@ -1896,7 +1896,7 @@ function saveState(){
  try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 738
 
@@ -1904,7 +1904,7 @@ function saveState(){
  refreshMenuStats()
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 739
 
@@ -1912,7 +1912,7 @@ function saveState(){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 740
 
@@ -1920,7 +1920,7 @@ function saveState(){
 function queueRunSave(){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 741
 
@@ -1928,7 +1928,7 @@ function queueRunSave(){
  if(saveQueueTimer)return;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 742
 
@@ -1936,7 +1936,7 @@ function queueRunSave(){
  saveQueueTimer=setTimeout(()=>{saveQueueTimer=null;try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}refreshMenuStats()},1400)
 ```
 
-**Explicação:** Lê ou grava dados persistentes do jogador no armazenamento local.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 743
 
@@ -1944,7 +1944,7 @@ function queueRunSave(){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 744
 
@@ -1952,7 +1952,7 @@ function queueRunSave(){
 function flushRunSave(){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 745
 
@@ -1960,7 +1960,7 @@ function flushRunSave(){
  if(saveQueueTimer){clearTimeout(saveQueueTimer);saveQueueTimer=null}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 746
 
@@ -1968,7 +1968,7 @@ function flushRunSave(){
  try{localStorage.setItem(SAVE_KEY,JSON.stringify(SAVE))}catch(e){}
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Manipula progresso/estado persistente do jogador.
 
 ### Linha 747
 
@@ -1976,7 +1976,7 @@ function flushRunSave(){
  refreshMenuStats()
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 748
 
@@ -1984,7 +1984,7 @@ function flushRunSave(){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 749
 
@@ -1992,7 +1992,7 @@ function flushRunSave(){
 document.addEventListener('visibilitychange',()=>{if(document.hidden)flushRunSave()},{passive:true});
 ```
 
-**Explicação:** Registra um evento de interação ou ciclo de vida e define o que deve acontecer quando ele ocorrer.
+**Explicação:** Registra evento de interação.
 
 ### Linha 750
 
@@ -2000,5 +2000,5 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)flushRunSav
 window.addEventListener('pagehide',flushRunSave,{passive:true});
 ```
 
-**Explicação:** Registra um evento de interação ou ciclo de vida e define o que deve acontecer quando ele ocorrer.
+**Explicação:** Registra evento de interação.
 
