@@ -1,6 +1,6 @@
 # index.html — Parte 2
 
-Linhas **251 a 500** da MOBILE86.
+Linhas **251 a 500** da MOBILE87.
 
 ### Linha 251
 
@@ -8,7 +8,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn secondary" id="nerisLowerQuick" type="button">NERIS • TÚNEL / PONTE COBERTA</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 252
 
@@ -16,7 +16,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn secondary" id="vhalorDropQuick" type="button">VHALOR • QUEDA DA PONTE</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 253
 
@@ -24,7 +24,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn secondary" id="vhalorFloodQuick" type="button">VHALOR • TÚNEL INUNDADO</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 254
 
@@ -32,7 +32,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn primary" id="vhalorFloodExitQuick" type="button">VHALOR • 6s ANTES DA SAÍDA INUNDADA</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 255
 
@@ -40,7 +40,7 @@ Linhas **251 a 500** da MOBILE86.
     </div>
 ```
 
-**Explicação:** Fecha um contêiner visual aberto anteriormente.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 256
 
@@ -48,7 +48,7 @@ Linhas **251 a 500** da MOBILE86.
     <div class="eyebrow" style="margin-top:14px">DESCIDAS / SEQUÊNCIAS</div>
 ```
 
-**Explicação:** Cria um contêiner visual usado para organizar a interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 257
 
@@ -56,7 +56,7 @@ Linhas **251 a 500** da MOBILE86.
     <div class="qaQuickGrid">
 ```
 
-**Explicação:** Cria um contêiner visual usado para organizar a interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 258
 
@@ -64,7 +64,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn secondary" id="riverQuick" type="button">TERRAS DOS DRAGÕES • DESCIDA DO RIO</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 259
 
@@ -72,7 +72,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn secondary" id="lavaQuick" type="button">VALE DAS CINZAS • DESCIDA VULCÂNICA</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 260
 
@@ -80,7 +80,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn secondary" id="floodedQuick" type="button">VHALOR • CANOA NA PASSAGEM INUNDADA</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 261
 
@@ -88,7 +88,7 @@ Linhas **251 a 500** da MOBILE86.
     </div>
 ```
 
-**Explicação:** Fecha um contêiner visual aberto anteriormente.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 262
 
@@ -96,7 +96,7 @@ Linhas **251 a 500** da MOBILE86.
     <div class="eyebrow" style="margin-top:14px">HISTÓRIA / FINAIS</div>
 ```
 
-**Explicação:** Cria um contêiner visual usado para organizar a interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 263
 
@@ -104,7 +104,7 @@ Linhas **251 a 500** da MOBILE86.
     <div class="qaQuickGrid">
 ```
 
-**Explicação:** Cria um contêiner visual usado para organizar a interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 264
 
@@ -112,7 +112,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn secondary" data-final-test="j2start" type="button">JORNADA 2 • ABERTURA COM LYRA</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Controla Lyra.
 
 ### Linha 265
 
@@ -120,7 +120,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn secondary" data-final-test="j1" type="button">FINAL • JORNADA 1</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 266
 
@@ -128,7 +128,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn secondary" data-final-test="j2final" type="button">FINAL • JORNADA 2</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 267
 
@@ -136,7 +136,7 @@ Linhas **251 a 500** da MOBILE86.
     </div>
 ```
 
-**Explicação:** Fecha um contêiner visual aberto anteriormente.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 268
 
@@ -144,7 +144,7 @@ Linhas **251 a 500** da MOBILE86.
     <div class="cardActions">
 ```
 
-**Explicação:** Cria um contêiner visual usado para organizar a interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 269
 
@@ -152,7 +152,7 @@ Linhas **251 a 500** da MOBILE86.
       <button class="btn secondary" id="scenarioTestClose" type="button">VOLTAR AO MENU NORMAL</button>
 ```
 
-**Explicação:** Cria um botão interativo da interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 270
 
@@ -160,7 +160,7 @@ Linhas **251 a 500** da MOBILE86.
     </div>
 ```
 
-**Explicação:** Fecha um contêiner visual aberto anteriormente.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 271
 
@@ -168,7 +168,7 @@ Linhas **251 a 500** da MOBILE86.
   </div>
 ```
 
-**Explicação:** Fecha um contêiner visual aberto anteriormente.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 272
 
@@ -176,7 +176,7 @@ Linhas **251 a 500** da MOBILE86.
 </div>
 ```
 
-**Explicação:** Fecha um contêiner visual aberto anteriormente.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 273
 
@@ -184,7 +184,7 @@ Linhas **251 a 500** da MOBILE86.
 <script src="max-realms-security.js"></script>
 ```
 
-**Explicação:** Inicia um bloco JavaScript ou carrega um arquivo JavaScript externo.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 274
 
@@ -192,7 +192,7 @@ Linhas **251 a 500** da MOBILE86.
 <script>
 ```
 
-**Explicação:** Inicia um bloco JavaScript ou carrega um arquivo JavaScript externo.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 275
 
@@ -200,7 +200,7 @@ Linhas **251 a 500** da MOBILE86.
 // MAX HEALMS MOBILE ENGINE LOADER 1.2 • LOCAL FIRST
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 276
 
@@ -208,7 +208,7 @@ Linhas **251 a 500** da MOBILE86.
 // Prioridade: arquivos locais do pacote -> CDNs de contingência.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 277
 
@@ -216,7 +216,7 @@ Linhas **251 a 500** da MOBILE86.
 window.__MR_ENGINE_READY=(async()=>{
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 278
 
@@ -224,7 +224,7 @@ window.__MR_ENGINE_READY=(async()=>{
   const attempts=[];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 279
 
@@ -232,7 +232,7 @@ window.__MR_ENGINE_READY=(async()=>{
   if(window.__MR_ORIGIN_AUTHORIZED===false){attempts.push('BLOQUEADO • ORIGEM NÃO AUTORIZADA');window.__MR_ENGINE_LOG=attempts;return {ok:false,stage:'LICENÇA / ORIGEM NÃO AUTORIZADA',attempts};}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 280
 
@@ -240,7 +240,7 @@ window.__MR_ENGINE_READY=(async()=>{
   const loadScript=(src,timeout=7000)=>new Promise((resolve,reject)=>{
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 281
 
@@ -248,7 +248,7 @@ window.__MR_ENGINE_READY=(async()=>{
     const el=document.createElement('script'); let finished=false;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 282
 
@@ -256,7 +256,7 @@ window.__MR_ENGINE_READY=(async()=>{
     const timer=setTimeout(()=>finish(false,new Error('timeout')),timeout);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 283
 
@@ -264,7 +264,7 @@ window.__MR_ENGINE_READY=(async()=>{
     const finish=(ok,err)=>{if(finished)return;finished=true;clearTimeout(timer);if(!ok){try{el.remove()}catch(_){}}ok?resolve(src):reject(err||new Error('falha'))};
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 284
 
@@ -272,7 +272,7 @@ window.__MR_ENGINE_READY=(async()=>{
     el.src=src; el.async=false; el.onload=()=>finish(true); el.onerror=()=>finish(false,new Error('falha ao carregar '+src)); document.head.appendChild(el);
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 285
 
@@ -280,7 +280,7 @@ window.__MR_ENGINE_READY=(async()=>{
   });
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 286
 
@@ -288,7 +288,7 @@ window.__MR_ENGINE_READY=(async()=>{
   async function tryList(kind,list,test){
 ```
 
-**Explicação:** Declara uma função assíncrona, permitindo aguardar carregamentos ou operações antes de continuar.
+**Explicação:** Declara função assíncrona.
 
 ### Linha 287
 
@@ -296,7 +296,7 @@ window.__MR_ENGINE_READY=(async()=>{
     if(test())return true;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 288
 
@@ -304,7 +304,7 @@ window.__MR_ENGINE_READY=(async()=>{
     for(const src of list){
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 289
 
@@ -312,7 +312,7 @@ window.__MR_ENGINE_READY=(async()=>{
       try{await loadScript(src); attempts.push('OK '+kind+' '+src); if(test()){window.__MR_ENGINE_SOURCE=src;return true}}
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 290
 
@@ -320,7 +320,7 @@ window.__MR_ENGINE_READY=(async()=>{
       catch(e){attempts.push('ERRO '+kind+' '+src)}
 ```
 
-**Explicação:** Captura e trata um erro ocorrido no bloco anterior.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 291
 
@@ -328,7 +328,7 @@ window.__MR_ENGINE_READY=(async()=>{
     }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 292
 
@@ -336,7 +336,7 @@ window.__MR_ENGINE_READY=(async()=>{
     return false;
 ```
 
-**Explicação:** Encerra a função atual e devolve um resultado, quando aplicável.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 293
 
@@ -344,7 +344,7 @@ window.__MR_ENGINE_READY=(async()=>{
   }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 294
 
@@ -352,7 +352,7 @@ window.__MR_ENGINE_READY=(async()=>{
   const threeOk=await tryList('THREE',[
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 295
 
@@ -360,7 +360,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'three.min.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 296
 
@@ -368,7 +368,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 297
 
@@ -376,7 +376,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://unpkg.com/three@0.128.0/build/three.min.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 298
 
@@ -384,7 +384,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 299
 
@@ -392,7 +392,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://raw.githubusercontent.com/mrdoob/three.js/r128/build/three.min.js'
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 300
 
@@ -400,7 +400,7 @@ window.__MR_ENGINE_READY=(async()=>{
   ],()=>!!window.THREE);
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 301
 
@@ -408,7 +408,7 @@ window.__MR_ENGINE_READY=(async()=>{
   if(!threeOk){window.__MR_ENGINE_LOG=attempts;return {ok:false,stage:'THREE',attempts}}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 302
 
@@ -416,7 +416,7 @@ window.__MR_ENGINE_READY=(async()=>{
   const gltfOk=await tryList('GLTF',[
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 303
 
@@ -424,7 +424,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'GLTFLoader.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 304
 
@@ -432,7 +432,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 305
 
@@ -440,7 +440,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 306
 
@@ -448,7 +448,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://raw.githubusercontent.com/mrdoob/three.js/r128/examples/js/loaders/GLTFLoader.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 307
 
@@ -456,7 +456,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://raw.githack.com/mrdoob/three.js/r128/examples/js/loaders/GLTFLoader.js'
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 308
 
@@ -464,7 +464,7 @@ window.__MR_ENGINE_READY=(async()=>{
   ],()=>!!(window.THREE&&THREE.GLTFLoader));
 ```
 
-**Explicação:** Usa a biblioteca Three.js para criar, posicionar, animar ou renderizar elementos 3D.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 309
 
@@ -472,7 +472,7 @@ window.__MR_ENGINE_READY=(async()=>{
   if(!gltfOk){window.__MR_ENGINE_LOG=attempts;return {ok:false,stage:'GLTFLoader',attempts}}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 310
 
@@ -480,7 +480,7 @@ window.__MR_ENGINE_READY=(async()=>{
   // FBX é opcional nesta linha: os assets ativos desta build usam GLB/GLTF.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 311
 
@@ -488,7 +488,7 @@ window.__MR_ENGINE_READY=(async()=>{
   await tryList('FBX-OPCIONAL',[
 ```
 
-**Explicação:** Espera a conclusão de uma operação assíncrona antes de prosseguir.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 312
 
@@ -496,7 +496,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'FBXLoader.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 313
 
@@ -504,7 +504,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://unpkg.com/three@0.128.0/examples/js/loaders/FBXLoader.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 314
 
@@ -512,7 +512,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 315
 
@@ -520,7 +520,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://raw.githubusercontent.com/mrdoob/three.js/r128/examples/js/loaders/FBXLoader.js',
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 316
 
@@ -528,7 +528,7 @@ window.__MR_ENGINE_READY=(async()=>{
     'https://raw.githack.com/mrdoob/three.js/r128/examples/js/loaders/FBXLoader.js'
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 317
 
@@ -536,7 +536,7 @@ window.__MR_ENGINE_READY=(async()=>{
   ],()=>!!(window.THREE&&THREE.FBXLoader));
 ```
 
-**Explicação:** Usa a biblioteca Three.js para criar, posicionar, animar ou renderizar elementos 3D.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 318
 
@@ -544,7 +544,7 @@ window.__MR_ENGINE_READY=(async()=>{
   await tryList('SKELETON',['SkeletonUtils.js'],()=>!!(window.THREE&&THREE.SkeletonUtils));
 ```
 
-**Explicação:** Espera a conclusão de uma operação assíncrona antes de prosseguir.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 319
 
@@ -552,7 +552,7 @@ window.__MR_ENGINE_READY=(async()=>{
   window.__MR_ENGINE_LOG=attempts;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 320
 
@@ -560,7 +560,7 @@ window.__MR_ENGINE_READY=(async()=>{
   return {ok:true,attempts};
 ```
 
-**Explicação:** Encerra a função atual e devolve um resultado, quando aplicável.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 321
 
@@ -568,7 +568,7 @@ window.__MR_ENGINE_READY=(async()=>{
 })();
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 322
 
@@ -576,7 +576,7 @@ window.__MR_ENGINE_READY=(async()=>{
 </script>
 ```
 
-**Explicação:** Encerra o bloco JavaScript.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 323
 
@@ -584,7 +584,7 @@ window.__MR_ENGINE_READY=(async()=>{
 <script>
 ```
 
-**Explicação:** Inicia um bloco JavaScript ou carrega um arquivo JavaScript externo.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 324
 
@@ -592,7 +592,7 @@ window.__MR_ENGINE_READY=(async()=>{
 const ASSETS = {"varekAdventurer":"varek-adventurer.glb","varekOriginalRun":"varek-original-run.glb","varekOriginalWalk":"varek-original-run.glb","varekOriginalSlide":"varek-original-slide.glb","varekVorenRun":"varek-voren-run.glb","varekVorenWalk":"varek-voren-run.glb","varekVorenSlide":"varek-voren-slide.glb","hunterRaven":"raven.glb","lyraRun":"lyra-run.glb","lyraSlide":"lyra-slide.glb","wife":"wife.glb"};
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 325
 
@@ -600,7 +600,7 @@ const ASSETS = {"varekAdventurer":"varek-adventurer.glb","varekOriginalRun":"var
 
 ```
 
-**Explicação:** Linha em branco usada para separar blocos e melhorar a leitura do arquivo.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 326
 
@@ -608,7 +608,7 @@ const ASSETS = {"varekAdventurer":"varek-adventurer.glb","varekOriginalRun":"var
 (() => {
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 327
 
@@ -616,7 +616,7 @@ const ASSETS = {"varekAdventurer":"varek-adventurer.glb","varekOriginalRun":"var
 'use strict';
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 328
 
@@ -624,7 +624,7 @@ const ASSETS = {"varekAdventurer":"varek-adventurer.glb","varekOriginalRun":"var
 const $=id=>document.getElementById(id), canvas=$('threeCanvas'), app=$('app');
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 329
 
@@ -632,7 +632,7 @@ const $=id=>document.getElementById(id), canvas=$('threeCanvas'), app=$('app');
 const UI={menu:$('menu'),hud:$('hud'),pause:$('pause'),hint:$('hint'),toast:$('toast'),loading:$('loading'),loadingText:$('loadingText'),error:$('error'),distance:$('distance'),stars:$('stars'),score:$('score'),runTime:$('runTime'),lives:$('lives'),gems:$('gems'),water:$('water'),realmName:$('realmName'),fps:$('fps'),status3d:$('status3d'),realmPanel:$('realmPanel'),storyPanel:$('storyPanel'),upgradePanel:$('upgradePanel'),profilePanel:$('profilePanel'),shopPanel:$('shopPanel'),diamondShopPanel:$('diamondShopPanel'),rankingPanel:$('rankingPanel'),shelterPanel:$('shelterPanel'),shelterChoicePanel:$('shelterChoicePanel'),pausePanel:$('pausePanel'),realmGrid:$('realmGrid'),activeRealmStatus:$('activeRealmStatus'),pauseTitle:$('pauseTitle'),pauseText:$('pauseText'),revivePanel:$('revivePanel'),reviveTitle:$('reviveTitle'),reviveText:$('reviveText'),reviveWallet:$('reviveWallet'),reviveRank:$('reviveRank'),journeyEndPanel:$('journeyEndPanel'),journeyEndTitle:$('journeyEndTitle'),journeyEndText:$('journeyEndText'),journeyEndEyebrow:$('journeyEndEyebrow'),shelterPrompt:$('shelterPrompt'),shelterCounter:$('shelterCounter'),shelterHydrationBefore:$('shelterHydrationBefore'),shelterHydrationNow:$('shelterHydrationNow'),shelterHydrationStatus:$('shelterHydrationStatus'),fallFlash:$('fallFlash'),effortPulse:$('effortPulse'),tobogganHud:$('tobogganHud'),tobogganTime:$('tobogganTime'),tobogganFx:$('tobogganFx'),finalVictory:$('finalVictory'),finalPlacement:$('finalPlacement'),finalResultLine:$('finalResultLine'),finalEndingText:$('finalEndingText'),finalUnlockLine:$('finalUnlockLine'),arrivalBanner:$('arrivalBanner'),scenarioTestPanel:$('scenarioTestPanel'),weatherCanvas:$('weatherCanvas'),weatherFlash:$('weatherFlash')};
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 330
 
@@ -640,7 +640,7 @@ const UI={menu:$('menu'),hud:$('hud'),pause:$('pause'),hint:$('hint'),toast:$('t
 let renderer,scene,camera,clock,loader,fbxLoader,hero,mixer,heroRoot,currentAction=null,currentActionName='',sun,hemi;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 331
 
@@ -648,7 +648,7 @@ let renderer,scene,camera,clock,loader,fbxLoader,hero,mixer,heroRoot,currentActi
 let hunters=[];
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 332
 
@@ -656,7 +656,7 @@ let hunters=[];
 let huntersVisible=false,huntersTimer=0,hunterStage=0,huntersLoadPromise=null;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 333
 
@@ -664,15 +664,15 @@ let huntersVisible=false,huntersTimer=0,hunterStage=0,huntersLoadPromise=null;
 let lyraRoot=null,lyraModel=null,lyraMixer=null,lyraActions={},lyraAction=null,lyraActionName='';
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 334
 
 ```text
-let wifeRoot=null,wifeModel=null,wifeLoadPromise=null,finalFamilyMode=false,finalFamilyPhase='',finalArrivalGroup=null,finalSceneClock=0,finalFireworkTimer=0;
+let wifeRoot=null,wifeModel=null,wifeLoadPromise=null,finalFamilyMode=false,finalFamilyPhase='',finalArrivalGroup=null,finalSceneClock=0,finalFireworkTimer=0,j1KidnapTriggered=false;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 335
 
@@ -680,7 +680,7 @@ let wifeRoot=null,wifeModel=null,wifeLoadPromise=null,finalFamilyMode=false,fina
 let finalFireworks=[],finalPetals=[],finalPetalTimer=0,finalChimePlayed=false;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 336
 
@@ -688,7 +688,7 @@ let finalFireworks=[],finalPetals=[],finalPetalTimer=0,finalChimePlayed=false;
 let accessoryGroup=null,capTemplates={},capLoadPromises={};
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 337
 
@@ -696,7 +696,7 @@ let accessoryGroup=null,capTemplates={},capLoadPromises={};
 let roadGroup,decorGroup,itemGroup,sceneryGroup,worldRoot,skyGroup,tobogganGroup,tobogganCart=null,tobogganLyraCart=null,shelter3D=null;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 338
 
@@ -704,7 +704,7 @@ let roadGroup,decorGroup,itemGroup,sceneryGroup,worldRoot,skyGroup,tobogganGroup
 let W=0,H=0,started=false,paused=false,gameOver=false,currentJourney=1,journeyRunFinished=false,lastDeathReason='',lastDeathMessage='';
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 339
 
@@ -712,7 +712,7 @@ let W=0,H=0,started=false,paused=false,gameOver=false,currentJourney=1,journeyRu
 let endlessMode=false,endlessLap=1,realmCheckpointPanelOpen=false,realmCheckpointNextIndex=null,realmCheckpointReward=0,realmCheckpointBonusClaimed=false;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 340
 
@@ -720,7 +720,7 @@ let endlessMode=false,endlessLap=1,realmCheckpointPanelOpen=false,realmCheckpoin
 let portalTransitioning=false,reviveStep=0,tobogganApproachStage=0,tobogganRoadBlend=0;let pendingJourneyStart=null,rewardedContinueCount=0,rewardedAdRunning=false,rewardedAdTimer=null,rewardedAdResolve=null;const MAX_REWARDED_CONTINUES_PER_RUN=2;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 341
 
@@ -728,7 +728,7 @@ let portalTransitioning=false,reviveStep=0,tobogganApproachStage=0,tobogganRoadB
 let forcedAdRunning=false,forcedAdTimer=null,forcedAdResolve=null;const FORCED_AD_MIN_INTERVAL_MS=60000;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 342
 
@@ -736,7 +736,7 @@ let forcedAdRunning=false,forcedAdTimer=null,forcedAdResolve=null;const FORCED_A
 const MOBILE_RUNNER=(matchMedia('(pointer:coarse)').matches||innerWidth<=740);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 343
 
@@ -744,7 +744,7 @@ const MOBILE_RUNNER=(matchMedia('(pointer:coarse)').matches||innerWidth<=740);
 const DEVICE_MEMORY=navigator.deviceMemory||4,HARDWARE_THREADS=navigator.hardwareConcurrency||4;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 344
 
@@ -752,7 +752,7 @@ const DEVICE_MEMORY=navigator.deviceMemory||4,HARDWARE_THREADS=navigator.hardwar
 const LOW_END_MOBILE=MOBILE_RUNNER&&(DEVICE_MEMORY<=3||HARDWARE_THREADS<=4);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 345
 
@@ -760,7 +760,7 @@ const LOW_END_MOBILE=MOBILE_RUNNER&&(DEVICE_MEMORY<=3||HARDWARE_THREADS<=4);
 const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.78:.94,MOBILE_PIXEL_RATIO_MIN=LOW_END_MOBILE?.66:.76;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 346
 
@@ -768,7 +768,7 @@ const MOBILE_PIXEL_RATIO_MAX=LOW_END_MOBILE?.78:.94,MOBILE_PIXEL_RATIO_MIN=LOW_E
 const TARGET_PIXEL_RATIO=MOBILE_RUNNER?MOBILE_PIXEL_RATIO_MAX:1.4;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 347
 
@@ -776,7 +776,7 @@ const TARGET_PIXEL_RATIO=MOBILE_RUNNER?MOBILE_PIXEL_RATIO_MAX:1.4;
 let mobilePixelRatioCurrent=TARGET_PIXEL_RATIO,mobilePerfLowSamples=0,mobilePerfHighSamples=0,mobilePerfLastAdjust=0,mobilePerfGuard=false;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 348
 
@@ -784,7 +784,7 @@ let mobilePixelRatioCurrent=TARGET_PIXEL_RATIO,mobilePerfLowSamples=0,mobilePerf
 const RUN_SPEED_BASE=MOBILE_RUNNER?36.0:20.2;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 349
 
@@ -792,7 +792,7 @@ const RUN_SPEED_BASE=MOBILE_RUNNER?36.0:20.2;
 const RUN_SPEED_MAX=MOBILE_RUNNER?40.0:34.0;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 350
 
@@ -800,7 +800,7 @@ const RUN_SPEED_MAX=MOBILE_RUNNER?40.0:34.0;
 let distance=0,lives=3,water=100,speed=RUN_SPEED_BASE,targetLane=0,lane=0,jumpY=0,jumpV=0,slideTimer=0,slideCooldown=0,hitCooldown=0;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 351
 
@@ -808,7 +808,7 @@ let distance=0,lives=3,water=100,speed=RUN_SPEED_BASE,targetLane=0,lane=0,jumpY=
 let runStars=0,runGems=0,elapsed=0,timePenalty=0,shieldCharges=0;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 352
 
@@ -816,7 +816,7 @@ let runStars=0,runGems=0,elapsed=0,timePenalty=0,shieldCharges=0;
 let runStartGems=0,runSpentGems=0,runRewardedAds=0,runInterstitialAds=0,runPaidContinues=0,runRealmRewards=0;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 353
 
@@ -824,7 +824,7 @@ let runStartGems=0,runSpentGems=0,runRewardedAds=0,runInterstitialAds=0,runPaidC
 let shelterActive=false,shelterAvailable=false,shelterTimer=0,shelterDecisionDone=false,shelterChoiceOpen=false,shelterHydrationBefore=100;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 354
 
@@ -832,7 +832,7 @@ let shelterActive=false,shelterAvailable=false,shelterTimer=0,shelterDecisionDon
 let fallingDeath=false,holeRecoveryActive=false,fallTimer=0,deathRecorded=false,effortTimer=0,hydrationBand=2;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 355
 
@@ -840,7 +840,7 @@ let fallingDeath=false,holeRecoveryActive=false,fallTimer=0,deathRecorded=false,
 let curveStrength=0,curveTarget=.45,curveTimer=3.2;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 356
 
@@ -848,7 +848,7 @@ let curveStrength=0,curveTarget=.45,curveTimer=3.2;
 let realmIndex=0,realmStartDistance=0,autoRealm=true,soundOn=true,flipHero=false,shadowsOn=true,hapticsOn=true,musicVolume=.70,sfxVolume=.85,ambientVolume=.65;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 357
 
@@ -856,7 +856,7 @@ let realmIndex=0,realmStartDistance=0,autoRealm=true,soundOn=true,flipHero=false
 let spawnTimer=1.1,gemTimer=2.8,starTimer=.55,waterTimer=9.5,realmLoading=false;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 358
 
@@ -864,7 +864,7 @@ let spawnTimer=1.1,gemTimer=2.8,starTimer=.55,waterTimer=9.5,realmLoading=false;
 const TOBOGGAN_DURATION=30,TOBOGGAN_SPEED=MOBILE_RUNNER?35.6:37.5,LAVA_TOBOGGAN_SPEED=MOBILE_RUNNER?40.0:38.4,TOBOGGAN_LOOP=MOBILE_RUNNER?260:420; // 52 * 5 m on mobile: no uncovered water gap
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 359
 
@@ -872,7 +872,7 @@ const TOBOGGAN_DURATION=30,TOBOGGAN_SPEED=MOBILE_RUNNER?35.6:37.5,LAVA_TOBOGGAN_
 const REALM_DISTANCE_J1=2200,REALM_DISTANCE_J2=3000,ENDLESS_REALM_DISTANCE=1800;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 360
 
@@ -880,7 +880,7 @@ const REALM_DISTANCE_J1=2200,REALM_DISTANCE_J2=3000,ENDLESS_REALM_DISTANCE=1800;
 const DISTANCE_SCALE=.50,TOBOGGAN_DISTANCE_SCALE=.52;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 361
 
@@ -888,7 +888,7 @@ const DISTANCE_SCALE=.50,TOBOGGAN_DISTANCE_SCALE=.52;
 const SHELTER_START_Z=-720,SHELTER_LOOP_Z=2600;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 362
 
@@ -896,7 +896,7 @@ const SHELTER_START_Z=-720,SHELTER_LOOP_Z=2600;
 const REVIVE_SEQUENCE=[{lives:1,price:150},{lives:2,price:300},{lives:3,price:500},{lives:1,price:650},{lives:2,price:900},{lives:3,price:1200}];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 363
 
@@ -904,7 +904,7 @@ const REVIVE_SEQUENCE=[{lives:1,price:150},{lives:2,price:300},{lives:3,price:50
 let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobogganPhase=0,tobogganAutoDone=false,tobogganPrevSpeed=RUN_SPEED_BASE,tobogganHitCooldown=0,tobogganTestLaunch=false,tobogganForcedMode=null,tobogganExitAtDistance=null;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 364
 
@@ -912,7 +912,7 @@ let tobogganActive=false,tobogganTimer=0,tobogganElapsed=0,tobogganTravel=0,tobo
 let postTobogganExitProgress=null,lastGuidanceRealm=-1,lastRankNoticeAt=0,realmDistanceNotices=new Set();
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 365
 
@@ -920,7 +920,7 @@ let postTobogganExitProgress=null,lastGuidanceRealm=-1,lastRankNoticeAt=0,realmD
 const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganLavaBase=[],tobogganCollectibles=[];let tobogganTrackTexture=null,tobogganTrackMode='river';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 366
 
@@ -928,7 +928,7 @@ const tobogganSegments=[],tobogganHazards=[],tobogganTunnel=[],tobogganLavaBase=
 const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks=[];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 367
 
@@ -936,7 +936,7 @@ const obstacles=[],collectibles=[],roadSegments=[],decorObjects=[],sceneryChunks
 let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 368
 
@@ -944,7 +944,7 @@ let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
 // MAX HEALMS MOBILE70 • RELEASE CANDIDATE 5 • ANÁLISE AUTOMÁTICA DE MONETIZAÇÃO
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 369
 
@@ -952,7 +952,7 @@ let fpsFrames=0,fpsAccum=0,lastTime=performance.now(),audioCtx=null;
 const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.getContext('2d'):null;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 370
 
@@ -960,7 +960,7 @@ const weatherCanvas=$('weatherCanvas'),weatherCtx=weatherCanvas?weatherCanvas.ge
 let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightningAlpha=0,weatherTestMode=false,weatherTestOverride=null,weatherFrameAccumulator=0;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 371
 
@@ -968,7 +968,7 @@ let weatherMode='none',weatherParticles=[],weatherLightningTimer=8,weatherLightn
 let atmosphereMode='none',atmosphereParticles=[];
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 372
 
@@ -976,7 +976,7 @@ let atmosphereMode='none',atmosphereParticles=[];
 let openingImpactStage=0,openingBridgeActive=false,openingDragonGroup=null,openingDragonWingL=null,openingDragonWingR=null,openingDragonShadow=null;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 373
 
@@ -984,7 +984,7 @@ let openingImpactStage=0,openingBridgeActive=false,openingDragonGroup=null,openi
 let openingBridgePulse=0,openingBridgeDamage=0,openingCameraShake=0,openingCreakTimer=0;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 374
 
@@ -992,7 +992,7 @@ let openingBridgePulse=0,openingBridgeDamage=0,openingCameraShake=0,openingCreak
 const bridgeDetailGroups=[];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 375
 
@@ -1000,7 +1000,7 @@ const bridgeDetailGroups=[];
 const kharvorUpperBridgeGroups=[];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 376
 
@@ -1008,7 +1008,7 @@ const kharvorUpperBridgeGroups=[];
 const forestClosedBridgeGroups=[];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 377
 
@@ -1016,7 +1016,7 @@ const forestClosedBridgeGroups=[];
 let kharvorLayerY=0,kharvorFallStage=0,kharvorFallImpact=0,kharvorBreakFx=null,forestUnderpassActive=false,vhalorFloodVisualActive=false;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 378
 
@@ -1024,7 +1024,7 @@ let kharvorLayerY=0,kharvorFallStage=0,kharvorFallImpact=0,kharvorBreakFx=null,f
 let bridgeDropSafetyCleared=false;
 ```
 
-**Explicação:** Declara uma variável JavaScript cujo valor pode mudar durante a execução.
+**Explicação:** Declara variável mutável.
 
 ### Linha 379
 
@@ -1032,7 +1032,7 @@ let bridgeDropSafetyCleared=false;
 function isBridgeDropRealm(){const id=REALMS[realmIndex]?.id;return id==='vruins'||id==='forest'||id==='ruins'}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 380
 
@@ -1040,7 +1040,7 @@ function isBridgeDropRealm(){const id=REALMS[realmIndex]?.id;return id==='vruins
 function isBridgeDropTransitionZone(progress){return isBridgeDropRealm()&&progress>=448&&progress<=535}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 381
 
@@ -1048,7 +1048,7 @@ function isBridgeDropTransitionZone(progress){return isBridgeDropRealm()&&progre
 function clearBridgeDropApproach(){for(let i=obstacles.length-1;i>=0;i--){const o=obstacles[i];if(o.position.z>-30&&o.position.z<12){itemGroup.remove(o);disposeObject(o);obstacles.splice(i,1)}}}
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 382
 
@@ -1056,7 +1056,7 @@ function clearBridgeDropApproach(){for(let i=obstacles.length-1;i>=0;i--){const 
 
 ```
 
-**Explicação:** Linha em branco usada para separar blocos e melhorar a leitura do arquivo.
+**Explicação:** Separa visualmente blocos do arquivo.
 
 ### Linha 383
 
@@ -1064,7 +1064,7 @@ function clearBridgeDropApproach(){for(let i=obstacles.length-1;i>=0;i--){const 
 const KHARVOR_LOWER_Y=-5.2,FOREST_LOWER_Y=-4.6;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 384
 
@@ -1072,7 +1072,7 @@ const KHARVOR_LOWER_Y=-5.2,FOREST_LOWER_Y=-4.6;
 function setForestUnderpassVisual(active){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 385
 
@@ -1080,7 +1080,7 @@ function setForestUnderpassVisual(active){
  active=!!active;if(forestUnderpassActive===active)return;forestUnderpassActive=active;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 386
 
@@ -1088,7 +1088,7 @@ function setForestUnderpassVisual(active){
  const cfg=REALMS[realmIndex];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 387
 
@@ -1096,7 +1096,7 @@ function setForestUnderpassVisual(active){
  if(active){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 388
 
@@ -1104,7 +1104,7 @@ function setForestUnderpassVisual(active){
    if(app){app.style.backgroundImage='none';app.style.backgroundColor='#132018'}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 389
 
@@ -1112,7 +1112,7 @@ function setForestUnderpassVisual(active){
    if(scene){scene.background=new THREE.Color(0x132018);if(scene.fog){scene.fog.color.set(0x23382a);scene.fog.near=15;scene.fog.far=70}}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 390
 
@@ -1120,7 +1120,7 @@ function setForestUnderpassVisual(active){
    if(sceneryGroup)sceneryGroup.visible=false;if(decorGroup)decorGroup.visible=false;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 391
 
@@ -1128,7 +1128,7 @@ function setForestUnderpassVisual(active){
  }else{
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 392
 
@@ -1136,7 +1136,7 @@ function setForestUnderpassVisual(active){
    if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 393
 
@@ -1144,7 +1144,7 @@ function setForestUnderpassVisual(active){
    if(cfg&&cfg.id==='forest'&&scene){setRealmBackground(cfg);if(scene.fog){scene.fog.color.set(cfg.fog);scene.fog.near=currentJourney===2?Math.max(17,cfg.fogNear-4):cfg.fogNear;scene.fog.far=currentJourney===2?Math.max(78,cfg.fogFar-10):cfg.fogFar}}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 394
 
@@ -1152,7 +1152,7 @@ function setForestUnderpassVisual(active){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 395
 
@@ -1160,7 +1160,7 @@ function setForestUnderpassVisual(active){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 396
 
@@ -1168,7 +1168,7 @@ function setForestUnderpassVisual(active){
 function setVhalorFloodVisual(active){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 397
 
@@ -1176,7 +1176,7 @@ function setVhalorFloodVisual(active){
  active=!!active;if(vhalorFloodVisualActive===active)return;vhalorFloodVisualActive=active;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 398
 
@@ -1184,7 +1184,7 @@ function setVhalorFloodVisual(active){
  const cfg=REALMS[realmIndex];
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 399
 
@@ -1192,7 +1192,7 @@ function setVhalorFloodVisual(active){
  if(active){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 400
 
@@ -1200,7 +1200,7 @@ function setVhalorFloodVisual(active){
    // O túnel inundado precisa ter leitura de profundidade: teto presente, laterais fechadas e horizonte longo à frente.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 401
 
@@ -1208,7 +1208,7 @@ function setVhalorFloodVisual(active){
    if(kharvorBreakFx)kharvorBreakFx.visible=false;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 402
 
@@ -1216,7 +1216,7 @@ function setVhalorFloodVisual(active){
    if(app){app.style.backgroundImage='none';app.style.backgroundColor='#101817'}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 403
 
@@ -1224,7 +1224,7 @@ function setVhalorFloodVisual(active){
    if(scene){scene.background=new THREE.Color(0x101817);if(scene.fog){scene.fog.color.set(0x1a2725);scene.fog.near=15;scene.fog.far=96}}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 404
 
@@ -1232,7 +1232,7 @@ function setVhalorFloodVisual(active){
    if(sceneryGroup)sceneryGroup.visible=false;if(decorGroup)decorGroup.visible=false;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 405
 
@@ -1240,7 +1240,7 @@ function setVhalorFloodVisual(active){
  }else if(cfg&&cfg.id==='ruins'&&scene){
 ```
 
-**Explicação:** Ajusta elementos centrais da renderização 3D, como cena, câmera ou renderizador.
+**Explicação:** Controla renderização/câmera/cena 3D.
 
 ### Linha 406
 
@@ -1248,7 +1248,7 @@ function setVhalorFloodVisual(active){
    if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;setRealmBackground(cfg);if(scene.fog){scene.fog.color.set(cfg.fog);scene.fog.near=currentJourney===2?Math.max(17,cfg.fogNear-4):cfg.fogNear;scene.fog.far=currentJourney===2?Math.max(78,cfg.fogFar-10):cfg.fogFar}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 407
 
@@ -1256,7 +1256,7 @@ function setVhalorFloodVisual(active){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 408
 
@@ -1264,7 +1264,7 @@ function setVhalorFloodVisual(active){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 409
 
@@ -1272,7 +1272,7 @@ function setVhalorFloodVisual(active){
 function resetKharvorBridge(){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 410
 
@@ -1280,7 +1280,7 @@ function resetKharvorBridge(){
  kharvorLayerY=0;kharvorFallStage=0;kharvorFallImpact=0;bridgeDropSafetyCleared=false;setForestUnderpassVisual(false);setVhalorFloodVisual(false);
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 411
 
@@ -1288,7 +1288,7 @@ function resetKharvorBridge(){
  if(roadGroup){roadGroup.position.y=0;roadGroup.visible=true}if(itemGroup){itemGroup.position.y=0;itemGroup.visible=true}if(shelter3D){shelter3D.position.y=0;shelter3D.visible=true}if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;if(heroRoot&&!finalFamilyMode)heroRoot.visible=true;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 412
 
@@ -1296,7 +1296,7 @@ function resetKharvorBridge(){
  for(const g of kharvorUpperBridgeGroups){g.visible=false;g.position.y=4.70}
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 413
 
@@ -1304,7 +1304,7 @@ function resetKharvorBridge(){
  for(const g of forestClosedBridgeGroups){g.visible=false;g.position.y=0}
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 414
 
@@ -1312,7 +1312,7 @@ function resetKharvorBridge(){
  if(kharvorBreakFx)kharvorBreakFx.visible=false;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 415
 
@@ -1320,7 +1320,7 @@ function resetKharvorBridge(){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 416
 
@@ -1328,7 +1328,7 @@ function resetKharvorBridge(){
 function restoreVarekAfterTransition(){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 417
 
@@ -1336,7 +1336,7 @@ function restoreVarekAfterTransition(){
  if(!heroRoot)return;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 418
 
@@ -1344,7 +1344,7 @@ function restoreVarekAfterTransition(){
  finalFamilyMode=false;
 ```
 
-**Explicação:** Controla a apresentação cinematográfica e o quadro compacto dos finais.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 419
 
@@ -1352,7 +1352,7 @@ function restoreVarekAfterTransition(){
  heroRoot.visible=true;
 ```
 
-**Explicação:** Controla o modelo, posição, visibilidade ou animação de Varek.
+**Explicação:** Controla Varek.
 
 ### Linha 420
 
@@ -1360,7 +1360,7 @@ function restoreVarekAfterTransition(){
  heroRoot.position.set(laneX?laneX(lane):0,Math.max(0,jumpY||0),0);
 ```
 
-**Explicação:** Controla o modelo, posição, visibilidade ou animação de Varek.
+**Explicação:** Controla Varek.
 
 ### Linha 421
 
@@ -1368,7 +1368,7 @@ function restoreVarekAfterTransition(){
  heroRoot.rotation.set(0,Math.PI+(flipHero?Math.PI:0),0);
 ```
 
-**Explicação:** Controla o modelo, posição, visibilidade ou animação de Varek.
+**Explicação:** Controla Varek.
 
 ### Linha 422
 
@@ -1376,7 +1376,7 @@ function restoreVarekAfterTransition(){
  if(heroRoot.scale&&heroRoot.userData&&heroRoot.userData.baseScale){heroRoot.scale.copy(heroRoot.userData.baseScale)}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 423
 
@@ -1384,7 +1384,7 @@ function restoreVarekAfterTransition(){
  else if(heroRoot.scale){heroRoot.scale.set(Math.abs(heroRoot.scale.x)||1,Math.abs(heroRoot.scale.y)||1,Math.abs(heroRoot.scale.z)||1)}
 ```
 
-**Explicação:** Define o caminho alternativo quando a condição anterior não é atendida.
+**Explicação:** Define caminho alternativo.
 
 ### Linha 424
 
@@ -1392,7 +1392,7 @@ function restoreVarekAfterTransition(){
  if(hero)hero.visible=true;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 425
 
@@ -1400,7 +1400,7 @@ function restoreVarekAfterTransition(){
  slideTimer=0;slideCooldown=0;jumpY=0;jumpV=0;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 426
 
@@ -1408,7 +1408,7 @@ function restoreVarekAfterTransition(){
  try{playHero('Running',.06)}catch(_){}
 ```
 
-**Explicação:** Inicia um bloco protegido para tratar possíveis erros.
+**Explicação:** Controla Varek.
 
 ### Linha 427
 
@@ -1416,7 +1416,7 @@ function restoreVarekAfterTransition(){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 428
 
@@ -1424,7 +1424,7 @@ function restoreVarekAfterTransition(){
 function ensureKharvorBreakFx(){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 429
 
@@ -1432,7 +1432,7 @@ function ensureKharvorBreakFx(){
  if(kharvorBreakFx||!worldRoot)return kharvorBreakFx;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 430
 
@@ -1440,7 +1440,7 @@ function ensureKharvorBreakFx(){
  const g=new THREE.Group();g.name='MAX_HEALMS_GRANDE_RUPTURA_PONTE';g.visible=false;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 431
 
@@ -1448,7 +1448,7 @@ function ensureKharvorBreakFx(){
  const voidMat=new THREE.MeshBasicMaterial({color:0x000000,side:THREE.DoubleSide,depthWrite:true});
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 432
 
@@ -1456,7 +1456,7 @@ function ensureKharvorBreakFx(){
  const edgeMat=new THREE.MeshStandardMaterial({color:0x463e36,roughness:1});
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 433
 
@@ -1464,7 +1464,7 @@ function ensureKharvorBreakFx(){
  const darkEdgeMat=new THREE.MeshStandardMaterial({color:0x28231f,roughness:1});
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 434
 
@@ -1472,7 +1472,7 @@ function ensureKharvorBreakFx(){
  const mossMat=new THREE.MeshBasicMaterial({color:0x40543a,transparent:true,opacity:.66,side:THREE.DoubleSide});
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 435
 
@@ -1480,7 +1480,7 @@ function ensureKharvorBreakFx(){
  const pts=[],count=18,rx=4.05,rz=2.62;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 436
 
@@ -1488,7 +1488,7 @@ function ensureKharvorBreakFx(){
  for(let i=0;i<count;i++){
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 437
 
@@ -1496,7 +1496,7 @@ function ensureKharvorBreakFx(){
    const a=i/count*Math.PI*2;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 438
 
@@ -1504,7 +1504,7 @@ function ensureKharvorBreakFx(){
    const jag=1+Math.sin(i*2.11)*.13+Math.sin(i*.83+1.2)*.08+(i===3||i===11?-.20:0)+(i%4===0?.07:0);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 439
 
@@ -1512,7 +1512,7 @@ function ensureKharvorBreakFx(){
    pts.push(new THREE.Vector2(Math.cos(a)*rx*jag,Math.sin(a)*rz*jag));
 ```
 
-**Explicação:** Usa a biblioteca Three.js para criar, posicionar, animar ou renderizar elementos 3D.
+**Explicação:** Usa Three.js para renderização 3D.
 
 ### Linha 440
 
@@ -1520,7 +1520,7 @@ function ensureKharvorBreakFx(){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 441
 
@@ -1528,7 +1528,7 @@ function ensureKharvorBreakFx(){
  const shape=new THREE.Shape(pts);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 442
 
@@ -1536,7 +1536,7 @@ function ensureKharvorBreakFx(){
  const mouth=new THREE.Mesh(new THREE.ShapeGeometry(shape),voidMat);mouth.rotation.x=-Math.PI/2;mouth.position.y=.13;mouth.renderOrder=9;g.add(mouth);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 443
 
@@ -1544,7 +1544,7 @@ function ensureKharvorBreakFx(){
  const abyss=new THREE.Mesh(new THREE.CylinderGeometry(3.45,1.95,4.2,14,1,true),new THREE.MeshBasicMaterial({color:0x010101,side:THREE.BackSide}));abyss.position.y=-2.2;abyss.scale.set(1.0,1,0.68);g.add(abyss);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 444
 
@@ -1552,7 +1552,7 @@ function ensureKharvorBreakFx(){
  // Lajes quebradas grandes: dão leitura de uma ponte realmente rompida, sem borda circular limpa.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 445
 
@@ -1560,7 +1560,7 @@ function ensureKharvorBreakFx(){
  for(let i=0;i<14;i++){
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 446
 
@@ -1568,7 +1568,7 @@ function ensureKharvorBreakFx(){
    const a=i/14*Math.PI*2+(i%2)*.11,rr=.92+(i%4)*.04;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 447
 
@@ -1576,7 +1576,7 @@ function ensureKharvorBreakFx(){
    const x=Math.cos(a)*4.05*rr,z=Math.sin(a)*2.62*rr;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 448
 
@@ -1584,7 +1584,7 @@ function ensureKharvorBreakFx(){
    const slab=new THREE.Mesh(new THREE.BoxGeometry(.70+(i%4)*.25,.14+(i%3)*.07,.76+(i%5)*.22),i%3?edgeMat:darkEdgeMat);
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 449
 
@@ -1592,7 +1592,7 @@ function ensureKharvorBreakFx(){
    slab.position.set(x,.16-Math.abs(Math.sin(a))*.04,z);slab.rotation.set((i%3-1)*.10,-a+(i%2?.13:-.10),(i%2?1:-1)*.10);g.add(slab)
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 450
 
@@ -1600,7 +1600,7 @@ function ensureKharvorBreakFx(){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 451
 
@@ -1608,7 +1608,7 @@ function ensureKharvorBreakFx(){
  // Trincas radiais se prolongam para fora do buraco, quebrando o aspecto de "círculo desenhado".
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 452
 
@@ -1616,7 +1616,7 @@ function ensureKharvorBreakFx(){
  for(let i=0;i<7;i++){
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 453
 
@@ -1624,7 +1624,7 @@ function ensureKharvorBreakFx(){
    const a=i/7*Math.PI*2+.19*Math.sin(i*1.7),len=.95+(i%3)*.38;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 454
 
@@ -1632,7 +1632,7 @@ function ensureKharvorBreakFx(){
    const crack=new THREE.Mesh(new THREE.BoxGeometry(.08,.025,len),new THREE.MeshBasicMaterial({color:0x171411}));
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 455
 
@@ -1640,7 +1640,7 @@ function ensureKharvorBreakFx(){
    crack.position.set(Math.cos(a)*(4.18+len*.24),.145,Math.sin(a)*(2.78+len*.24));crack.rotation.y=-a;g.add(crack)
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 456
 
@@ -1648,7 +1648,7 @@ function ensureKharvorBreakFx(){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 457
 
@@ -1656,7 +1656,7 @@ function ensureKharvorBreakFx(){
  for(let i=0;i<7;i++){
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 458
 
@@ -1664,7 +1664,7 @@ function ensureKharvorBreakFx(){
    const a=(i/7)*Math.PI*2+.20,m=new THREE.Mesh(new THREE.PlaneGeometry(.8+.18*(i%3),.38+.10*(i%2)),mossMat);m.rotation.x=-Math.PI/2;m.rotation.z=a;m.position.set(Math.cos(a)*3.45,.18,Math.sin(a)*2.28);g.add(m)
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 459
 
@@ -1672,7 +1672,7 @@ function ensureKharvorBreakFx(){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 460
 
@@ -1680,7 +1680,7 @@ function ensureKharvorBreakFx(){
  worldRoot.add(g);kharvorBreakFx=g;return g;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 461
 
@@ -1688,7 +1688,7 @@ function ensureKharvorBreakFx(){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 462
 
@@ -1696,7 +1696,7 @@ function ensureKharvorBreakFx(){
 function updateKharvorBridge(dt,progress){
 ```
 
-**Explicação:** Declara uma função reutilizável com uma responsabilidade específica no jogo.
+**Explicação:** Declara função reutilizável.
 
 ### Linha 463
 
@@ -1704,7 +1704,7 @@ function updateKharvorBridge(dt,progress){
  const cfg=REALMS[realmIndex],id=cfg&&cfg.id,isKharvor=id==='vruins',isForest=id==='forest',isVhalor=id==='ruins';
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 464
 
@@ -1712,7 +1712,7 @@ function updateKharvorBridge(dt,progress){
  const sequenceRealm=isKharvor||isForest||isVhalor;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 465
 
@@ -1720,7 +1720,7 @@ function updateKharvorBridge(dt,progress){
  if(!sequenceRealm){if(Math.abs(kharvorLayerY)>.01||forestUnderpassActive||vhalorFloodVisualActive)resetKharvorBridge();return}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 466
 
@@ -1728,7 +1728,7 @@ function updateKharvorBridge(dt,progress){
  const total=realmTargetDistance();
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 467
 
@@ -1736,7 +1736,7 @@ function updateKharvorBridge(dt,progress){
  const tunnelStart=500,tunnelEnd=Math.max(980,total-520),previewStart=420;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 468
 
@@ -1744,7 +1744,7 @@ function updateKharvorBridge(dt,progress){
  const preview=progress>=previewStart&&progress<tunnelStart;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 469
 
@@ -1752,7 +1752,7 @@ function updateKharvorBridge(dt,progress){
  const inside=progress>=tunnelStart&&progress<tunnelEnd;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 470
 
@@ -1760,7 +1760,7 @@ function updateKharvorBridge(dt,progress){
  const holeFx=kharvorBreakFx;if(holeFx)holeFx.visible=false;
 ```
 
-**Explicação:** Declara uma constante JavaScript usada pelo jogo.
+**Explicação:** Declara constante JavaScript.
 
 ### Linha 471
 
@@ -1768,7 +1768,7 @@ function updateKharvorBridge(dt,progress){
  // MOBILE41: nenhum túnel exige queda de nível. Pista, Varek, itens e câmera permanecem em Y=0.
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 472
 
@@ -1776,7 +1776,7 @@ function updateKharvorBridge(dt,progress){
  kharvorLayerY=0;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 473
 
@@ -1784,7 +1784,7 @@ function updateKharvorBridge(dt,progress){
  if(roadGroup)roadGroup.position.y=0;if(itemGroup)itemGroup.position.y=0;if(shelter3D)shelter3D.position.y=0;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 474
 
@@ -1792,7 +1792,7 @@ function updateKharvorBridge(dt,progress){
  if(heroRoot&&!finalFamilyMode&&Math.abs(heroRoot.position.y-jumpY)<6)heroRoot.position.y=jumpY-(slideTimer>0?.035:0);
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 475
 
@@ -1800,7 +1800,7 @@ function updateKharvorBridge(dt,progress){
  // Limpa obstáculos imediatamente antes da boca do túnel para a entrada ser legível.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 476
 
@@ -1808,7 +1808,7 @@ function updateKharvorBridge(dt,progress){
  if(progress>=previewStart&&progress<535&&!bridgeDropSafetyCleared){bridgeDropSafetyCleared=true;clearBridgeDropApproach();spawnTimer=Math.max(spawnTimer,1.15)}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 477
 
@@ -1816,7 +1816,7 @@ function updateKharvorBridge(dt,progress){
  // Kharvor e Neris usam corredor reto, com teto/paredes visíveis antes da entrada.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 478
 
@@ -1824,7 +1824,7 @@ function updateKharvorBridge(dt,progress){
  for(const g of kharvorUpperBridgeGroups){g.visible=isKharvor&&(preview||inside);g.position.y=4.70}
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 479
 
@@ -1832,7 +1832,7 @@ function updateKharvorBridge(dt,progress){
  for(const g of forestClosedBridgeGroups){g.visible=isForest&&(preview||inside);g.position.y=4.25}
 ```
 
-**Explicação:** Inicia um laço de repetição para percorrer valores ou objetos.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 480
 
@@ -1840,7 +1840,7 @@ function updateKharvorBridge(dt,progress){
  if(isForest)setForestUnderpassVisual(inside);
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 481
 
@@ -1848,7 +1848,7 @@ function updateKharvorBridge(dt,progress){
  if(isKharvor){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 482
 
@@ -1856,7 +1856,7 @@ function updateKharvorBridge(dt,progress){
    if(sceneryGroup)sceneryGroup.visible=!inside;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 483
 
@@ -1864,7 +1864,7 @@ function updateKharvorBridge(dt,progress){
    if(decorGroup)decorGroup.visible=!inside&&!tobogganActive;
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 484
 
@@ -1872,7 +1872,7 @@ function updateKharvorBridge(dt,progress){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 485
 
@@ -1880,7 +1880,7 @@ function updateKharvorBridge(dt,progress){
  if((isKharvor||isForest)&&progress>=tunnelStart&&kharvorFallStage<1){kharvorFallStage=1;toast('▰ TÚNEL À FRENTE • MANTENHA A LINHA');haptic([12,18,12])}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 486
 
@@ -1888,7 +1888,7 @@ function updateKharvorBridge(dt,progress){
  if((isKharvor||isForest)&&progress>=tunnelEnd&&kharvorFallStage<2){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 487
 
@@ -1896,7 +1896,7 @@ function updateKharvorBridge(dt,progress){
    kharvorFallStage=2;for(const g of kharvorUpperBridgeGroups)g.visible=false;for(const g of forestClosedBridgeGroups)g.visible=false;
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 488
 
@@ -1904,7 +1904,7 @@ function updateKharvorBridge(dt,progress){
    if(isForest)setForestUnderpassVisual(false);if(sceneryGroup)sceneryGroup.visible=true;if(decorGroup&&!tobogganActive)decorGroup.visible=true;toast('✓ SAÍDA DO TÚNEL • PONTE ABERTA')
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 489
 
@@ -1912,7 +1912,7 @@ function updateKharvorBridge(dt,progress){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 490
 
@@ -1920,7 +1920,7 @@ function updateKharvorBridge(dt,progress){
  // MOBILE42: Vhalor tem água, então a mudança de nível volta a fazer sentido visualmente.
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 491
 
@@ -1928,7 +1928,7 @@ function updateKharvorBridge(dt,progress){
  if(isVhalor){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 492
 
@@ -1936,7 +1936,7 @@ function updateKharvorBridge(dt,progress){
    if(progress>=tunnelStart&&!tobogganActive&&!tobogganAutoDone){
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 493
 
@@ -1944,7 +1944,7 @@ function updateKharvorBridge(dt,progress){
      kharvorFallStage=1;kharvorFallImpact=1;openingCameraShake=Math.max(openingCameraShake,.72);haptic([20,18,48]);
 ```
 
-**Explicação:** Controla clima, partículas ou efeitos atmosféricos.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 494
 
@@ -1952,7 +1952,7 @@ function updateKharvorBridge(dt,progress){
      setVhalorFloodVisual(true);toast('🛶 QUEDA PARA A PASSAGEM INUNDADA');
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 495
 
@@ -1960,7 +1960,7 @@ function updateKharvorBridge(dt,progress){
      startToboggan(false,'flooded',distance+(tunnelEnd-progress));
 ```
 
-**Explicação:** Controla alguma parte do sistema de descida/tobogã, incluindo estado, visual, física ou interface.
+**Explicação:** Controla o sistema do tobogã/descida.
 
 ### Linha 496
 
@@ -1968,7 +1968,7 @@ function updateKharvorBridge(dt,progress){
    }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 497
 
@@ -1976,7 +1976,7 @@ function updateKharvorBridge(dt,progress){
    if(!tobogganActive&&progress>=tunnelEnd){setVhalorFloodVisual(false);if(kharvorFallStage<2){kharvorFallStage=2;toast('✓ SAÍDA DA PASSAGEM INUNDADA')}}
 ```
 
-**Explicação:** Executa o bloco seguinte somente quando a condição indicada for verdadeira.
+**Explicação:** Executa condicionalmente.
 
 ### Linha 498
 
@@ -1984,7 +1984,7 @@ function updateKharvorBridge(dt,progress){
  }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
 ### Linha 499
 
@@ -1992,7 +1992,7 @@ function updateKharvorBridge(dt,progress){
  kharvorFallImpact=Math.max(0,kharvorFallImpact-dt*1.6);
 ```
 
-**Explicação:** Atribui ou atualiza um valor usado pela lógica ou pela interface.
+**Explicação:** Atribui ou atualiza valor da lógica/interface.
 
 ### Linha 500
 
@@ -2000,5 +2000,5 @@ function updateKharvorBridge(dt,progress){
 }
 ```
 
-**Explicação:** Executa uma instrução do jogo ou completa o bloco lógico/visual iniciado nas linhas próximas.
+**Explicação:** Completa uma instrução lógica, visual ou estrutural do jogo.
 
