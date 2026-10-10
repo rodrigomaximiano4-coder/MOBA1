@@ -1,16 +1,16 @@
-# MAX HEALMS — MOBILE86 — Documentação técnica
+# MAX HEALMS — MOBILE87 — Documentação técnica
 
 ## Build
 
-**MAX HEALMS • MOBILE86 • ALPHA 2 FINALS**
+**MAX HEALMS • MOBILE87 • ALPHA 2 FINALS**
 
 Commit da correção do Final 1:
-`931495c4ed265b559de7c05f569d1ab4304cc6f0`
+`2cc8e61d65a86294bced1c6e1410db8a143a84d4`
 
 ## O que foi corrigido
 
-- Final da Jornada 1 agora usa o mesmo painel compacto sobre a cena 3D usado no Final da Jornada 2.
-- A cena da família permanece visível ao fundo quando os dados aparecem.
+- Final da Jornada 1 usa o mesmo painel compacto sobre a cena 3D usado no Final da Jornada 2, mantendo a família visível até o jogador iniciar a Jornada 2.
+- A cena da família permanece visível ao fundo enquanto os dados compactos ficam na tela; o sequestro só começa ao tocar em INICIAR JORNADA 2.
 - O painel grande `journeyEndPanel` não é mais usado como tela principal do resultado da Jornada 1.
 - O botão principal do Final 1 passa a levar para **Jornada 2 • O Resgate**.
 - Em modo de teste, o botão permite rever o Final 1.
@@ -57,4 +57,4 @@ Essas bibliotecas são de terceiros e não devem ser modificadas para corrigir g
 
 ## Regra de documentação
 
-Da MOBILE86 em diante, quando um código novo ou alterado do MAX HEALMS for entregue, a documentação correspondente deve manter a explicação imediatamente abaixo da linha/trecho documentado.
+Da MOBILE87 em diante, quando um código novo ou alterado do MAX HEALMS for entregue, a documentação correspondente deve manter a explicação imediatamente abaixo da linha/trecho documentado.
