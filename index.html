@@ -2130,6 +2130,15 @@ function makeStoneMaterial(color){return new THREE.MeshStandardMaterial({color,r
 function makeMobileRoadTileTexture(cfg){
  const c=document.createElement('canvas');c.width=512;c.height=512;const g=c.getContext('2d');if(!g)return null;
  const cols=(cfg.road&&cfg.road.length?cfg.road:[0x666666,0x5d5d5d,0x707070]).map(v=>'#'+v.toString(16).padStart(6,'0'));
+ // TESTE MOBILE: piso claro e fosco contínuo, com referências discretas fora das faixas.
+ if(cfg.id==='vpath'){
+   g.fillStyle='#b6a185';g.fillRect(0,0,512,512);
+   g.fillStyle='rgba(108,83,58,.055)';
+   for(let i=0;i<105;i++){const x=(i*73)%512,y=(i*137)%512;g.fillRect(x,y,2+(i%3),2)}
+   g.strokeStyle='rgba(87,68,49,.065)';g.lineWidth=2;
+   for(const y of [0,256]){g.beginPath();g.moveTo(0,y);g.lineTo(512,y);g.stroke()}
+   const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(1,2.15);t.encoding=THREE.sRGBEncoding;t.minFilter=THREE.LinearFilter;t.magFilter=THREE.LinearFilter;t.needsUpdate=true;return t;
+ }
  const rows=4,colsN=3,w=c.width/colsN,h=c.height/rows;
  g.fillStyle=cols[0];g.fillRect(0,0,c.width,c.height);
  for(let y=0;y<rows;y++)for(let x=0;x<colsN;x++){
@@ -3353,7 +3362,7 @@ function render(){
    camera.lookAt((lava?cartX*.22:lookX*.34),canoeBaseY+(lava?-.56:-.85),-13.8);
    renderer.render(scene,camera);return
  }
- const curveLook=trackCurveX(-34)*.20,targetX=(heroRoot?heroRoot.position.x*.16:0)+curveLook,now=performance.now(),shakeX=Math.sin(now*.081)*openingCameraShake*.10,shakeY=Math.sin(now*.113+1.7)*openingCameraShake*.055,shakeR=Math.sin(now*.097+.8)*openingCameraShake*.012,coveredCam=MOBILE_RUNNER&&forestUnderpassActive;camera.position.x+=((targetX+shakeX)-camera.position.x)*.075;camera.position.y=(coveredCam?3.02:3.45)+kharvorLayerY+jumpY*.03+(effortTimer>0?Math.sin(now*.045)*.025:0)+shakeY+kharvorFallImpact*.72;camera.rotation.z+=(curveStrength*.012+shakeR-camera.rotation.z)*.065;camera.fov+=((coveredCam?58:60)+Math.max(0,speed-RUN_SPEED_BASE)*.42+(effortTimer>0?1.2:0)+kharvorFallImpact*5.5-camera.fov)*.05;camera.updateProjectionMatrix();camera.lookAt((targetX+shakeX*.35)*.28,(coveredCam?.96:1.15)+kharvorLayerY+shakeY*.28-kharvorFallImpact*1.30,-7.8);renderer.render(scene,camera)
+ const curveLook=trackCurveX(-34)*.20,targetX=(heroRoot?heroRoot.position.x*.16:0)+curveLook,now=performance.now(),shakeX=Math.sin(now*.081)*openingCameraShake*.10,shakeY=Math.sin(now*.113+1.7)*openingCameraShake*.055,shakeR=Math.sin(now*.097+.8)*openingCameraShake*.012,coveredCam=MOBILE_RUNNER&&forestUnderpassActive;camera.position.x+=((targetX+shakeX)-camera.position.x)*.075;camera.position.y=(coveredCam?2.75:3.45)+kharvorLayerY+jumpY*.03+(effortTimer>0?Math.sin(now*.045)*.025:0)+shakeY+kharvorFallImpact*.72;camera.rotation.z+=(curveStrength*.012+shakeR-camera.rotation.z)*.065;camera.fov+=((coveredCam?64:60)+Math.max(0,speed-RUN_SPEED_BASE)*.42+(effortTimer>0?1.2:0)+kharvorFallImpact*5.5-camera.fov)*.05;camera.updateProjectionMatrix();camera.lookAt((targetX+shakeX*.35)*.28,(coveredCam?1.08:1.15)+kharvorLayerY+shakeY*.28-kharvorFallImpact*1.30,-7.8);renderer.render(scene,camera)
 }
 function adjustMobileRenderScale(fps,now){
  if(!MOBILE_RUNNER||!renderer||!started)return;
