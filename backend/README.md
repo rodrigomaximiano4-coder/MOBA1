@@ -1,30 +1,32 @@
-# MAX HEALMS — Backend Render (preparação)
-Esta é uma **base segura para hospedagem e teste de saúde**. Não é um sistema de pagamentos pronto.
-O endpoint /api/purchases/verify responde 503 e **não libera diamantes, Premium ou Vareks**.
+# MAX HEALMS — Backend Render (staging, sem pagamentos reais)
 
-## Deploy separado no Render
-- New > Web Service
-- Repositório: `rodrigomaximiano4-coder/MOBA1`
-- Branch: `backend-render-staging`
-- Root Directory: `backend`
-- Runtime: Node
-- Build Command: `npm install`
-- Start Command: `npm start`
-- Health Check Path: `/health`
-- Nome sugerido: `max-healms-backend`
+## Estado implementado (2026-10-12)
+- Render Web Service: max-healms-backend.onrender.com, branch backend-render-staging, root backend, Node.
+- PostgreSQL Render: max-healms-db, plano Free de teste com expiração de 30 dias. Banco ligado por segredo DATABASE_URL no Render (NUNCA colocar senha no repositório).
+- GET /health: informa estado do servidor, database e schema. A resposta `schema: "ready"` comprova que as tabelas staging foram criadas durante o boot; verificar depois do deploy. Não significa monetização pronta.
+- Inicialização de esquema via backend/schema.js e backend/schema.sql, transação + advisory lock e CREATE TABLE IF NOT EXISTS.
+- Tabelas staging: players, wallets, wallet_ledger, entitlements, purchase_records. Restrições de não-negatividade e unicidade de chave de idempotência/token em hash.
+- POST /api/purchases/verify CONTINUA 503 sem entregar recompensas; nenhuma rota pública altera dados no banco.
+- AAB 22 na Play Store não foi modificado.
 
-**Não coloque contas de serviço, JSON de credenciais, tokens ou senhas no GitHub nem na interface pública do aplicativo.** Futuras credenciais devem ser definidas somente nos Secret Environment Variables do Render.
+## Deploy
+Repo: rodrigomaximiano4-coder/MOBA1
+Branch: backend-render-staging
+Root: backend
+Build: npm install
+Start: npm start
+Health: /health
+Env secreta: DATABASE_URL (Internal Database URL do PostgreSQL na mesma região).
+Nota: credenciais que foram compartilhadas devem ser substituídas antes de uso real.
 
-## Bloqueios para monetização real
-1. Banco Postgres persistente (desativar qualquer implementação que dependa somente de memória).
-2. Autenticação e identificação estável de jogador no backend.
-3. Serviço Google Play Developer API com permissão para gerenciar pedidos e produtos no app.
-4. Validar cada purchaseToken no Google Play, conferir app `com.maxhealms.game`, productId, estado de compra e identidade.
-5. Registrar tokens/transações com restrição UNIQUE e processamento atômico para evitar crédito duplicado.
-6. Entregar entitlement persistente; somente depois realizar acknowledge ou consume apropriado.
-7. Tratar reembolsos/revogações, restauração e reconciliação via notificações em tempo real, quando disponíveis.
-8. Limites de requisições, monitoramento, auditoria e testes integrados.
-9. Só então atualizar ponte Android e habilitar produtos na Play.
+## Ainda NÃO implementado
+1. Autenticação real de jogadores e migração dos perfis locais, vínculo de contas entre dispositivos.
+2. Endpoints autenticados de jogadores/inventário e operações de carteira somente pelo servidor.
+3. Catálogo oficial, Google Play Developer API, permissões da conta de serviço, verificação real dos purchaseTokens.
+4. Transação atômica e idempotente para entregar diamantes, Premium e personagens, consumos/acknowledge, restauração, reembolso, RTDN.
+5. Ponte Android Billing end-to-end. No código web atual, compras continuam bloqueadas intencionalmente.
+6. Banco durável para produção: o PostgreSQL Free Render expira em 30 dias; configurar migração, backup e recuperação antes de vender.
+7. Testes automatizados de segurança, casos duplicados/concorrentes e QA dos nove produtos cadastrados na Play Console.
+8. Só após testes, gerar e submeter AAB 23. Não mexer no Truco Online.
 
-O HTML atual usa `window.MaxHealmsBilling` e compras seguem bloqueadas até existir validação confiável.
-**Não implantar o backend do Truco Online neste serviço.** O AAB 22 permanece intocado.
+Não pôr chaves de serviço, JSON de credenciais, senhas ou tokens no GitHub, logs ou no código cliente.
