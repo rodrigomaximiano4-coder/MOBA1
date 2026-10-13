@@ -1,11 +1,22 @@
 'use strict';
 const http = require('node:http');
+const {Pool} = require('pg');
 const PORT = Number(process.env.PORT || 3000);
 const HOST = process.env.HOST || '0.0.0.0';
 const MAX_BODY = 8192;
 const BODY_TIMEOUT = 10000;
 const CORS_ORIGIN = process.env.ALLOWED_ORIGIN || '';
-const service = http.createServer((req,res) => {
+const pool = process.env.DATABASE_URL
+  ? new Pool({connectionString:process.env.DATABASE_URL,connectionTimeoutMillis:5000,
+      idleTimeoutMillis:10000,max:2})
+  : null;
+if(pool) pool.on('error',()=>console.error('Database idle connection error'));
+async function databaseStatus() {
+  if(!pool)return 'not_configured';
+  try {await pool.query('SELECT 1');return 'connected'}
+  catch(err){console.error('Database health check failed:',err.code||'connection_error');return 'unavailable'}
+}
+const service = http.createServer(async (req,res) => {
   const headers = {'Content-Type':'application/json; charset=utf-8',
     'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',
     'Referrer-Policy':'no-referrer'};
@@ -17,12 +28,12 @@ const service = http.createServer((req,res) => {
   }
   function reply(code,body){res.writeHead(code,headers);res.end(JSON.stringify(body))}
   if(req.method==='GET' && req.url==='/health')
-    return reply(200,{ok:true,service:'max-healms-backend',stage:'preparacao',paymentsEnabled:false});
+    return reply(200,{ok:true,service:'max-healms-backend',stage:'preparacao',
+      paymentsEnabled:false,database:await databaseStatus()});
   if(req.method==='OPTIONS')return reply(204,{});
   if(req.url==='/api/purchases/verify' && req.method==='POST') {
-    // Fail closed: real Play Developer API validation, authenticated identity,
-    // durable transaction ledger and idempotent entitlement credit are NOT configured.
-    // Never unlock products based solely on purchaseToken or client supplied state.
+    // No real purchase verification or credits until Google Play API,
+    // player authentication, durable ledger and refund handling exist.
     let size=0;let rejected=false;
     req.setTimeout(BODY_TIMEOUT,()=>req.destroy());
     req.on('data',b=>{size+=b.length;if(size>MAX_BODY&&!rejected){rejected=true;reply(413,{error:'payload_too_large'});req.resume()}});
