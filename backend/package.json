@@ -1,0 +1,13 @@
+{
+  "name": "max-healms-purchase-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MAX HEALMS backend staging - no purchases enabled",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
+}
