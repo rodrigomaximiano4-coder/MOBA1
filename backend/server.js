@@ -1,6 +1,7 @@
 'use strict';
 const http = require('node:http');
 const {Pool} = require('pg');
+const {initializeSchema} = require('./schema');
 const PORT = Number(process.env.PORT || 3000);
 const HOST = process.env.HOST || '0.0.0.0';
 const MAX_BODY = 8192;
@@ -11,6 +12,7 @@ const pool = process.env.DATABASE_URL
       idleTimeoutMillis:10000,max:2})
   : null;
 if(pool) pool.on('error',()=>console.error('Database idle connection error'));
+let schemaStatus='pending';
 async function databaseStatus() {
   if(!pool)return 'not_configured';
   try {await pool.query('SELECT 1');return 'connected'}
@@ -29,11 +31,11 @@ const service = http.createServer(async (req,res) => {
   function reply(code,body){res.writeHead(code,headers);res.end(JSON.stringify(body))}
   if(req.method==='GET' && req.url==='/health')
     return reply(200,{ok:true,service:'max-healms-backend',stage:'preparacao',
-      paymentsEnabled:false,database:await databaseStatus()});
+      paymentsEnabled:false,database:await databaseStatus(),schema:schemaStatus});
   if(req.method==='OPTIONS')return reply(204,{});
   if(req.url==='/api/purchases/verify' && req.method==='POST') {
-    // No real purchase verification or credits until Google Play API,
-    // player authentication, durable ledger and refund handling exist.
+    // Fail closed: no real Play verification, authenticated identity,
+    // atomic fulfillment, or refund processing has been configured.
     let size=0;let rejected=false;
     req.setTimeout(BODY_TIMEOUT,()=>req.destroy());
     req.on('data',b=>{size+=b.length;if(size>MAX_BODY&&!rejected){rejected=true;reply(413,{error:'payload_too_large'});req.resume()}});
@@ -42,4 +44,14 @@ const service = http.createServer(async (req,res) => {
   }
   return reply(404,{error:'not_found'});
 });
-service.listen(PORT,HOST,()=>console.log('MAX HEALMS backend staging listening on port '+PORT));
+(async()=>{
+  try{
+    schemaStatus=await initializeSchema(pool);
+    if(schemaStatus==='ready')console.log('MAX HEALMS staging database schema ready');
+    else console.warn('MAX HEALMS schema not configured');
+  }catch(error){
+    schemaStatus='error';
+    console.error('MAX HEALMS schema init failed:',error.code||'schema_error');
+  }
+  service.listen(PORT,HOST,()=>console.log('MAX HEALMS backend staging listening on port '+PORT));
+})();
