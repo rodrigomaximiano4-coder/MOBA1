@@ -2188,8 +2188,12 @@ function buildRoad(){
  };
  const stableMobileRoadColor=mobileRoadPalette[cfg.id]??cfg.road[0];
  const mobileRoadTileTex=cfg.id==='vpath'?null:makeMobileRoadTileTexture(cfg);
- const vpathMobileRoadMat=new THREE.MeshBasicMaterial({color:stableMobileRoadColor});
+ const vpathMobileRoadPreMat=new THREE.MeshBasicMaterial({color:0x968878});   // claro, seco e fosco
+ const vpathMobileRoadPostMat=new THREE.MeshBasicMaterial({color:0x766a61});  // pós-tobogã: pedra antiga molhada/terrosa
+ const vpathEdgePreMat=new THREE.MeshBasicMaterial({color:0x765f4e,transparent:true,opacity:.13,depthWrite:false});
+ const vpathEdgePostMat=new THREE.MeshBasicMaterial({color:0xa0785a,transparent:true,opacity:.16,depthWrite:false});
  const vpathBridgeMat=new THREE.MeshBasicMaterial({color:0x695b50});
+ const mobileEdgeAccentMat=new THREE.MeshBasicMaterial({color:cfg.accent,transparent:true,opacity:.22,depthWrite:false});
  const mobileRoadMats=[0,1,2].map((_,laneI)=>new THREE.MeshBasicMaterial({color:mobileRoadTileTex?0xffffff:stableMobileRoadColor,map:mobileRoadTileTex||null}));
  const roadLogoTex=makeRoadBrandTexture(cfg.accent);
  const roadLogoMat=roadLogoTex?new THREE.MeshBasicMaterial({map:roadLogoTex,transparent:true,opacity:cfg.id==='celestial'?.66:.48,depthWrite:false,side:THREE.DoubleSide}):null;
@@ -2209,12 +2213,18 @@ function buildRoad(){
  const sigPillarGeo=new THREE.BoxGeometry(.72,4.8,.78),sigBrokenGeo=new THREE.BoxGeometry(.95,2.6,.95),sigOrbGeo=new THREE.SphereGeometry(.13,7,6),sigShardGeo=new THREE.TetrahedronGeometry(.42,0);
  const addSigOrb=(g,x,y,z,mat,scale=1)=>{const o=new THREE.Mesh(sigOrbGeo,mat);o.position.set(x,y,z);o.scale.setScalar(scale);g.add(o);return o};
 
+ if(MOBILE_RUNNER&&cfg.id==='vpath'){
+   roadGroup.userData.vpathPreMat=vpathMobileRoadPreMat;
+   roadGroup.userData.vpathPostMat=vpathMobileRoadPostMat;
+   roadGroup.userData.vpathEdgePreMat=vpathEdgePreMat;
+   roadGroup.userData.vpathEdgePostMat=vpathEdgePostMat;
+ }
  const roadCount=MOBILE_RUNNER?11:20;for(let s=0;s<roadCount;s++){
    const seg=new THREE.Group();seg.position.z=8-s*10.5;seg.userData.baseIndex=s;
    if(MOBILE_RUNNER){
      if(cfg.id==='vpath'){
-       // MOBILE88: Fase 1 usa uma peça contínua, clara e fosca. Sem grade, listras ou emendas entre faixas.
-       const deck=new THREE.Mesh(mobileFullRoadGeo,vpathMobileRoadMat);deck.position.set(0,-.10,0);deck.receiveShadow=false;seg.add(deck)
+       // MOBILE89: Fase 1 usa uma peça contínua, clara e fosca. Sem grade, listras ou emendas entre faixas.
+       const deck=new THREE.Mesh(mobileFullRoadGeo,vpathMobileRoadPreMat);deck.position.set(0,-.10,0);deck.receiveShadow=false;deck.userData.vpathDeck=true;seg.userData.vpathDeck=deck;seg.add(deck)
      }else{
        for(let laneI=0;laneI<3;laneI++){const laneDeck=new THREE.Mesh(mobileLaneGeo,mobileRoadMats[laneI]);laneDeck.position.set(LANE_X[laneI],-.10,0);laneDeck.receiveShadow=false;seg.add(laneDeck)}
      }
@@ -2244,8 +2254,14 @@ function buildRoad(){
    }
    for(const x of [-4.15,4.15]){const e=new THREE.Mesh(edgeGeo,edgeRoadMat);e.position.set(x,-.06,0);e.receiveShadow=!MOBILE_RUNNER;seg.add(e)}
    if(MOBILE_RUNNER){
-     const mobileEdgeAccent=new THREE.MeshBasicMaterial({color:cfg.id==='vpath'?0xa77b58:cfg.accent,transparent:true,opacity:cfg.id==='vpath'?.12:.22,depthWrite:false});
-     for(const x of [-3.92,3.92]){const line=new THREE.Mesh(new THREE.BoxGeometry(.055,.018,10.42),mobileEdgeAccent);line.position.set(x,.015,0);seg.add(line)}
+     const edgeAccentMat=cfg.id==='vpath'?vpathEdgePreMat:mobileEdgeAccentMat;
+     seg.userData.vpathEdgeAccents=[];
+     for(const x of [-3.92,3.92]){
+       const line=new THREE.Mesh(new THREE.BoxGeometry(.055,.018,10.42),edgeAccentMat);
+       line.position.set(x,.015,0);
+       if(cfg.id==='vpath')seg.userData.vpathEdgeAccents.push(line);
+       seg.add(line)
+     }
    }
    // MOBILE37: ponte legível e bonita, mas com bem menos draw calls no celular.
    for(const side of [-1,1]){
@@ -2390,6 +2406,16 @@ function buildRoad(){
  }
 }
 
+function setVpathRoadPhase(afterToboggan=false){
+ if(!MOBILE_RUNNER||REALMS[realmIndex]?.id!=='vpath'||!roadGroup)return;
+ const roadMat=afterToboggan?roadGroup.userData.vpathPostMat:roadGroup.userData.vpathPreMat;
+ const edgeMat=afterToboggan?roadGroup.userData.vpathEdgePostMat:roadGroup.userData.vpathEdgePreMat;
+ if(!roadMat||!edgeMat)return;
+ for(const seg of roadSegments){
+   const deck=seg.userData&&seg.userData.vpathDeck;if(deck)deck.material=roadMat;
+   const accents=(seg.userData&&seg.userData.vpathEdgeAccents)||[];for(const line of accents)line.material=edgeMat;
+ }
+}
 function buildDecor(){
  while(decorGroup.children.length){const c=decorGroup.children.pop();disposeObject(c)}
  decorObjects.length=0;
@@ -3193,6 +3219,7 @@ function endToboggan(silent=false){
    if(!silent&&!gameOver)toast('↗ SUBIDA DA PASSAGEM INUNDADA • NÍVEL NORMAL RESTAURADO')
  }
  if(!silent)postTobogganExitProgress=Math.max(0,distance-realmStartDistance);
+ if(!silent&&realmIndex===0)setVpathRoadPhase(true);
  tobogganForcedMode=null;tobogganExitAtDistance=null;
  if(!silent&&!gameOver&&currentJourney===1&&realmIndex===0){weatherTestOverride=null;setWeatherMode('extremeRain');weatherLightningTimer=.9;stopWeatherAudio();if(soundOn&&ambientVolume>0)startWeatherAudio('extremeRain');toast('🌧 TEMPESTADE FORTE • A FUGA CONTINUA');}
 }
@@ -3515,7 +3542,7 @@ UI.shelterPrompt.onclick=()=>{if(shelter3D&&shelter3D.position.z>-8&&Math.round(
 UI.pause.onclick=()=>pauseGame(true);$('resume').onclick=()=>{UI.pausePanel.classList.remove('show');paused=false;clock.getDelta()};$('restart').onclick=()=>{UI.pausePanel.classList.remove('show');endlessMode?startEndless():requestJourneyStart(currentJourney)};$('backMenu').onclick=backMenu;$('revive1').onclick=()=>reviveWithLives(1);$('revive2').onclick=()=>reviveWithLives(2);$('revive3').onclick=()=>reviveWithLives(3);$('reviveAd').onclick=reviveWithRewardedAd;$('rewardedAdCancel').onclick=()=>{if(rewardedAdRunning)closeRewardedAd()};$('giveUpRun').onclick=()=>{void giveUpRun()};$('journeyNext').onclick=()=>{UI.journeyEndPanel.classList.remove('show');requestJourneyStart(2)};$('journeyMenu').onclick=()=>{UI.journeyEndPanel.classList.remove('show');backMenu()};$('realmCheckpointContinue').onclick=()=>{void continueRealmCheckpoint()};$('realmCheckpointExit').onclick=exitRealmCheckpoint;$('realmCheckpointDouble').onclick=()=>{void doubleRealmCheckpointReward()};
 
 window.addEventListener('load',async()=>{
- window.__MR_BUILD='MAX-HEALMS-MOBILE88-ALPHA2-FINALS';
+ window.__MR_BUILD='MAX-HEALMS-MOBILE89-ALPHA2-FINALS';
  settingsFromSave();applyAudioSettings();refreshMenuStats();applyLanguage(gameLanguage,false);renderAccountStatus();const bb=$('buildBrand');if(bb)bb.innerHTML=LOCAL_TEST_BUILD?'MAX HEALMS':'MAX HEALMS';if(NATIVE_PRODUCTION){const issues=productionReadinessIssues();if(issues.length){throw new Error('BUILD ANDROID INCOMPLETA: '+issues.join(' • '))}}
  try{await PrivacyService.initialize()}catch(e){console.warn('PRIVACY INIT',e)}
  try{
